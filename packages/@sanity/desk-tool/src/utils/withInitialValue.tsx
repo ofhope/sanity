@@ -26,7 +26,10 @@ import {LoadingPane} from '../panes/loadingPane'
 import {BrokenReferences} from '../components/BrokenReferences'
 
 const withInitialValue = (Pane) => {
-  const WithInitialValueStream = streamingComponent((props$) =>
+  const WithInitialValueStream = streamingComponent<{
+    options: {id: string}
+    paneContext: {draft: any; published: any}
+  }>((props$) =>
     props$.pipe(
       switchMap((props) => {
         const {options, paneContext, ...paneProps} = props
@@ -40,7 +43,7 @@ const withInitialValue = (Pane) => {
           scan((prev, res) => ({...prev, ...res}), {}),
           // Wait until we know the state of both draft and published
           filter((res) => 'draft' in res && 'published' in res),
-          map((res) => res.draft || res.published),
+          map((res: any) => res.draft || res.published),
           // Only update if we didn't previously have a document but we now do
           distinctUntilChanged((prev, next) => Boolean(prev) !== Boolean(next)),
           // Prevent rapid re-resolving when transitioning between different templates
@@ -64,6 +67,7 @@ const withInitialValue = (Pane) => {
             return merge(
               of({isResolving: true}),
               resolveInitialValueWithParameters(templateName, parameters).pipe(
+                // @ts-expect-error NOTE: TypeScript fails for an unknown reason.
                 catchError((resolveError) => {
                   /* eslint-disable no-console */
                   console.group('Failed to resolve initial value')
@@ -77,7 +81,7 @@ const withInitialValue = (Pane) => {
                 })
               )
             ).pipe(
-              switchMap(({isResolving, initialValue, resolveError}) => {
+              switchMap(({isResolving, initialValue, resolveError}: any) => {
                 if (resolveError) {
                   return of(
                     <ErrorPane {...props} title="Failed to resolve initial value">
@@ -154,7 +158,9 @@ function resolveInitialValueWithParameters(templateName, parameters) {
     return of({isResolving: false, initialValue: undefined})
   }
 
-  return from(resolveInitialValue(schema, getTemplateById(templateName), parameters)).pipe(
+  const tpl = getTemplateById(templateName)
+
+  return from(resolveInitialValue(schema, tpl!, parameters)).pipe(
     map((initialValue) => ({isResolving: false, initialValue}))
   )
 }

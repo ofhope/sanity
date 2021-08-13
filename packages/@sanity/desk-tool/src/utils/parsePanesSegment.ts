@@ -1,5 +1,6 @@
 import {EMPTY_PARAMS} from '../constants'
 import {exclusiveParams} from '../contexts/PaneRouterContext'
+import {PaneNode} from '../types'
 
 // old: authors;knut,{"template":"diaryEntry"}
 // new: authors;knut,view=diff,eyJyZXYxIjoiYWJjMTIzIiwicmV2MiI6ImRlZjQ1NiJ9|latest-posts
@@ -29,16 +30,17 @@ function parseChunks(chunks, initial = {}) {
   )
 }
 
-function encodeChunks(pane, i, group) {
+function encodeChunks(pane: PaneNode, i: number, group: PaneNode[]): string {
   const {payload, params = {}, id} = pane
   const sameAsFirst = i !== 0 && id === group[0].id
-  const encodedPayload = typeof payload === 'undefined' ? undefined : btoa(JSON.stringify(payload))
+  const encodedPayload = typeof payload === 'undefined' ? '' : btoa(JSON.stringify(payload))
 
-  const encodedParams = Object.keys(params).reduce((pairs, key) => {
+  const encodedParams = Object.keys(params).reduce((pairs: string[], key) => {
     if (
       sameAsFirst &&
       i !== 0 &&
       !exclusiveParams.includes(key) &&
+      group[0].params &&
       group[0].params[key] === params[key]
     ) {
       return pairs
@@ -47,11 +49,11 @@ function encodeChunks(pane, i, group) {
     return params[key] ? [...pairs, `${key}=${params[key]}`] : pairs
   }, [])
 
-  return (
-    [sameAsFirst ? '' : id]
-      .concat([encodedParams.length > 0 && encodedParams, encodedPayload].filter(Boolean))
-      .join(',') || ','
-  )
+  const p = encodedParams.length > 0 ? encodedParams : ''
+
+  const parts: Array<string | string[]> = [sameAsFirst ? '' : id, p, encodedPayload].filter(Boolean)
+
+  return parts.join(',') || ','
 }
 
 export function parsePanesSegment(str) {
@@ -81,7 +83,7 @@ export function encodePanesSegment(panes) {
 }
 
 export function parseOldPanesSegment(str) {
-  const chunks = []
+  const chunks: PaneNode[] = []
 
   let buffer = str
   while (buffer.length) {

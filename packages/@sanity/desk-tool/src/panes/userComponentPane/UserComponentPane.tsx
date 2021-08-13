@@ -1,7 +1,24 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, {createElement} from 'react'
 import DefaultPane from 'part:@sanity/components/panes/default'
+import {MenuItem, MenuItemGroup} from '@sanity/base/__legacy/@sanity/components'
+import {isValidElementType} from 'react-is'
 import userComponentPaneStyles from './UserComponentPane.css'
+
+interface UserComponentPaneProps {
+  // styles?: object, // eslint-disable-line react/forbid-prop-types
+  title?: string
+  index: number
+  type: string
+  component: React.ComponentType | React.ReactNode
+  options?: Record<string, unknown> // eslint-disable-line react/forbid-prop-types
+  isSelected: boolean
+  isCollapsed: boolean
+  onExpand?: () => void
+  onCollapse?: () => void
+  renderActions?: () => void
+  menuItems?: MenuItem[]
+  menuItemGroups?: MenuItemGroup[]
+}
 
 function noActionFn() {
   // eslint-disable-next-line no-console
@@ -11,31 +28,7 @@ function noActionFn() {
 const EMPTY_ARRAY = []
 const EMPTY_RECORD = {}
 
-export default class UserComponentPane extends React.PureComponent {
-  static propTypes = {
-    styles: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    title: PropTypes.string,
-    index: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    component: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
-    options: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    isSelected: PropTypes.bool.isRequired,
-    isCollapsed: PropTypes.bool.isRequired,
-    onExpand: PropTypes.func,
-    onCollapse: PropTypes.func,
-    renderActions: PropTypes.func,
-    menuItems: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-      })
-    ),
-    menuItemGroups: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-      })
-    ),
-  }
-
+export class UserComponentPane extends React.PureComponent<UserComponentPaneProps> {
   static defaultProps = {
     title: '',
     options: EMPTY_RECORD,
@@ -47,14 +40,17 @@ export default class UserComponentPane extends React.PureComponent {
     renderActions: undefined,
   }
 
-  constructor(props) {
+  userComponent: React.RefObject<any>
+
+  constructor(props: UserComponentPaneProps) {
     super(props)
 
     this.userComponent = React.createRef()
   }
 
-  handleAction = (item) => {
-    let handler
+  handleAction = (item: MenuItem) => {
+    let handler: MenuItem['action'] | null = null
+
     if (typeof item.action === 'function') {
       handler = item.action
     } else {
@@ -62,10 +58,10 @@ export default class UserComponentPane extends React.PureComponent {
         this.userComponent &&
         this.userComponent.current &&
         this.userComponent.current.actionHandlers &&
-        this.userComponent.current.actionHandlers[item.action]
+        this.userComponent.current.actionHandlers[item.action as any]
     }
 
-    if (handler) {
+    if (typeof handler === 'function') {
       handler(item.params, this)
     } else {
       noActionFn()
@@ -80,18 +76,18 @@ export default class UserComponentPane extends React.PureComponent {
       onExpand,
       component,
       index,
-      styles,
+      // styles,
       title,
       type,
-      menuItems,
-      menuItemGroups,
+      menuItems = [],
+      menuItemGroups = [],
       renderActions,
       ...rest
     } = this.props
 
     const hideHeader = !title && !menuItems.length && !renderActions
     const paneStyles = hideHeader ? {header: userComponentPaneStyles.noHeader} : {}
-    const UserComponent = typeof component === 'function' && component
+    // const UserComponent = typeof component === 'function' && component
 
     return (
       <DefaultPane
@@ -105,7 +101,9 @@ export default class UserComponentPane extends React.PureComponent {
         onExpand={onExpand}
         onAction={this.handleAction}
       >
-        {UserComponent ? <UserComponent ref={this.userComponent} {...rest} /> : component}
+        {isValidElementType(component) &&
+          createElement(component, {...rest, ref: this.userComponent})}
+        {/* {UserComponent ? <UserComponent ref={this.userComponent} {...rest} /> : component} */}
       </DefaultPane>
     )
   }

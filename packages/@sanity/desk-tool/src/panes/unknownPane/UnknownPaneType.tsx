@@ -1,18 +1,17 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import DefaultPane from 'part:@sanity/components/panes/default'
 import styles from './UnknownPaneType.css'
 
-export default class UnknownPaneType extends React.PureComponent {
-  static propTypes = {
-    type: PropTypes.string,
-    isSelected: PropTypes.bool.isRequired,
-    isCollapsed: PropTypes.bool.isRequired,
-    onExpand: PropTypes.func,
-    onCollapse: PropTypes.func,
-    index: PropTypes.number,
-  }
+interface UnknownPaneTypeProps {
+  type?: string
+  isSelected: boolean
+  isCollapsed: boolean
+  onExpand?: () => void
+  onCollapse?: () => void
+  index?: number
+}
 
+export class UnknownPaneType extends React.PureComponent<UnknownPaneTypeProps> {
   static defaultProps = {
     type: undefined,
     onExpand: undefined,

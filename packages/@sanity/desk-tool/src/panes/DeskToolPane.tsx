@@ -1,13 +1,18 @@
-/* eslint-disable react/jsx-filename-extension */
-
 import React from 'react'
-import PropTypes from 'prop-types'
 import {noop} from 'lodash'
 import {DocumentsListPane} from './documentsListPane'
 import {UserComponentPane} from './userComponentPane'
 import {UnknownPane} from './unknownPane'
 import {DocumentPaneProvider} from './documentPane'
 import {ListPane} from './listPane'
+
+interface DeskToolPaneProps {
+  index: number
+  title?: string
+  type: string
+  onCollapse: (index: number) => void
+  onExpand: (index: number) => void
+}
 
 const paneMap = {
   list: ListPane,
@@ -16,16 +21,7 @@ const paneMap = {
   component: UserComponentPane,
 }
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class DeskToolPane extends React.PureComponent {
-  static propTypes = {
-    index: PropTypes.number,
-    title: PropTypes.string,
-    type: PropTypes.string.isRequired,
-    onCollapse: PropTypes.func,
-    onExpand: PropTypes.func,
-  }
-
+export default class DeskToolPane extends React.PureComponent<DeskToolPaneProps> {
   static defaultProps = {
     title: '',
     index: 0,

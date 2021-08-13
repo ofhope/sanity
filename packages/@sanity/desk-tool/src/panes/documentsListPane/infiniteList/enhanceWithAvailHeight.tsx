@@ -2,22 +2,36 @@ import React from 'react'
 import elementResizeDetectorMaker from 'element-resize-detector'
 import styles from './enhanceWithAvailableHeight.css'
 
-export default function enhanceWithAvailHeight(Component) {
-  return class enhancedWithAvailHeight extends React.PureComponent {
-    static displayName = `enhanceWithAvailHeight(${Component.displayName || Component.name})`
-    state = {}
+export interface WithAvailHeightProps {
+  height?: number
+}
 
-    constructor() {
-      super()
+export default function enhanceWithAvailHeight<ComponentProps extends WithAvailHeightProps>(
+  WrappedComponent: React.ComponentType<ComponentProps>
+) {
+  return class EnhancedWithAvailHeight extends React.PureComponent<Omit<ComponentProps, 'height'>> {
+    static displayName = `enhanceWithAvailHeight(${
+      WrappedComponent.displayName || WrappedComponent.name || 'WrappedComponent'
+    })`
+
+    // state = {}
+    erd: elementResizeDetectorMaker.Erd
+    _element: HTMLDivElement | null = null
+
+    constructor(props: Omit<ComponentProps, 'height'>) {
+      super(props)
 
       this.erd = elementResizeDetectorMaker({strategy: 'scroll'})
+      this.state = {}
     }
 
     componentWillUnmount() {
-      this.teardown(this._element)
+      if (this._element) {
+        this.teardown(this._element)
+      }
     }
 
-    setup(el) {
+    setup(el: HTMLDivElement) {
       if (this._element) {
         this.teardown(this._element)
       }
@@ -25,26 +39,31 @@ export default function enhanceWithAvailHeight(Component) {
       this._element = el
     }
 
-    teardown(el) {
+    teardown(el: HTMLDivElement) {
       this.erd.removeAllListeners(el)
       this.erd.uninstall(el)
       this._element = null
     }
 
-    setContainer = (el) => {
+    setContainer = (el: HTMLDivElement) => {
       if (el) {
         this.setup(el)
       }
     }
 
     handleResize = () => {
-      this.setState({height: this._element.offsetHeight})
+      this.setState({height: this._element?.offsetHeight})
     }
 
     render() {
+      const wrappedProps = {
+        ...(this.props as ComponentProps),
+        ...this.state,
+      }
+
       return (
         <div className={styles.root} ref={this.setContainer}>
-          <Component {...this.props} {...this.state} />
+          <WrappedComponent {...wrappedProps} />
         </div>
       )
     }
