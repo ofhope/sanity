@@ -2,17 +2,14 @@
 ///<reference types="@sanity/types/parts" />
 
 import {UserAvatar, useZIndex} from '@sanity/base/components'
-import {Layer} from '@sanity/ui'
-import React from 'react'
-import CloseIcon from 'part:@sanity/base/close-icon'
-import SignOutIcon from 'part:@sanity/base/sign-out-icon'
-import Button from 'part:@sanity/components/buttons/default'
+import {Layer, Card, Flex, Text, Box, Button, Stack, useGlobalKeyDown} from '@sanity/ui'
+import {CloseIcon, LeaveIcon} from '@sanity/icons'
+import React, {useEffect, useRef} from 'react'
 import ToolMenu from 'part:@sanity/default-layout/tool-switcher'
-import {DatasetSelect} from '../components'
+import styled from 'styled-components'
+import {DatasetSelect} from '../datasetSelect'
 import {Router, Tool, User} from '../types'
 import {HAS_SPACES} from '../util/spaces'
-
-import styles from './SideMenu.css'
 
 interface Props {
   activeToolName: string | null
@@ -25,67 +22,116 @@ interface Props {
   user: User
 }
 
-function SideMenu(props: Props) {
+const Root = styled(Layer)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+`
+
+const Backdrop = styled(Box)<{$open: boolean}>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: ${({$open}) => ($open ? 1 : 0)};
+  background: var(--card-shadow-penumbra-color);
+  transition: 200ms opacity ease-in-out;
+  pointer-events: ${({$open}) => ($open ? 'all' : 'none')};
+`
+
+const InnerCard = styled(Card)<{$open: boolean}>`
+  position: relative;
+  pointer-events: all;
+  flex-direction: column;
+  min-width: 200px;
+  max-width: 280px;
+  transform: ${({$open}) => ($open ? 'translate(0%)' : 'translate(-100%)')};
+  transition: 200ms transform ease-in-out;
+`
+
+export function SideMenu(props: Props) {
   const {activeToolName, isOpen, onClose, onSignOut, onSwitchTool, router, tools, user} = props
-  const zindex = useZIndex()
-  let className = styles.root
-  if (isOpen) className += ` ${styles.isOpen}`
+  const zIndex = useZIndex()
+  const closeButtonRef = useRef<HTMLButtonElement>()
   const tabIndex = isOpen ? 0 : -1
 
+  useGlobalKeyDown((e: KeyboardEvent) => {
+    if (e.key === 'Escape' && isOpen) {
+      onClose()
+    }
+  })
+
+  useEffect(() => {
+    if (isOpen) {
+      closeButtonRef?.current?.focus()
+    }
+  }, [isOpen])
+
   return (
-    <Layer className={className} zOffset={zindex.drawer}>
-      <div className={styles.backdrop} />
+    <Root zOffset={zIndex.drawer}>
+      <Backdrop $open={isOpen} onClick={onClose} />
 
-      <div className={styles.inner}>
-        <div className={styles.header}>
-          <div className={styles.headerMain}>
-            <div className={styles.userProfile}>
-              <div className={styles.userAvatarContainer}>
-                <UserAvatar size="medium" userId="me" />
-              </div>
-              <div className={styles.userProfileText}>{user.name || user.email}</div>
-            </div>
+      <InnerCard display="flex" height="fill" $open={isOpen}>
+        <Card borderBottom>
+          <Stack space={3} padding={2}>
+            <Flex align="center">
+              <Flex flex={1} align="center" paddingRight={2}>
+                <Flex flex={1} align="center">
+                  <Box>
+                    <UserAvatar size="medium" userId="me" />
+                  </Box>
+                  <Box flex={1} marginLeft={2} title={user.name || user.email}>
+                    <Text textOverflow="ellipsis">{user.name || user.email}</Text>
+                  </Box>
+                </Flex>
+              </Flex>
 
-            <div className={styles.closeButtonContainer}>
-              <Button
-                icon={CloseIcon}
-                kind="simple"
-                onClick={onClose}
-                padding="small"
-                tabIndex={tabIndex}
-                title="Close menu"
-              />
-            </div>
-          </div>
+              <Box>
+                <Button
+                  ref={closeButtonRef}
+                  icon={CloseIcon}
+                  onClick={onClose}
+                  tabIndex={tabIndex}
+                  title="Close menu"
+                  mode="bleed"
+                />
+              </Box>
+            </Flex>
 
-          {HAS_SPACES && (
-            <div className={styles.datasetSelectContainer}>
-              <DatasetSelect isVisible={isOpen} />
-            </div>
-          )}
-        </div>
+            {HAS_SPACES && (
+              <Box>
+                <DatasetSelect isVisible={isOpen} />
+              </Box>
+            )}
+          </Stack>
+        </Card>
 
-        <div className={styles.toolSwitcher}>
+        <Box flex={1} overflow="auto" padding={2}>
           <ToolMenu
             activeToolName={activeToolName}
-            direction="vertical"
             isVisible={isOpen}
             onSwitchTool={onSwitchTool}
             router={router}
             tools={tools}
           />
-        </div>
+        </Box>
 
-        <div className={styles.menuBottom}>
-          <div className={styles.signOutButton}>
-            <Button icon={SignOutIcon} kind="simple" onClick={onSignOut} tabIndex={tabIndex}>
-              Sign out
-            </Button>
-          </div>
-        </div>
-      </div>
-    </Layer>
+        <Card paddingX={2} paddingY={3} borderTop>
+          <Button
+            style={{width: '100%'}}
+            justify="flex-start"
+            icon={LeaveIcon}
+            text="Sign out"
+            onClick={onSignOut}
+            tabIndex={tabIndex}
+            mode="bleed"
+          />
+        </Card>
+      </InnerCard>
+    </Root>
   )
 }
-
-export default SideMenu
