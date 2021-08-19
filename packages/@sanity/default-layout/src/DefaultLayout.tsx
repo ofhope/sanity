@@ -1,7 +1,7 @@
 // @todo: remove the following line when part imports has been removed from this file
 ///<reference types="@sanity/types/parts" />
 
-import {Layer} from '@sanity/ui'
+import {Layer, ThemeProvider} from '@sanity/ui'
 import classNames from 'classnames'
 import React from 'react'
 import {Subscription} from 'rxjs'
@@ -143,82 +143,84 @@ class DefaultLayout extends React.PureComponent<Props, State> {
     const documentTypes = getNewDocumentModalActions().map((action) => action.schemaType)
 
     return (
-      <div
-        className={classNames(styles.root, isOverlayVisible && styles.isOverlayVisible)}
-        onClickCapture={this.handleClickCapture}
-      >
-        {this.state.showLoadingScreen && (
-          <Layer
-            className={
-              this.state.loaded || document.visibilityState == 'hidden'
-                ? styles.loadingScreenLoaded
-                : styles.loadingScreen
-            }
-            zOffset={600000}
-            ref={this.setLoadingScreenElement}
-          >
-            <AppLoadingScreen text="Restoring Sanity" />
-          </Layer>
-        )}
+      <ThemeProvider>
+        <div
+          className={classNames(styles.root, isOverlayVisible && styles.isOverlayVisible)}
+          onClickCapture={this.handleClickCapture}
+        >
+          {this.state.showLoadingScreen && (
+            <Layer
+              className={
+                this.state.loaded || document.visibilityState == 'hidden'
+                  ? styles.loadingScreenLoaded
+                  : styles.loadingScreen
+              }
+              zOffset={600000}
+              ref={this.setLoadingScreenElement}
+            >
+              <AppLoadingScreen text="Restoring Sanity" />
+            </Layer>
+          )}
 
-        <LegacyLayerProvider zOffset="navbar">
-          <div className={styles.navbar}>
-            <NavbarContainer
-              tools={tools}
-              createMenuIsOpen={createMenuIsOpen}
-              onCreateButtonClick={this.handleCreateButtonClick}
-              onToggleMenu={this.handleToggleMenu}
+          <LegacyLayerProvider zOffset="navbar">
+            <div className={styles.navbar}>
+              <NavbarContainer
+                tools={tools}
+                createMenuIsOpen={createMenuIsOpen}
+                onCreateButtonClick={this.handleCreateButtonClick}
+                onToggleMenu={this.handleToggleMenu}
+                onSwitchTool={this.handleSwitchTool}
+                router={router}
+                documentTypes={documentTypes}
+                searchIsOpen={searchIsOpen}
+                /* eslint-disable-next-line react/jsx-handler-names */
+                onUserLogout={userStore.actions.logout}
+                onSearchOpen={this.handleSearchOpen}
+                onSearchClose={this.handleSearchClose}
+              />
+            </div>
+          </LegacyLayerProvider>
+
+          <div className={styles.sideMenuContainer}>
+            <SideMenu
+              activeToolName={tool}
+              isOpen={menuIsOpen}
+              onClose={this.handleToggleMenu}
+              /* eslint-disable-next-line react/jsx-handler-names */
+              onSignOut={userStore.actions.logout}
               onSwitchTool={this.handleSwitchTool}
               router={router}
-              documentTypes={documentTypes}
-              searchIsOpen={searchIsOpen}
-              /* eslint-disable-next-line react/jsx-handler-names */
-              onUserLogout={userStore.actions.logout}
-              onSearchOpen={this.handleSearchOpen}
-              onSearchClose={this.handleSearchClose}
+              tools={this.props.tools}
+              user={this.state.user}
             />
           </div>
-        </LegacyLayerProvider>
 
-        <div className={styles.sideMenuContainer}>
-          <SideMenu
-            activeToolName={tool}
-            isOpen={menuIsOpen}
-            onClose={this.handleToggleMenu}
-            /* eslint-disable-next-line react/jsx-handler-names */
-            onSignOut={userStore.actions.logout}
-            onSwitchTool={this.handleSwitchTool}
-            router={router}
-            tools={this.props.tools}
-            user={this.state.user}
-          />
-        </div>
+          <div className={styles.mainArea}>
+            <div className={styles.toolContainer}>
+              <RouteScope scope={tool}>
+                <RenderTool tool={tool} />
+              </RouteScope>
+            </div>
 
-        <div className={styles.mainArea}>
-          <div className={styles.toolContainer}>
-            <RouteScope scope={tool}>
-              <RenderTool tool={tool} />
-            </RouteScope>
+            <div className={styles.sidecarContainer}>
+              <Sidecar />
+            </div>
           </div>
 
-          <div className={styles.sidecarContainer}>
-            <Sidecar />
-          </div>
+          {createMenuIsOpen && (
+            <LegacyLayerProvider zOffset="navbar">
+              <ActionModal
+                onClose={this.handleActionModalClose}
+                actions={getNewDocumentModalActions()}
+              />
+            </LegacyLayerProvider>
+          )}
+
+          {absolutes.map((Abs, i) => (
+            <Abs key={String(i)} />
+          ))}
         </div>
-
-        {createMenuIsOpen && (
-          <LegacyLayerProvider zOffset="navbar">
-            <ActionModal
-              onClose={this.handleActionModalClose}
-              actions={getNewDocumentModalActions()}
-            />
-          </LegacyLayerProvider>
-        )}
-
-        {absolutes.map((Abs, i) => (
-          <Abs key={String(i)} />
-        ))}
-      </div>
+      </ThemeProvider>
     )
   }
 
