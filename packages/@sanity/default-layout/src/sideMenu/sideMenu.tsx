@@ -104,7 +104,7 @@ export function SideMenu(props: Props) {
 
             {HAS_SPACES && (
               <Box>
-                <DatasetSelect isVisible={isOpen} />
+                <DatasetSelect />
               </Box>
             )}
           </Stack>
