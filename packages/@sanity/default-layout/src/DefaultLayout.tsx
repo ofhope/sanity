@@ -12,7 +12,7 @@ import userStore from 'part:@sanity/base/user'
 import {LegacyLayerProvider} from '@sanity/base/components'
 import Sidecar from './addons/Sidecar'
 import RenderTool from './main/RenderTool'
-import ActionModal from './actionModal/ActionModal'
+import {CreateDocumentDialog} from './createDocumentDialog'
 import NavbarContainer from './navbar/NavbarContainer'
 import {SchemaErrorReporter} from './schemaErrors/SchemaErrorReporter'
 import {SideMenu} from './sideMenu'
@@ -209,7 +209,7 @@ class DefaultLayout extends React.PureComponent<Props, State> {
 
           {createMenuIsOpen && (
             <LegacyLayerProvider zOffset="navbar">
-              <ActionModal
+              <CreateDocumentDialog
                 onClose={this.handleActionModalClose}
                 actions={getNewDocumentModalActions()}
               />
