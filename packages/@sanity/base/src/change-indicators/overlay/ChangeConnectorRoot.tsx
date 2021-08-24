@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unused-prop-types */
-
 import React, {useMemo} from 'react'
 import {Path} from '@sanity/types'
 import {ScrollContainer} from '../../components/scroll'
@@ -7,7 +5,7 @@ import {Tracker, ConnectorContext} from '../'
 import {ENABLED} from '../constants'
 import {ConnectorsOverlay} from './ConnectorsOverlay'
 
-interface Props {
+interface EnabledChangeConnectorRootProps {
   isReviewChangesOpen: boolean
   onOpenReviewChanges: () => void
   onSetFocus: (path: Path) => void
@@ -21,8 +19,8 @@ function EnabledChangeConnectorRoot({
   onSetFocus,
   isReviewChangesOpen,
   onOpenReviewChanges,
-}: Props) {
-  const [rootRef, setRootRef] = React.useState<HTMLDivElement | null>()
+}: EnabledChangeConnectorRootProps) {
+  const [rootElement, setRootRef] = React.useState<HTMLDivElement | null>()
 
   const contextValue = useMemo(
     () => ({
@@ -38,14 +36,19 @@ function EnabledChangeConnectorRoot({
       <Tracker>
         <ScrollContainer ref={setRootRef} className={className}>
           {children}
-          {rootRef && <ConnectorsOverlay rootRef={rootRef} onSetFocus={onSetFocus} />}
+          {rootElement && <ConnectorsOverlay rootElement={rootElement} onSetFocus={onSetFocus} />}
         </ScrollContainer>
       </Tracker>
     </ConnectorContext.Provider>
   )
 }
 
-function DisabledChangeConnectorRoot({children, className}: Props) {
+interface DisabledChangeConnectorRootProps {
+  className?: string
+  children: React.ReactNode
+}
+
+function DisabledChangeConnectorRoot({children, className}: DisabledChangeConnectorRootProps) {
   return <ScrollContainer className={className}>{children}</ScrollContainer>
 }
 

@@ -1,16 +1,17 @@
-import React, {useCallback, useMemo} from 'react'
+import React, {useCallback, useMemo, useState} from 'react'
 import {sortBy} from 'lodash'
 import {Path} from '@sanity/types'
 import {ScrollMonitor} from '../../components/scroll'
 import {useReportedValues, Reported, TrackedChange} from '../'
 import {findMostSpecificTarget} from '../helpers/findMostSpecificTarget'
-import {getElementGeometry} from '../helpers/getElementGeometry'
-import isChangeBar from '../helpers/isChangeBar'
-import scrollIntoView from '../helpers/scrollIntoView'
+import {isChangeBar} from '../helpers/isChangeBar'
+import {scrollIntoView} from '../helpers/scrollIntoView'
 import {DEBUG_LAYER_BOUNDS} from '../constants'
-import {resizeObserver} from '../../util/resizeObserver'
+import {getOffsetsTo} from '../helpers/getOffsetsTo'
+import {TrackedArea} from '../tracker'
 import {Connector} from './Connector'
 import {DebugLayers} from './DebugLayers'
+import {useResizeObserver} from './useResizeObserver'
 
 import styles from './ConnectorsOverlay.module.css'
 
@@ -22,83 +23,97 @@ export interface Rect {
 }
 
 interface ConnectorsOverlayProps {
-  rootRef: HTMLDivElement
+  rootElement: HTMLDivElement
   onSetFocus: (nextFocusPath: Path) => void
 }
 
-function useResizeObserver(
-  element: HTMLDivElement,
-  onResize: (event: ResizeObserverEntry) => void
+function getState(
+  allReportedValues: Reported<TrackedChange | TrackedArea>[],
+  hovered: string | null,
+  byId: Map<string, TrackedChange | TrackedArea>,
+  rootElement: HTMLElement
 ) {
-  React.useEffect(() => resizeObserver.observe(element, onResize), [element, onResize])
+  const changeBarsWithHover: Reported<TrackedChange>[] = []
+  const changeBarsWithFocus: Reported<TrackedChange>[] = []
+
+  for (const value of allReportedValues) {
+    if (!isChangeBar(value) || !value[1].isChanged) {
+      continue
+    }
+
+    const [id, reportedChangeBar] = value
+
+    if (id === hovered) {
+      changeBarsWithHover.push(value)
+      continue
+    }
+
+    if (reportedChangeBar.hasHover) {
+      changeBarsWithHover.push(value)
+      continue
+    }
+
+    if (reportedChangeBar.hasFocus) {
+      changeBarsWithFocus.push(value)
+      continue
+    }
+  }
+
+  const isHoverConnector = changeBarsWithHover.length > 0
+
+  const changeBars = isHoverConnector ? changeBarsWithHover : changeBarsWithFocus
+
+  const connectors = changeBars
+    .map(([id]) => ({
+      field: {id, ...findMostSpecificTarget('field', id, byId)},
+      change: {id, ...findMostSpecificTarget('change', id, byId)},
+    }))
+    .filter(({field, change}) => field && change && field.element && change.element)
+    .map(({field, change}) => ({
+      hasHover: field.hasHover || change.hasHover,
+      hasFocus: field.hasFocus,
+      hasRevertHover: change.hasRevertHover,
+      field: {...field, ...getOffsetsTo(field.element, rootElement)},
+      change: {...change, ...getOffsetsTo(change.element, rootElement)},
+    }))
+
+  return {connectors, isHoverConnector}
+}
+
+interface State {
+  connectors: {
+    field: TrackedChange & {id: string; rect: Rect; bounds: Rect}
+    change: TrackedChange & {id: string; rect: Rect; bounds: Rect}
+    hasFocus: boolean
+    hasHover: boolean
+    hasRevertHover: boolean
+  }[]
+  isHoverConnector: boolean
 }
 
 export function ConnectorsOverlay(props: ConnectorsOverlayProps) {
-  const {rootRef, onSetFocus} = props
+  const {rootElement, onSetFocus} = props
   const [hovered, setHovered] = React.useState<string | null>(null)
   const allReportedValues = useReportedValues()
-  const [, forceUpdate] = React.useReducer((n) => n + 1, 0)
   const byId = useMemo(() => new Map(allReportedValues), [allReportedValues])
 
-  const [changeBarsWithHover, changeBarsWithFocus] = useMemo(() => {
-    const _changeBarsWithHover: Reported<TrackedChange>[] = []
-    const _changeBarsWithFocus: Reported<TrackedChange>[] = []
-
-    for (const value of allReportedValues) {
-      if (!isChangeBar(value) || !value[1].isChanged) {
-        continue
-      }
-
-      const [id, reportedChangeBar] = value
-      if (id === hovered) {
-        _changeBarsWithHover.push(value)
-        continue
-      }
-
-      if (reportedChangeBar.hasHover) {
-        _changeBarsWithHover.push(value)
-        continue
-      }
-
-      if (reportedChangeBar.hasFocus) {
-        _changeBarsWithFocus.push(value)
-        continue
-      }
-    }
-
-    return [_changeBarsWithHover, _changeBarsWithFocus]
-  }, [allReportedValues, hovered])
-
-  const isHoverConnector = changeBarsWithHover.length > 0
-  const changeBarsWithFocusOrHover = isHoverConnector ? changeBarsWithHover : changeBarsWithFocus
-
-  const enabledConnectors = useMemo(
-    () =>
-      changeBarsWithFocusOrHover
-        .map(([id]) => ({
-          field: {id, ...findMostSpecificTarget('field', id, byId)},
-          change: {id, ...findMostSpecificTarget('change', id, byId)},
-        }))
-        .filter(({field, change}) => field && change && field.element && change.element)
-        .map(({field, change}) => ({
-          hasHover: field.hasHover || change.hasHover,
-          hasFocus: field.hasFocus,
-          hasRevertHover: change.hasRevertHover,
-          field: {...field, ...getElementGeometry(field.element, rootRef)},
-          change: {...change, ...getElementGeometry(change.element, rootRef)},
-        })),
-    [byId, changeBarsWithFocusOrHover, rootRef]
+  const [{connectors, isHoverConnector}, setState] = useState<State>(() =>
+    getState(allReportedValues, hovered, byId, rootElement)
   )
 
   const visibleConnectors = useMemo(
-    () => sortBy(enabledConnectors, (c) => -c.field.path.length).slice(0, 1),
-    [enabledConnectors]
+    () => sortBy(connectors, (c) => -c.field.path.length).slice(0, 1),
+    [connectors]
   )
 
-  useResizeObserver(rootRef, forceUpdate)
+  const handleScrollOrResize = useCallback(() => {
+    setState(getState(allReportedValues, hovered, byId, rootElement))
+  }, [byId, allReportedValues, hovered, rootElement])
+
+  useResizeObserver(rootElement, handleScrollOrResize)
 
   return (
-    <ScrollMonitor onScroll={forceUpdate}>
+    <ScrollMonitor onScroll={handleScrollOrResize}>
       <svg
         className={styles.svg}
         style={{zIndex: visibleConnectors[0] && visibleConnectors[0].field.zIndex}}
