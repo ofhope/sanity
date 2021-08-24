@@ -10,8 +10,10 @@ describe('@sanity/default-layout: Navbar', () => {
       '500401'
     )
 
-    cy.get(
-      '[data-testid="desk-tool-list-pane"] [data-test="components-default-pane-header"]'
-    ).should('have.css', 'z-index', '101')
+    cy.get('[data-testid="desk-tool-list-pane"] [data-ui="PaneHeader"]').should(
+      'have.css',
+      'z-index',
+      '101'
+    )
   })
 })
