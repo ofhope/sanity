@@ -5,7 +5,7 @@ import {LOADING_PANE} from './constants'
 
 export const hasLoading = (panes: any) => panes.some((item) => item === LOADING_PANE)
 
-export const isSaveHotkey = isHotkey('mod+s')
+export const isSaveHotkey: (event: KeyboardEvent) => boolean = isHotkey('mod+s')
 
 export function getPaneDiffIndex(nextPanes: any, prevPanes: any): [number, number] | undefined {
   if (!nextPanes.length) {
