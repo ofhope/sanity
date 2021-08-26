@@ -1,8 +1,9 @@
 // @todo: remove the following line when part imports has been removed from this file
 ///<reference types="@sanity/types/parts" />
 
-import tools from 'all:part:@sanity/base/tool'
 import React from 'react'
+import {Box, Card, Container, Heading, Stack, Text} from '@sanity/ui'
+import tools from 'all:part:@sanity/base/tool'
 import ErrorScreen from './ErrorScreen'
 
 declare const __DEV__: boolean
@@ -34,10 +35,6 @@ export default class RenderTool extends React.Component<Props> {
     this.setState({error: {error, info}})
   }
 
-  handleShowDetails = () => {
-    this.setState({showErrorDetails: true})
-  }
-
   handleRetry = () => {
     this.setState({error: null})
   }
@@ -59,7 +56,6 @@ export default class RenderTool extends React.Component<Props> {
           error={error}
           info={info}
           onRetry={this.handleRetry}
-          onShowDetails={this.handleShowDetails}
           showErrorDetails={showErrorDetails}
         />
       )
@@ -67,15 +63,43 @@ export default class RenderTool extends React.Component<Props> {
 
     if (!tools.length) {
       return (
-        <div>
-          No tools fulfills the part <code>`part:@sanity/base/tool`</code>
-        </div>
+        <Card height="fill" paddingX={[5, 5, 7]} paddingY={[5, 5, 6]} sizing="border">
+          <Container>
+            <Box marginBottom={5}>
+              <Heading as="h1">No available tools</Heading>
+            </Box>
+
+            <Stack space={4}>
+              <Text muted>
+                No tools implement the <code>part:@sanity/base/tool</code>, so there is nothing to
+                display.
+              </Text>
+            </Stack>
+          </Container>
+        </Card>
       )
     }
 
     const activeTool = this.getActiveTool()
     if (!activeTool) {
-      return <div>Tool not found: {this.props.tool}</div>
+      return (
+        <Card height="fill" paddingX={[5, 5, 7]} paddingY={[5, 5, 6]} sizing="border">
+          <Container>
+            <Box marginBottom={5}>
+              <Heading as="h1">
+                Tool not found: <code>{this.props.tool}</code>
+              </Heading>
+            </Box>
+
+            <Stack space={4}>
+              <Text muted>
+                The list of tools installed in this Studio do not include{' '}
+                <code>{this.props.tool}</code>
+              </Text>
+            </Stack>
+          </Container>
+        </Card>
+      )
     }
 
     const ActiveTool = activeTool.component
