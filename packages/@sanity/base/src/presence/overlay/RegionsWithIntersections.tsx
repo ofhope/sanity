@@ -1,4 +1,6 @@
-import React from 'react'
+/* eslint-disable no-nested-ternary */
+
+import React, {useMemo} from 'react'
 import {tap} from 'rxjs/operators'
 import {
   SNAP_TO_DOCK_DISTANCE_BOTTOM,
@@ -59,7 +61,7 @@ export const RegionsWithIntersections = React.forwardRef(function RegionsWithInt
         rootMargin: margins.map(invert).map(toPx).join(' '),
         threshold: INTERSECTION_THRESHOLDS,
       }),
-    []
+    [margins]
   )
 
   const [intersections, setIntersections] = React.useState({})
@@ -70,50 +72,55 @@ export const RegionsWithIntersections = React.forwardRef(function RegionsWithInt
 
   const top = intersections['::top']
   const bottom = intersections['::bottom']
-  const regionsWithIntersectionDetails: RegionWithIntersectionDetails[] = (top && bottom
-    ? regions
-        .filter((region) => region.presence?.length > 0)
-        .map((region): RegionWithIntersectionDetails | null => {
-          const intersection = intersections[region.id]
-          if (!intersection) {
-            return null
-          }
+  const regionsWithIntersectionDetails: RegionWithIntersectionDetails[] = useMemo(
+    () =>
+      (top && bottom
+        ? regions
+            .filter((region) => region.presence?.length > 0)
+            .map((region): RegionWithIntersectionDetails | null => {
+              const intersection = intersections[region.id]
+              if (!intersection) {
+                return null
+              }
 
-          const {bottom: boundsBottom, top: boundsTop} = intersection.boundingClientRect
+              const {bottom: boundsBottom, top: boundsTop} = intersection.boundingClientRect
 
-          const aboveTop = intersection.boundingClientRect.top < top.boundingClientRect.bottom
-          const belowBottom = intersection.boundingClientRect.top < bottom.boundingClientRect.top
-          const distanceTop = intersection.isIntersecting
-            ? boundsTop - (intersection.intersectionRect.top - INTERSECTION_ELEMENT_PADDING)
-            : aboveTop
-            ? -top.boundingClientRect.bottom
-            : bottom.boundingClientRect.top
+              const aboveTop = intersection.boundingClientRect.top < top.boundingClientRect.bottom
+              const belowBottom =
+                intersection.boundingClientRect.top < bottom.boundingClientRect.top
+              const distanceTop = intersection.isIntersecting
+                ? boundsTop - (intersection.intersectionRect.top - INTERSECTION_ELEMENT_PADDING)
+                : aboveTop
+                ? -top.boundingClientRect.bottom
+                : bottom.boundingClientRect.top
 
-          const distanceBottom = intersection.isIntersecting
-            ? -(
-                boundsBottom -
-                (intersection.intersectionRect.bottom + INTERSECTION_ELEMENT_PADDING)
-              )
-            : belowBottom
-            ? bottom.boundingClientRect.top
-            : -top.boundingClientRect.bottom
+              const distanceBottom = intersection.isIntersecting
+                ? -(
+                    boundsBottom -
+                    (intersection.intersectionRect.bottom + INTERSECTION_ELEMENT_PADDING)
+                  )
+                : belowBottom
+                ? bottom.boundingClientRect.top
+                : -top.boundingClientRect.bottom
 
-          const position =
-            distanceTop <= SNAP_TO_DOCK_DISTANCE_TOP
-              ? 'top'
-              : distanceBottom <= SNAP_TO_DOCK_DISTANCE_BOTTOM
-              ? 'bottom'
-              : 'inside'
+              const position =
+                distanceTop <= SNAP_TO_DOCK_DISTANCE_TOP
+                  ? 'top'
+                  : distanceBottom <= SNAP_TO_DOCK_DISTANCE_BOTTOM
+                  ? 'bottom'
+                  : 'inside'
 
-          return {
-            distanceTop,
-            distanceBottom,
-            region,
-            position,
-          }
-        })
-        .filter(Boolean)
-    : []) as RegionWithIntersectionDetails[]
+              return {
+                distanceTop,
+                distanceBottom,
+                region,
+                position,
+              }
+            })
+            .filter(Boolean)
+        : []) as RegionWithIntersectionDetails[],
+    [bottom, intersections, regions, top]
+  )
 
   return (
     <div className={styles.root} ref={ref}>
