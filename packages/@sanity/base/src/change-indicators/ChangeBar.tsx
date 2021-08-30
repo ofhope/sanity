@@ -44,6 +44,7 @@ export function ChangeBar(props: {
           }
           disabled={!isChanged || isReviewChangesOpen}
           placement="top"
+          portal
         >
           <div className={styles.wrapper}>
             <div className={styles.bar} />
