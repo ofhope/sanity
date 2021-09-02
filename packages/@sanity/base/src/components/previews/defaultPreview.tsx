@@ -91,7 +91,7 @@ export const DefaultPreview = (props: PreviewProps<'default'>) => {
             </MediaWrapper>
           )}
 
-          <Stack space={2} flex={1}>
+          <Stack flex={1} space={2} paddingLeft={media ? 0 : 1}>
             <Text textOverflow="ellipsis" style={{color: 'inherit'}}>
               {title && typeof title === 'function' ? title({layout: 'default'}) : title}
               {!title && <>Untitled</>}
