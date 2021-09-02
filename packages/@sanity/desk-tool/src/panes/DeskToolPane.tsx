@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useCallback} from 'react'
 import {noop} from 'lodash'
 import {DocumentsListPane} from './documentsListPane'
 import {UserComponentPane} from './userComponentPane'
@@ -10,8 +10,8 @@ interface DeskToolPaneProps {
   index: number
   title?: string
   type: string
-  onCollapse: (index: number) => void
-  onExpand: (index: number) => void
+  onCollapse?: (index: number) => void
+  onExpand?: (index: number) => void
 }
 
 const paneMap = {
@@ -21,26 +21,20 @@ const paneMap = {
   component: UserComponentPane,
 }
 
-export default class DeskToolPane extends React.PureComponent<DeskToolPaneProps> {
-  static defaultProps = {
-    title: '',
-    index: 0,
-    onCollapse: noop,
-    onExpand: noop,
-  }
+export function DeskToolPane(props: DeskToolPaneProps) {
+  const {index = 0, onCollapse = noop, onExpand = noop, title = '', type} = props
 
-  handlePaneCollapse = () => this.props.onCollapse(this.props.index)
-  handlePaneExpand = () => this.props.onExpand(this.props.index)
+  const handlePaneCollapse = useCallback(() => onCollapse(index), [index, onCollapse])
+  const handlePaneExpand = useCallback(() => onExpand(index), [index, onExpand])
 
-  render() {
-    const {type} = this.props
-    const PaneComponent = paneMap[type] || UnknownPane
-    return (
-      <PaneComponent
-        {...this.props}
-        onExpand={this.handlePaneExpand}
-        onCollapse={this.handlePaneCollapse}
-      />
-    )
-  }
+  const PaneComponent = paneMap[type] || UnknownPane
+
+  return (
+    <PaneComponent
+      {...props}
+      onExpand={handlePaneExpand}
+      onCollapse={handlePaneCollapse}
+      title={title}
+    />
+  )
 }
