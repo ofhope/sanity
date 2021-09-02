@@ -10,14 +10,16 @@ export interface DocTitleProps {
   document: Partial<SanityDocument>
 }
 
-const renderTitle = ({title}: {title?: string}) => <span>{title}</span>
+const renderTitle = ({title}: SanityDocument) => <>{title}</>
+
+const PREVIEW_FIELDS = ['title']
 
 export function DocTitle(props: DocTitleProps) {
   const {document} = props
   const type = schema.get(document._type!)
 
   return (
-    <PreviewFields document={document} type={type} fields={['title']}>
+    <PreviewFields document={document} fields={PREVIEW_FIELDS} layout="inline" type={type}>
       {renderTitle}
     </PreviewFields>
   )
