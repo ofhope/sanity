@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Flex, Stack, Text, Skeleton, TextSkeleton} from '@sanity/ui'
+import {Box, Flex, Stack, Text, Skeleton, TextSkeleton, rem} from '@sanity/ui'
 import styled from 'styled-components'
 import {getDevicePixelRatio} from 'use-device-pixel-ratio'
 import {PreviewProps} from './types'
@@ -10,10 +10,12 @@ const Root = styled(Flex)`
 
 const MediaWrapper = styled(Flex)`
   position: relative;
+  align-items: center;
+  justify-content: center;
   width: 35px;
   height: 35px;
   min-width: 35px;
-  border-radius: ${({theme}) => theme.sanity.radius[2]}px;
+  border-radius: ${({theme}) => rem(theme.sanity.radius[2])};
 
   & img {
     position: absolute;
@@ -48,6 +50,8 @@ const MediaWrapper = styled(Flex)`
   }
 `
 
+MediaWrapper.displayName = 'MediaWrapper'
+
 export const DefaultPreview = (props: PreviewProps<'default'>) => {
   const {title, subtitle, media, status, isPlaceholder, children} = props
 
@@ -66,13 +70,7 @@ export const DefaultPreview = (props: PreviewProps<'default'>) => {
       {!isPlaceholder && (
         <>
           {media !== false && media !== undefined && (
-            <MediaWrapper
-              align="center"
-              justify="center"
-              marginRight={2}
-              sizing="border"
-              overflow="hidden"
-            >
+            <MediaWrapper align="center" justify="center" marginRight={2} overflow="hidden">
               {typeof media === 'function' &&
                 media({
                   dimensions: {
