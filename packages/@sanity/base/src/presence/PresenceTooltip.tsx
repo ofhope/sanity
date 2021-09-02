@@ -1,8 +1,5 @@
-// @todo: remove the following line when part imports has been removed from this file
-///<reference types="@sanity/types/parts" />
-
-import {Tooltip, TooltipPlacement} from 'part:@sanity/components/tooltip'
 import React from 'react'
+import {Placement, Tooltip} from '@sanity/ui'
 import {UserAvatar} from '../components/UserAvatar'
 import type {FormFieldPresence} from './types'
 
@@ -11,7 +8,7 @@ import styles from './PresenceTooltip.css'
 interface PresenceTooltipProps {
   children?: React.ReactElement
   items: FormFieldPresence[]
-  placement?: TooltipPlacement
+  placement?: Placement
 }
 
 export function PresenceTooltip(props: PresenceTooltipProps) {
