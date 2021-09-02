@@ -7,11 +7,19 @@ import {DocumentPaneProvider} from './documentPane'
 import {ListPane} from './listPane'
 
 interface DeskToolPaneProps {
+  childItemId: string
   index: number
+  itemId: string
+  isActive: boolean
+  isClosable: boolean
+  isCollapsed: boolean
+  isSelected: boolean
+  paneKey: string
   title?: string
   type: string
   onCollapse?: (index: number) => void
   onExpand?: (index: number) => void
+  urlParams: Record<string, unknown>
 }
 
 const paneMap = {
