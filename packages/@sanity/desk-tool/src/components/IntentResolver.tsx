@@ -12,6 +12,7 @@ import {LOADING_PANE} from '../constants'
 import {StructureError} from './StructureError'
 
 export interface IntentResolverProps {
+  intent: any
   params: {type: string; id: string; [key: string]: unknown}
   payload: unknown
 }
