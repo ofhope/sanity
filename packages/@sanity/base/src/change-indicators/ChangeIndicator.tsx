@@ -128,7 +128,7 @@ interface CoreProps {
   className?: string
   disabled?: boolean
   fullPath: Path
-  compareDeep: boolean
+  compareDeep?: boolean
   value: unknown
   hasFocus: boolean
   compareValue: unknown
@@ -208,11 +208,11 @@ export const ChangeIndicatorWithProvidedFullPath = ({
   children,
 }: {
   className?: string
-  disabled: boolean
+  disabled?: boolean
   path: Path
   value: unknown
   hasFocus: boolean
-  compareDeep: boolean
+  compareDeep?: boolean
   children?: React.ReactNode
 }) => {
   const parentContext = React.useContext(ChangeIndicatorContext)

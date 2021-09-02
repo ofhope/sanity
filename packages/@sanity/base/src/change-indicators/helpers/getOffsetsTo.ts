@@ -5,19 +5,24 @@ export const getOffsetsTo = (
   source: HTMLElement,
   target: HTMLElement
 ): {rect: Rect; bounds: Rect} => {
-  const bounds: {top: number; height: number; left: number; width: number} = {
+  const bounds: Rect = {
     top: 0,
     left: 0,
     height: target.offsetHeight, // Number.MAX_SAFE_INTEGER,
     width: target.offsetWidth, // Number.MAX_SAFE_INTEGER,
   }
 
-  let top = 0
-  let left = 0
+  const rect: Rect = {
+    top: 0,
+    left: 0,
+    height: source.offsetHeight,
+    width: source.offsetWidth,
+  }
+
   let foundScrollContainer = false
   let el: HTMLElement | null = source
 
-  while (el && el !== target) {
+  while (el && el !== target && target.contains(el)) {
     if (foundScrollContainer) {
       bounds.top += el.offsetTop
       bounds.left += el.offsetLeft
@@ -32,16 +37,10 @@ export const getOffsetsTo = (
       foundScrollContainer = true
     }
 
-    top += el.offsetTop - el.scrollTop
-    left += el.offsetLeft - el.scrollLeft
-    el = el.offsetParent as HTMLElement
-  }
+    rect.top += el.offsetTop - el.scrollTop
+    rect.left += el.offsetLeft - el.scrollLeft
 
-  const rect = {
-    top,
-    left,
-    height: source.offsetHeight,
-    width: source.offsetWidth,
+    el = el.offsetParent as HTMLElement
   }
 
   return {rect, bounds}
