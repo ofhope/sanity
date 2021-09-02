@@ -43,7 +43,7 @@ export function IntentActionButton(props: {intent: Intent; item: MenuItemType}) 
           data-as="a"
           icon={item.icon}
           mode="bleed"
-          padding={2}
+          padding={3}
         />
       </div>
     </Tooltip>
