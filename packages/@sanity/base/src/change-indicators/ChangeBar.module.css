@@ -49,7 +49,7 @@
 
   @media (--max-screen-medium) {
     /* hide on mobile */
-    display: none;
+    /* display: none; */
   }
 
   @media (--screen-medium) {

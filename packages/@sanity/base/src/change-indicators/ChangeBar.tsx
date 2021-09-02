@@ -66,7 +66,7 @@ export function ChangeBar(props: {
           placement="top"
         >
           <div className={styles.wrapper}>
-            <div className={styles.bar} />
+            <div className={styles.bar} data-bar="" />
 
             <div className={styles.badge}>
               <Shape className={styles.badge__shape} />
