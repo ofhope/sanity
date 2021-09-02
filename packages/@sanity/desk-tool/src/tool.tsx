@@ -2,11 +2,11 @@ import {MasterDetailIcon} from '@sanity/icons'
 import {uuid} from '@sanity/uuid'
 import {route, useRouterState} from 'part:@sanity/base/router'
 import React, {useEffect} from 'react'
-import {IntentResolver} from '../components/IntentResolver'
-import {EMPTY_PARAMS} from '../constants'
-import {DeskToolFeaturesProvider} from '../features'
-import {parsePanesSegment, encodePanesSegment} from '../utils/parsePanesSegment'
-import DeskToolRoot from './DeskTool'
+import {IntentResolver} from './components/IntentResolver'
+import {EMPTY_PARAMS} from './constants'
+import {DeskToolFeaturesProvider} from './features'
+import {parsePanesSegment, encodePanesSegment} from './utils/parsePanesSegment'
+import {DeskTool as DeskToolRoot} from './DeskTool'
 
 function toState(pathSegment: string) {
   return parsePanesSegment(decodeURIComponent(pathSegment))
