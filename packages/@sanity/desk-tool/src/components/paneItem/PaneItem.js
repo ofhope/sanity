@@ -1,4 +1,4 @@
-import React, {forwardRef, useContext, useMemo} from 'react'
+import React, {forwardRef, useMemo} from 'react'
 import PropTypes from 'prop-types'
 import {Card, Text} from '@sanity/ui'
 import {FolderIcon, ChevronRightIcon, DocumentIcon} from '@sanity/icons'
@@ -7,7 +7,7 @@ import {SanityDefaultPreview} from 'part:@sanity/base/preview'
 import {DocumentPaneItemPreview} from '../../components/DocumentPaneItemPreview'
 import getIconWithFallback from '../../utils/getIconWithFallback'
 import {MissingSchemaType} from '../../components/MissingSchemaType'
-import {PaneRouterContext} from '../../contexts/PaneRouterContext'
+import {usePaneRouter} from '../../contexts/paneRouter'
 
 PaneItem.propTypes = {
   id: PropTypes.string.isRequired,
@@ -39,7 +39,7 @@ PaneItem.defaultProps = {
 
 export default function PaneItem(props) {
   const {id, isSelected, schemaType, layout, icon, value, isActive} = props
-  const {ChildLink} = useContext(PaneRouterContext)
+  const {ChildLink} = usePaneRouter()
   const hasSchemaType = Boolean(schemaType && schemaType.name && schema.get(schemaType.name))
 
   const preview = useMemo(() => {
