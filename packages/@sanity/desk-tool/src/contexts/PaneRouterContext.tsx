@@ -6,7 +6,10 @@ import React, {useContext, useMemo} from 'react'
 import {isEqual, pick, omit} from 'lodash'
 import {StateLink, HOCRouter} from 'part:@sanity/base/router'
 
-const contextCache = new WeakMap<any, Map<string, PaneRouterContextShape>>()
+const contextCache = new WeakMap<
+  React.Component<DeskToolPanesProps>,
+  Map<string, PaneRouterContextShape>
+>()
 
 interface SetParamsOptions {
   recurseIfInherited?: boolean
@@ -16,13 +19,13 @@ const DEFAULT_SET_PARAMS_OPTIONS: SetParamsOptions = {
   recurseIfInherited: false,
 }
 
-function missingContext<T = any>(): T {
+function missingContext<T = unknown>(): T {
   throw new Error('Pane is missing router context')
 }
 
 export const exclusiveParams = ['view', 'since', 'rev']
 
-type PaneSegment = {id: string; payload?: unknown; params?: Record<string, any>}
+type PaneSegment = {id: string; payload?: unknown; params?: Record<string, unknown>}
 type RouterPanesState = Array<PaneSegment[]>
 
 export interface PaneRouterContextShape {
@@ -51,25 +54,28 @@ export interface PaneRouterContextShape {
   routerPanesState: RouterPanesState
 
   // Curried StateLink that passes the correct state automatically
-  ChildLink: (props: {childId: string; childParameters: Record<string, any>}) => React.ReactNode
+  ChildLink: (props: {childId: string; childParameters: Record<string, unknown>}) => React.ReactNode
 
   // Curried StateLink that passed the correct state, but merges params/payload
-  ParameterizedLink: (props: {params?: Record<string, any>; payload?: unknown}) => React.ReactNode
+  ParameterizedLink: (props: {
+    params?: Record<string, unknown>
+    payload?: unknown
+  }) => React.ReactNode
 
   // Replaces the current pane with a new one
-  replaceCurrent: (pane: {id?: string; payload?: unknown; params?: Record<string, any>}) => void
+  replaceCurrent: (pane: {id?: string; payload?: unknown; params?: Record<string, unknown>}) => void
 
   // Removes the current pane from the group
   closeCurrent: () => void
 
   // Duplicate the current pane, with optional overrides for item ID and parameters
-  duplicateCurrent: (pane?: {payload?: unknown; params?: Record<string, any>}) => void
+  duplicateCurrent: (pane?: {payload?: unknown; params?: Record<string, unknown>}) => void
 
   // Set the current "view" for the pane
   setView: (viewId: string) => void
 
   // Set the parameters for the current pane
-  setParams: (params: Record<string, any>, options?: SetParamsOptions) => void
+  setParams: (params: Record<string, unknown>, options?: SetParamsOptions) => void
 
   // Set the payload for the current pane
   setPayload: (payload: unknown) => void
@@ -77,7 +83,7 @@ export interface PaneRouterContextShape {
   // Proxied navigation to a given intent. Consider just exposing `router` instead?
   navigateIntent: (
     intentName: string,
-    params: Record<string, any>,
+    params: Record<string, unknown>,
     options?: {replace?: boolean}
   ) => void
 }
@@ -108,7 +114,10 @@ type ChildLinkProps = {
   children?: React.ReactNode
 }
 
-const ChildLink = React.forwardRef(function ChildLink(props: ChildLinkProps, ref: React.Ref<any>) {
+const ChildLink = React.forwardRef(function ChildLink(
+  props: ChildLinkProps,
+  ref: React.Ref<typeof StateLink>
+) {
   const {childId, childPayload, ...rest} = props
   const {routerPanesState, groupIndex} = useContext(PaneRouterContext)
   const panes: RouterPanesState = useMemo(
@@ -121,14 +130,14 @@ const ChildLink = React.forwardRef(function ChildLink(props: ChildLinkProps, ref
 })
 
 type ParameterizedLinkProps = {
-  params?: Record<string, any>
+  params?: Record<string, unknown>
   payload?: unknown
   children?: React.ReactNode
 }
 
 const ParameterizedLink = React.forwardRef(function ParameterizedLink(
   props: ParameterizedLinkProps,
-  ref: React.Ref<any>
+  ref: React.Ref<StateLink>
 ) {
   const {params: newParams, payload: newPayload, ...rest} = props
   const {routerPanesState} = useContext(PaneRouterContext)
@@ -156,7 +165,7 @@ type PaneRouterContextFactory = (options: {
   groupIndex: number
   siblingIndex: number
   flatIndex: number
-  params: Record<string, any>
+  params: Record<string, string>
   payload: unknown
 }) => PaneRouterContextShape
 
