@@ -4,7 +4,6 @@
 import React, {useCallback, useMemo, useState} from 'react'
 import {DocumentActionDescription} from '@sanity/base'
 import {EditStateFor} from '@sanity/base/_internal'
-
 import {useEditState, useConnectionState} from '@sanity/react-hooks'
 import {Box, Flex, Tooltip, Stack, Button, Hotkeys, LayerProvider, Text} from '@sanity/ui'
 import {RenderActionCollectionState} from 'part:@sanity/base/actions/utils'

@@ -1,8 +1,5 @@
-// @todo: remove the following line when part imports has been removed from this file
-///<reference types="@sanity/types/parts" />
-
-import {useTimeAgo} from '@sanity/base/hooks'
 import {ChangeFieldWrapper} from '@sanity/base/change-indicators'
+import {useTimeAgo} from '@sanity/base/hooks'
 import {
   ChangeList,
   Chunk,
@@ -13,20 +10,20 @@ import {
   ObjectDiff,
   ObjectSchemaType,
 } from '@sanity/field/diff'
-import CloseIcon from 'part:@sanity/base/close-icon'
 import {UserAvatar, ScrollContainer} from '@sanity/base/components'
-import {SelectIcon} from '@sanity/icons'
-import {AvatarStack, BoundaryElementProvider, Button, Flex, Card} from '@sanity/ui'
+import {CloseIcon, SelectIcon} from '@sanity/icons'
+import {AvatarStack, BoundaryElementProvider, Box, Button, Flex} from '@sanity/ui'
 import React, {useCallback, useRef} from 'react'
+import styled from 'styled-components'
 import {useDocumentHistory} from '../documentHistory'
 import {formatTimelineEventLabel} from '../timeline'
+import {PaneContent, PaneHeader} from '../../../components/pane'
+import {usePane} from '../../../components/pane/usePane'
 import {LoadingContent} from './content/loading'
 import {collectLatestAuthorAnnotations} from './helpers'
 
-import styles from './changesPanel.css'
-
 interface ChangesPanelProps {
-  changesSinceSelectRef: React.MutableRefObject<HTMLDivElement | null>
+  changesSinceSelectRef: React.MutableRefObject<HTMLButtonElement | null>
   documentId: string
   isTimelineOpen: boolean
   loading: boolean
@@ -35,6 +32,12 @@ interface ChangesPanelProps {
   since: Chunk | null
   timelineMode: 'rev' | 'since' | 'closed'
 }
+const Scroller = styled(ScrollContainer)`
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  scroll-behavior: smooth;
+`
 
 export function ChangesPanel({
   changesSinceSelectRef,
@@ -46,7 +49,8 @@ export function ChangesPanel({
   schemaType,
   timelineMode,
 }: ChangesPanelProps): React.ReactElement | null {
-  const scrollRef = useRef<HTMLElement | null>(null)
+  const {collapsed} = usePane()
+  const scrollRef = useRef<HTMLDivElement | null>(null)
   const {close: closeHistory, historyController} = useDocumentHistory()
   const diff: ObjectDiff | null = historyController.currentObjectDiff()
   const isComparingCurrent = !historyController.onOlderRevision()
@@ -75,54 +79,37 @@ export function ChangesPanel({
 
   const menuOpen = isTimelineOpen && timelineMode === 'since'
 
+  if (collapsed) {
+    return null
+  }
+
   return (
-    <Card className={styles.root}>
-      <Flex direction="column" height="fill">
-        <header className={styles.header}>
-          <div className={styles.mainNav}>
-            <h2 className={styles.title}>Changes</h2>
-            <div className={styles.closeButtonContainer}>
-              <Button
-                icon={CloseIcon}
-                mode="bleed"
-                onClick={closeHistory}
-                padding={2}
-                title="Hide changes panel"
-              />
-            </div>
-          </div>
-
-          <div className={styles.versionSelectContainer}>
-            <div className={styles.changesSinceSelectContainer}>
-              <div ref={changesSinceSelectRef}>
-                <Button
-                  fontSize={1}
-                  iconRight={SelectIcon}
-                  mode="bleed"
-                  onClick={onTimelineOpen}
-                  onMouseUp={ignoreClickOutside}
-                  padding={2}
-                  selected={isTimelineOpen && timelineMode === 'since'}
-                  text={
-                    // eslint-disable-next-line no-nested-ternary
-                    menuOpen ? (
-                      <>Review changes since</>
-                    ) : since ? (
-                      <SinceText since={since} />
-                    ) : (
-                      <>Since unknown version</>
-                    )
-                  }
-                />
-              </div>
-            </div>
-
-            {changeAnnotations.length > 0 && (
+    <Flex
+      direction="column"
+      flex={1}
+      style={{
+        borderLeft: '1px dashed var(--card-border-color)',
+        overflow: 'hidden',
+        minWidth: 320,
+      }}
+    >
+      <PaneHeader
+        actions={
+          <Button
+            icon={CloseIcon}
+            mode="bleed"
+            onClick={closeHistory}
+            padding={3}
+            title="Hide changes panel"
+          />
+        }
+        subActions={
+          changeAnnotations.length > 0 && (
+            <Box paddingRight={1}>
               <DiffTooltip
                 annotations={changeAnnotations}
                 description="Changes by"
                 placement="bottom-end"
-                fallbackPlacements={['top-end', 'bottom-end']}
               >
                 <AvatarStack maxLength={4}>
                   {changeAnnotations.map(({author}) => (
@@ -130,21 +117,50 @@ export function ChangesPanel({
                   ))}
                 </AvatarStack>
               </DiffTooltip>
-            )}
-          </div>
-        </header>
+            </Box>
+          )
+        }
+        tabs={
+          <Button
+            fontSize={1}
+            iconRight={SelectIcon}
+            mode="bleed"
+            onClick={onTimelineOpen}
+            onMouseUp={ignoreClickOutside}
+            padding={2}
+            ref={changesSinceSelectRef}
+            selected={isTimelineOpen && timelineMode === 'since'}
+            style={{maxWidth: '100%'}}
+            text={
+              // eslint-disable-next-line no-nested-ternary
+              menuOpen ? (
+                <>Review changes since</>
+              ) : since ? (
+                <SinceText since={since} />
+              ) : (
+                <>Since unknown version</>
+              )
+            }
+          />
+        }
+        title="Changes"
+      />
+
+      <PaneContent>
         <BoundaryElementProvider element={scrollRef.current}>
-          <ScrollContainer className={styles.body} ref={scrollRef}>
-            <Content
-              diff={diff}
-              documentContext={documentContext}
-              loading={loading}
-              schemaType={schemaType}
-            />
-          </ScrollContainer>
+          <Scroller data-ui="Scroller" ref={scrollRef}>
+            <Box flex={1} padding={4}>
+              <Content
+                diff={diff}
+                documentContext={documentContext}
+                loading={loading}
+                schemaType={schemaType}
+              />
+            </Box>
+          </Scroller>
         </BoundaryElementProvider>
-      </Flex>
-    </Card>
+      </PaneContent>
+    </Flex>
   )
 }
 

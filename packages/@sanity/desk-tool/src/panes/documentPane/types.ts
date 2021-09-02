@@ -1,9 +1,12 @@
-import {ComponentType} from 'react'
+import {MenuItem, MenuItemGroup} from '@sanity/base/__legacy/@sanity/components'
+import {SanityDocument} from '@sanity/types'
+import {BaseDeskToolPaneProps} from '../types'
 
 export interface DocumentPaneOptions {
   id: string
   type: string
   template?: string
+  templateParameters?: Record<string, unknown>
 }
 
 export interface DocumentView {
@@ -11,30 +14,9 @@ export interface DocumentView {
   id: string
   title: string
   options: {}
-  component: ComponentType<any>
-  icon?: ComponentType<any>
+  component: React.ComponentType<any>
+  icon?: React.ComponentType<any>
 }
-
-export interface Doc {
-  _id?: string
-  _type?: string
-  _rev?: string
-  _updatedAt?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
-}
-
-// export interface MenuAction {
-//   action: string
-//   icon?: React.FunctionComponent | React.Component
-//   isDisabled?: boolean
-//   title: React.ReactNode
-//   url?: string
-// }
-
-// export interface MenuItemGroup {
-//   id: string
-// }
 
 export interface DocumentViewType {
   type: string
@@ -45,17 +27,12 @@ export interface DocumentViewType {
   component: React.ComponentType<any>
 }
 
-export interface ObjectSchemaType {
-  name: string
-  jsonType: string
+export type DocumentPaneProviderProps = BaseDeskToolPaneProps<{
+  type: 'document'
+  initialValue?: SanityDocument
+  menuItems: MenuItem[]
+  menuItemGroups: MenuItemGroup[]
+  options: DocumentPaneOptions
   title?: string
-  fields: ObjectField[]
-  diffComponent?: ComponentType<any>
-}
-
-export interface ObjectField {
-  name: string
-  type: SchemaType
-}
-
-export type SchemaType = ObjectSchemaType
+  views: DocumentViewType[]
+}>

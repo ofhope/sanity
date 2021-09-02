@@ -2,22 +2,23 @@
 ///<reference types="@sanity/types/parts" />
 
 import {useDocumentPresence} from '@sanity/base/hooks'
+import {SanityDocument} from '@sanity/types'
+import {Box} from '@sanity/ui'
 import {FormBuilder} from 'part:@sanity/form-builder'
 import documentStore from 'part:@sanity/base/datastore/document'
-import React, {FormEvent, useEffect, useMemo, useRef, memo} from 'react'
+import React, {FormEvent, useEffect, useRef, memo} from 'react'
 import {Subscription} from 'rxjs'
 import {tap} from 'rxjs/operators'
 
 const preventDefault = (ev: FormEvent) => ev.preventDefault()
 
-type Doc = any
 type Schema = any
 type SchemaType = any
 
 interface Props {
   id: string
-  value: Doc
-  compareValue: Doc | null
+  value: Partial<SanityDocument> | null
+  compareValue: SanityDocument | null
 
   filterField: () => boolean
   focusPath: any[]
@@ -34,7 +35,7 @@ interface Props {
 export const EditForm = memo((props: Props) => {
   const presence = useDocumentPresence(props.id)
   const subscriptionRef = useRef<Subscription | null>(null)
-  const patchChannel = useMemo(() => FormBuilder.createPatchChannel(), [])
+  const patchChannelRef = useRef<any>(null)
   const {
     filterField,
     focusPath,
@@ -50,6 +51,14 @@ export const EditForm = memo((props: Props) => {
   } = props
 
   useEffect(() => {
+    patchChannelRef.current = FormBuilder.createPatchChannel()
+  }, [])
+
+  useEffect(() => {
+    const patchChannel = patchChannelRef.current
+
+    if (patchChannel) return undefined
+
     subscriptionRef.current = documentStore.pair
       .documentEvents(props.id, props.type.name)
       .pipe(
@@ -65,26 +74,26 @@ export const EditForm = memo((props: Props) => {
         subscriptionRef.current = null
       }
     }
-  }, [])
+  }, [props.id, props.type.name])
 
   return (
-    <form onSubmit={preventDefault}>
+    <Box as="form" onSubmit={preventDefault}>
       <FormBuilder
         schema={schema}
-        patchChannel={patchChannel}
+        patchChannel={patchChannelRef.current}
         value={value || {_type: type}}
         compareValue={compareValue}
         type={type}
         presence={presence}
         filterField={filterField}
-        readOnly={readOnly}
+        readOnly={!patchChannelRef.current || readOnly}
         onBlur={onBlur}
         onFocus={onFocus}
         focusPath={focusPath}
         onChange={onChange}
         markers={markers}
       />
-    </form>
+    </Box>
   )
 })
 
