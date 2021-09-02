@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable react/jsx-filename-extension */
-
-import React, {useEffect} from 'react'
+import {MasterDetailIcon} from '@sanity/icons'
 import {uuid} from '@sanity/uuid'
 import {route, useRouterState} from 'part:@sanity/base/router'
-import {parsePanesSegment, encodePanesSegment} from '../utils/parsePanesSegment'
+import React, {useEffect} from 'react'
 import {IntentResolver} from '../components/IntentResolver'
 import {EMPTY_PARAMS} from '../constants'
 import {DeskToolFeaturesProvider} from '../features'
+import {parsePanesSegment, encodePanesSegment} from '../utils/parsePanesSegment'
 import DeskToolRoot from './DeskTool'
 
-function toState(pathSegment) {
+function toState(pathSegment: string) {
   return parsePanesSegment(decodeURIComponent(pathSegment))
 }
 
@@ -28,11 +26,11 @@ function legacyEditParamsToState(params) {
   }
 }
 
-function legacyEditParamsToPath(params) {
+function legacyEditParamsToPath(params: Record<string, unknown>) {
   return JSON.stringify(params)
 }
 
-const state = {activePanes: []}
+const state: {activePanes: any[]} = {activePanes: []}
 
 function setActivePanes(panes) {
   state.activePanes = panes
@@ -54,7 +52,7 @@ function DeskToolPaneStateSyncer(props) {
 }
 
 // eslint-disable-next-line complexity
-function getIntentState(intentName, params, currentState, payload) {
+function getIntentState(intentName: string, params, currentState, payload) {
   const paneSegments = (currentState && currentState.panes) || []
   const activePanes = state.activePanes || []
   const editDocumentId = params.id || uuid()
@@ -74,33 +72,6 @@ function getIntentState(intentName, params, currentState, payload) {
   }
 
   return {intent: intentName, params, payload}
-}
-
-const strokeStyle = {
-  stroke: 'currentColor',
-  strokeWidth: 1.2,
-}
-
-// @todo: Move to @sanity/base
-// eslint-disable-next-line react/no-multi-comp
-function MasterDetailIcon() {
-  return (
-    <svg
-      data-sanity-icon
-      width="1em"
-      height="1em"
-      viewBox="0 0 25 25"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <rect x="4.5" y="5.5" width="16" height="14" style={strokeStyle} />
-      <path d="M10.5 5.5V19.5" style={strokeStyle} />
-      <path d="M6 8.5H9" style={strokeStyle} />
-      <path d="M13 8.5H18" style={strokeStyle} />
-      <path d="M6 11.5H9" style={strokeStyle} />
-      <path d="M6 14.5H9" style={strokeStyle} />
-    </svg>
-  )
 }
 
 function DeskTool() {
