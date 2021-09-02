@@ -2,9 +2,7 @@ import {Observable} from 'rxjs'
 import settings from 'part:@sanity/base/settings'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
-const deskToolSettings = settings.forNamespace('desk-tool')
-
-export default deskToolSettings
+export const deskToolSettings = settings.forNamespace('desk-tool')
 
 export function useDeskToolSetting<ValueType>(
   namespace: string | null,
