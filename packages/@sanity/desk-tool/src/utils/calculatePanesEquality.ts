@@ -1,7 +1,10 @@
 import {isEqual} from 'lodash'
-import {PaneNode} from '../types'
+import {RouterPane} from '../types'
 
-export const calculatePanesEquality = (prev: PaneNode[][] = [], next: PaneNode[][] = []) => {
+export const calculatePanesEquality = (
+  prev: RouterPane[][] = [],
+  next: RouterPane[][] = []
+): {ids: boolean; params: boolean} => {
   if (prev === next) {
     return {ids: true, params: true}
   }

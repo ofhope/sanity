@@ -20,7 +20,7 @@ import {
   getTemplatesBySchemaType,
   resolveInitialValue,
 } from '@sanity/base/initial-value-templates'
-import {PaneRouterContext} from '../contexts/PaneRouterContext'
+import {PaneRouterContext} from '../contexts/paneRouter'
 import {ErrorPane} from '../panes/errorPane'
 import {LoadingPane} from '../panes/loadingPane'
 import {BrokenReferences} from '../components/BrokenReferences'

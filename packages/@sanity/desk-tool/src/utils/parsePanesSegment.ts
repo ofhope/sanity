@@ -1,6 +1,6 @@
 import {EMPTY_PARAMS} from '../constants'
-import {exclusiveParams} from '../contexts/PaneRouterContext'
-import {PaneNode} from '../types'
+import {exclusiveParams} from '../contexts/paneRouter'
+import {RouterPane} from '../types'
 
 // old: authors;knut,{"template":"diaryEntry"}
 // new: authors;knut,view=diff,eyJyZXYxIjoiYWJjMTIzIiwicmV2MiI6ImRlZjQ1NiJ9|latest-posts
@@ -30,7 +30,7 @@ function parseChunks(chunks, initial = {}) {
   )
 }
 
-function encodeChunks(pane: PaneNode, i: number, group: PaneNode[]): string {
+function encodeChunks(pane: RouterPane, i: number, group: RouterPane[]): string {
   const {payload, params = {}, id} = pane
   const sameAsFirst = i !== 0 && id === group[0].id
   const encodedPayload = typeof payload === 'undefined' ? '' : btoa(JSON.stringify(payload))
@@ -83,7 +83,7 @@ export function encodePanesSegment(panes) {
 }
 
 export function parseOldPanesSegment(str) {
-  const chunks: PaneNode[] = []
+  const chunks: RouterPane[] = []
 
   let buffer = str
   while (buffer.length) {
@@ -94,7 +94,7 @@ export function parseOldPanesSegment(str) {
     }
 
     const payload = payloadChunk && tryParsePayload(payloadChunk)
-    chunks.push({id, payload})
+    chunks.push({id, params: {}, payload})
 
     buffer = buffer.slice(match.length)
   }

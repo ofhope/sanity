@@ -1,11 +1,12 @@
 import {useEffect, useState} from 'react'
 import shallowEquals from 'shallow-equals'
-import {Observable, defer, throwError, from, of as observableOf, Subscription} from 'rxjs'
+import {Observable, defer, throwError, from, of as observableOf, Subscription, Observer} from 'rxjs'
 import {map, switchMap, distinctUntilChanged} from 'rxjs/operators'
 import leven from 'leven'
 import generateHelpUrl from '@sanity/generate-help-url'
 import {LOADING_PANE} from '../constants'
 import {defaultStructure} from '../defaultStructure'
+import {StructurePane} from '../types'
 import isSubscribable from './isSubscribable'
 import validateStructure from './validateStructure'
 import serializeStructure from './serializeStructure'
@@ -35,7 +36,7 @@ export function resolvePanes(
   prevStructure,
   fromIndex,
   options: {silent?: boolean} = {}
-) {
+): Observable<StructurePane[]> {
   const waitStructure = isSubscribable(structure) ? from(structure) : observableOf(structure)
   return waitStructure.pipe(
     switchMap((struct) =>
@@ -64,8 +65,8 @@ function resolveForStructure(
   prevStructure,
   fromIndex,
   options: {silent?: boolean} = {}
-) {
-  return Observable.create((subscriber) => {
+): Observable<StructurePane[]> {
+  return Observable.create((subscriber: Observer<StructurePane[]>) => {
     try {
       validateStructure(structure)
     } catch (err) {
