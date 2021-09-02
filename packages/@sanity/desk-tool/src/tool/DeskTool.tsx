@@ -2,10 +2,10 @@ import isHotkey from 'is-hotkey'
 import React from 'react'
 import PropTypes from 'prop-types'
 import {isEqual} from 'lodash'
-import {interval, of} from 'rxjs'
+import {interval, of, Subscription} from 'rxjs'
 import {map, switchMap, distinctUntilChanged, debounce} from 'rxjs/operators'
 import shallowEquals from 'shallow-equals'
-import {withRouterHOC} from 'part:@sanity/base/router'
+import {HOCRouter, withRouterHOC} from 'part:@sanity/base/router'
 import {getTemplateById} from '@sanity/base/initial-value-templates'
 import {
   resolvePanes,
@@ -20,59 +20,56 @@ import windowWidth$ from '../utils/windowWidth'
 import {LOADING_PANE} from '../constants'
 import DeskToolPanes from './DeskToolPanes'
 
-const EMPTY_PANE_KEYS = []
+interface StructureErrorType {
+  message: string
+  stack: string
+  path?: Array<string | number>
+  helpId?: string
+}
 
-const hasLoading = (panes) => panes.some((item) => item === LOADING_PANE)
+interface DeskToolProps {
+  router: HOCRouter
+  onPaneChange: (panes: any) => void
+}
+
+interface DeskToolState {
+  isResolving: boolean
+  hasNarrowScreen: boolean
+  panes: any
+  error?: StructureErrorType
+}
+
+const EMPTY_PANE_KEYS: string[] = []
+
+const hasLoading = (panes: any) => panes.some((item) => item === LOADING_PANE)
 
 const isSaveHotkey = isHotkey('mod+s')
 
 export default withRouterHOC(
-  // eslint-disable-next-line react/prefer-stateless-function
-  class DeskTool extends React.Component {
+  class DeskTool extends React.Component<DeskToolProps, DeskToolState> {
     static contextTypes = {
       addToSnackQueue: PropTypes.func,
     }
 
-    static propTypes = {
-      router: PropTypes.shape({
-        navigate: PropTypes.func.isRequired,
-        state: PropTypes.shape({
-          panes: PropTypes.arrayOf(
-            PropTypes.arrayOf(
-              PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                params: PropTypes.object,
-              })
-            )
-          ),
-          params: PropTypes.shape({
-            template: PropTypes.string,
-          }),
-          editDocumentId: PropTypes.string,
-          legacyEditDocumentId: PropTypes.string,
-          type: PropTypes.string,
-          action: PropTypes.string,
-        }),
-      }).isRequired,
-      onPaneChange: PropTypes.func.isRequired,
-    }
+    paneDeriver: Subscription | null = null
+    resizeSubscriber: Subscription | null = null
 
-    state = {
+    state: DeskToolState = {
       // eslint-disable-next-line react/no-unused-state
       isResolving: true,
       hasNarrowScreen: isNarrowScreen(),
       panes: null,
     }
 
-    constructor(props) {
+    constructor(props: DeskToolProps) {
       super(props)
 
       props.onPaneChange([])
     }
 
-    setResolvedPanes = (panes) => {
+    setResolvedPanes = (panes: any) => {
       const router = this.props.router
-      const paneSegments = router.state.panes || []
+      const routerPanes = router.state.panes || []
 
       this.setState({
         panes,
@@ -80,15 +77,15 @@ export default withRouterHOC(
         isResolving: false,
       })
 
-      if (panes.length < paneSegments.length) {
+      if (panes.length < routerPanes.length) {
         router.navigate(
-          {...router.state, panes: paneSegments.slice(0, panes.length)},
+          {...router.state, panes: routerPanes.slice(0, panes.length)},
           {replace: true}
         )
       }
     }
 
-    setResolveError = (error) => {
+    setResolveError = (error: StructureErrorType) => {
       setStructureResolveError(error)
 
       // Log error for proper stacktraces
@@ -101,7 +98,7 @@ export default withRouterHOC(
       })
     }
 
-    derivePanes(props, fromIndex = [0, 0]) {
+    derivePanes(props: DeskToolProps, fromIndex: [number, number] = [0, 0]) {
       if (this.paneDeriver) {
         this.paneDeriver.unsubscribe()
       }
@@ -110,23 +107,26 @@ export default withRouterHOC(
         // eslint-disable-next-line react/no-unused-state
         isResolving: true,
       })
+
       this.paneDeriver = loadStructure()
         .pipe(
           distinctUntilChanged(),
           map(maybeSerialize),
-          switchMap((structure) =>
+          switchMap((structure: any) =>
             resolvePanes(structure, props.router.state.panes || [], this.state.panes, fromIndex)
           ),
-          switchMap((panes) =>
+          switchMap((panes: any) =>
             hasLoading(panes) ? of(panes).pipe(debounce(() => interval(50))) : of(panes)
           )
         )
         .subscribe(this.setResolvedPanes, this.setResolveError)
     }
 
-    panesAreEqual = (prev, next) => calculatePanesEquality(prev, next).ids
+    panesAreEqual = (prev: any, next: any) => {
+      return calculatePanesEquality(prev, next).ids
+    }
 
-    shouldDerivePanes = (nextProps, prevProps) => {
+    shouldDerivePanes = (nextProps: DeskToolProps, prevProps: DeskToolProps) => {
       const nextRouterState = nextProps.router.state
       const prevRouterState = prevProps.router.state
 
@@ -138,7 +138,7 @@ export default withRouterHOC(
       )
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: DeskToolProps, prevState: DeskToolState) {
       if (
         prevProps.onPaneChange !== this.props.onPaneChange ||
         prevState.panes !== this.state.panes
@@ -159,7 +159,7 @@ export default withRouterHOC(
       }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    shouldComponentUpdate(nextProps: DeskToolProps, nextState: DeskToolState) {
       const {router: oldRouter, ...oldProps} = this.props
       const {router: newRouter, ...newProps} = nextProps
       const {panes: oldPanes, ...oldState} = this.state
@@ -214,7 +214,7 @@ export default withRouterHOC(
       }
 
       const {navigate} = this.props.router
-      const panes = this.props.router.state.panes || []
+      const panes: unknown[][] = this.props.router.state.panes || []
       const hasSiblings = panes.some((group) => group.length > 1)
       if (!hasSiblings) {
         return
@@ -252,7 +252,7 @@ export default withRouterHOC(
       window.removeEventListener('keydown', this.handleGlobalKeyDown)
     }
 
-    handleGlobalKeyDown = (event) => {
+    handleGlobalKeyDown = (event: KeyboardEvent) => {
       // Prevent `Cmd+S`
       if (isSaveHotkey(event)) {
         event.preventDefault()
@@ -276,14 +276,16 @@ export default withRouterHOC(
         return <StructureError error={error} />
       }
 
-      const keys =
-        (router.state.panes || []).reduce(
-          (ids, group) => ids.concat(group.map((sibling) => sibling.id)),
+      const routerPanes = router.state.panes || []
+
+      const keys: string[] =
+        routerPanes.reduce(
+          (ids: string[], group) => ids.concat(group.map((sibling) => sibling.id)),
           []
         ) || EMPTY_PANE_KEYS
 
-      const groupIndexes = (router.state.panes || []).reduce(
-        (ids, group) => ids.concat(group.map((sibling, groupIndex) => groupIndex)),
+      const groupIndexes: number[] = routerPanes.reduce(
+        (ids: number[], group) => ids.concat(group.map((sibling, groupIndex) => groupIndex)),
         []
       )
 
@@ -294,7 +296,7 @@ export default withRouterHOC(
       return (
         <DeskToolPanes
           router={router}
-          panes={this.state.panes}
+          panes={panes}
           keys={keys}
           groupIndexes={groupIndexes}
           autoCollapse
@@ -304,7 +306,7 @@ export default withRouterHOC(
   }
 )
 
-function getPaneDiffIndex(nextPanes, prevPanes) {
+function getPaneDiffIndex(nextPanes: any, prevPanes: any): [number, number] | undefined {
   if (!nextPanes.length) {
     return [0, 0]
   }
