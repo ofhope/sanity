@@ -92,6 +92,7 @@ export default function PaneItem(props) {
         radius={2}
         pressed={!isActive && isSelected}
         selected={isActive && isSelected}
+        tone="inherit"
       >
         {preview}
       </Card>
