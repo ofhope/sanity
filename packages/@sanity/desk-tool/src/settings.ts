@@ -1,4 +1,4 @@
-import Observable from '@sanity/observable'
+import {Observable} from 'rxjs'
 import settings from 'part:@sanity/base/settings'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
