@@ -99,14 +99,18 @@
 .badge__icon {
   display: block;
   position: relative;
-  margin: 1px;
-  font-size: calc(17 / 16 * 1rem);
+  margin: 0;
+  font-size: calc(19 / 16 * 1rem);
   color: var(--component-bg);
   opacity: 0;
   transition: opacity var(--change-bar-changed-badge-animation-duration);
 
   @nest .root.hover > .wrapper > .badge > &, .root.focus > .wrapper > .badge > & {
     opacity: 1;
+  }
+
+  @nest & path {
+    stroke-width: 1.5px;
   }
 }
 
