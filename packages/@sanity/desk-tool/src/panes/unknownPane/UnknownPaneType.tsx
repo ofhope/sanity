@@ -1,49 +1,32 @@
 import React from 'react'
-import DefaultPane from 'part:@sanity/components/panes/default'
-import styles from './UnknownPaneType.css'
+import {Box, Text} from '@sanity/ui'
+import {Pane, PaneContent, PaneHeader} from '../../components/pane'
+import {BaseDeskToolPaneProps} from '../types'
 
-interface UnknownPaneTypeProps {
-  type?: string
-  isSelected: boolean
-  isCollapsed: boolean
-  onExpand?: () => void
-  onCollapse?: () => void
-  index?: number
-}
+type UnknownPaneProps = BaseDeskToolPaneProps<{
+  type: string
+}>
 
-export class UnknownPaneType extends React.PureComponent<UnknownPaneTypeProps> {
-  static defaultProps = {
-    type: undefined,
-    onExpand: undefined,
-    onCollapse: undefined,
-  }
+export function UnknownPane(props: UnknownPaneProps) {
+  const {index, isSelected, pane} = props
+  const {type} = pane
 
-  render() {
-    const {isSelected, isCollapsed, onCollapse, onExpand, type} = this.props
-
-    return (
-      <DefaultPane
-        title="Unknown pane type"
-        index={this.props.index}
-        isSelected={isSelected}
-        isCollapsed={isCollapsed}
-        onCollapse={onCollapse}
-        onExpand={onExpand}
-      >
-        <div className={styles.root}>
-          <p>
-            {type ? (
-              <span>
-                Structure item of type <code>{type}</code> is not a known entity.
-              </span>
-            ) : (
-              <span>
-                Structure item is missing required <code>type</code> property.
-              </span>
-            )}
-          </p>
-        </div>
-      </DefaultPane>
-    )
-  }
+  return (
+    <Pane data-index={index} selected={isSelected}>
+      <PaneHeader title="Unknown pane type" />
+      <PaneContent>
+        <Box padding={4}>
+          {type ? (
+            <Text as="p" muted>
+              Structure item of type <code>{type}</code> is not a known entity.
+            </Text>
+          ) : (
+            <Text as="p" muted>
+              Structure item is missing required <code>type</code> property.
+            </Text>
+          )}
+        </Box>
+      </PaneContent>
+    </Pane>
+  )
 }
