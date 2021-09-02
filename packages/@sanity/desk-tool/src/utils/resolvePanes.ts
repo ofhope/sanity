@@ -5,7 +5,7 @@ import {map, switchMap, distinctUntilChanged} from 'rxjs/operators'
 import leven from 'leven'
 import generateHelpUrl from '@sanity/generate-help-url'
 import {LOADING_PANE} from '../constants'
-import defaultStructure from '../defaultStructure'
+import {defaultStructure} from '../defaultStructure'
 import isSubscribable from './isSubscribable'
 import validateStructure from './validateStructure'
 import serializeStructure from './serializeStructure'
@@ -29,7 +29,13 @@ if (__DEV__) {
   }
 }
 
-export function resolvePanes(structure, paneGroups, prevStructure, fromIndex, options) {
+export function resolvePanes(
+  structure,
+  paneGroups,
+  prevStructure,
+  fromIndex,
+  options: {silent?: boolean} = {}
+) {
   const waitStructure = isSubscribable(structure) ? from(structure) : observableOf(structure)
   return waitStructure.pipe(
     switchMap((struct) =>
