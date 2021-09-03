@@ -54,7 +54,7 @@ jobs:
       - name: Test sanity build command
         run: |
           # Test building the test studio with all customizations
-          cd $GITHUB_WORKSPACE/examples/test-studio
+          cd $GITHUB_WORKSPACE/dev/test-studio
           sanity build -y
 
       - name: Test sanity init command

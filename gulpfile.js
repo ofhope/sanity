@@ -7,9 +7,9 @@ const changed = require('gulp-changed')
 const filter = require('gulp-filter')
 const chalk = require('chalk')
 const babel = require('gulp-babel')
-const {runTsc} = require('./scripts/runTsc')
 const log = require('fancy-log')
 const through = require('through2')
+const {runTsc} = require('./scripts/runTsc')
 
 const {getPackagePaths} = require('./scripts/utils/getPackagePaths')
 
@@ -21,8 +21,9 @@ const DEST_DIR = 'dist'
 // or packages that does their own build (e.g. studios)
 const IGNORED_PACKAGES = [
   'dev/workshop',
-  'examples/depcheck-test',
-  'examples/storybook',
+  'dev/depcheck-test',
+  'dev/storybook',
+  /dev\/.*-studio/,
   /examples\/.*-studio/,
   'packages/@sanity/components',
   'packages/@sanity/date-input',
