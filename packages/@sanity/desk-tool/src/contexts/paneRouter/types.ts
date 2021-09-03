@@ -1,3 +1,5 @@
+import React from 'react'
+
 export interface SetParamsOptions {
   recurseIfInherited?: boolean
 }
@@ -31,7 +33,7 @@ export interface PaneRouterContextValue {
   routerPanesState: RouterPanesState
 
   // Curried StateLink that passes the correct state automatically
-  ChildLink: (props: {childId: string; childParameters: Record<string, string>}) => React.ReactNode
+  ChildLink: React.ComponentType<{childId: string; childParameters: Record<string, string>}>
 
   // Curried StateLink that passed the correct state, but merges params/payload
   ParameterizedLink: (props: {

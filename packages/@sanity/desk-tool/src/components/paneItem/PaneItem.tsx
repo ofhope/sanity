@@ -1,44 +1,29 @@
-import React, {forwardRef, useMemo} from 'react'
-import PropTypes from 'prop-types'
-import {Card, Text} from '@sanity/ui'
+import React, {useMemo} from 'react'
 import {FolderIcon, ChevronRightIcon, DocumentIcon} from '@sanity/icons'
+import {SanityDocument} from '@sanity/types'
+import {Card, Text} from '@sanity/ui'
 import schema from 'part:@sanity/base/schema'
 import {SanityDefaultPreview} from 'part:@sanity/base/preview'
-import {DocumentPaneItemPreview} from '../../components/DocumentPaneItemPreview'
+import {DocumentPaneItemPreview} from '../DocumentPaneItemPreview'
 import getIconWithFallback from '../../utils/getIconWithFallback'
-import {MissingSchemaType} from '../../components/MissingSchemaType'
+import {MissingSchemaType} from '../MissingSchemaType'
 import {usePaneRouter} from '../../contexts/paneRouter'
 
-PaneItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  layout: PropTypes.string,
-  isSelected: PropTypes.bool,
-  isActive: PropTypes.bool,
-  icon: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-  value: PropTypes.shape({
-    _id: PropTypes.string,
-    _type: PropTypes.string,
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    media: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  }),
-  schemaType: PropTypes.shape({
-    name: PropTypes.string,
-    icon: PropTypes.func,
-  }),
+interface PaneItemProps {
+  id: string
+  layout?: 'inline' | 'block' | 'default' | 'card' | 'media'
+  isSelected?: boolean
+  isActive?: boolean
+  icon?: boolean | React.FunctionComponent
+  value: SanityDocument
+  schemaType?: {
+    name?: string
+    icon?: React.FunctionComponent
+  }
 }
 
-PaneItem.defaultProps = {
-  layout: 'default',
-  icon: undefined,
-  value: null,
-  isSelected: false,
-  isActive: false,
-  schemaType: null,
-}
-
-export default function PaneItem(props) {
-  const {id, isSelected, schemaType, layout, icon, value, isActive} = props
+export function PaneItem(props: PaneItemProps) {
+  const {id, isSelected, schemaType, layout = 'default', icon, value, isActive} = props
   const {ChildLink} = usePaneRouter()
   const hasSchemaType = Boolean(schemaType && schemaType.name && schema.get(schemaType.name))
 
@@ -75,9 +60,9 @@ export default function PaneItem(props) {
   const LinkComponent = useMemo(
     () =>
       // eslint-disable-next-line no-shadow
-      forwardRef(function LinkComponent(linkProps, ref) {
-        return <ChildLink {...linkProps} childId={id} ref={ref} />
-      }),
+      function LinkComponent(linkProps) {
+        return <ChildLink {...linkProps} childId={id} />
+      },
     [ChildLink, id]
   )
 
