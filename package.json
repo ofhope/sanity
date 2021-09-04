@@ -34,8 +34,8 @@
     "example-studio": "cd examples/example-studio && npm start",
     "movies-studio": "cd examples/movies-studio && npm start",
     "blog-studio": "cd examples/blog-studio && npm start",
-    "stylelint": "stylelint \"**/*.css\"",
-    "stylelint:fix": "stylelint \"**/*.css\" --fix",
+    "stylelint": "stylelint \"**/*.{css,js,ts,tsx}\"",
+    "stylelint:fix": "stylelint \"**/*.{css,js,ts,tsx}\" --fix",
     "build-and-serve": "cd examples/test-studio && npm run build && history-server -p 3333 -a dist",
     "test": "jest && lerna run --scope groq --scope '@sanity/{client,generate-help-url,plugin-loader}' test",
     "test-e2e": "start-server-and-test build-and-serve http://localhost:3333 'npm run cypress:run'",
@@ -120,9 +120,9 @@
     "rimraf": "^2.7.1",
     "semver": "^6.2.3",
     "start-server-and-test": "^1.11.7",
-    "stylelint": "^13.4.1",
+    "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.1",
-    "stylelint-prettier": "^1.1.2",
+    "stylelint-prettier": "^1.2.0",
     "typescript": "^4.4.2",
     "yarn": "^1.3.2"
   }
