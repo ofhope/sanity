@@ -1,6 +1,6 @@
 import {useContext} from 'react'
-import {DeskToolContextValue} from '../../types'
 import {DeskToolContext} from './DeskToolContext'
+import {DeskToolContextValue} from './types'
 
 export function useDeskTool(): DeskToolContextValue {
   const deskTool = useContext(DeskToolContext)

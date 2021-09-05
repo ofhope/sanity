@@ -5,7 +5,6 @@ import {MasterDetailIcon} from '@sanity/icons'
 import {route, useRouterState} from 'part:@sanity/base/router'
 import React, {useEffect} from 'react'
 import {IntentResolver} from './components/IntentResolver'
-import {DeskToolFeaturesProvider} from './contexts/features'
 import {DeskTool as DeskToolRoot} from './DeskTool'
 import {getIntentState, setActivePanes} from './getIntentState'
 import {legacyEditParamsToPath, legacyEditParamsToState, toPath, toState} from './helpers'
@@ -23,14 +22,6 @@ function DeskToolPaneStateSyncer() {
     <IntentResolver intent={intent} params={params} payload={payload} />
   ) : (
     <DeskToolRoot onPaneChange={setActivePanes} />
-  )
-}
-
-function DeskTool() {
-  return (
-    <DeskToolFeaturesProvider>
-      <DeskToolPaneStateSyncer />
-    </DeskToolFeaturesProvider>
   )
 }
 
@@ -72,5 +63,5 @@ export default {
   title: 'Desk',
   name: 'desk',
   icon: MasterDetailIcon,
-  component: DeskTool,
+  component: DeskToolPaneStateSyncer,
 }

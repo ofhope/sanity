@@ -5,8 +5,9 @@ import {getTemplateById} from '@sanity/base/initial-value-templates'
 import {PortalProvider, useToast} from '@sanity/ui'
 import {useRouter, useRouterState} from 'part:@sanity/base/router'
 import React, {useState, useEffect, useCallback, useMemo, useRef, Fragment} from 'react'
-import {interval, of} from 'rxjs'
+import {Observable, interval, of} from 'rxjs'
 import {map, switchMap, distinctUntilChanged, debounce} from 'rxjs/operators'
+import styled from 'styled-components'
 import {PaneLayout} from './components/pane'
 import {StructureError} from './components/StructureError'
 import {LOADING_PANE} from './constants'
@@ -31,49 +32,52 @@ interface DeskToolProps {
   onPaneChange: (panes: StructurePane[]) => void
 }
 
-const EMPTY_PANE_KEYS: string[] = []
+const StyledPaneLayout = styled(PaneLayout)`
+  min-height: 100%;
+  min-width: 320px;
+`
 
 export function DeskTool(props: DeskToolProps) {
   const {onPaneChange} = props
+  const {push: pushToast} = useToast()
   const {navigate} = useRouter()
   const routerState = useRouterState()
   const routerPanes: RouterPane[][] = useMemo(() => routerState.panes || [], [routerState.panes])
-  const {action, legacyEditDocumentId, type: schemaType, editDocumentId, params = {}} = routerState
-  const {push: pushToast} = useToast()
-  const [resolvedPanes, setResolvedPanes] = useState<StructurePane[]>([])
   const [error, setError] = useState<StructureErrorType | null>(null)
   const prevRouterPanesRef = useRef<RouterPane[][] | null>(null)
   const currRouterPanesRef = useRef<RouterPane[][]>(routerPanes)
   const [layoutCollapsed, setLayoutCollapsed] = useState(false)
+  const [resolvedPanes, setResolvedPanes] = useState<StructurePane[]>([])
   const resolvedPanesRef = useRef(resolvedPanes)
+  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
+  const structure$Ref = useRef<Observable<any> | null>(null)
 
-  const structure$ = useMemo(
-    () => loadStructure().pipe(distinctUntilChanged(), map(maybeSerialize)),
-    []
-  )
+  const {action, legacyEditDocumentId, type: schemaType, editDocumentId, params = {}} = routerState
 
   const keys: string[] = useMemo(
     () =>
       routerPanes.reduce(
         (ids: string[], group) => ids.concat(group.map((sibling) => sibling.id)),
         []
-      ) || EMPTY_PANE_KEYS,
-    [routerPanes]
-  )
-
-  const groupIndexes: number[] = useMemo(
-    () =>
-      routerPanes.reduce(
-        (ids: number[], group) => ids.concat(group.map((sibling, groupIndex) => groupIndex)),
-        []
       ),
     [routerPanes]
   )
 
-  useEffect(() => {
-    prevRouterPanesRef.current = currRouterPanesRef.current
-    currRouterPanesRef.current = routerPanes
-  }, [routerPanes])
+  const paneGroups: RouterPane[][] = useMemo(
+    () => [[{id: 'root', params: {}}]].concat(routerPanes || []),
+    [routerPanes]
+  )
+
+  const paneKeys = useMemo(() => ['root'].concat(keys), [keys])
+
+  const groupIndexes: number[] = useMemo(
+    () =>
+      routerPanes.reduce(
+        (ids: number[], group) => ids.concat(group.map((_, groupIndex) => groupIndex)),
+        []
+      ),
+    [routerPanes]
+  )
 
   const setResolveError = useCallback((_error: StructureErrorType) => {
     setStructureResolveError(_error)
@@ -83,6 +87,10 @@ export function DeskTool(props: DeskToolProps) {
 
     setError(_error)
   }, [])
+
+  const handleRootCollapse = useCallback(() => setLayoutCollapsed(true), [])
+
+  const handleRootExpand = useCallback(() => setLayoutCollapsed(false), [])
 
   const maybeHandleOldUrl = useCallback(() => {
     const {template: templateName, ...payloadParams} = params
@@ -121,6 +129,15 @@ export function DeskTool(props: DeskToolProps) {
     navigate({panes: withoutSiblings}, {replace: true})
   }, [navigate, layoutCollapsed, routerPanes])
 
+  // Load the structure configuration observable
+  useEffect(() => {
+    structure$Ref.current = loadStructure().pipe(distinctUntilChanged(), map(maybeSerialize))
+
+    return () => {
+      structure$Ref.current = null
+    }
+  }, [])
+
   useEffect(maybePruneSiblingPanes, [maybePruneSiblingPanes])
   useEffect(maybeHandleOldUrl, [maybeHandleOldUrl])
 
@@ -148,6 +165,15 @@ export function DeskTool(props: DeskToolProps) {
   }, [pushToast])
 
   useEffect(() => {
+    prevRouterPanesRef.current = currRouterPanesRef.current
+    currRouterPanesRef.current = routerPanes
+  }, [routerPanes])
+
+  useEffect(() => {
+    const structure$ = structure$Ref.current
+
+    if (!structure$) return undefined
+
     const _resolvedPanes = resolvedPanesRef.current
     const prevPanes = prevRouterPanesRef.current
     const nextPanes = currRouterPanesRef.current
@@ -171,22 +197,9 @@ export function DeskTool(props: DeskToolProps) {
     })
 
     return () => sub.unsubscribe()
-  }, [routerPanes, setResolveError, setResolvedPanes, structure$])
+  }, [routerPanes, setResolveError, setResolvedPanes])
 
-  useEffect(() => {
-    onPaneChange(resolvedPanes)
-  }, [onPaneChange, resolvedPanes])
-
-  const [portalElement, setPortalElement] = useState<HTMLDivElement | null>(null)
-  const paneKeys = useMemo(() => ['root'].concat(keys), [keys])
-  const paneGroups: RouterPane[][] = useMemo(
-    () => [[{id: 'root', params: {}}]].concat(routerPanes || []),
-    [routerPanes]
-  )
-
-  const handleRootCollapse = useCallback(() => setLayoutCollapsed(true), [])
-
-  const handleRootExpand = useCallback(() => setLayoutCollapsed(false), [])
+  useEffect(() => onPaneChange(resolvedPanes), [onPaneChange, resolvedPanes])
 
   if (error) {
     return <StructureError error={error} />
@@ -200,15 +213,14 @@ export function DeskTool(props: DeskToolProps) {
   let path: string[] = []
 
   return (
-    <DeskToolProvider narrow={layoutCollapsed}>
+    <DeskToolProvider layoutCollapsed={layoutCollapsed}>
       <PortalProvider element={portalElement || null}>
-        <PaneLayout
+        <StyledPaneLayout
           flex={1}
           height={layoutCollapsed ? undefined : 'fill'}
           minWidth={512}
           onCollapse={handleRootCollapse}
           onExpand={handleRootExpand}
-          style={{minHeight: '100%', minWidth: 320}}
         >
           {paneGroups.map((group, groupIndex) => {
             return (
@@ -217,18 +229,14 @@ export function DeskTool(props: DeskToolProps) {
                 {group.map((sibling, siblingIndex) => {
                   const pane = resolvedPanes[++i]
 
-                  if (!pane) {
-                    return null
-                  }
-
-                  const wrapperKey = pane === LOADING_PANE ? `loading-${i}` : `${i}-${pane.id}`
+                  if (!pane) return null
 
                   path = path.concat([pane.id || `[${i}]`])
 
                   if (pane === LOADING_PANE) {
                     return (
                       <LoadingPane
-                        key={wrapperKey}
+                        key={`loading-${i}`}
                         path={path}
                         index={i}
                         message={getWaitMessages}
@@ -243,7 +251,7 @@ export function DeskTool(props: DeskToolProps) {
                       groupIndexes={groupIndexes}
                       i={i}
                       index={groupIndex}
-                      key={wrapperKey}
+                      key={`${i}-${pane.id}`}
                       pane={pane}
                       paneKeys={paneKeys}
                       panes={resolvedPanes}
@@ -255,7 +263,7 @@ export function DeskTool(props: DeskToolProps) {
               </Fragment>
             )
           })}
-        </PaneLayout>
+        </StyledPaneLayout>
         <div data-portal="" ref={setPortalElement} />
       </PortalProvider>
     </DeskToolProvider>

@@ -14,10 +14,6 @@ export interface StructureErrorType {
   stack: string
 }
 
-export interface DeskToolContextValue {
-  narrow: boolean
-}
-
 export interface PreviewValue {
   id?: string
   subtitle?: React.ReactNode
