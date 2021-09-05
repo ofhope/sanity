@@ -32,14 +32,16 @@ export interface PaneRouterContextValue {
   // Current router state for the "panes" property
   routerPanesState: RouterPanesState
 
+  /**
+   * @beta
+   */
+  BackLink: React.ComponentType
+
   // Curried StateLink that passes the correct state automatically
   ChildLink: React.ComponentType<{childId: string; childParameters: Record<string, string>}>
 
   // Curried StateLink that passed the correct state, but merges params/payload
-  ParameterizedLink: (props: {
-    params?: Record<string, string>
-    payload?: unknown
-  }) => React.ReactNode
+  ParameterizedLink: React.ComponentType<{params?: Record<string, string>; payload?: unknown}>
 
   // Replaces the current pane with a new one
   replaceCurrent: (pane: {id?: string; payload?: unknown; params?: Record<string, string>}) => void

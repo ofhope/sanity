@@ -1,14 +1,15 @@
 // @todo: remove the following line when part imports has been removed from this file
 ///<reference types="@sanity/types/parts" />
 
-import React, {useMemo, useCallback} from 'react'
 import {pick, omit} from 'lodash'
 import {useRouter, useRouterState} from 'part:@sanity/base/router'
-import {PaneRouterContext} from './PaneRouterContext'
-import {PaneRouterContextValue, SetParamsOptions} from './types'
+import React, {useMemo, useCallback} from 'react'
+import {BackLink} from './BackLink'
 import {exclusiveParams} from './constants'
 import {ChildLink} from './ChildLink'
+import {PaneRouterContext} from './PaneRouterContext'
 import {ParameterizedLink} from './ParameterizedLink'
+import {PaneRouterContextValue, SetParamsOptions} from './types'
 
 const DEFAULT_SET_PARAMS_OPTIONS: SetParamsOptions = {
   recurseIfInherited: false,
@@ -139,6 +140,9 @@ export function PaneRouterProvider(props: {
 
       // Current router state for the "panes" property
       routerPanesState: routerPanes,
+
+      // A component to link to the parent pane
+      BackLink: BackLink as any,
 
       // Curried StateLink that passes the correct state automatically
       ChildLink,

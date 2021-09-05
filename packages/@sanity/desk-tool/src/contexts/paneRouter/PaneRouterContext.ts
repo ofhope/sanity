@@ -14,6 +14,7 @@ export const PaneRouterContext = createContext<PaneRouterContextValue>({
   hasGroupSiblings: false,
   groupLength: 0,
   routerPanesState: [],
+  BackLink: () => missingContext(),
   ChildLink: () => missingContext(),
   ParameterizedLink: () => missingContext(),
   replaceCurrent: () => missingContext(),

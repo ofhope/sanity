@@ -11,6 +11,7 @@ export function DeskToolProvider({
 }): React.ReactElement {
   const features = useMemo(
     () => ({
+      backButton: layoutCollapsed,
       reviewChanges: !layoutCollapsed,
       splitPanes: !layoutCollapsed,
       splitViews: !layoutCollapsed,
