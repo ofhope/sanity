@@ -2,71 +2,17 @@
 ///<reference types="@sanity/types/parts" />
 
 import {SanityDocument} from '@sanity/types'
+import {SanityDefaultPreview} from 'part:@sanity/base/preview'
 import React from 'react'
-import {combineLatest, concat, of, Subscription} from 'rxjs'
-import {assignWith} from 'lodash'
-import {map} from 'rxjs/operators'
-import {getDraftId, getPublishedId} from 'part:@sanity/base/util/draft-utils'
-import {SanityDefaultPreview, observeForPreview} from 'part:@sanity/base/preview'
-import {WarningOutlineIcon} from '@sanity/icons'
-import {PreviewValue} from '../../types'
-import {NotPublishedStatus} from '../NotPublishedStatus'
-import {DraftStatus} from '../DraftStatus'
+import {Subscription} from 'rxjs'
+import {getPreviewState$, getStatusIndicator, getValueWithFallback} from './helpers'
+import {PaneItemPreviewState} from './types'
 
 export interface PaneItemPreviewProps {
   icon: React.FunctionComponent | boolean
   layout: 'inline' | 'block' | 'default' | 'card' | 'media' | 'detail'
   schemaType: any
   value: SanityDocument
-}
-
-export interface PaneItemPreviewState {
-  isLoading?: boolean
-  draft?: SanityDocument | null
-  published?: SanityDocument | null
-}
-
-const isLiveEditEnabled = (schemaType: any) => schemaType.liveEdit === true
-
-const getStatusIndicator = (draft?: SanityDocument | null, published?: SanityDocument | null) => {
-  if (draft) {
-    return DraftStatus
-  }
-  return published ? null : NotPublishedStatus
-}
-
-const getMissingDocumentFallback = (item: SanityDocument): PreviewValue => ({
-  title: (
-    <span style={{fontStyle: 'italic'}}>
-      {item.title ? String(item.title) : 'Missing document'}
-    </span>
-  ),
-  subtitle: (
-    <span style={{fontStyle: 'italic'}}>
-      {item.title ? `Missing document ID: ${item._id}` : `Document ID: ${item._id}`}
-    </span>
-  ),
-  media: WarningOutlineIcon,
-})
-
-const getValueWithFallback = ({
-  value,
-  draft,
-  published,
-}: {
-  value: SanityDocument
-  draft?: SanityDocument | null
-  published?: SanityDocument | null
-}): PreviewValue | SanityDocument => {
-  const snapshot = draft || published
-
-  if (!snapshot) {
-    return getMissingDocumentFallback(value)
-  }
-
-  return assignWith({}, snapshot, value, (objValue, srcValue) => {
-    return typeof srcValue === 'undefined' ? objValue : srcValue
-  })
 }
 
 export class PaneItemPreview extends React.Component<PaneItemPreviewProps, PaneItemPreviewState> {
@@ -76,48 +22,20 @@ export class PaneItemPreview extends React.Component<PaneItemPreviewProps, PaneI
 
   constructor(props: PaneItemPreviewProps) {
     super(props)
+
     const {value, schemaType} = props
     const {title} = value
+
     let sync = true
-    this.subscription = concat(
-      of({isLoading: true}),
-      combineLatest([
-        isLiveEditEnabled(schemaType)
-          ? of({snapshot: null})
-          : observeForPreview(
-              // @todo: fix typings
-              {_id: getDraftId(value._id)} as any,
-              schemaType
-            ),
-        observeForPreview(
-          // @todo: fix typings
-          {_id: getPublishedId(value._id)} as any,
-          schemaType
-        ),
-      ]).pipe(
-        map(([draft, published]) => ({
-          draft: draft.snapshot
-            ? {
-                title,
-                ...(draft.snapshot as any),
-              }
-            : null,
-          published: published.snapshot
-            ? {
-                title,
-                ...(published.snapshot as any),
-              }
-            : null,
-          isLoading: false,
-        }))
-      )
-    ).subscribe((state) => {
+
+    this.subscription = getPreviewState$(schemaType, value._id, title).subscribe((state) => {
       if (sync) {
         this.state = state
       } else {
         this.setState(state)
       }
     })
+
     sync = false
   }
 
