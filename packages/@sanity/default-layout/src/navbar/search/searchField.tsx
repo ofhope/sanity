@@ -1,18 +1,43 @@
-import React, {useCallback, useMemo} from 'react'
-import {Text, Flex, useGlobalKeyDown, Autocomplete, Popover} from '@sanity/ui'
+import React, {forwardRef, useCallback, useMemo} from 'react'
+import {
+  Text,
+  Flex,
+  useGlobalKeyDown,
+  Autocomplete,
+  Popover,
+  Box,
+  Card,
+  PortalProvider,
+  Portal,
+  PopoverProps,
+} from '@sanity/ui'
 import {SearchIcon} from '@sanity/icons'
-import {SearchItem, useSearch, SearchLoading} from '.'
+import styled from 'styled-components'
+import {SearchItem, useSearch} from '.'
 
-const Root = ({children}: {children: React.ReactNode}) => (
-  <Flex align="center" justify="center" sizing="border" paddingX={3} style={{minHeight: 150}}>
-    {children}
-  </Flex>
-)
+const ResultsPopover = styled(Popover)`
+  & > div {
+    min-height: 43px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
-export function SearchField() {
+  &[data-popper-reference-hidden='true'] {
+    display: none;
+  }
+`
+
+export function SearchField({
+  portalElement,
+  fullScreen,
+  inputElement,
+}: {
+  portalElement: HTMLDivElement | null
+  fullScreen: boolean
+  inputElement: (el: HTMLInputElement | null) => void
+}) {
   const {handleSearch, handleClearSearch, searchState} = useSearch()
   const {hits, loading, searchString, error} = searchState
-  const showPopoverContent = loading || (searchString.length > 0 && hits.length === 0)
 
   useGlobalKeyDown((e) => {
     if (e.key === 'Escape' && searchString?.length > 0) {
@@ -20,71 +45,160 @@ export function SearchField() {
     }
   })
 
+  const filterOption = useCallback(() => true, [])
+
   const renderOption = useCallback(
     (option) => {
       const {data} = option.payload
-      return (
-        <SearchItem
-          data={data}
-          key={data.hit._id}
-          onClick={handleClearSearch}
-          paddingX={1}
-          paddingY={2}
-        />
-      )
+      return <SearchItem data={data} key={data.hit._id} onClick={handleClearSearch} padding={2} />
     },
     [handleClearSearch]
   )
 
-  const popoverContent = useMemo(() => {
-    if (loading) {
+  const PopoverContent = useMemo(
+    () =>
+      // eslint-disable-next-line no-shadow
+      forwardRef(function LinkComponent(
+        popoverProps: PopoverProps,
+        ref: React.ForwardedRef<HTMLDivElement>
+      ) {
+        return (
+          <ResultsPopover
+            portal
+            placement="bottom"
+            arrow={false}
+            constrainSize
+            ref={ref}
+            scheme="light"
+            matchReferenceWidth
+            {...popoverProps}
+          />
+        )
+      }),
+    []
+  )
+
+  const renderPopoverFullscreen = useCallback(
+    (props, ref) => {
+      if (!props.hidden && error) {
+        return (
+          <Portal>
+            <Card
+              padding={4}
+              style={{position: 'absolute', inset: '0 0 0 0'}}
+              tone="critical"
+              scheme="light"
+            >
+              <Flex align="center" height="fill" justify="center">
+                <Text align="center" muted>
+                  Something went wrong while searching
+                </Text>
+              </Flex>
+            </Card>
+          </Portal>
+        )
+      }
+
+      if (!props.hidden && searchString && !loading && hits.length === 0) {
+        return (
+          <Portal>
+            <Card
+              padding={4}
+              style={{position: 'absolute', inset: '0 0 0 0'}}
+              tone="critical"
+              scheme="light"
+            >
+              <Flex align="center" height="fill" justify="center">
+                <Text align="center" muted>
+                  No results for <strong>‘{searchString}’</strong>
+                </Text>
+              </Flex>
+            </Card>
+          </Portal>
+        )
+      }
+
       return (
-        <Root>
-          <SearchLoading />
-        </Root>
+        <Portal>
+          <Card
+            hidden={props.hidden}
+            ref={ref}
+            scheme="light"
+            style={{position: 'absolute', inset: '0 0 0 0'}}
+          >
+            {props.content}
+          </Card>
+        </Portal>
       )
-    }
+    },
+    [error, loading, hits, searchString]
+  )
 
-    if (error) {
-      return (
-        <Flex align="center" justify="center">
-          <Text align="center">{error?.message}</Text>
-        </Flex>
-      )
-    }
+  const renderPopover = useCallback(
+    (props, ref) => {
+      if (props.hidden && error) {
+        return (
+          <PopoverContent
+            open={props.hidden}
+            referenceElement={props.inputElement}
+            ref={ref}
+            content={
+              <Box padding={4}>
+                <Flex align="center" height="fill" justify="center" style={{minHeight: 100}}>
+                  <Text align="center" muted>
+                    Something went wrong while searching
+                  </Text>
+                </Flex>
+              </Box>
+            }
+          />
+        )
+      }
 
-    return (
-      <Root>
-        <Text align="center" muted>
-          Could not find <strong style={{wordBreak: 'break-word'}}>"{searchString}"</strong>
-        </Text>
-      </Root>
-    )
-  }, [error, loading, searchString])
+      if (props.hidden && searchString && !loading && hits.length === 0) {
+        return (
+          <PopoverContent
+            open={props.hidden}
+            referenceElement={props.inputElement}
+            ref={ref}
+            content={
+              <Box padding={4}>
+                <Flex align="center" height="fill" justify="center" style={{minHeight: 100}}>
+                  <Text align="center" muted>
+                    No results for <strong>‘{searchString}’</strong>
+                  </Text>
+                </Flex>
+              </Box>
+            }
+          />
+        )
+      }
 
-  return (
-    <Popover
-      matchReferenceWidth
-      portal
-      arrow={false}
-      content={popoverContent}
-      open={showPopoverContent}
-      radius={2}
-      scheme="light"
-    >
+      if (!props.hidden && hits.length > 0) {
+        return (
+          <PopoverContent
+            open={!props.hidden}
+            referenceElement={props.inputElement}
+            ref={ref}
+            content={props.content}
+          />
+        )
+      }
+
+      return undefined
+    },
+    [error, searchString, loading, hits, PopoverContent]
+  )
+
+  const autoComplete = useMemo(
+    () => (
       <Autocomplete
-        id="studio-search-autocomplete"
         icon={SearchIcon}
-        placeholder="Search"
-        popover={{
-          scheme: 'light',
-          radius: 2,
-          shadow: 2,
-          constrainSize: true,
-          matchReferenceWidth: true,
-        }}
+        key="studio-search"
+        id="studio-search"
+        listBox={{padding: 2}}
+        loading={loading}
         onQueryChange={handleSearch}
-        value={searchString}
         options={hits.map((hit) => {
           return {
             value: hit.hit._id,
@@ -93,10 +207,30 @@ export function SearchField() {
             },
           }
         })}
-        // eslint-disable-next-line react/jsx-no-bind
-        filterOption={() => true}
+        placeholder="Search"
+        radius={2}
+        ref={inputElement}
+        filterOption={filterOption}
         renderOption={renderOption}
+        renderPopover={fullScreen ? renderPopoverFullscreen : renderPopover}
       />
-    </Popover>
+    ),
+    [
+      filterOption,
+      fullScreen,
+      handleSearch,
+      hits,
+      inputElement,
+      loading,
+      renderOption,
+      renderPopover,
+      renderPopoverFullscreen,
+    ]
   )
+
+  if (fullScreen) {
+    return <PortalProvider element={portalElement}>{autoComplete}</PortalProvider>
+  }
+
+  return <PortalProvider element={null}>{autoComplete}</PortalProvider>
 }
