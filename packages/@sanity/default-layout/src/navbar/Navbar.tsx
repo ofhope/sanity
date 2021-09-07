@@ -2,8 +2,8 @@
 ///<reference types="@sanity/types/parts" />
 
 import React, {createElement, useCallback, useState, useEffect, useMemo} from 'react'
-import {SearchIcon, MenuIcon, ComposeIcon} from '@sanity/icons'
-import {Button, Card, Tooltip, useMediaIndex, Text, Box, Flex} from '@sanity/ui'
+import {SearchIcon, MenuIcon, ComposeIcon, CloseIcon} from '@sanity/icons'
+import {Button, Card, Tooltip, useMediaIndex, Text, Box, Flex, useGlobalKeyDown} from '@sanity/ui'
 import {InsufficientPermissionsMessage, LegacyLayerProvider} from '@sanity/base/components'
 import {StateLink} from '@sanity/state-router/components'
 // eslint-disable-next-line camelcase
@@ -16,7 +16,7 @@ import {Router, Tool} from '../types'
 import {DatasetSelect} from '../datasetSelect'
 import Branding from './branding/Branding'
 import SanityStatusContainer from './studioStatus/SanityStatusContainer'
-import {PresenceMenu, LoginStatus, SearchField, SearchFullscreen, ToolMenuCollapse} from '.'
+import {PresenceMenu, LoginStatus, SearchField, ToolMenuCollapse} from '.'
 
 interface Props {
   createMenuIsOpen: boolean
@@ -26,19 +26,37 @@ interface Props {
   onUserLogout: () => void
   router: Router
   searchIsOpen: (open: boolean) => void
+  searchPortalElement: HTMLDivElement | null
   tools: Tool[]
 }
+
+const Root = styled(Card)`
+  position: relative;
+`
 
 const StateLinkWrap = styled(Box)`
   text-decoration: none;
   color: inherit;
   display: block;
-  border-radius: ${({theme}) => theme.sanity.radius[2]}px;
+`
 
-  &:focus {
-    outline: 0;
-    box-shadow: inset 0 0 0 1px var(--card-focus-ring-color), 0 0 0 1px var(--card-focus-ring-color);
-  }
+const StyledFlex = styled(Flex)`
+  width: max-content;
+`
+
+const BrandingCenterBox = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
+
+const SearchCard = styled(Card)<{$fullScreen: boolean}>`
+  min-width: 253px;
+  max-width: ${({$fullScreen}) => ($fullScreen ? undefined : '350px')};
+  inset: 0;
+  z-index: 1;
+  position: ${({$fullScreen}) => ($fullScreen ? 'absolute' : undefined)};
 `
 
 export function Navbar(props: Props) {
@@ -50,37 +68,19 @@ export function Navbar(props: Props) {
     onUserLogout,
     router,
     searchIsOpen,
+    searchPortalElement,
     tools,
   } = props
 
   const [searchOpen, setSearchOpen] = useState<boolean>(false)
-  const [searchOpenButton, setSearchOpenButton] = useState<HTMLButtonElement | null>(null)
+  const [inputElement, setInputElement] = useState<HTMLInputElement | null>(null)
+  const [searchButtonElement, setSearchButtonElement] = useState<HTMLButtonElement | null>(null)
   const {value: currentUser} = useCurrentUser()
   const createAnyPermission = unstable_useCanCreateAnyOf(documentTypes)
   const mediaIndex = useMediaIndex()
   const rootState = useMemo(
     () => (HAS_SPACES && router.state.space ? {space: router.state.space} : {}),
     [router.state.space]
-  )
-
-  const handleToggleSearchOpen = useCallback(() => {
-    setSearchOpen((prev) => {
-      if (prev) {
-        searchOpenButton.focus()
-      }
-      return !prev
-    })
-  }, [searchOpenButton])
-
-  useEffect(() => {
-    searchIsOpen(searchOpen)
-  }, [searchIsOpen, searchOpen])
-
-  const LinkComponent = useCallback(
-    (linkProps) => {
-      return <StateLink state={rootState} {...linkProps} />
-    },
-    [rootState]
   )
 
   const shouldRender = {
@@ -94,16 +94,49 @@ export function Navbar(props: Props) {
     tools: mediaIndex >= 3,
   }
 
+  useGlobalKeyDown((e) => {
+    if (e.key === 'Escape' && searchOpen) {
+      setSearchOpen(false)
+      searchButtonElement?.focus()
+    }
+  })
+
+  const handleToggleSearchOpen = useCallback(() => {
+    setSearchOpen((prev) => {
+      if (prev) {
+        searchButtonElement?.focus()
+      }
+
+      return !prev
+    })
+  }, [searchButtonElement])
+
+  useEffect(() => {
+    if (searchIsOpen && !shouldRender.searchFullscreen) {
+      setSearchOpen(false)
+      searchIsOpen(false)
+    }
+  }, [searchIsOpen, shouldRender.searchFullscreen])
+
+  useEffect(() => {
+    searchIsOpen(searchOpen)
+
+    if (searchOpen) {
+      inputElement?.focus()
+    }
+  }, [inputElement, searchButtonElement, searchIsOpen, searchOpen])
+
+  const LinkComponent = useCallback(
+    (linkProps) => {
+      return <StateLink state={rootState} {...linkProps} />
+    },
+    [rootState]
+  )
+
   return (
-    <Card
-      paddingX={2}
-      scheme="dark"
-      display="flex"
-      style={{height: 50, alignItems: 'center'}}
-      sizing="border"
-    >
-      <Flex flex={1} align="center" gap={2} justify="space-between" style={{position: 'relative'}}>
-        <Flex gap={2} flex={1} align="center" style={{width: 'max-content'}}>
+    <Root padding={2} scheme="dark" display="flex" sizing="border">
+      <Flex flex={1} align="center" gap={2} justify="space-between">
+        <StyledFlex gap={2} flex={1} align="center">
           {!shouldRender.tools && (
             <Button
               aria-label="Open menu"
@@ -157,36 +190,51 @@ export function Navbar(props: Props) {
             </Tooltip>
           </LegacyLayerProvider>
 
-          {!shouldRender.searchFullscreen && (
-            <LegacyLayerProvider zOffset="navbarPopover">
-              <Box flex={1} style={{minWidth: 253, maxWidth: 350}}>
-                <SearchField />
-              </Box>
-            </LegacyLayerProvider>
-          )}
+          <LegacyLayerProvider zOffset="navbarPopover">
+            {(searchOpen || !shouldRender.searchFullscreen) && (
+              <SearchCard
+                flex={1}
+                paddingX={shouldRender.searchFullscreen ? 2 : undefined}
+                paddingY={shouldRender.searchFullscreen ? 2 : undefined}
+                scheme="dark"
+                $fullScreen={shouldRender.searchFullscreen}
+              >
+                <Flex flex={1}>
+                  <Box flex={1} marginRight={shouldRender.searchFullscreen ? 2 : undefined}>
+                    <SearchField
+                      portalElement={searchPortalElement}
+                      inputElement={setInputElement}
+                      fullScreen={shouldRender.searchFullscreen}
+                    />
+                  </Box>
+                  {shouldRender.searchFullscreen && (
+                    <Button
+                      icon={CloseIcon}
+                      aria-label="Close search"
+                      onClick={handleToggleSearchOpen}
+                      mode="bleed"
+                    />
+                  )}
+                </Flex>
+              </SearchCard>
+            )}
+          </LegacyLayerProvider>
 
           {shouldRender.tools && (
-            <Card borderRight paddingRight={2} flex={1}>
+            <Card borderRight paddingRight={1} flex={1}>
               <LegacyLayerProvider zOffset="navbarPopover">
                 <ToolMenuCollapse tools={tools} router={router} />
               </LegacyLayerProvider>
             </Card>
           )}
-        </Flex>
+        </StyledFlex>
 
         {shouldRender.brandingCenter && (
-          <Box
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%,-50%)',
-            }}
-          >
+          <BrandingCenterBox>
             <StateLinkWrap forwardedAs={LinkComponent} state={rootState}>
               <Branding projectName={config && config.project.name} />
             </StateLinkWrap>
-          </Box>
+          </BrandingCenterBox>
         )}
 
         <Flex gap={2} align="center">
@@ -205,18 +253,16 @@ export function Navbar(props: Props) {
           )}
 
           {shouldRender.searchFullscreen && (
-            <LegacyLayerProvider zOffset="navbarPopover">
-              <Button
-                icon={SearchIcon}
-                mode="bleed"
-                onClick={handleToggleSearchOpen}
-                ref={setSearchOpenButton}
-              />
-              {searchOpen && <SearchFullscreen onClose={handleToggleSearchOpen} />}
-            </LegacyLayerProvider>
+            <Button
+              aria-label="Open search"
+              onClick={handleToggleSearchOpen}
+              icon={SearchIcon}
+              mode="bleed"
+              ref={setSearchButtonElement}
+            />
           )}
         </Flex>
       </Flex>
-    </Card>
+    </Root>
   )
 }
