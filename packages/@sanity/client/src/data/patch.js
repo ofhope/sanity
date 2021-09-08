@@ -26,7 +26,9 @@ assign(Patch.prototype, {
       .slice(2)
 
     console.warn(
-      `The "merge" patch has been deprecated and will be removed in the future\n${stack.join('\n')}`
+      `The "merge" patch has been deprecated and will be removed in the future\n${stack.join(
+        '\n',
+      )}`,
     )
     return this._assign('merge', deepAssign(this.operations.merge || {}, props))
   },
@@ -110,7 +112,7 @@ assign(Patch.prototype, {
     if (!this.client) {
       throw new Error(
         'No `client` passed to patch, either provide one or pass the ' +
-          'patch to a clients `mutate()` method'
+          'patch to a clients `mutate()` method',
       )
     }
 

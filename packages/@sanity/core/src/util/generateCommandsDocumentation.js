@@ -33,7 +33,7 @@ export function generateCommandDocumentation(command, group, subCommand) {
     throw new Error(
       subCommand
         ? `"${subCommand}" is not a subcommand of "${group}". See 'sanity help ${group}'`
-        : noSuchCommandText(group)
+        : noSuchCommandText(group),
     )
   }
 

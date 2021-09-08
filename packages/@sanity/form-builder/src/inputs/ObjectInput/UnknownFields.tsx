@@ -24,7 +24,7 @@ export function UnknownFields(props: Props) {
         onChange(PatchEvent.from(unset([fieldName])))
       }
     },
-    [onChange]
+    [onChange],
   )
 
   return (

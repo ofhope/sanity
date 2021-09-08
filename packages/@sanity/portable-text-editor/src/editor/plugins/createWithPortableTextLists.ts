@@ -10,7 +10,7 @@ const MAX_LIST_LEVEL = 10
 
 export function createWithPortableTextLists(
   portableTextFeatures: PortableTextFeatures,
-  change$: Subject<EditorChange>
+  change$: Subject<EditorChange>,
 ) {
   return function withPortableTextLists(editor: PortableTextSlateEditor) {
     // // Extend Slate's default normalization to set / unset level on .listItem blocks.
@@ -93,7 +93,7 @@ export function createWithPortableTextLists(
               listItemStyle ||
               (portableTextFeatures.lists[0] && portableTextFeatures.lists[0].value),
           },
-          {at: path}
+          {at: path},
         )
       })
       // Emit a new selection here (though it might be the same).
@@ -153,7 +153,7 @@ export function createWithPortableTextLists(
         Transforms.setNodes(
           editor,
           {level: Math.min(MAX_LIST_LEVEL, Math.max(1, level))},
-          {at: path}
+          {at: path},
         )
       })
       change$.next({type: 'selection', selection: toPortableTextRange(editor)})

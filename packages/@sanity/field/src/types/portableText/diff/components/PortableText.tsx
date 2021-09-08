@@ -130,14 +130,14 @@ export default function PortableText(props: Props): JSX.Element {
                 path={[{_key: block._key}, 'children', {_key: originChild._key}]}
                 diff={objectDiff}
                 schemaType={objectSchemaType}
-              />
+              />,
             )
           }
         } else if (seg.text) {
           // TODO: find a better way of getting a removed child
           const getChildFromFromValue = () =>
             diff.origin.fromValue?.children.find(
-              (cld) => cld.text && cld.text.match(escapeRegExp(seg.text))
+              (cld) => cld.text && cld.text.match(escapeRegExp(seg.text)),
             ) as PortableTextChild
           const child = block.children[childToIndex] || getChildFromFromValue()
           const childDiff = child && findSpanDiffFromChild(diff.origin, child)
@@ -185,7 +185,7 @@ export default function PortableText(props: Props): JSX.Element {
                   (type) =>
                     endedAnnotation &&
                     endedAnnotation.object &&
-                    type.name === endedAnnotation.object._type
+                    type.name === endedAnnotation.object._type,
                 )
               returnedChildren.push(
                 <Annotation
@@ -196,7 +196,7 @@ export default function PortableText(props: Props): JSX.Element {
                   key={key}
                 >
                   <>{annotationSegments[endedAnnotation.mark]}</>
-                </Annotation>
+                </Annotation>,
               )
             }
             // delete annotationSegments[endedAnnotation.mark]
@@ -319,7 +319,7 @@ function renderDecorators({
   const ptDiffMatchString = ptDiffChildren
   const controlString = ptDiffMatchString.substring(
     0,
-    ptDiffMatchString.indexOf(seg.text) + seg.text.length
+    ptDiffMatchString.indexOf(seg.text) + seg.text.length,
   )
   const toTest = controlString.substring(0, controlString.indexOf(seg.text))
   const marks: string[] = []
@@ -327,7 +327,7 @@ function renderDecorators({
   matches.forEach((match) => {
     const sym = match[0]
     const set = TextSymbols.DECORATOR_SYMBOLS.concat(TextSymbols.ANNOTATION_SYMBOLS).find(
-      (aSet) => aSet.indexOf(sym) > -1
+      (aSet) => aSet.indexOf(sym) > -1,
     )
     if (set) {
       const isMarkStart = sym === set[0]

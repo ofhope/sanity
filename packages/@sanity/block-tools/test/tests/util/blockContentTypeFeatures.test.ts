@@ -12,7 +12,7 @@ describe('blockContentTypeFeatures', () => {
     const expected = require('../../fixtures/defaultFeatures.json')
     assert.deepEqual(
       JSON.parse(JSON.stringify(blockContentTypeFeatures(blockContentType))),
-      expected
+      expected,
     )
   })
 
@@ -23,7 +23,7 @@ describe('blockContentTypeFeatures', () => {
     const expected = require('../../fixtures/customFeatures.json')
     assert.deepEqual(
       JSON.parse(JSON.stringify(blockContentTypeFeatures(blockContentType))),
-      expected
+      expected,
     )
   })
 })

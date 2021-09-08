@@ -76,7 +76,7 @@ function mergeResult(plugins, options = {}) {
       if (!Array.isArray(plugin.manifest.parts)) {
         const help = `See ${generateHelpUrl('plugin-parts-syntax')}`
         throw new Error(
-          `Plugin "${plugin.name}" has a "parts" property which is not an array\n${help}`
+          `Plugin "${plugin.name}" has a "parts" property which is not an array\n${help}`,
         )
       }
 
@@ -117,7 +117,7 @@ function assignNonOverridablePart(plugin, part, implementations, definitions, op
         `Plugins ${existing} and ${current} both define part "${part.name}"` +
         ' - did you mean to use "implements"?\n' +
         'See '
-      }${generateHelpUrl('part-declare-vs-implement')}`
+      }${generateHelpUrl('part-declare-vs-implement')}`,
     )
   }
 
@@ -136,7 +136,7 @@ function assignDefinitionForAbstractPart(plugin, part, definitions) {
         `Plugins ${existing} and ${current} both define part "${part.name}"` +
         ' - did you mean to use "implements"?\n' +
         'See '
-      }${generateHelpUrl('part-declare-vs-implement')}`
+      }${generateHelpUrl('part-declare-vs-implement')}`,
     )
   }
 
@@ -152,7 +152,7 @@ function assignPartImplementation(plugin, part, implementations, definitions, op
         `Plugin ${current} tries to implement a part "${partName}",` +
         ' but did not define a path. Did you mean to use "name"?\n' +
         'See '
-      }${generateHelpUrl('part-declare-vs-implement')}`
+      }${generateHelpUrl('part-declare-vs-implement')}`,
     )
   }
 
@@ -165,7 +165,7 @@ function assignPartImplementation(plugin, part, implementations, definitions, op
         `Plugin ${current} tried to implement part "${partName}", which is already declared` +
         ` as a non-overridable part by ${existing} - ` +
         'See '
-      }${generateHelpUrl('implement-non-overridable-part')}`
+      }${generateHelpUrl('implement-non-overridable-part')}`,
     )
   } else if (!prevDefinition) {
     // In some cases, a user might want to declare a new part name and

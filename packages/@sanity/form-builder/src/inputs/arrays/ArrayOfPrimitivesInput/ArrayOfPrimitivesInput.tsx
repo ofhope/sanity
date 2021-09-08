@@ -117,7 +117,7 @@ export class ArrayOfPrimitivesInput extends React.PureComponent<Props> {
   getMemberType(typeName: string) {
     const {type} = this.props
     return type?.of.find(
-      (memberType) => memberType.name === typeName || memberType.jsonType === typeName
+      (memberType) => memberType.name === typeName || memberType.jsonType === typeName,
     )
   }
 
@@ -166,7 +166,7 @@ export class ArrayOfPrimitivesInput extends React.PureComponent<Props> {
         onFocus={this.handleFocusRoot}
         ref={this.setElement}
         __unstable_presence={presence.filter(
-          (item) => item.path[0] === '$' || item.path.length === 0
+          (item) => item.path[0] === '$' || item.path.length === 0,
         )}
         __unstable_changeIndicator={false}
         __unstable_markers={markers}

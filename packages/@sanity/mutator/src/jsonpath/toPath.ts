@@ -42,7 +42,7 @@ function toPathInner(expr: any, inUnion: boolean): string {
     case 'constraint':
       const inner = `${toPathInner(expr.lhs, false)} ${expr.operator} ${toPathInner(
         expr.rhs,
-        false
+        false,
       )}`
 
       if (inUnion) {

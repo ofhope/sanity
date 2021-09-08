@@ -2,18 +2,6 @@
   "name": "@sanity/default-layout",
   "version": "2.18.0",
   "description": "The default layout components for Sanity",
-  "main": "./lib/default-layout.js",
-  "types": "./dist/dts",
-  "scripts": {
-    "coverage": "nyc --report=lcov --report=text _mocha -- test/**/*.test.js",
-    "clean": "rimraf lib .nyc_output coverage",
-    "posttest": "npm run type-check"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/default-layout"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -23,12 +11,24 @@
     "default-layout",
     "layout"
   ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
+  "homepage": "https://www.sanity.io/",
   "bugs": {
     "url": "https://github.com/sanity-io/sanity/issues"
   },
-  "homepage": "https://www.sanity.io/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/default-layout"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "./lib/default-layout.js",
+  "types": "./dist/dts",
+  "scripts": {
+    "coverage": "nyc --report=lcov --report=text _mocha -- test/**/*.test.js",
+    "clean": "rimraf lib .nyc_output coverage",
+    "posttest": "npm run type-check"
+  },
   "dependencies": {
     "@reach/auto-id": "^0.13.2",
     "@sanity/base": "2.18.0",

@@ -12,7 +12,7 @@ export default function resolvePathFromState(node: Node, state: Record<string, u
     throw new Error(
       `Unable to find matching route for state. Could not map the following state key${
         remaining.length == 1 ? '' : 's'
-      } to a valid url: ${remaining.join(', ')}`
+      } to a valid url: ${remaining.join(', ')}`,
     )
   }
 
@@ -33,7 +33,7 @@ export default function resolvePathFromState(node: Node, state: Record<string, u
         const transform = matchNode.transform && matchNode.transform[segment.name]
         return transform ? transform.toPath(scopedState[segment.name]) : scopedState[segment.name]
       })
-    })
+    }),
   ).join('/')
 
   debug('Resolved to /%s', relative)

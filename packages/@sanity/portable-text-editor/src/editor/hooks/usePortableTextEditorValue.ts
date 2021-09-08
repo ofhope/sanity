@@ -6,7 +6,7 @@ import {PortableTextBlock} from '../../types/portableText'
  */
 
 export const PortableTextEditorValueContext = createContext<PortableTextBlock[] | undefined>(
-  undefined
+  undefined,
 )
 
 /**

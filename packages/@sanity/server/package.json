@@ -2,25 +2,6 @@
   "name": "@sanity/server",
   "version": "2.18.0",
   "description": "Webserver dedicated to serving Sanity, allowing a smooth development experience",
-  "main": "lib/server.js",
-  "scripts": {
-    "build": "babel src --copy-files --out-dir lib",
-    "clean": "rimraf lib dest",
-    "prebuild": "npm run clean",
-    "start": "node bin/sanity-server.js",
-    "start-dev": "node bin/sanity-server.js --dev"
-  },
-  "bin": {
-    "sanity-server": "./bin/sanity-server.js"
-  },
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/server"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -30,12 +11,28 @@
     "server",
     "webserver"
   ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
+  "homepage": "https://www.sanity.io/",
   "bugs": {
     "url": "https://github.com/sanity-io/sanity/issues"
   },
-  "homepage": "https://www.sanity.io/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/server"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/server.js",
+  "bin": {
+    "sanity-server": "./bin/sanity-server.js"
+  },
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "babel src --copy-files --out-dir lib",
+    "clean": "rimraf lib dest",
+    "start": "node bin/sanity-server.js",
+    "start-dev": "node bin/sanity-server.js --dev"
+  },
   "dependencies": {
     "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
@@ -81,5 +78,8 @@
     "prop-types": "^15.6 || ^16",
     "react": "^16.9 || ^17",
     "react-dom": "^16.9 || ^17"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }

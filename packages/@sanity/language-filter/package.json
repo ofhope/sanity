@@ -2,10 +2,6 @@
   "name": "@sanity/language-filter",
   "version": "2.18.0",
   "description": "A Sanity plugin that supports filtering localized fields by language",
-  "main": "index.js",
-  "scripts": {
-    "clean": "rimraf lib dest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -14,6 +10,21 @@
     "content",
     "language-filter"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/language-filter"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf lib dest"
+  },
   "dependencies": {
     "@sanity/icons": "^1.1.7",
     "@sanity/types": "2.18.0",
@@ -24,17 +35,6 @@
   "peerDependencies": {
     "prop-types": "^15.3",
     "react": "^16.9 || ^17"
-  },
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/language-filter"
   },
   "publishConfig": {
     "access": "public"

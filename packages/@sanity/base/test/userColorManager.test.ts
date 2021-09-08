@@ -84,13 +84,13 @@ describe('user color manager', () => {
     // unused colors, and the previously assigned color is in use, which should prioritize
     // giving a unique color instead of giving the previously used one.
     const nonKokos = ['espen'].concat(
-      peopleNames.filter((name) => name !== 'kokos' && name !== 'yggrasil')
+      peopleNames.filter((name) => name !== 'kokos' && name !== 'yggrasil'),
     )
 
     const subs = nonKokos.map((name) =>
       manager
         .listen(name)
-        .subscribe((color) => expect(color).toBe(colors[colorPreferences[name] || 'purple']))
+        .subscribe((color) => expect(color).toBe(colors[colorPreferences[name] || 'purple'])),
     )
 
     // Now, when kokos wants her previous color, and there is an unused slot, she should
@@ -113,8 +113,8 @@ describe('user color manager', () => {
         .map((name) =>
           manager
             .listen(name)
-            .subscribe((color) => expect(color).toBe(colors[colorPreferences[name]]))
-        )
+            .subscribe((color) => expect(color).toBe(colors[colorPreferences[name]])),
+        ),
     )
 
     // espen "stole" purple, so kokos will have to pick a different color
@@ -150,7 +150,7 @@ describe('user color manager', () => {
 
     const nextHueInLine = hues.find((color) => color !== options.currentUserColor)
     const prefersBlue = peopleNames.find(
-      (name) => colorPreferences[name] === options.currentUserColor
+      (name) => colorPreferences[name] === options.currentUserColor,
     )
 
     expectColor(manager.listen(prefersBlue), nextHueInLine)

@@ -37,7 +37,7 @@ function combine(...visitors) {
           _problems: result._problems.concat(res._problems),
         }
       },
-      {_problems: [], ...schemaType}
+      {_problems: [], ...schemaType},
     )
   }
 }

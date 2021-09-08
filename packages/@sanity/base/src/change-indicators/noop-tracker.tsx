@@ -15,7 +15,7 @@ export function createNoopTracker<T>() {
     useReporter: noop as (
       id: string | null,
       value: T | (() => T),
-      isEqual: IsEqualFunction<T>
+      isEqual: IsEqualFunction<T>,
     ) => void,
   }
 }

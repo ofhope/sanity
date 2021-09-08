@@ -75,7 +75,7 @@ const createEmitter = (operationName: keyof OperationsAPI, idPair, typeName) => 
 function wrap<ErrorStrings>(
   opName: keyof OperationsAPI,
   op: OperationImpl<ErrorStrings>,
-  operationArgs: OperationArgs
+  operationArgs: OperationArgs,
 ): WrappedOperation<ErrorStrings> {
   const disabled = op.disabled(operationArgs)
   return {

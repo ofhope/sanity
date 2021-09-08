@@ -106,7 +106,7 @@ export default class HintsPackage extends React.PureComponent {
         'Configuration missing',
         <span>
           The <code>studioHintsConfig</code> does not contain a hints package slug.
-        </span>
+        </span>,
       )
     }
 

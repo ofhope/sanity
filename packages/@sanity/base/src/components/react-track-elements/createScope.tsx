@@ -11,8 +11,8 @@ const useReporterGuard = (id: string): void => {
     // eslint-disable-next-line no-console
     console.warn(
       new Error(
-        `No context provided for reporter. Make sure that the component calling "useReporter(${id}, ...)", is wrapped in a <Tracker> element`
-      )
+        `No context provided for reporter. Make sure that the component calling "useReporter(${id}, ...)", is wrapped in a <Tracker> element`,
+      ),
     )
   }
   didWarn = true
@@ -23,8 +23,8 @@ function useReportedValueGuard(): Reported<unknown>[] {
     // eslint-disable-next-line no-console
     console.warn(
       new Error(
-        'No context provided for reporter. Make sure that the component calling "useReportedValues()", is wrapped inside a <Tracker> element'
-      )
+        'No context provided for reporter. Make sure that the component calling "useReportedValues()", is wrapped inside a <Tracker> element',
+      ),
     )
   }
   didWarn = true
@@ -36,8 +36,8 @@ const useSubscribeGuard = () => {
     // eslint-disable-next-line no-console
     console.warn(
       new Error(
-        'No context provided for reporter. Make sure that the component calling "useReportedValues()", is wrapped inside a <Tracker> element'
-      )
+        'No context provided for reporter. Make sure that the component calling "useReportedValues()", is wrapped inside a <Tracker> element',
+      ),
     )
   }
   didWarn = true
@@ -82,7 +82,7 @@ export function createScope<Value>() {
     useReporter,
     useAutoIdReporter: (
       value: Value | (() => Value),
-      isEqual: IsEqualFunction<Value> = Object.is
+      isEqual: IsEqualFunction<Value> = Object.is,
     ) => useReporter(`element-${React.useRef(getNextId()).current}`, value, isEqual),
   }
 }

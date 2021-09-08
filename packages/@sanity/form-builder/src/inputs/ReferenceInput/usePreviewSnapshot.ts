@@ -30,7 +30,7 @@ type PreviewSnapshot = {
 
 export function usePreviewSnapshot(
   value: Reference | undefined,
-  getPreviewSnapshot: (reference: Reference) => Observable<PreviewSnapshot | null>
+  getPreviewSnapshot: (reference: Reference) => Observable<PreviewSnapshot | null>,
 ): SnapshotState {
   const [state, setState] = useState<SnapshotState>(LOADING_SNAPSHOT)
 

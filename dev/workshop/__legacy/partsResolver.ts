@@ -26,7 +26,7 @@ export function createPartsResolver(): PartsResolver {
       (parts: Parts) => {
         cache = parts
         return parts
-      }
+      },
     )
   }
 

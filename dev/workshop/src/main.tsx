@@ -57,12 +57,12 @@ function Root() {
 
   const handleLocationPush = useCallback(
     (newLoc: WorkshopLocation) => pushState({path: newLoc.path}),
-    [pushState]
+    [pushState],
   )
 
   const handleLocationReplace = useCallback(
     (newLoc: WorkshopLocation) => replaceState({path: newLoc.path}),
-    [replaceState]
+    [replaceState],
   )
 
   const studioLocation: WorkshopLocation = useMemo(() => ({path}), [path])
@@ -98,5 +98,5 @@ ReactDOM.render(
   <LocationProvider>
     <Root />
   </LocationProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 )

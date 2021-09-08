@@ -33,7 +33,7 @@ type Props = {
 
 export const ItemRow = React.forwardRef(function ItemRow(
   props: Props,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const focusRef = React.useRef<FormBuilderInput>(null)
   const {
@@ -65,7 +65,7 @@ export const ItemRow = React.forwardRef(function ItemRow(
         onEnterKey(index)
       }
     },
-    [index, onEnterKey]
+    [index, onEnterKey],
   )
 
   const handleKeyUp = useCallback(
@@ -78,7 +78,7 @@ export const ItemRow = React.forwardRef(function ItemRow(
         onEscapeKey(index)
       }
     },
-    [index, onEscapeKey, onRemove, value]
+    [index, onEscapeKey, onRemove, value],
   )
 
   const handleChange = useCallback(
@@ -86,16 +86,16 @@ export const ItemRow = React.forwardRef(function ItemRow(
       onChange(
         PatchEvent.from(
           patchEvent.patches.map((
-            patch // Map direct unset patches to empty value instead in order to not *remove* elements as the user clears out the value
+            patch, // Map direct unset patches to empty value instead in order to not *remove* elements as the user clears out the value
           ) =>
             patch.path.length === 0 && patch.type === 'unset' && type
               ? set(getEmptyValue(type))
-              : patch
-          )
-        ).prefixAll(index)
+              : patch,
+          ),
+        ).prefixAll(index),
       )
     },
-    [index, onChange, type]
+    [index, onChange, type],
   )
 
   const handleMissingTypeFocus = useCallback(() => onFocus([]), [onFocus])

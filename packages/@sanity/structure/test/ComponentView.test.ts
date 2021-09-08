@@ -10,7 +10,7 @@ test('throws on missing title', () => {
 
 test('throws on invalid id', () => {
   expect(() => S.view.component().id('foo bar').title('Foo bar').serialize()).toThrowError(
-    'Structure node id cannot contain character " "'
+    'Structure node id cannot contain character " "',
   )
 })
 
@@ -29,7 +29,7 @@ test('builds component view through component constructor', () => {
       .id('custom')
       .title('Custom')
       .options({foo: 'bar'})
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 

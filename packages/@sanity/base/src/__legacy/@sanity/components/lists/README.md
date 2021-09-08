@@ -1,5 +1,3 @@
-
-
 # Usage
 
 ## Regular list
@@ -9,21 +7,11 @@ import React from 'react'
 import {List, Item} from 'part:@sanity/components/lists/default'
 
 function renderItem(item, index) {
-  return (
-    <Item className="myListItem">
-      {item}
-    </Item>
-    )
+  return <Item className="myListItem">{item}</Item>
 }
 
 function MyComponent() {
-  return (
-    <List
-     className="myList"
-     items={['a', 'b', 'c']}
-     renderItem={renderItem}
-    />
-  )
+  return <List className="myList" items={['a', 'b', 'c']} renderItem={renderItem} />
 }
 ```
 
@@ -31,8 +19,7 @@ function MyComponent() {
 
 ```jsx
 import {List, Item, DragHandle} from 'part:@sanity/components/lists/sortable'
-
-<List className="myList">
+;<List className="myList">
   <ListItem>
     <DragHandle />
     Hello this is sortable list item
@@ -44,17 +31,10 @@ import {List, Item, DragHandle} from 'part:@sanity/components/lists/sortable'
 
 ```jsx
 import {List, Item} from 'part:@sanity/components/lists/grid'
-
-<List className="myGridList">
-  <ListItem>
-    Hello this is grid list item #1
-  </ListItem>
-  <ListItem>
-    Hello this is grid list item #2
-  </ListItem>
-  <ListItem>
-    Hello this is grid list item #3
-  </ListItem>
+;<List className="myGridList">
+  <ListItem>Hello this is grid list item #1</ListItem>
+  <ListItem>Hello this is grid list item #2</ListItem>
+  <ListItem>Hello this is grid list item #3</ListItem>
 </List>
 ```
 
@@ -62,8 +42,7 @@ import {List, Item} from 'part:@sanity/components/lists/grid'
 
 ```jsx
 import {List, Item} from 'part:@sanity/components/lists/sortable-grid'
-
-<List className="myGridList">
+;<List className="myGridList">
   <ListItem>
     <DragHandle />
     Hello this is sortable grid list item #1
@@ -80,6 +59,7 @@ import {List, Item} from 'part:@sanity/components/lists/sortable-grid'
 ```
 
 # Custom drag handle
+
 To create a custom drag handle, you can import the custom `createDragHandle` function. This works for both regular sortable lists and sortable grid lists.
 
 ```jsx

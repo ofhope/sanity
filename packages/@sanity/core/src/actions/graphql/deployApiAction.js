@@ -201,7 +201,7 @@ async function confirmValidationResult(valid, {spinner, output, prompt, force}) 
 
   if (!isInteractive) {
     throw new Error(
-      'Dangerous changes found - falling back. Re-run the command with the `--force` flag to force deployment.'
+      'Dangerous changes found - falling back. Re-run the command with the `--force` flag to force deployment.',
     )
   }
 
@@ -226,7 +226,7 @@ async function resolveApiGeneration({currentGeneration, flags, output, prompt, c
     debug(
       'There is no current generation deployed, using %s (%s)',
       generation,
-      flags.generation ? 'specified' : 'default'
+      flags.generation ? 'specified' : 'default',
     )
     return generation
   }
@@ -240,7 +240,7 @@ async function resolveApiGeneration({currentGeneration, flags, output, prompt, c
     }
 
     output.warn(
-      `Specified generation (${flags.generation}) differs from the one currently deployed (${currentGeneration}).`
+      `Specified generation (${flags.generation}) differs from the one currently deployed (${currentGeneration}).`,
     )
 
     const confirmDeploy =
@@ -258,8 +258,8 @@ async function resolveApiGeneration({currentGeneration, flags, output, prompt, c
   if (generation !== latestGeneration) {
     output.warn(
       chalk.cyan(
-        `A new generation of the GraphQL API is available, use \`--generation ${latestGeneration}\` to use it`
-      )
+        `A new generation of the GraphQL API is available, use \`--generation ${latestGeneration}\` to use it`,
+      ),
     )
   }
 

@@ -1,6 +1,5 @@
 # default-layout
 
-
 ## Sidecar
 
 The Sidecar will be enabled in a Studio if there is an implementations of the part `part:@sanity/default-layout/sidecar`
@@ -9,12 +8,11 @@ The Sidecar will be enabled in a Studio if there is an implementations of the pa
 
 An implementation of `part:@sanity/default-layout/sidecar` _must_ export these:
 
- - `SidecarToggleButton` React component. The button which will appear in the Navbar to toggle on/off the Sidecar
- - `SidecarLayout` React component. The content of the Sidecar (once it appears)
- - `isSidecarEnabled` Function. Call this to check if the Sidecar implementation is happy and good to go (typically, the sidecar impl. wants to verify if config is present)
+- `SidecarToggleButton` React component. The button which will appear in the Navbar to toggle on/off the Sidecar
+- `SidecarLayout` React component. The content of the Sidecar (once it appears)
+- `isSidecarEnabled` Function. Call this to check if the Sidecar implementation is happy and good to go (typically, the sidecar impl. wants to verify if config is present)
 
 If you need inspiration, the `@sanity/studio-hints` package is an implementation of this part.
-
 
 ### `part:@sanity/default-layout/sidecar-datastore`
 

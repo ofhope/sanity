@@ -8,7 +8,7 @@ export interface DocumentFragmentResolveOptions {
 }
 
 export const getUserDefinedDefaultDocumentBuilder = (
-  options: DocumentFragmentResolveOptions
+  options: DocumentFragmentResolveOptions,
 ): DocumentBuilder | null => {
   const structure = getUserDefinedStructure()
   if (!structure || !structure.getDefaultDocumentNode) {

@@ -39,6 +39,6 @@ test('scopes all the way down', () => {
           },
         },
       },
-    })
+    }),
   )
 })

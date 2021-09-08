@@ -18,7 +18,7 @@ import {
 const debug = debugWithName('createPortableTextEditor')
 
 const disablePlugin = (
-  name: string
+  name: string,
 ): ((editor: PortableTextSlateEditor) => PortableTextSlateEditor) => {
   debug(`Editor plugin '${name}' is disabled`)
   // This is the signature of a minimal Slate plugin
@@ -30,7 +30,7 @@ const disablePlugin = (
 
 export const withPortableText = <T extends Editor>(
   editor: T,
-  options: createEditorOptions
+  options: createEditorOptions,
 ): PortableTextSlateEditor => {
   const e = editor as T & PortableTextSlateEditor
   const {
@@ -57,7 +57,7 @@ export const withPortableText = <T extends Editor>(
   const withPortableTextMarkModel = createWithPortableTextMarkModel(
     portableTextFeatures,
     keyGenerator,
-    change$
+    change$,
   )
   const withPortableTextBlockStyle = createWithPortableTextBlockStyle(portableTextFeatures, change$)
   const withUtils = createWithUtils(portableTextFeatures)
@@ -67,10 +67,10 @@ export const withPortableText = <T extends Editor>(
       withUtils(
         withPortableTextBlockStyle(
           withPortableTextLists(
-            withPortableTextMarkModel(withObjectKeys(withScemaTypes(withMaxBlocks(e))))
-          )
-        )
-      )
-    )
+            withPortableTextMarkModel(withObjectKeys(withScemaTypes(withMaxBlocks(e)))),
+          ),
+        ),
+      ),
+    ),
   )
 }

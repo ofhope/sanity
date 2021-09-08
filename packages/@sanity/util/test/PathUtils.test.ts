@@ -111,11 +111,11 @@ test('toString: handles deep array index segments', () => {
 
 test('toString: handles deep key segments', () => {
   expect(toString(['foo', {_key: 'bar'}, 'body', {_key: '13ch'}])).toEqual(
-    'foo[_key=="bar"].body[_key=="13ch"]'
+    'foo[_key=="bar"].body[_key=="13ch"]',
   )
   expect(toString(['bar', 'foo', 3, {_key: 'seg'}])).toEqual('bar.foo[3][_key=="seg"]')
   expect(toString([{_key: 'foo'}, {_key: 'bar'}, {_key: 'baz'}, {_key: 'seg'}])).toEqual(
-    '[_key=="foo"][_key=="bar"][_key=="baz"][_key=="seg"]'
+    '[_key=="foo"][_key=="bar"][_key=="baz"][_key=="seg"]',
   )
 })
 
@@ -150,7 +150,7 @@ test('get: can use array indexes', () => {
 test('get: can use key lookup', () => {
   expect(get(srcObject, ['body', {_key: 'bar'}])).toEqual(srcObject.body[1])
   expect(get(srcObject, ['body', {_key: 'bar'}, 'children', {_key: 'child1'}])).toEqual(
-    srcObject.body[1].children![0]
+    srcObject.body[1].children![0],
   )
 })
 

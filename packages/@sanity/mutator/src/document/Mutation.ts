@@ -81,7 +81,7 @@ export default class Mutation {
             ? Object.assign(mutation.create, {
                 _createdAt: mutation.create._createdAt || this.params.timestamp,
               })
-            : doc
+            : doc,
         )
       } else if (mutation.createIfNotExists) {
         operations.push((doc) =>
@@ -89,13 +89,13 @@ export default class Mutation {
             ? Object.assign(mutation.createIfNotExists, {
                 _createdAt: mutation.createIfNotExists._createdAt || this.params.timestamp,
               })
-            : doc
+            : doc,
         )
       } else if (mutation.createOrReplace) {
         operations.push(() =>
           Object.assign(mutation.createOrReplace, {
             _createdAt: mutation.createOrReplace._createdAt || this.params.timestamp,
-          })
+          }),
         )
       } else if (mutation.delete) {
         operations.push(() => null)
@@ -119,7 +119,7 @@ export default class Mutation {
     this.compiled = (doc) => {
       if (prevRev && prevRev != doc._rev) {
         throw new Error(
-          `Previous revision for this mutation was ${prevRev}, but the document revision is ${doc._rev}`
+          `Previous revision for this mutation was ${prevRev}, but the document revision is ${doc._rev}`,
         )
       }
       let result = operations.reduce((revision, operation) => operation(revision), doc)
@@ -154,7 +154,7 @@ export default class Mutation {
   static squash(document: Doc, mutations: Array<Mutation>): Mutation {
     const squashed = mutations.reduce(
       (result, mutation) => result.concat(...mutation.mutations),
-      []
+      [],
     )
     return new Mutation({mutations: squashed})
   }

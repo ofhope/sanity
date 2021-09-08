@@ -10,7 +10,7 @@ import {FormBuilderInput} from 'part:@sanity/form-builder'
 
 export const CustomInputWithDialogOverlay = React.forwardRef(function CustomInputWithDialogOverlay(
   props,
-  ref
+  ref,
 ) {
   const {value, type, focusPath, onFocus, level, onChange, onBlur} = props
 

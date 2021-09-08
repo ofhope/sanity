@@ -43,7 +43,7 @@ function suggestCommand(cmdName, group, parentGroupName = null) {
     .map((command) => leven(command.name, cmdName))
     .reduce(
       (current, distance, index) => (distance < current.distance ? {index, distance} : current),
-      {index: null, distance: +Infinity}
+      {index: null, distance: +Infinity},
     )
 
   // Given we are within our target threshold, suggest the command

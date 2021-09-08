@@ -148,13 +148,13 @@ export default {
       })
 
       output.print(
-        `Copying dataset ${chalk.green(sourceDatasetName)} to ${chalk.green(targetDatasetName)}...`
+        `Copying dataset ${chalk.green(sourceDatasetName)} to ${chalk.green(targetDatasetName)}...`,
       )
 
       if (flags.detach) {
         output.print(`Copy initiated.`)
         output.print(
-          `\nRun:\n\n    sanity dataset copy --attach ${response.jobId}\n\nto watch attach`
+          `\nRun:\n\n    sanity dataset copy --attach ${response.jobId}\n\nto watch attach`,
         )
 
         return

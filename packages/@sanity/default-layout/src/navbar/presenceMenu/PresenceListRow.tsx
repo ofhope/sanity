@@ -21,7 +21,7 @@ interface PresenceListRowProps {
 export function PresenceListRow(props: PresenceListRowProps) {
   const {presence, onClose} = props
   const lastActiveLocation = orderBy(presence.locations || [], ['lastActiveAt'], ['desc']).find(
-    (location) => location.documentId
+    (location) => location.documentId,
   )
   const hasLink = Boolean(lastActiveLocation?.documentId)
 

@@ -132,7 +132,7 @@ class NavbarContainer extends React.PureComponent<Props, State> {
 
       this.setState(
         (prevState) =>
-          getNextState(prevState, mostRightRect.left + mostRightRect.width, winWidth) as State
+          getNextState(prevState, mostRightRect.left + mostRightRect.width, winWidth) as State,
       )
     }
   }

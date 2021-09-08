@@ -29,7 +29,7 @@ export function InsufficientPermissionsMessage(props: InsufficientPermissionsMes
           Your role{plural && 's'}{' '}
           {join(
             roles.map((r) => <code key={r.name}>{r.title}</code>),
-            ', '
+            ', ',
           )}{' '}
           do{plural || 'es'} not have permissions to {operationLabel}
         </Text>

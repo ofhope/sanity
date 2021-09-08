@@ -42,8 +42,8 @@ export default withRouterHOC(
               PropTypes.shape({
                 id: PropTypes.string.isRequired,
                 params: PropTypes.object,
-              })
-            )
+              }),
+            ),
           ),
           params: PropTypes.shape({
             template: PropTypes.string,
@@ -83,7 +83,7 @@ export default withRouterHOC(
       if (panes.length < paneSegments.length) {
         router.navigate(
           {...router.state, panes: paneSegments.slice(0, panes.length)},
-          {replace: true}
+          {replace: true},
         )
       }
     }
@@ -115,11 +115,11 @@ export default withRouterHOC(
           distinctUntilChanged(),
           map(maybeSerialize),
           switchMap((structure) =>
-            resolvePanes(structure, props.router.state.panes || [], this.state.panes, fromIndex)
+            resolvePanes(structure, props.router.state.panes || [], this.state.panes, fromIndex),
           ),
           switchMap((panes) =>
-            hasLoading(panes) ? of(panes).pipe(debounce(() => interval(50))) : of(panes)
-          )
+            hasLoading(panes) ? of(panes).pipe(debounce(() => interval(50))) : of(panes),
+          ),
         )
         .subscribe(this.setResolvedPanes, this.setResolveError)
     }
@@ -203,7 +203,7 @@ export default withRouterHOC(
           payloadParams,
           templateName,
         }),
-        {replace: true}
+        {replace: true},
       )
     }
 
@@ -279,12 +279,12 @@ export default withRouterHOC(
       const keys =
         (router.state.panes || []).reduce(
           (ids, group) => ids.concat(group.map((sibling) => sibling.id)),
-          []
+          [],
         ) || EMPTY_PANE_KEYS
 
       const groupIndexes = (router.state.panes || []).reduce(
         (ids, group) => ids.concat(group.map((sibling, groupIndex) => groupIndex)),
-        []
+        [],
       )
 
       if (!panes) {
@@ -301,7 +301,7 @@ export default withRouterHOC(
         />
       )
     }
-  }
+  },
 )
 
 function getPaneDiffIndex(nextPanes, prevPanes) {

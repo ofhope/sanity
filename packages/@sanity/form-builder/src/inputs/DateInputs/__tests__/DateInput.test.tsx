@@ -23,7 +23,7 @@ function renderInput(props: Partial<Props> = {}) {
           {...props}
         />
       </LayerProvider>
-    </ThemeProvider>
+    </ThemeProvider>,
   )
 
   const textInput = container.querySelector('input') as HTMLInputElement

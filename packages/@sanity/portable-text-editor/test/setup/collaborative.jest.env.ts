@@ -44,11 +44,11 @@ export default class CollaborationEnvironment extends NodeEnvironment {
       }, DEBUG)
       this._pageA.on('console', (message) =>
         // eslint-disable-next-line no-console
-        console.log(`A:${message.type().substring(0, 3).toUpperCase()} ${message.text()}`)
+        console.log(`A:${message.type().substring(0, 3).toUpperCase()} ${message.text()}`),
       )
       this._pageB.on('console', (message) =>
         // eslint-disable-next-line no-console
-        console.log(`B:${message.type().substring(0, 3).toUpperCase()} ${message.text()}`)
+        console.log(`B:${message.type().substring(0, 3).toUpperCase()} ${message.text()}`),
       )
     }
     this._pageA.on('pageerror', (err) => {
@@ -82,14 +82,14 @@ export default class CollaborationEnvironment extends NodeEnvironment {
     await this._pageA.goto(`${WEB_SERVER_ROOT_URL}?editorId=A&testId=${testId}`)
     await this._pageB.goto(`${WEB_SERVER_ROOT_URL}?editorId=B&testId=${testId}`)
     this.global.setDocumentValue = async (
-      value: PortableTextBlock[] | undefined
+      value: PortableTextBlock[] | undefined,
     ): Promise<void> => {
       ipc.of.socketServer.emit('payload', JSON.stringify({type: 'value', value, testId}))
       const valueHandleA: puppeteer.ElementHandle<HTMLDivElement> = await this._pageA.waitForSelector(
-        '#pte-value'
+        '#pte-value',
       )
       const valueHandleB: puppeteer.ElementHandle<HTMLDivElement> = await this._pageB.waitForSelector(
-        '#pte-value'
+        '#pte-value',
       )
       const readVal = (node) => {
         return node.innerText ? JSON.parse(node.innerText) : undefined
@@ -109,23 +109,23 @@ export default class CollaborationEnvironment extends NodeEnvironment {
           const editorId = ['A', 'B'][index]
           const editableHandle = await page.waitForSelector('div[contentEditable="true"]')
           const selectionHandle: puppeteer.ElementHandle<HTMLDivElement> = await page.waitForSelector(
-            '#pte-selection'
+            '#pte-selection',
           )
           const valueHandle: puppeteer.ElementHandle<HTMLDivElement> = await page.waitForSelector(
-            '#pte-value'
+            '#pte-value',
           )
           const waitForRevision = async () => {
             const revId = (Math.random() + 1).toString(36).substring(7)
             ipc.of.socketServer.emit(
               'payload',
-              JSON.stringify({type: 'revId', revId, testId, editorId})
+              JSON.stringify({type: 'revId', revId, testId, editorId}),
             )
             await page.waitForSelector(`code[data-rev-id="${revId}"]`)
             await delay(250) // Give selection time to catch up in the editor after a new value so that it's ready to test afterwards
           }
           const getSelection = async (): Promise<EditorSelection | null> => {
             const selection = await selectionHandle.evaluate((node) =>
-              node.innerText ? JSON.parse(node.innerText) : null
+              node.innerText ? JSON.parse(node.innerText) : null,
             )
             return selection
           }
@@ -138,7 +138,7 @@ export default class CollaborationEnvironment extends NodeEnvironment {
 
           const waitForSelection = async (selection: EditorSelection) => {
             const value = await valueHandle.evaluate((node): PortableTextBlock[] | undefined =>
-              node.innerText ? JSON.parse(node.innerText) : undefined
+              node.innerText ? JSON.parse(node.innerText) : undefined,
             )
             const normalized = normalizeSelection(selection, value)
             const dataVal = JSON.stringify(normalized)
@@ -160,10 +160,10 @@ export default class CollaborationEnvironment extends NodeEnvironment {
                           cancelable: true,
                           inputType: 'insertText',
                           data: args[0],
-                        })
+                        }),
                       )
                     },
-                    [text]
+                    [text],
                   )
                 }),
               ])
@@ -216,19 +216,19 @@ export default class CollaborationEnvironment extends NodeEnvironment {
                   selection,
                   testId,
                   editorId,
-                })
+                }),
               )
               await waitForSelection(selection)
             },
             async getValue(): Promise<PortableTextBlock[] | undefined> {
               const value = await valueHandle.evaluate((node): PortableTextBlock[] | undefined =>
-                node.innerText ? JSON.parse(node.innerText) : undefined
+                node.innerText ? JSON.parse(node.innerText) : undefined,
               )
               return value
             },
             getSelection,
           }
-        })
+        }),
       )
   }
 }

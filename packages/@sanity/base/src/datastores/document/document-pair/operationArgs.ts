@@ -17,13 +17,13 @@ export const operationArgs = memoize(
               snapshots: {draft, published},
               draft: versions.draft,
               published: versions.published,
-            })
-          )
-        )
+            }),
+          ),
+        ),
       ),
       publishReplay(1),
-      refCount()
+      refCount(),
     )
   },
-  (idPair) => idPair.publishedId
+  (idPair) => idPair.publishedId,
 )

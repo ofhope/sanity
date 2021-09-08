@@ -51,7 +51,7 @@ export function resolvePlugin(options) {
   const dirResolver = Promise.resolve(
     isDirPlugin
       ? resolver(path.resolve(parentDir, name))
-      : resolvePluginPath({name, basePath, parentPluginPath}, sync)
+      : resolvePluginPath({name, basePath, parentPluginPath}, sync),
   )
 
   return dirResolver.then((manifestDir) => {
@@ -66,8 +66,8 @@ export function resolvePlugin(options) {
               basePath,
               parentPluginPath: plugin.path,
             }),
-          })
-        )
+          }),
+        ),
     )
   })
 }
@@ -119,7 +119,7 @@ function getPluginNotFoundError(pluginName, locations) {
       `Plugin "${pluginName}" not found.\n`,
       'Locations tried:\n  * ',
       locations.join('\n  * '),
-    ].join('')
+    ].join(''),
   )
 
   err.code = 'PluginNotFound'

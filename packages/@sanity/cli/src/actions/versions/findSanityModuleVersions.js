@@ -30,7 +30,7 @@ export default async (context, target, opts = {}) => {
   const resolveOpts = {includeCli: options.includeCli, target}
   const spin = spinner('Resolving latest versions').start()
   const versions = await promiseProps(
-    buildPackageArray(sanityModules, context.workDir, resolveOpts)
+    buildPackageArray(sanityModules, context.workDir, resolveOpts),
   )
 
   const packages = values(versions)
@@ -57,7 +57,7 @@ function filterSanityModules(manifest) {
   const dependencies = Object.assign(
     {},
     manifest.dependencies || {},
-    manifest.devDependencies || {}
+    manifest.devDependencies || {},
   )
 
   const sanityDeps = Object.keys(dependencies)

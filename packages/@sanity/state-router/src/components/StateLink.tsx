@@ -11,7 +11,7 @@ interface Props {
 
 const StateLink = forwardRef(function StateLink(
   props: Props & React.HTMLProps<HTMLAnchorElement>,
-  ref: ForwardedRef<HTMLAnchorElement>
+  ref: ForwardedRef<HTMLAnchorElement>,
 ) {
   const {state, toIndex = false, ...rest} = props
   const routerContext = useContext(RouterContext)
@@ -26,8 +26,8 @@ const StateLink = forwardRef(function StateLink(
     // eslint-disable-next-line no-console
     console.error(
       new Error(
-        'No state passed to StateLink. If you want to link to an empty state, its better to use the the `toIndex` property'
-      )
+        'No state passed to StateLink. If you want to link to an empty state, its better to use the the `toIndex` property',
+      ),
     )
   }
 

@@ -41,7 +41,7 @@ export function OverflowMenu(props: Props) {
   } = props
   const actionBarRef = useRef<HTMLDivElement | null>(null)
   const [actionStates, setActionStates] = useState(
-    actions.map((__, index) => ({index, visible: false}))
+    actions.map((__, index) => ({index, visible: false})),
   )
   const actionStatesRef = useRef(actionStates)
   const showOverflowButton = useMemo(() => actionStates.filter((a) => !a.visible).length > 0, [
@@ -135,7 +135,7 @@ export function OverflowMenu(props: Props) {
                   <div
                     className={classNames(
                       styles.menuItem,
-                      action.firstInGroup && styles.firstInGroup
+                      action.firstInGroup && styles.firstInGroup,
                     )}
                     key={String(hiddenActionIndex)}
                     onMouseDown={preventDefault} // Needed so the editor doesn't reset selection

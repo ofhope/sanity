@@ -23,7 +23,7 @@ import * as adapter from './client-adapters/reference'
 async function resolveUserDefinedFilter(
   options: ReferenceOptions | undefined,
   document: SanityDocument,
-  valuePath: Path
+  valuePath: Path,
 ): Promise<ReferenceFilterSearchOptions> {
   if (!options) {
     return {}
@@ -76,7 +76,7 @@ type SearchError = {
 
 const SanityReferenceInput = forwardRef(function SanityReferenceInput(
   props: Props,
-  ref: ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<HTMLInputElement>,
 ) {
   const {getValuePath, type, document} = props
 
@@ -91,7 +91,7 @@ const SanityReferenceInput = forwardRef(function SanityReferenceInput(
             filter,
             params,
             tag: 'search.reference',
-          })
+          }),
         ),
         catchError((err: SearchError) => {
           const isQueryError = err.details && err.details.type === 'queryParseError'
@@ -99,14 +99,14 @@ const SanityReferenceInput = forwardRef(function SanityReferenceInput(
             err.message = `Invalid reference filter, please check the custom "filter" option`
           }
           return throwError(err)
-        })
+        }),
       ),
-    [documentRef, getValuePath, type]
+    [documentRef, getValuePath, type],
   )
 
   const getPreviewSnapshot = useCallback(
     (value: Reference) => adapter.getPreviewSnapshot(value, type),
-    [type]
+    [type],
   )
 
   return (

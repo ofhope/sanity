@@ -12,14 +12,14 @@ type ExposedSortableProps = {
 }
 
 export function sortableHandle<Props>(
-  Component: React.ComponentType<Props>
+  Component: React.ComponentType<Props>,
 ): React.ComponentType<Props> {
   return SortableHandle(Component)
 }
 
 // Wrapper to avoid accidental leaking of react-sortable-hoc props
 export function sortableItem<Props>(
-  Component: React.ComponentType<Props>
+  Component: React.ComponentType<Props>,
 ): React.ComponentType<Props & {index: number}> {
   return SortableElement(Component)
 }
@@ -27,20 +27,20 @@ export function sortableItem<Props>(
 // Wrapper to avoid accidental leaking of react-sortable-hoc props
 function sortableContainer<Props>(
   Component: React.ComponentType<Props>,
-  options: SortableContainerProps
+  options: SortableContainerProps,
 ) {
   const Container = (SortableContainer(
     React.forwardRef(function Sortable(
       props: Props & ExposedSortableProps,
-      forwardedRef: React.ForwardedRef<React.ComponentType<Props>>
+      forwardedRef: React.ForwardedRef<React.ComponentType<Props>>,
     ) {
       return <Component {...props} ref={forwardedRef} />
-    })
+    }),
   ) as any) as React.ComponentType<SortableContainerProps> // there are some wonky typings from react-sortable-hoc
 
   return React.forwardRef(function SortableList(
     props: Props & ExposedSortableProps,
-    ref: React.ForwardedRef<React.ComponentType<Props>>
+    ref: React.ForwardedRef<React.ComponentType<Props>>,
   ) {
     return <Container {...props} {...options} ref={ref} />
   })

@@ -2,9 +2,34 @@
   "name": "@sanity/client",
   "version": "2.18.0",
   "description": "Client for retrieving data from Sanity",
+  "keywords": [
+    "sanity",
+    "cms",
+    "headless",
+    "realtime",
+    "content",
+    "client",
+    "fetch",
+    "api",
+    "gradient"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/client"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
   "main": "lib/sanityClient.js",
-  "umd": "umd/sanityClient.min.js",
   "unpkg": "umd/sanityClient.min.js",
+  "browser": {
+    "./src/http/nodeMiddleware.js": "./src/http/browserMiddleware.js",
+    "./lib/http/nodeMiddleware.js": "./lib/http/browserMiddleware.js"
+  },
   "types": "./sanityClient.d.ts",
   "scripts": {
     "analyze": "NODE_ENV=production BROWSERIFY_ENV=build DEBUG='' browserify --full-paths -t envify -g uglifyify lib/sanityClient.js --standalone=SanityClient | discify --open",
@@ -17,9 +42,14 @@
     "prepublishOnly": "npm run build",
     "test": "NODE_ENV=test tape -r @babel/register test/*.test.js"
   },
-  "browser": {
-    "./src/http/nodeMiddleware.js": "./src/http/browserMiddleware.js",
-    "./lib/http/nodeMiddleware.js": "./lib/http/browserMiddleware.js"
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "require": [
+      "@babel/register"
+    ],
+    "sourceMap": false
   },
   "dependencies": {
     "@sanity/eventsource": "2.14.0",
@@ -52,35 +82,5 @@
     "uglifyify": "^5.0.1",
     "xtend": "4.0.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/client"
-  },
-  "keywords": [
-    "sanity",
-    "cms",
-    "headless",
-    "realtime",
-    "content",
-    "client",
-    "fetch",
-    "api",
-    "gradient"
-  ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/",
-  "nyc": {
-    "include": [
-      "src/**/*.js"
-    ],
-    "require": [
-      "@babel/register"
-    ],
-    "sourceMap": false
-  }
+  "umd": "umd/sanityClient.min.js"
 }

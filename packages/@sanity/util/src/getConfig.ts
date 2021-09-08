@@ -20,7 +20,7 @@ const getConfig = (rootDir, options: {env?: string} = {}) => {
   const config = reduceConfig(
     localConfig ? merge({}, defaults, localConfig) : defaults,
     options.env || process.env.NODE_ENV || 'development', // eslint-disable-line no-process-env
-    {studioRootPath: rootDir}
+    {studioRootPath: rootDir},
   )
 
   return configContainer(config)

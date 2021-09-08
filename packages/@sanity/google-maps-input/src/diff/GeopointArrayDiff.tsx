@@ -74,7 +74,7 @@ function hasCoordinates(point: Partial<Geopoint>): point is Geopoint {
 function getBounds(
   fromValue: google.maps.LatLngLiteral[] | null | undefined,
   toValue: google.maps.LatLngLiteral[] | null | undefined,
-  api: typeof window.google.maps
+  api: typeof window.google.maps,
 ): google.maps.LatLngBounds {
   const bounds = new api.LatLngBounds()
   const points = [...(fromValue || []), ...(toValue || [])]

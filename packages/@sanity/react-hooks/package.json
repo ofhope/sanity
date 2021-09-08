@@ -2,18 +2,6 @@
   "name": "@sanity/react-hooks",
   "version": "2.18.0",
   "description": "Officially supported Sanity Studio API building blocks",
-  "main": "./lib/index.js",
-  "types": "./dist/dts",
-  "author": "Sanity.io <hello@sanity.io>",
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "license": "MIT",
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "clean": "rimraf lib coverage"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -24,8 +12,23 @@
     "structure",
     "api"
   ],
-  "publishConfig": {
-    "access": "public"
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/react-hooks"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "./lib/index.js",
+  "types": "./dist/dts",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "clean": "rimraf lib coverage"
   },
   "dependencies": {
     "@sanity/types": "2.18.0",
@@ -40,13 +43,10 @@
   "peerDependencies": {
     "react": "^16.9 || ^17"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/react-hooks"
+  "engines": {
+    "node": ">=10.0.0"
   },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/"
+  "publishConfig": {
+    "access": "public"
+  }
 }

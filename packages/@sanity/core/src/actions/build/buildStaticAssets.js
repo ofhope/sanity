@@ -20,7 +20,7 @@ export default async (args, context) => {
   const {output, prompt, workDir} = context
   const flags = Object.assign(
     {minify: true, profile: false, stats: false, 'source-maps': false},
-    args.extOptions
+    args.extOptions,
   )
 
   const unattendedMode = flags.yes || flags.y
@@ -47,7 +47,7 @@ export default async (args, context) => {
   const envVarKeys = Object.keys(envVars)
   if (envVarKeys.length > 0) {
     output.print(
-      '\nIncluding the following environment variables as part of the JavaScript bundle:'
+      '\nIncluding the following environment variables as part of the JavaScript bundle:',
     )
     envVarKeys.forEach((key) => output.print(`- ${key}`))
     output.print('')
@@ -95,7 +95,7 @@ export default async (args, context) => {
     stats.chunks.forEach((chunk) =>
       chunk.files.forEach((file) => {
         chunkMap[file] = chunk.hash
-      })
+      }),
     )
 
     bundle.stats = stats
@@ -103,7 +103,7 @@ export default async (args, context) => {
     if (flags.profile) {
       await fse.writeFile(
         path.join(workDir, 'build-stats.json'),
-        JSON.stringify(statistics.toJson('verbose'))
+        JSON.stringify(statistics.toJson('verbose')),
       )
     }
 
@@ -120,13 +120,13 @@ export default async (args, context) => {
             hash: chunkMap[assetPath] || chunkMap[asset],
           }
         }),
-      }
+      },
     )
 
     // Write index file to output destination
     await fse.writeFile(
       path.join(outputDir, 'index.html'),
-      `<!doctype html>${ReactDOM.renderToStaticMarkup(doc)}`
+      `<!doctype html>${ReactDOM.renderToStaticMarkup(doc)}`,
     )
 
     // Print build output, optionally stats if requested
@@ -149,7 +149,7 @@ export default async (args, context) => {
         Object.keys(chunkMap)
           .filter((fileName) => path.extname(fileName) === '.js')
           .map((fileName) => path.join(compilationConfig.outputPath, fileName))
-          .map(compressJavascript)
+          .map(compressJavascript),
       )
 
       spin.text = `Minifying JavaScript bundles (${Date.now() - compressStart}ms)`

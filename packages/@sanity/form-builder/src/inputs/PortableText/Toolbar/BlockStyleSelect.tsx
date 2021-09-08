@@ -70,13 +70,13 @@ export default function BlockStyleSelect(props: Props): JSX.Element {
           () =>
             StyleComponent ? <StyleComponent>{item.title}</StyleComponent> : <>{item.title}</>,
           // @todo: remove this:
-          React.createRef()
+          React.createRef(),
         )
       }
 
       return <div key={item.key}>No style</div>
     },
-    [selection]
+    [selection],
   )
   const focusBlock = PortableTextEditor.focusBlock(editor)
 

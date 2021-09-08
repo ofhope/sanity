@@ -9,6 +9,6 @@ export default async (args, context) => {
   output.print(
     aliases
       .map((set) => `${ALIAS_PREFIX}${set.name} -> ${set.datasetName || '<unlinked>'}`)
-      .join('\n')
+      .join('\n'),
   )
 }

@@ -113,7 +113,7 @@ export function createWithUndoRedo(incomingPatches$?: PatchObservable) {
           let transformedOperations = step.operations
           otherPatches.forEach((item) => {
             transformedOperations = flatten(
-              transformedOperations.map((op) => transformOperation(editor, item.patch, op))
+              transformedOperations.map((op) => transformOperation(editor, item.patch, op)),
             )
           })
           withoutSaving(editor, () => {
@@ -150,7 +150,7 @@ export function createWithUndoRedo(incomingPatches$?: PatchObservable) {
           let transformedOperations = step.operations
           otherPatches.forEach((item) => {
             transformedOperations = flatten(
-              transformedOperations.map((op) => transformOperation(editor, item.patch, op))
+              transformedOperations.map((op) => transformOperation(editor, item.patch, op)),
             )
           })
           withoutSaving(editor, () => {
@@ -205,7 +205,7 @@ function transformOperation(editor: Editor, patch: Patch, operation: Operation):
     const block = editor.children[blockIndex]
     if (block && Array.isArray(block.children)) {
       const childIndex = block.children.findIndex((child) =>
-        isEqual({_key: child._key}, patch.path[2])
+        isEqual({_key: child._key}, patch.path[2]),
       )
       const parsed = dmp.patch_fromText(patch.value)[0]
       if (!parsed) {
@@ -291,7 +291,7 @@ function adjustBlockPath(
   editor: Editor,
   patch: Patch,
   operation: Operation,
-  level: number
+  level: number,
 ): Operation {
   const transformedOperation = {...operation}
   const myIndex = editor.children.findIndex((blk) => isEqual({_key: blk._key}, patch.path[0]))

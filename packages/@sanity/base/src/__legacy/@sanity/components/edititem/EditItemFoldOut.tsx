@@ -33,7 +33,7 @@ export default EditItemFoldOut
 const EditItemFoldOutChildren = forwardRef(
   (
     props: {onClose?: () => void; title?: string} & Omit<React.HTMLProps<HTMLDivElement>, 'title'>,
-    ref
+    ref,
   ) => {
     const {children, onClose, title, ...restProps} = props
     const {isTopLayer} = useLayer()
@@ -69,7 +69,7 @@ const EditItemFoldOutChildren = forwardRef(
         </div>
       </div>
     )
-  }
+  },
 )
 
 EditItemFoldOutChildren.displayName = 'EditItemFoldOutChildren'

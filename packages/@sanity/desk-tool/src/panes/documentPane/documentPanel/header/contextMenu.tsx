@@ -29,7 +29,7 @@ export function DocumentPanelContextMenu(props: DocumentPanelContextMenuProps) {
       onAction(action)
       setOpen(false)
     },
-    [onAction, setOpen]
+    [onAction, setOpen],
   )
 
   const handleCloseMenu = useCallback(() => {

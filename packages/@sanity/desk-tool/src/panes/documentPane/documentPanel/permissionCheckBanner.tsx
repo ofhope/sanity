@@ -26,7 +26,7 @@ export function PermissionCheckBanner(props: Props) {
               Your role{plural && 's'}{' '}
               {join(
                 currentUser?.roles?.map((r) => <code key={r.name}>{r.title}</code>),
-                ', '
+                ', ',
               )}{' '}
               do{plural || 'es'} not have permissions to {requiredPermission} this document
             </Text>

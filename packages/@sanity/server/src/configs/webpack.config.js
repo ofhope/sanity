@@ -65,7 +65,7 @@ export default (config = {}) => {
   return {
     entry: {
       app: [path.join(__dirname, '..', 'browser', isProd ? 'entry.js' : 'entry-dev.js')].filter(
-        Boolean
+        Boolean,
       ),
       vendor: ['react', 'react-dom'],
     },

@@ -50,7 +50,7 @@ export const openPopup = (url, positionFeatures) => {
       // when attempting to call .focus() or .moveTo() on a window with an untrusted origin
       'about:blank',
       '_blank',
-      DEFAULT_FEATURES.concat(positionFeatures ? toFeatureStr(positionFeatures) : []).join(',')
+      DEFAULT_FEATURES.concat(positionFeatures ? toFeatureStr(positionFeatures) : []).join(','),
     )
     if (positionFeatures) {
       win.moveTo(positionFeatures.left, positionFeatures.top)

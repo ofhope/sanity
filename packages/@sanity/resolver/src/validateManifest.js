@@ -32,7 +32,7 @@ export default function validateManifest(manifest, plugin) {
           baseError,
           'A part that has a defined `path` needs to also define either `name` or `implements`',
           `See ${generateHelpUrl('plugin-parts-syntax')}`,
-        ].join('\n')
+        ].join('\n'),
       )
     }
 
@@ -42,7 +42,7 @@ export default function validateManifest(manifest, plugin) {
           baseError,
           'A part that has not defined a `path` needs to include a `description`',
           `See ${generateHelpUrl('plugin-parts-syntax')}`,
-        ].join('\n')
+        ].join('\n'),
       )
     }
 
@@ -83,25 +83,25 @@ function validatePartName(name, baseError) {
 
   if (matchers.partMultiPrefixed.test(name)) {
     throw new Error(
-      `${baseError}\nPart "${name}" is invalid - can't contain multiple ":". ${examples}`
+      `${baseError}\nPart "${name}" is invalid - can't contain multiple ":". ${examples}`,
     )
   }
 
   if (!matchers.partPrefix.test(name)) {
     throw new Error(
-      `${baseError}\nPart "${name}" is invalid - it needs a "part:"-prefix. ${examples}`
+      `${baseError}\nPart "${name}" is invalid - it needs a "part:"-prefix. ${examples}`,
     )
   }
 
   if (!matchers.partPackage.test(name)) {
     throw new Error(
-      `${baseError}\nPart "${name}" is invalid - it needs to include the plugin name. ${examples}`
+      `${baseError}\nPart "${name}" is invalid - it needs to include the plugin name. ${examples}`,
     )
   }
 
   if (!matchers.partComponent.test(name)) {
     throw new Error(
-      `${baseError}\nPart "${name}" is invalid - it needs to include a name after the plugin name. ${examples}`
+      `${baseError}\nPart "${name}" is invalid - it needs to include a name after the plugin name. ${examples}`,
     )
   }
 }

@@ -73,7 +73,7 @@ export default withPropsStream(
 
       return {showStatus: false}
     }) as any),
-    catchError((err) => of({error: err, showStatus: false}))
+    catchError((err) => of({error: err, showStatus: false})),
   ),
-  SanityStatusContainer
+  SanityStatusContainer,
 )

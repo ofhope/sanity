@@ -31,5 +31,5 @@ export const FileButton = styled(Button).attrs({forwardedAs: 'label'})(
         opacity: 0;
       }
     `
-  }
+  },
 )

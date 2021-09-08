@@ -278,7 +278,7 @@ class DefaultPane extends React.PureComponent<DefaultPaneProps, State> {
       (action) =>
         action.showAsAction &&
         (!isCollapsed ||
-          (typeof action.showAsAction === 'object' && action.showAsAction.whenCollapsed))
+          (typeof action.showAsAction === 'object' && action.showAsAction.whenCollapsed)),
     )
 
     if (renderActions) {
@@ -395,7 +395,7 @@ class DefaultPane extends React.PureComponent<DefaultPaneProps, State> {
           className={classNames(
             styles.root,
             isCollapsed && styles.isCollapsed,
-            isSelected ? styles.isActive : styles.isDisabled
+            isSelected ? styles.isActive : styles.isDisabled,
           )}
           data-pane-color={color}
           data-pane-loading={isLoading}

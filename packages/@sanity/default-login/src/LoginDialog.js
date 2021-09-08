@@ -35,7 +35,7 @@ export default class LoginDialog extends React.Component {
           providers: providers,
           isLoaded: true,
           shouldRedirect: providers.length === 1 && pluginConfig.providers.redirectOnSingle,
-        })
+        }),
       )
       .catch((err) => this.setState({error: err}))
   }

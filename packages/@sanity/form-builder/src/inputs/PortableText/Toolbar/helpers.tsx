@@ -28,7 +28,7 @@ import {BlockItem, BlockStyleItem, PTEToolbarAction, PTEToolbarActionGroup} from
 
 function getFormatIcon(
   type: string,
-  schemaIcon?: React.ComponentType | string
+  schemaIcon?: React.ComponentType | string,
 ): React.ComponentType {
   if (schemaIcon) {
     return schemaIcon as React.ComponentType
@@ -53,14 +53,14 @@ function getFormatIcon(
 function getPTEFormatActions(
   editor: PortableTextEditor,
   selection: EditorSelection,
-  hotkeyOpts: HotkeyOptions
+  hotkeyOpts: HotkeyOptions,
 ): PTEToolbarAction[] {
   const features = PortableTextEditor.getPortableTextFeatures(editor)
   const focusBlock = PortableTextEditor.focusBlock(editor)
 
   return features.decorators.map((decorator) => {
     const shortCutKey = Object.keys(hotkeyOpts.marks).find(
-      (key) => hotkeyOpts.marks[key] === decorator.value
+      (key) => hotkeyOpts.marks[key] === decorator.value,
     )
 
     let hotkeys: string[]
@@ -108,7 +108,7 @@ function getListIcon(item: PortableTextFeature, active: boolean): React.Componen
 
 function getPTEListActions(
   editor: PortableTextEditor,
-  selection: EditorSelection
+  selection: EditorSelection,
 ): PTEToolbarAction[] {
   const features = PortableTextEditor.getPortableTextFeatures(editor)
   const focusBlock = PortableTextEditor.focusBlock(editor)
@@ -160,7 +160,7 @@ function getAnnotationIcon(item: PortableTextFeature, active: boolean): React.Co
 
 function getPTEAnnotationActions(
   editor: PortableTextEditor,
-  onInsert: (type: Type) => void
+  onInsert: (type: Type) => void,
 ): PTEToolbarAction[] {
   const features = PortableTextEditor.getPortableTextFeatures(editor)
   const activeAnnotations = PortableTextEditor.activeAnnotations(editor)
@@ -192,7 +192,7 @@ export function getPTEToolbarActionGroups(
   editor: PortableTextEditor,
   selection: EditorSelection,
   onInsertAnnotation: (type: Type) => void,
-  hotkeyOpts: HotkeyOptions
+  hotkeyOpts: HotkeyOptions,
 ): PTEToolbarActionGroup[] {
   return [
     {name: 'format', actions: getPTEFormatActions(editor, selection, hotkeyOpts)},
@@ -202,7 +202,7 @@ export function getPTEToolbarActionGroups(
 }
 
 export function getBlockStyleSelectProps(
-  editor: PortableTextEditor
+  editor: PortableTextEditor,
 ): {items: BlockStyleItem[]; value: BlockStyleItem[]} {
   const features = PortableTextEditor.getPortableTextFeatures(editor)
   const items = features.styles.map((style: PortableTextFeature) => {
@@ -236,7 +236,7 @@ export function getBlockStyleSelectProps(
 
 function getInsertMenuIcon(
   type: Type,
-  fallbackIcon: () => React.ReactElement
+  fallbackIcon: () => React.ReactElement,
 ): React.ComponentType {
   const referenceIcon = get(type, 'to[0].icon')
 
@@ -247,7 +247,7 @@ export function getInsertMenuItems(
   editor: PortableTextEditor,
   selection: EditorSelection,
   onInsertBlock: (type: Type) => void,
-  onInsertInline: (type: Type) => void
+  onInsertInline: (type: Type) => void,
 ): BlockItem[] {
   const focusBlock = PortableTextEditor.focusBlock(editor)
   const features = PortableTextEditor.getPortableTextFeatures(editor)
@@ -260,7 +260,7 @@ export function getInsertMenuItems(
       inline: false,
       key: `block-${index}`,
       type,
-    })
+    }),
   )
 
   const inlineItems = features.types.inlineObjects.map(
@@ -271,7 +271,7 @@ export function getInsertMenuItems(
       inline: true,
       key: `inline-${index}`,
       type,
-    })
+    }),
   )
 
   // Do not include items that are supposed to be hidden

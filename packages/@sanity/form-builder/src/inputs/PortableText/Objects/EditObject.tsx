@@ -183,7 +183,7 @@ export const EditObject = ({
 function findObjectAndType(
   objectEditData,
   value,
-  ptFeatures
+  ptFeatures,
 ): [PortableTextChild | undefined, Type | undefined] {
   if (!objectEditData) {
     return [undefined, undefined]

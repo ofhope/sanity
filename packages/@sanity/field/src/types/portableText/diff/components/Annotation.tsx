@@ -104,7 +104,7 @@ function AnnnotationWithDiff({
   const markDefPath = [path[0]].concat(['markDefs', {_key: object._key}])
   const prefix = fullPath.slice(
     0,
-    fullPath.findIndex((seg) => isKeySegment(seg) && seg._key === object._key)
+    fullPath.findIndex((seg) => isKeySegment(seg) && seg._key === object._key),
   )
   const annotationPath = prefix.concat(path)
   const myPath = prefix.concat(markDefPath)
@@ -129,7 +129,7 @@ function AnnnotationWithDiff({
         setTimeout(() => onSetFocus(myPath), 10) // Open edit object interface
       }
     },
-    [annotationPath]
+    [annotationPath],
   )
 
   const handleClickOutside = useCallback(() => {

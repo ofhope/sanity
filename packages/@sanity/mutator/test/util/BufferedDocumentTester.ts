@@ -139,7 +139,7 @@ export default class BufferedDocumentTester {
     this.tap.same(
       extract(path, this.doc.LOCAL)[0],
       value,
-      `assert value ${path} of LOCAL failed ${this.context}`
+      `assert value ${path} of LOCAL failed ${this.context}`,
     )
     return this
   }
@@ -148,7 +148,7 @@ export default class BufferedDocumentTester {
     this.tap.same(
       extract(path, this.doc.document.EDGE)[0],
       value,
-      `assert value ${path} of EDGE failed ${this.context}`
+      `assert value ${path} of EDGE failed ${this.context}`,
     )
     return this
   }
@@ -157,7 +157,7 @@ export default class BufferedDocumentTester {
     this.tap.same(
       extract(path, this.doc.document.HEAD)[0],
       value,
-      `assert value ${path} of HEAD failed ${this.context}`
+      `assert value ${path} of HEAD failed ${this.context}`,
     )
     return this
   }
@@ -231,7 +231,7 @@ export default class BufferedDocumentTester {
     this.tap.same(
       this.doc.document.EDGE,
       this.doc.document.HEAD,
-      `HEAD and EDGE should be equal ${this.context}`
+      `HEAD and EDGE should be equal ${this.context}`,
     )
     return this
   }
@@ -241,7 +241,7 @@ export default class BufferedDocumentTester {
     this.tap.notSame(
       this.doc.document.EDGE,
       this.doc.document.HEAD,
-      `HEAD and EDGE should be different ${this.context}`
+      `HEAD and EDGE should be different ${this.context}`,
     )
     return this
   }
@@ -249,7 +249,7 @@ export default class BufferedDocumentTester {
   hasUnresolvedLocalMutations() {
     this.tap.ok(
       this.doc.document.anyUnresolvedMutations(),
-      `should be unresolved local mutations ${this.context}`
+      `should be unresolved local mutations ${this.context}`,
     )
     return this
   }
@@ -257,7 +257,7 @@ export default class BufferedDocumentTester {
   noUnresolvedLocalMutations() {
     this.tap.notOk(
       this.doc.document.anyUnresolvedMutations(),
-      `should be no unresolved local mutations ${this.context}`
+      `should be no unresolved local mutations ${this.context}`,
     )
     return this
   }

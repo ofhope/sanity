@@ -59,7 +59,7 @@ function normalizeItems(items: DataTransferItem[]) {
 
       console.warn('Unknown DataTransferItem.kind: %s', item.kind)
       return Promise.resolve([])
-    })
+    }),
   )
 }
 
@@ -85,14 +85,14 @@ type Entry = WebKitFileEntry | WebKitDirectoryEntry
 type DirectoryReader = {
   readEntries: (
     successCallback: (entries: Entry[]) => void,
-    errorCallback?: (error: Error) => void
+    errorCallback?: (error: Error) => void,
   ) => void
 }
 
 function walk(entry: Entry): Promise<File[]> {
   if (entry.isFile) {
     return new Promise<File>((resolve, reject) =>
-      entry.file(resolve, reject)
+      entry.file(resolve, reject),
     ).then((file: File) => [file])
   }
 

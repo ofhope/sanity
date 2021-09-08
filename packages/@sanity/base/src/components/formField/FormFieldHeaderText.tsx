@@ -21,7 +21,7 @@ export interface FormFieldHeaderTextProps {
 const EMPTY_ARRAY = []
 
 export const FormFieldHeaderText = memo(function FormFieldHeaderText(
-  props: FormFieldHeaderTextProps
+  props: FormFieldHeaderTextProps,
 ) {
   const {description, inputId, title, __unstable_markers: markers = EMPTY_ARRAY} = props
   const validationMarkers = useMemo(() => markers.filter(isValidationMarker), [markers])

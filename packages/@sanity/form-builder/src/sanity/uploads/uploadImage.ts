@@ -32,7 +32,7 @@ export default function uploadImage(file: File, options?: UploadOptions): Observ
         set(event.percent, [UPLOAD_STATUS_KEY, 'progress']),
         set(new Date().toISOString(), [UPLOAD_STATUS_KEY, 'updated']),
       ])
-    })
+    }),
   )
 
   const setPreviewUrl$ = readExif(file).pipe(
@@ -42,17 +42,17 @@ export default function uploadImage(file: File, options?: UploadOptions): Observ
       console.warn(
         'Image preprocessing failed for "%s" with the error: %s',
         file.name,
-        error.message
+        error.message,
       )
       // something went wrong, but continue still
       return observableOf(null)
     }),
     filter(Boolean),
-    map((imageUrl) => createUploadEvent([set(imageUrl, [UPLOAD_STATUS_KEY, 'previewImage'])]))
+    map((imageUrl) => createUploadEvent([set(imageUrl, [UPLOAD_STATUS_KEY, 'previewImage'])])),
   )
 
   return observableOf(createInitialUploadEvent(file)).pipe(
     concat(observableFrom(upload$).pipe(merge(setPreviewUrl$))),
-    concat(observableOf(CLEANUP_EVENT))
+    concat(observableOf(CLEANUP_EVENT)),
   )
 }

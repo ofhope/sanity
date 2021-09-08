@@ -26,7 +26,7 @@ function SetMissingTypeButton({
 
   const handleClick = useCallback(
     () => onChange(PatchEvent.from(setIfMissing(targetType, ['_type'])), itemValue),
-    [itemValue, onChange, targetType]
+    [itemValue, onChange, targetType],
   )
 
   return (

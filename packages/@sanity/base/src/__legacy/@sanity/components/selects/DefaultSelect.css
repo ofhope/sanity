@@ -13,11 +13,11 @@
 
 .root:hover .arrow {
   color: var(--link-color);
-  
+
   @nest & svg {
     color: inherit;
     opacity: 1;
-    transform: scale(1.1  );
+    transform: scale(1.1);
   }
 }
 
@@ -27,7 +27,7 @@
   @nest & svg {
     color: inherit;
     opacity: 1;
-    transform: scale(1.1  );
+    transform: scale(1.1);
   }
 }
 

@@ -8,14 +8,14 @@ import {Props} from './types'
 
 const TelephoneInput = React.forwardRef(function TelephoneInput(
   props: Props<string, StringSchemaType>,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {value, readOnly, type, markers, level, onFocus, onBlur, onChange, presence} = props
   const inputId = useId()
 
   const errors = useMemo(
     () => markers.filter((marker) => marker.type === 'validation' && marker.level === 'error'),
-    [markers]
+    [markers],
   )
 
   const handleChange = React.useCallback(
@@ -23,7 +23,7 @@ const TelephoneInput = React.forwardRef(function TelephoneInput(
       const inputValue = event.currentTarget.value
       onChange(PatchEvent.from(inputValue ? set(inputValue) : unset()))
     },
-    [onChange]
+    [onChange],
   )
   return (
     <FormField

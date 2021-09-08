@@ -26,7 +26,7 @@ export default class InInputButton extends React.Component<
   render() {
     const {kind, inverted, colored, icon, loading, className: classNameProp, ...restProps} = omit(
       this.props,
-      'onAction'
+      'onAction',
     )
 
     const Icon = icon
@@ -41,7 +41,7 @@ export default class InInputButton extends React.Component<
       inverted && styles.inverted,
       kind && styles[kind],
       colored && styles.colored,
-      Icon && styles.hasIcon
+      Icon && styles.hasIcon,
     )
 
     return (

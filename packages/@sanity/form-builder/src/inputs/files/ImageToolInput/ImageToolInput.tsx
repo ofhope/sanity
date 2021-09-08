@@ -65,7 +65,7 @@ function LoadStatus(props: {children: React.ReactNode}) {
 
 export const ImageToolInput = forwardRef(function ImageToolInput(
   props: ImageToolInputProps,
-  ref: ForwardedRef<HTMLDivElement>
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   const {
     imageUrl,
@@ -109,11 +109,11 @@ export const ImageToolInput = forwardRef(function ImageToolInput(
       }
       // For backwards compatibility, where hotspot/crop might not have a named type yet
       const cropField = type.fields.find(
-        (field) => field.name === 'crop' && field.type.name !== 'object'
+        (field) => field.name === 'crop' && field.type.name !== 'object',
       )
 
       const hotspotField = type.fields.find(
-        (field) => field.type.name !== 'object' && field.name === 'hotspot'
+        (field) => field.type.name !== 'object' && field.name === 'hotspot',
       )
 
       // Note: when either hotspot or crop change we fill in the default if the other is missing
@@ -128,7 +128,7 @@ export const ImageToolInput = forwardRef(function ImageToolInput(
 
       onChange(PatchEvent.from([set(crop, ['crop']), set(hotspot, ['hotspot'])]))
     },
-    [onChange, readOnly, type.fields]
+    [onChange, readOnly, type.fields],
   )
 
   return (

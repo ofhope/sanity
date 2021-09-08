@@ -38,7 +38,7 @@ export default function calculateStyles(options: Options = {}) {
     {
       aspect: containerAspect,
       align,
-    }
+    },
   )
 
   const containerHeight = styleFormat(round(100 / containerAspect))
@@ -186,7 +186,7 @@ function calculateHotSpotCrop(sourceAspect, descriptor, spec) {
         break
       default:
         throw new Error(
-          `Invalid x alignment: '${alignment.x}'. Must be either 'left', 'right' or 'center'`
+          `Invalid x alignment: '${alignment.x}'. Must be either 'left', 'right' or 'center'`,
         )
     }
     const hotspotTop = hotspot.y * outCrop.height - (hotspot.height * outCrop.height) / 2
@@ -203,7 +203,7 @@ function calculateHotSpotCrop(sourceAspect, descriptor, spec) {
         break
       default:
         throw new Error(
-          `Invalid y alignment: '${alignment.y}'. Must be either 'top', 'bottom' or 'center'`
+          `Invalid y alignment: '${alignment.y}'. Must be either 'top', 'bottom' or 'center'`,
         )
     }
   } else if (cropIsTaller) {

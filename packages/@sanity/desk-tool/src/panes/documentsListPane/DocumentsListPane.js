@@ -58,7 +58,7 @@ function toOrderClause(orderBy) {
       [ordering.field, (ordering.direction || '').toLowerCase()]
         .map((str) => str.trim())
         .filter(Boolean)
-        .join(' ')
+        .join(' '),
     )
     .join(', ')
 }
@@ -80,25 +80,25 @@ export default class DocumentsListPane extends React.PureComponent {
         PropTypes.shape({
           field: PropTypes.string.isRequired,
           direction: PropTypes.oneOf(['asc', 'desc']),
-        })
+        }),
       ),
       params: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     }).isRequired,
     menuItems: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-      })
+      }),
     ),
     menuItemGroups: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-      })
+      }),
     ),
     initialValueTemplates: PropTypes.arrayOf(
       PropTypes.shape({
         templateId: PropTypes.string,
         parameters: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-      })
+      }),
     ),
     displayOptions: PropTypes.shape({
       showIcons: PropTypes.bool,
@@ -154,7 +154,7 @@ export default class DocumentsListPane extends React.PureComponent {
     let sync = true
     this.settingsSubscription = combineLatest(
       this.sortOrderSetting.listen(DEFAULT_ORDERING),
-      this.layoutSetting.listen()
+      this.layoutSetting.listen(),
     )
       .pipe(
         map(([sortOrder, layout]) => ({
@@ -168,7 +168,7 @@ export default class DocumentsListPane extends React.PureComponent {
           } else {
             this.setState(nextState)
           }
-        })
+        }),
       )
       .subscribe()
 
@@ -240,7 +240,7 @@ export default class DocumentsListPane extends React.PureComponent {
     this.queryResults$ = getQueryResults(of({query, params}), {tag: 'desk.document-list'})
       .pipe(filterEvents(fullList ? ({result}) => result : () => true))
       .subscribe((queryResult) =>
-        this.setState({queryResult, isLoadingMore: false, hasFullSubscription: fullList})
+        this.setState({queryResult, isLoadingMore: false, hasFullSubscription: fullList}),
       )
   }
 

@@ -20,7 +20,7 @@ export interface ArrayFunctionsProps<SchemaType extends ArraySchemaType, MemberT
 }
 
 export default function ArrayFunctions<MemberType>(
-  props: ArrayFunctionsProps<ArraySchemaType, MemberType>
+  props: ArrayFunctionsProps<ArraySchemaType, MemberType>,
 ) {
   const {type, readOnly, children, onCreateValue, onAppendItem} = props
   const menuButtonId = useId()
@@ -31,7 +31,7 @@ export default function ArrayFunctions<MemberType>(
 
       onAppendItem(item)
     },
-    [onCreateValue, onAppendItem]
+    [onCreateValue, onAppendItem],
   )
 
   const handleAddBtnClick = React.useCallback(() => {

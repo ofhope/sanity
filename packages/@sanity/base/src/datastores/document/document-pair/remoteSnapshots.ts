@@ -7,8 +7,8 @@ import {memoizedPair} from './memoizedPair'
 export const remoteSnapshots = memoize(
   (idPair: IdPair) => {
     return memoizedPair(idPair).pipe(
-      switchMap(({published, draft}) => merge(published.remoteSnapshot$, draft.remoteSnapshot$))
+      switchMap(({published, draft}) => merge(published.remoteSnapshot$, draft.remoteSnapshot$)),
     )
   },
-  (idPair) => idPair.publishedId
+  (idPair) => idPair.publishedId,
 )

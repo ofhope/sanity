@@ -58,13 +58,13 @@ export function checkoutPair(idPair: IdPair): Pair {
   const draft = createBufferedDocument(
     draftId,
     listenerEvents$.pipe(filter(isEventForDocId(draftId))),
-    commitMutations
+    commitMutations,
   )
 
   const published = createBufferedDocument(
     publishedId,
     listenerEvents$.pipe(filter(isEventForDocId(publishedId))),
-    commitMutations
+    commitMutations,
   )
 
   return {

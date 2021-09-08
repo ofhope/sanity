@@ -44,9 +44,9 @@ function buildTitle(type) {
   }
   return `Reference to ${humanize(
     arrify(type.to).map((toType) =>
-      (toType.title || toType.name || toType.type || '').toLowerCase()
+      (toType.title || toType.name || toType.type || '').toLowerCase(),
     ),
-    'or'
+    'or',
   )}`
 }
 
@@ -57,7 +57,7 @@ export const ReferenceType = {
   extend(subTypeDef, createMemberType) {
     if (!subTypeDef.to) {
       throw new Error(
-        `Missing "to" field in reference definition. Check the type ${subTypeDef.name}`
+        `Missing "to" field in reference definition. Check the type ${subTypeDef.name}`,
       )
     }
     const parsed = Object.assign(pick(REFERENCE_CORE, OVERRIDABLE_FIELDS), subTypeDef, {

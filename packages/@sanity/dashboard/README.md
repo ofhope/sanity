@@ -30,7 +30,7 @@ Changing what is rendered on your Dashboard is easy. To take control, do the fol
 
 ```js
 export default {
-  widgets: [{name: 'sanity-tutorials'}, {name: 'project-info'}, {name: 'project-users'}]
+  widgets: [{name: 'sanity-tutorials'}, {name: 'project-info'}, {name: 'project-users'}],
 }
 ```
 
@@ -64,9 +64,9 @@ export default {
     {name: 'document-list', options: {title: 'New', order: '_createdAt desc'}},
     {
       name: 'document-list',
-      options: {title: 'Last edited books', order: '_updatedAt desc', types: ['book']}
-    }
-  ]
+      options: {title: 'Last edited books', order: '_updatedAt desc', types: ['book']},
+    },
+  ],
 }
 ```
 

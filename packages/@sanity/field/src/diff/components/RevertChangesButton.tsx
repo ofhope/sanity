@@ -41,7 +41,7 @@ export const RevertChangesButton = forwardRef(
         {...restProps}
       />
     )
-  }
+  },
 )
 
 RevertChangesButton.displayName = 'RevertChangesButton'

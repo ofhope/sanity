@@ -91,7 +91,7 @@ const cli = meow(
         alias: 'c',
       },
     },
-  }
+  },
 )
 
 const {flags, input, showHelp} = cli
@@ -154,7 +154,7 @@ getStream()
       allowAssetsInDifferentDataset,
       assetConcurrency,
       replaceAssets,
-    })
+    }),
   )
   .then(({numDocs, warnings}) => {
     const timeSpent = prettyMs(Date.now() - stepStart, {secondsDecimalDigits: 2})
@@ -181,7 +181,7 @@ function printWarnings(warnings) {
 
   console.warn(
     yellow('⚠ Failed to import the following %s:'),
-    assetFails.length > 1 ? 'assets' : 'asset'
+    assetFails.length > 1 ? 'assets' : 'asset',
   )
 
   warnings.forEach((warning) => {

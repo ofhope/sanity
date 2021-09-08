@@ -40,8 +40,8 @@ const getGlobalEvents = () => {
           includeResult: false,
           visibility: 'query',
           tag: 'preview.global',
-        }
-      )
+        },
+      ),
     ).pipe(share())
 
     // This is a stream of welcome events from the server, each telling us that we have established listener connection
@@ -50,7 +50,7 @@ const getGlobalEvents = () => {
     const welcome$ = allEvents$.pipe(
       filter((event: any) => event.type === 'welcome'),
       publishReplay(1),
-      refCount()
+      refCount(),
     )
 
     // This will keep the listener active forever and in turn reduce the number of initial fetches
@@ -71,7 +71,7 @@ function listen(id: Id) {
   const globalEvents = getGlobalEvents()
   return merge(
     globalEvents.welcome$,
-    globalEvents.mutations$.pipe(filter((event: any) => event.documentId === id))
+    globalEvents.mutations$.pipe(filter((event: any) => event.documentId === id)),
   )
 }
 
@@ -97,13 +97,13 @@ function listenFields(id: Id, fields: FieldName[]) {
                 ? // just been created and is not yet indexed. We therefore need to wait a bit
                   // and then re-fetch.
                   fetchDocumentPathsSlow(id, fields)
-                : []
+                : [],
             )
-          })
+          }),
         )
       }
       return fetchDocumentPathsSlow(id, fields)
-    })
+    }),
   )
 }
 
@@ -128,11 +128,11 @@ function createCachedFieldObserver<T>(id, fields): CachedFieldObserver {
   let latest: T | null = null
   const changes$ = merge<T | null>(
     defer(() => (latest === null ? EMPTY : observableOf(latest))),
-    listenFields(id, fields) as Observable<T>
+    listenFields(id, fields) as Observable<T>,
   ).pipe(
     tap((v: T | null) => (latest = v)),
     publishReplay(1),
-    refCount()
+    refCount(),
   )
 
   return {id, fields, changes$}
@@ -146,7 +146,7 @@ export default function cachedObserveFields(id: Id, fields: FieldName[]) {
   const existingObservers = CACHE[id]
   const missingFields = difference(
     fields,
-    flatten(existingObservers.map((cachedFieldObserver) => cachedFieldObserver.fields))
+    flatten(existingObservers.map((cachedFieldObserver) => cachedFieldObserver.fields)),
   )
 
   if (missingFields.length > 0) {
@@ -163,7 +163,7 @@ export default function cachedObserveFields(id: Id, fields: FieldName[]) {
     map((snapshots) => snapshots.filter(Boolean)), // make sure all snapshots agree on same revision
     filter((snapshots) => isUniqueBy(snapshots, (snapshot) => snapshot._rev)), // pass on value with the requested fields (or null if value is deleted)
     map((snapshots) => (snapshots.length === 0 ? null : pickFrom(snapshots, fields))), // emit values only if changed
-    distinctUntilChanged(hasEqualFields(fields))
+    distinctUntilChanged(hasEqualFields(fields)),
   )
 }
 

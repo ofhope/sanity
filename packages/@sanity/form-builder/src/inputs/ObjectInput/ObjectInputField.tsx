@@ -31,7 +31,7 @@ interface FieldProps {
 // that changed. This gives the owner an opportunity to use the same event handler function for all of its fields
 export const ObjectInputField = forwardRef(function ObjectInputField(
   props: FieldProps,
-  forwardedRef: ForwardedRef<any>
+  forwardedRef: ForwardedRef<any>,
 ) {
   const {
     value,
@@ -54,7 +54,7 @@ export const ObjectInputField = forwardRef(function ObjectInputField(
         onChange(event, field)
       }
     },
-    [onChange, field]
+    [onChange, field],
   )
 
   const fieldPath = useMemo(() => [field.name], [field.name])

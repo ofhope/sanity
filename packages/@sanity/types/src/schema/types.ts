@@ -100,7 +100,7 @@ export interface BaseSchemaType {
         description?: unknown
         media?: unknown
       },
-      viewOptions?: PrepareViewOptions
+      viewOptions?: PrepareViewOptions,
     ) => PreviewValue
   }
 

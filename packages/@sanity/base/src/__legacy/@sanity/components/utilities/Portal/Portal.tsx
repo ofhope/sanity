@@ -44,7 +44,7 @@ export class Portal extends React.Component<PortalProps> {
         */}
         <span tabIndex={0} className={styles.captureTabFocus} />
       </React.Fragment>,
-      this.node
+      this.node,
     )
   }
 }

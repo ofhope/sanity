@@ -4,7 +4,7 @@ import arrayify from './utils/arrayify'
 
 function matchPath(
   node: Node,
-  path: string
+  path: string,
 ): {
   [key: string]: string
 } | null {

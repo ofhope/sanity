@@ -35,7 +35,7 @@ const ChangeBarWrapper = memo(function ChangeBarWrapper(
     fullPath: Path
     children: React.ReactNode
     disabled?: boolean
-  }
+  },
 ) {
   const {children, className, fullPath, hasFocus, isChanged, disabled} = props
   const layer = useLayer()
@@ -55,7 +55,7 @@ const ChangeBarWrapper = memo(function ChangeBarWrapper(
       zIndex: layer.zIndex,
     }),
     // note: deepCompare should be ok here since we're not comparing deep values
-    deepCompare
+    deepCompare,
   )
 
   return (
@@ -267,7 +267,7 @@ export const ChangeIndicatorCompareValueProvider = (props: {
 }
 
 export const ContextProvidedChangeIndicator = (
-  props: ChangeIndicatorContextProvidedProps
+  props: ChangeIndicatorContextProvidedProps,
 ): React.ReactElement => {
   const {children, className, compareDeep, disabled} = props
   const context = React.useContext(ChangeIndicatorContext)

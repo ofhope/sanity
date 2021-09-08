@@ -103,13 +103,13 @@ export default class CommandRunner {
       const subCommand = this.resolveSubcommand(
         this.commandGroups[commandOrGroup],
         subCommandName,
-        commandOrGroup
+        commandOrGroup,
       )
 
       debug(
         subCommand
           ? `Subcommand resolved to "${subCommand.commandName}"`
-          : `Subcommand with name "${subCommandName}" not found`
+          : `Subcommand with name "${subCommandName}" not found`,
       )
 
       return subCommand
@@ -168,6 +168,6 @@ export function getCliRunner(...args) {
       outputter: cliOutputter,
       prompter: cliPrompter,
     },
-    ...args
+    ...args,
   )
 }

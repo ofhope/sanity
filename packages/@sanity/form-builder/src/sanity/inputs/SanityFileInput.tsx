@@ -24,7 +24,7 @@ export default React.forwardRef(function SanityFileInput(props: Props, forwarded
   // disabling selecting images from asset source  (it's a feature, not a bug)
   const assetSources = React.useMemo(
     () => (sourcesFromSchema || globalAssetSources).map(wrapWithDocument),
-    [sourcesFromSchema]
+    [sourcesFromSchema],
   )
 
   return (

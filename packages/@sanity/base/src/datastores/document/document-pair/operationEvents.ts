@@ -52,11 +52,11 @@ const operationImpls: {[name: string]: OperationImpl<any>} = {
 const execute = (
   operationName: keyof typeof operationImpls,
   operationArgs,
-  extraArgs
+  extraArgs,
 ): Observable<any> => {
   const operation = operationImpls[operationName]
   return defer(() =>
-    merge(of(null), maybeObservable(operation.execute(operationArgs, ...extraArgs)))
+    merge(of(null), maybeObservable(operation.execute(operationArgs, ...extraArgs))),
   ).pipe(last())
 }
 
@@ -66,7 +66,7 @@ export function emitOperation(
   operationName: keyof OperationsAPI,
   idPair: IdPair,
   typeName: string,
-  extraArgs: any[]
+  extraArgs: any[],
 ) {
   operationCalls$.next({operationName, idPair, typeName, extraArgs})
 }
@@ -106,16 +106,16 @@ const results$ = operationCalls$.pipe(
             const isConsistent$ = consistencyStatus(args.idPair).pipe(filter(Boolean))
             const ready$ = requiresConsistency ? isConsistent$.pipe(take(1)) : of(null)
             return ready$.pipe(
-              mergeMap(() => execute(args.operationName, operationArgs, args.extraArgs))
+              mergeMap(() => execute(args.operationName, operationArgs, args.extraArgs)),
             )
           }),
           map(() => ({type: 'success', args})),
-          catchError((err) => of({type: 'error', args, error: err}))
+          catchError((err) => of({type: 'error', args, error: err})),
         )
-      })
+      }),
     )
   }),
-  share()
+  share(),
 )
 
 // this enables autocommit after patch operations
@@ -125,7 +125,7 @@ const autoCommit$ = results$.pipe(
   throttleTime(AUTOCOMMIT_INTERVAL, asyncScheduler, {leading: true, trailing: true}),
   tap((result) => {
     emitOperation('commit', result.args.idPair, result.args.typeName, [])
-  })
+  }),
 )
 
 autoCommit$.subscribe()
@@ -139,7 +139,7 @@ export const operationEvents = memoize(
         return result.type === 'success'
           ? {type: 'success', op: operationName, id: idPair.publishedId}
           : {type: 'error', op: operationName, id: idPair.publishedId, error: result.error}
-      })
+      }),
     ),
-  (idPair) => idPair.publishedId
+  (idPair) => idPair.publishedId,
 )

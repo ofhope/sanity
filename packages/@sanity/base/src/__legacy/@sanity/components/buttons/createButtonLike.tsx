@@ -18,7 +18,7 @@ export interface ButtonState {
 
 export default function createButtonLike(
   as: ButtonComponent | 'button' | 'a',
-  {displayName, defaultProps = {}}: ButtonComponentOpts
+  {displayName, defaultProps = {}}: ButtonComponentOpts,
 ) {
   const Component = as as ButtonComponent
 
@@ -90,7 +90,7 @@ export default function createButtonLike(
         bleed && styles.bleed,
         disabled && styles.disabled,
         selected && styles.selected,
-        loading && styles.loading
+        loading && styles.loading,
       )
 
       return (

@@ -86,10 +86,10 @@ export const CustomInputWithCustomPresence = React.forwardRef(
                   </div>
                 </div>
               )
-            })
+            }),
           )}
         </div>
       </div>
     )
-  }
+  },
 )

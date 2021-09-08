@@ -17,14 +17,16 @@ export default function validateBlockType(typeDef, visitorContext) {
   let members = typeDef.of
 
   const disallowedKeys = Object.keys(typeDef).filter(
-    (key) => !allowedKeys.includes(key) && !key.startsWith('_')
+    (key) => !allowedKeys.includes(key) && !key.startsWith('_'),
   )
 
   if (disallowedKeys.length > 0) {
     problems.push(
       error(
-        `Found unknown properties for block declaration: ${humanizeList(disallowedKeys.map(quote))}`
-      )
+        `Found unknown properties for block declaration: ${humanizeList(
+          disallowedKeys.map(quote),
+        )}`,
+      ),
     )
   }
 
@@ -59,22 +61,22 @@ function validateMarks(marks, visitorContext, problems) {
   }
 
   const disallowedMarkKeys = Object.keys(marks).filter(
-    (key) => !allowedMarkKeys.includes(key) && !key.startsWith('_')
+    (key) => !allowedMarkKeys.includes(key) && !key.startsWith('_'),
   )
 
   if (disallowedMarkKeys.length > 0) {
     problems.push(
       error(
         `Found unknown properties for block declaration: ${humanizeList(
-          disallowedMarkKeys.map(quote)
-        )}`
-      )
+          disallowedMarkKeys.map(quote),
+        )}`,
+      ),
     )
   }
 
   if (decorators && !Array.isArray(decorators)) {
     problems.push(
-      error(`"marks.decorators" declaration should be an array, got ${getTypeOf(decorators)}`)
+      error(`"marks.decorators" declaration should be an array, got ${getTypeOf(decorators)}`),
     )
   } else if (decorators) {
     decorators = validateDecorators(decorators, visitorContext, problems)
@@ -82,7 +84,7 @@ function validateMarks(marks, visitorContext, problems) {
 
   if (annotations && !Array.isArray(annotations)) {
     problems.push(
-      error(`"marks.annotations" declaration should be an array, got ${getTypeOf(annotations)}`)
+      error(`"marks.annotations" declaration should be an array, got ${getTypeOf(annotations)}`),
     )
   } else if (annotations) {
     annotations = validateAnnotations(annotations, visitorContext, problems)
@@ -105,14 +107,14 @@ function validateStyles(styles, visitorContext, problems) {
 
     const name = style.value || `#${index}`
     const disallowedKeys = Object.keys(style).filter(
-      (key) => !allowedStyleKeys.includes(key) && !key.startsWith('_')
+      (key) => !allowedStyleKeys.includes(key) && !key.startsWith('_'),
     )
 
     if (disallowedKeys.length > 0) {
       problems.push(
         error(
-          `Found unknown properties for style ${name}: ${humanizeList(disallowedKeys.map(quote))}`
-        )
+          `Found unknown properties for style ${name}: ${humanizeList(disallowedKeys.map(quote))}`,
+        ),
       )
     }
 
@@ -122,9 +124,9 @@ function validateStyles(styles, visitorContext, problems) {
       problems.push(
         error(
           `Style #${index} has an invalid "value" property, expected string, got ${getTypeOf(
-            style.value
-          )}`
-        )
+            style.value,
+          )}`,
+        ),
       )
     } else if (!style.title) {
       problems.push(warning(`Style ${name} is missing recommended "title" property`))
@@ -142,16 +144,16 @@ function validateDecorators(decorators, visitorContext, problems) {
 
     const name = decorator.value || `#${index}`
     const disallowedKeys = Object.keys(decorator).filter(
-      (key) => !allowedDecoratorKeys.includes(key) && !key.startsWith('_')
+      (key) => !allowedDecoratorKeys.includes(key) && !key.startsWith('_'),
     )
 
     if (disallowedKeys.length > 0) {
       problems.push(
         error(
           `Found unknown properties for decorator ${name}: ${humanizeList(
-            disallowedKeys.map(quote)
-          )}`
-        )
+            disallowedKeys.map(quote),
+          )}`,
+        ),
       )
     }
 
@@ -161,9 +163,9 @@ function validateDecorators(decorators, visitorContext, problems) {
       problems.push(
         error(
           `Decorator #${index} has an invalid "value" property, expected string, got ${getTypeOf(
-            decorator.value
-          )}`
-        )
+            decorator.value,
+          )}`,
+        ),
       )
     } else if (!decorator.title) {
       problems.push(warning(`Decorator ${name} is missing recommended "title" property`))
@@ -186,8 +188,8 @@ function validateAnnotations(annotations, visitorContext, problems) {
     if (targetType && !isJSONTypeOf(targetType, 'object', visitorContext)) {
       _problems.push(
         error(
-          `Annotation cannot have type "${annotation.type}" - annotation types must inherit from object`
-        )
+          `Annotation cannot have type "${annotation.type}" - annotation types must inherit from object`,
+        ),
       )
     }
 

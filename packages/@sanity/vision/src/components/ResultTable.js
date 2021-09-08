@@ -71,7 +71,7 @@ ResultTable.propTypes = {
       _type: PropTypes.string.isRequired,
       _updatedAt: PropTypes.string.isRequired,
       _createdAt: PropTypes.string.isRequired,
-    })
+    }),
   ),
 }
 

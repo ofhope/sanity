@@ -48,7 +48,7 @@ function loadDefinedTemplates(schema?: Schema) {
   if (templates === null || (templates && !Array.isArray(templates))) {
     const type = templates === null ? `null` : typeof templates
     throw new Error(
-      `'part:@sanity/base/initial-value-templates' should be an array of templates, got ${type}`
+      `'part:@sanity/base/initial-value-templates' should be an array of templates, got ${type}`,
     )
   }
 
@@ -93,7 +93,7 @@ export function getTemplates(schema?: Schema) {
 
 export function getParameterlessTemplatesBySchemaType(schemaType: string) {
   return getTemplatesBySchemaType(schemaType).filter(
-    (tpl) => !tpl.parameters || !tpl.parameters.length
+    (tpl) => !tpl.parameters || !tpl.parameters.length,
   )
 }
 

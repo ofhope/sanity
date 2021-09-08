@@ -35,7 +35,7 @@ export default class Spinner extends React.PureComponent<
       inline ? styles.inline : styles.block,
       fullscreen && styles.fullscreen,
       center && styles.center,
-      classNameProp
+      classNameProp,
     )
 
     const rootStyle = {

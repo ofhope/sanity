@@ -26,6 +26,6 @@ export default function resolveDocumentActions(props) {
   }
 
   return [...defaultResolve(props), props.published ? OnlyWhenPublishedAction : null].filter(
-    Boolean
+    Boolean,
   )
 }

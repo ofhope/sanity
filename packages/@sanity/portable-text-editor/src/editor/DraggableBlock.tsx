@@ -106,8 +106,8 @@ export const DraggableBlock: FunctionComponent<ElementProps> = ({children, eleme
         targetPath = Path.next(targetPath)
         debug(
           `Adjusting targetPath from ${JSON.stringify(originalPath)} to ${JSON.stringify(
-            targetPath
-          )}`
+            targetPath,
+          )}`,
         )
       }
       if (dragPosition === 'top' && isBefore && targetPath[0] !== editor.children.length - 1) {
@@ -115,8 +115,8 @@ export const DraggableBlock: FunctionComponent<ElementProps> = ({children, eleme
         targetPath = Path.previous(targetPath)
         debug(
           `Adjusting targetPath from ${JSON.stringify(originalPath)} to ${JSON.stringify(
-            targetPath
-          )}`
+            targetPath,
+          )}`,
         )
       }
       if (Path.equals(targetPath, myPath)) {
@@ -126,8 +126,8 @@ export const DraggableBlock: FunctionComponent<ElementProps> = ({children, eleme
       }
       debug(
         `Moving element ${element._key} from path ${JSON.stringify(myPath)} to ${JSON.stringify(
-          targetPath
-        )} (${dragPosition})`
+          targetPath,
+        )} (${dragPosition})`,
       )
       Transforms.moveNodes(editor, {at: myPath, to: targetPath})
       editor.onChange()

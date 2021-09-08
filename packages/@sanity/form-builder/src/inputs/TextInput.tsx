@@ -15,7 +15,7 @@ const StyledTextArea = styled(TextArea)`
 
 const TextInput = React.forwardRef(function TextInput(
   props: Props<string, TextSchemaType>,
-  forwardedRef: ForwardedRef<HTMLTextAreaElement>
+  forwardedRef: ForwardedRef<HTMLTextAreaElement>,
 ) {
   const {value, markers, type, readOnly, level, onFocus, onBlur, onChange, presence} = props
 
@@ -23,7 +23,7 @@ const TextInput = React.forwardRef(function TextInput(
 
   const errors = useMemo(
     () => markers.filter((marker) => marker.type === 'validation' && marker.level === 'error'),
-    [markers]
+    [markers],
   )
 
   const handleChange = React.useCallback(
@@ -31,7 +31,7 @@ const TextInput = React.forwardRef(function TextInput(
       const inputValue = event.currentTarget.value
       onChange(PatchEvent.from(inputValue ? set(inputValue) : unset()))
     },
-    [onChange]
+    [onChange],
   )
   return (
     <FormField

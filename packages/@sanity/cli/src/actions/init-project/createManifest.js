@@ -50,7 +50,7 @@ export function createPackageManifest(data) {
         build: 'sanity build',
       },
     },
-    deps
+    deps,
   )
 
   return serializeManifest(pkg)

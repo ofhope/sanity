@@ -13,7 +13,7 @@ test('builds component node through constructor', () => {
       child: childResolver,
       options,
       component,
-    }).serialize()
+    }).serialize(),
   ).toMatchSnapshot()
 })
 
@@ -33,7 +33,7 @@ test('infers ID from title if not specified', () => {
 
 test('throws on missing component', () => {
   expect(() => S.component().id('id').title('title').serialize()).toThrowError(
-    /`component` is required/
+    /`component` is required/,
   )
 })
 
@@ -45,7 +45,7 @@ test('can construct using builder', () => {
       .component(component)
       .options(options)
       .child(childResolver)
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -55,7 +55,7 @@ test('can set menu items', () => {
       .id('yeah')
       .component(component)
       .menuItems([{title: 'Print', action: noop}])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -65,7 +65,7 @@ test('can set menu items with builder', () => {
       .id('yeah')
       .component(component)
       .menuItems([S.menuItem().title('Purge').action(noop)])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -76,7 +76,7 @@ test('can set menu item groups', () => {
       .component(component)
       .menuItems([{title: 'Print', action: noop, group: 'old-school'}])
       .menuItemGroups([{title: 'Old-school', id: 'old-school'}])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -87,7 +87,7 @@ test('can set menu items groups with builder', () => {
       .component(component)
       .menuItems([S.menuItem().title('Print').action(noop).group('old-school')])
       .menuItemGroups([S.menuItemGroup().id('old-school').title('Old-school')])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 

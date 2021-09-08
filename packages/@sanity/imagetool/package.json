@@ -2,16 +2,37 @@
   "name": "@sanity/imagetool",
   "version": "2.18.0",
   "description": "The image hotspot selector / cropper used in Sanity",
+  "keywords": [
+    "sanity",
+    "cms",
+    "headless",
+    "realtime",
+    "content",
+    "imagetool"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/imagetool"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
   "main": "./index.js",
   "types": "./dist/dts",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
   "scripts": {
     "clean": "rimraf lib dest",
     "bloat": "browserify -t babelify --full-paths ./src/index.js | discify --open",
     "start": "remon --require babel-core/register ./example/app.js",
     "test": "jest"
   },
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
   "dependencies": {
     "debug": "^3.2.7",
     "lodash": "^4.17.15"
@@ -40,26 +61,5 @@
     "react": "^16.9 || ^17",
     "react-dom": "^16.9 || ^17",
     "styled-components": "^5.2.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/imagetool"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/",
-  "directories": {
-    "example": "example",
-    "test": "test"
-  },
-  "keywords": [
-    "sanity",
-    "cms",
-    "headless",
-    "realtime",
-    "content",
-    "imagetool"
-  ]
+  }
 }

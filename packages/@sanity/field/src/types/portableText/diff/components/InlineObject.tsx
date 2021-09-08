@@ -91,7 +91,7 @@ function InlineObjectWithDiff({
   const isRemoved = diff.action === 'removed'
   const prefix = fullPath.slice(
     0,
-    fullPath.findIndex((seg) => isKeySegment(seg) && seg._key === object._key)
+    fullPath.findIndex((seg) => isKeySegment(seg) && seg._key === object._key),
   )
   const myPath = prefix.concat(path)
   const myValue = `field-${toString(myPath)}`
@@ -117,7 +117,7 @@ function InlineObjectWithDiff({
       }
       event.preventDefault()
     },
-    [focusPath]
+    [focusPath],
   )
 
   const handleClose = useCallback(() => {

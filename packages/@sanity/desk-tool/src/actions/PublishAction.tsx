@@ -121,7 +121,7 @@ export const PublishAction: DocumentActionComponent = (props) => {
       publishState === 'publishing' ||
       publishState === 'published' ||
       hasValidationErrors ||
-      publish.disabled
+      publish.disabled,
   )
 
   return {

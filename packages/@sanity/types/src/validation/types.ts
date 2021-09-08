@@ -219,7 +219,7 @@ export type Validator<T = any, Value = any> = (
   constraint: T,
   value: Value,
   message: string | undefined,
-  context: ValidationContext
+  context: ValidationContext,
 ) =>
   | ValidationError[]
   | ValidationError
@@ -287,7 +287,7 @@ export type CustomValidatorResult = true | string | ValidationError
 
 export type CustomValidator<T = unknown> = (
   value: T,
-  context: ValidationContext
+  context: ValidationContext,
 ) => CustomValidatorResult | Promise<CustomValidatorResult>
 
 export type BlockValidator = (
@@ -295,7 +295,7 @@ export type BlockValidator = (
   // TODO (eventually): add the type of block here
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   block: any,
-  options: ValidationContext
+  options: ValidationContext,
 ) =>
   | ValidationError[]
   | ValidationError
@@ -305,5 +305,5 @@ export type BlockValidator = (
 
 export type SlugIsUniqueValidator = (
   slug: string,
-  options: ValidationContext & {defaultIsUnique: SlugIsUniqueValidator}
+  options: ValidationContext & {defaultIsUnique: SlugIsUniqueValidator},
 ) => Promise<boolean>

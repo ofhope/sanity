@@ -9,7 +9,7 @@ export function IntentButton(
   props: Omit<ComponentProps<typeof Button> & ComponentProps<typeof IntentLink>, 'as' | 'href'> & {
     intent: string
     params: Record<string, string>
-  }
+  },
 ) {
   return <Button {...props} as={IntentLink} />
 }

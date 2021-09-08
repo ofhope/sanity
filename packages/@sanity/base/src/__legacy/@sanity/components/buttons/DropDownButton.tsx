@@ -40,7 +40,7 @@ const DropdownMenuItem = forwardRef(
       onClose: () => void
       renderItem?: (i: DropdownItem) => React.ReactElement
     },
-    ref
+    ref,
   ) => {
     const handleItemClick = useCallback(
       (event: React.MouseEvent<HTMLElement>) => {
@@ -48,7 +48,7 @@ const DropdownMenuItem = forwardRef(
         onAction(item)
         onClose()
       },
-      [item, onAction, onClose]
+      [item, onAction, onClose],
     )
 
     const handleItemKeyPress = useCallback(
@@ -58,7 +58,7 @@ const DropdownMenuItem = forwardRef(
           onClose()
         }
       },
-      [item, onAction, onClose]
+      [item, onAction, onClose],
     )
 
     return (
@@ -81,7 +81,7 @@ const DropdownMenuItem = forwardRef(
         )}
       </Item>
     )
-  }
+  },
 )
 
 DropdownMenuItem.displayName = 'DropdownMenuItem'

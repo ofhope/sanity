@@ -24,7 +24,7 @@ export function getFormatters(versions) {
   const formatName = (name) =>
     padEnd(name, nameLength + 1).replace(
       /^@sanity\/(.*)/,
-      `${chalk.yellow('@sanity/')}${chalk.cyan('$1')}`
+      `${chalk.yellow('@sanity/')}${chalk.cyan('$1')}`,
     )
 
   return {nameLength, versionLength, formatName}

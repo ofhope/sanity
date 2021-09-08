@@ -8,7 +8,7 @@ beforeEach(() => {
 function getConsoleSpyWithAssert() {
   const consoleSpy = jest.spyOn(global.console, 'warn')
   consoleSpy.mockImplementation((msg, ...args) =>
-    expect(format(msg, ...args)).toMatchSnapshot('warning')
+    expect(format(msg, ...args)).toMatchSnapshot('warning'),
   )
   return {restore: () => consoleSpy.mockRestore()}
 }

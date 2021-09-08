@@ -9,7 +9,7 @@ export default async (args, context) => {
   const flags = Object.assign({build: true}, args.extOptions)
   const sourceDir = path.resolve(
     process.cwd(),
-    args.argsWithoutOptions[0] || path.join(workDir, 'dist')
+    args.argsWithoutOptions[0] || path.join(workDir, 'dist'),
   )
 
   if (args.argsWithoutOptions[0] === 'graphql') {
@@ -144,7 +144,7 @@ async function checkDir(sourceDir) {
               `"${sourceDir}/index.html" does not exist -`,
               '[SOURCE_DIR] must be a directory containing',
               'a Sanity studio built using "sanity build"',
-            ].join(' ')
+            ].join(' '),
           )
         : err
 

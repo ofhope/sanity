@@ -44,7 +44,7 @@ export const FileFieldDiff: DiffComponent<ObjectDiff<File>> = ({diff, schemaType
   const next = useRefValue<FileAsset>(toAsset?._ref)
 
   const changedFields = Object.keys(fields).filter(
-    (name) => fields[name].isChanged && name !== '_type'
+    (name) => fields[name].isChanged && name !== '_type',
   )
 
   const didAssetChange = changedFields.includes('asset')

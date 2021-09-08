@@ -54,6 +54,6 @@ export default function findMatchingRoutes(node: Node, _state: Object | null): M
   return createMatchResult(
     [node, ...matchingChild.nodes],
     matchingChild.missing,
-    matchingChild.remaining
+    matchingChild.remaining,
   )
 }

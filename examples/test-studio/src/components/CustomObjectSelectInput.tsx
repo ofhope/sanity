@@ -24,7 +24,7 @@ const EMPTY_ARRAY: Value[] = []
 let objectSelectInputIdx = 0
 export const CustomObjectSelectInput = React.forwardRef(function CustomObjectSelectInput(
   props: Props,
-  forwardedRef: React.ForwardedRef<HTMLSelectElement | HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLSelectElement | HTMLInputElement>,
 ) {
   const {value, readOnly, markers, type, level, onChange, presence} = props
   const items = (type.options && type.options.list) || EMPTY_ARRAY
@@ -36,11 +36,11 @@ export const CustomObjectSelectInput = React.forwardRef(function CustomObjectSel
     (evt) => {
       onChange(
         PatchEvent.from(
-          evt.target.value ? set(items.find((item) => item.value === evt.target.value)) : unset()
-        )
+          evt.target.value ? set(items.find((item) => item.value === evt.target.value)) : unset(),
+        ),
       )
     },
-    [onChange, items]
+    [onChange, items],
   )
   return (
     <FormField

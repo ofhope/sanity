@@ -59,7 +59,7 @@ export default function clientWrapper(manifest, configPath) {
     if (requireProject && !apiConfig.projectId) {
       throw new Error(
         `"${configPath}" does not contain a project identifier ("api.projectId"), ` +
-          'which is required for the Sanity CLI to communicate with the Sanity API'
+          'which is required for the Sanity CLI to communicate with the Sanity API',
       )
     }
 

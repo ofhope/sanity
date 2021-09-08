@@ -22,7 +22,7 @@ const ZeroLineHeightBox = styled(Box)`
 
 const BooleanInput = React.forwardRef(function BooleanInput(
   props: Props<boolean, BooleanSchemaType>,
-  ref: React.ForwardedRef<HTMLInputElement>
+  ref: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {onChange} = props
   const {value, type, readOnly, onFocus, markers, presence} = props
@@ -33,7 +33,7 @@ const BooleanInput = React.forwardRef(function BooleanInput(
     (event: React.SyntheticEvent<HTMLInputElement>) => {
       onChange(PatchEvent.from(set(event.currentTarget.checked)))
     },
-    [onChange]
+    [onChange],
   )
 
   const indeterminate = typeof value !== 'boolean'

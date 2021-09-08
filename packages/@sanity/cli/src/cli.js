@@ -81,8 +81,8 @@ function getCoreModulePath(workDir) {
         [
           '@sanity/core not installed in current project',
           'Project-specific commands not available until you run `sanity install`',
-        ].join('\n')
-      )
+        ].join('\n'),
+      ),
     )
   }
 
@@ -117,7 +117,7 @@ function resolveRootDir(cwd) {
     )
   } catch (err) {
     console.warn(
-      chalk.red(['Error occured trying to resolve project root:', err.message].join('\n'))
+      chalk.red(['Error occured trying to resolve project root:', err.message].join('\n')),
     )
     process.exit(1)
   }
@@ -148,7 +148,7 @@ function warnOnNonProductionEnvironment() {
     chalk.yellow(
       knownEnvs.includes(sanityEnv)
         ? `[WARN] Running in ${sanityEnv} environment mode\n`
-        : `[WARN] Running in ${chalk.red('UNKNOWN')} "${sanityEnv}" environment mode\n`
-    )
+        : `[WARN] Running in ${chalk.red('UNKNOWN')} "${sanityEnv}" environment mode\n`,
+    ),
   )
 }

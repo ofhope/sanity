@@ -10,7 +10,7 @@ function fetchDocumentSnapshot(client, id) {
     map((document) => ({
       type: 'snapshot',
       document: document,
-    }))
+    })),
   )
 }
 
@@ -48,7 +48,7 @@ function _createDeprecatedAPIs(client) {
       .listen(
         '*[_id == $id]',
         {id: documentId},
-        {includeResult: false, events: ['welcome', 'mutation', 'reconnect']}
+        {includeResult: false, events: ['welcome', 'mutation', 'reconnect']},
       )
       .pipe(
         concatMap((event: any) => {
@@ -56,7 +56,7 @@ function _createDeprecatedAPIs(client) {
             ? fetchDocumentSnapshot(client, documentId)
             : observableOf(event)
         }),
-        share()
+        share(),
       )
 
     return createBufferedDocument(documentId, serverEvents$, _doCommit)
@@ -90,13 +90,13 @@ function _createDeprecatedAPIs(client) {
 
   function fetchQuerySnapshot(
     groqQuery: string,
-    params: Record<string, unknown>
+    params: Record<string, unknown>,
   ): Observable<QuerySnapshotEvent> {
     return client.observable.fetch(groqQuery, params).pipe(
       map((documents) => ({
         type: 'snapshot',
         documents: documents,
-      }))
+      })),
     )
   }
 
@@ -106,13 +106,13 @@ function _createDeprecatedAPIs(client) {
         client.observable.listen(groqQuery, params || {}, {
           includeResult: false,
           events: ['welcome', 'mutation', 'reconnect'],
-        }) as Observable<WelcomeEvent | MutationEvent>
+        }) as Observable<WelcomeEvent | MutationEvent>,
     ).pipe(
       concatMap((event) => {
         return event.type === 'welcome'
           ? fetchQuerySnapshot(groqQuery, params)
           : observableOf(event)
-      })
+      }),
     )
   }
 
@@ -133,7 +133,7 @@ function deprecate(name, fn) {
   return (...args) => {
     console.warn(
       'The `documentStore.%s()-method is deprecated and should not be relied upon. Please use checkoutPair() or listenQuery() instead.',
-      name
+      name,
     )
     return fn(...args)
   }

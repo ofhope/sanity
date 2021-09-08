@@ -44,7 +44,7 @@ export default function getDevServer(config = {}) {
         ignored: /node_modules/,
       },
       publicPath: webpackConfig.output.publicPath,
-    })
+    }),
   )
 
   app.use(webpackHotMiddleware(compiler))

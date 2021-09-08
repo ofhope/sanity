@@ -29,7 +29,7 @@ export function FileInputField(props: FileInputFieldProps) {
     (ev: PatchEvent) => {
       onChange(ev.prefixAll(field.name))
     },
-    [onChange, field]
+    [onChange, field],
   )
 
   return (

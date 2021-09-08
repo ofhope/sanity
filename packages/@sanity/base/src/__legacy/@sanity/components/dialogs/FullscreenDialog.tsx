@@ -86,7 +86,7 @@ function FullscreenDialogChildren(props: FullScreenDialogProps) {
       if (!isTopLayer) return
       if (onClickOutside) onClickOutside()
     }, [isTopLayer, onClickOutside]),
-    [cardElement]
+    [cardElement],
   )
 
   return (

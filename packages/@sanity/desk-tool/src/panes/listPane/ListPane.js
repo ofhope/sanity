@@ -25,17 +25,17 @@ export default class ListPane extends React.PureComponent {
         id: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         schemaType: PropTypes.shape({name: PropTypes.string}),
-      })
+      }),
     ),
     menuItems: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-      })
+      }),
     ),
     menuItemGroups: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-      })
+      }),
     ),
     displayOptions: PropTypes.shape({
       showIcons: PropTypes.bool,
@@ -127,7 +127,7 @@ export default class ListPane extends React.PureComponent {
                     schemaType={item.schemaType}
                   />
                 </Box>
-              )
+              ),
             )}
           </Stack>
         </ListView>

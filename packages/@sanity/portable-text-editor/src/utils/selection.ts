@@ -41,7 +41,7 @@ export function createArrayedPath(point: EditorSelectionPoint, editor: Editor): 
     Editor.nodes(editor, {
       at: [],
       match: (n) => isKeySegment(point.path[0]) && n._key === point.path[0]._key,
-    })
+    }),
   )[0] || [undefined, undefined]
   if (!block || !Element.isElement(block)) {
     return []
@@ -98,7 +98,7 @@ function normalizePoint(point: EditorSelectionPoint, value: PortableTextBlock[])
 
 export function normalizeSelection(
   selection: EditorSelection,
-  value: PortableTextBlock[] | undefined
+  value: PortableTextBlock[] | undefined,
 ) {
   if (!selection || !value || value.length === 0) {
     return null

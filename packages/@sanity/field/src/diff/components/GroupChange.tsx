@@ -61,11 +61,11 @@ export function GroupChange({
   const {titlePath, changes, path: groupPath} = group
   const {path: diffPath} = useContext(DiffContext)
   const {documentId, schemaType, FieldWrapper, rootDiff, isComparingCurrent} = useContext(
-    DocumentChangeContext
+    DocumentChangeContext,
   )
 
   const isPortableText = changes.every(
-    (change) => isFieldChange(change) && isPTSchemaType(change.schemaType)
+    (change) => isFieldChange(change) && isPTSchemaType(change.schemaType),
   )
 
   const isNestedInDiff = pathsAreEqual(diffPath, groupPath)
@@ -99,7 +99,7 @@ export function GroupChange({
       hoverRef.current = el
       setRevertButtonElement(el)
     },
-    [hoverRef]
+    [hoverRef],
   )
   const content = (
     <Stack

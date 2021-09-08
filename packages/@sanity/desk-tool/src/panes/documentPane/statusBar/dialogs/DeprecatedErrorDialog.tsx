@@ -27,7 +27,7 @@ export function DeprecatedErrorDialog(props: {dialog: DocumentActionErrorDialogP
         'import {useToast} from "@sanity/ui"',
         'function MyDocumentAction () {\n  const toast = useToast()\n  useEffect(() => toast.push(...))\n}',
         '```',
-      ].join('\n\n')
+      ].join('\n\n'),
     )
   }, [])
 

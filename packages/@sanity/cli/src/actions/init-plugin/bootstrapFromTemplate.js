@@ -36,7 +36,7 @@ module.exports = async (context, url) => {
 
   debug('Looking up template manifest from zip')
   const manifest = zip.find(
-    (file) => path.basename(file.path) === 'package.json' && !file.path.includes('node_modules')
+    (file) => path.basename(file.path) === 'package.json' && !file.path.includes('node_modules'),
   )
 
   if (!manifest) {
@@ -49,7 +49,7 @@ module.exports = async (context, url) => {
   debug('Base directory resolved to %s', baseDir)
 
   const templateFiles = zip.filter(
-    (file) => file.type === 'file' && file.path.indexOf(baseDir) === 0
+    (file) => file.type === 'file' && file.path.indexOf(baseDir) === 0,
   )
   debug('%d files found in template', templateFiles.length)
 
@@ -64,7 +64,7 @@ module.exports = async (context, url) => {
 
     if (semver.lt(installed, minimumBaseVersion)) {
       throw new Error(
-        `Template requires Sanity at version ${minimumBaseVersion}, installed is ${installed}`
+        `Template requires Sanity at version ${minimumBaseVersion}, installed is ${installed}`,
       )
     }
   }
@@ -75,7 +75,7 @@ module.exports = async (context, url) => {
 
     if (semver.lt(pkg.version, minimumCliVersion)) {
       throw new Error(
-        `Template requires @sanity/cli at version ${minimumCliVersion}, installed is ${pkg.version}`
+        `Template requires @sanity/cli at version ${minimumCliVersion}, installed is ${pkg.version}`,
       )
     }
   }
@@ -132,7 +132,7 @@ module.exports = async (context, url) => {
 
       debug('Writing template file "%s" to "%s"', filename, outputPath)
       return fse.outputFile(path.join(outputPath, filename), file.data)
-    })
+    }),
   )
 
   return {name, outputPath, inPluginsPath: inProjectContext, dependencies: tplVars.dependencies}

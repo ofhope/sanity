@@ -68,7 +68,7 @@ function resolveIntentState(currentState, intentState) {
     (tool) =>
       tool &&
       typeof tool.canHandleIntent === 'function' &&
-      tool.canHandleIntent(intent, params, currentState[tool.name])
+      tool.canHandleIntent(intent, params, currentState[tool.name]),
   )
 
   if (matchingTool) {
@@ -76,7 +76,7 @@ function resolveIntentState(currentState, intentState) {
       intent,
       params,
       currentState[matchingTool.name],
-      payload
+      payload,
     )
     const currentWithState = resolveUrlStateWithDefaultSpace(currentState) || currentState
     return Object.assign({}, currentWithState, {
@@ -92,7 +92,7 @@ function resolveIntentState(currentState, intentState) {
 
 function maybeHandleIntent(
   prevEvent: {type: string; state: {[key: string]: {}}; isNotFound: boolean},
-  currentEvent: {type: string; state: {[key: string]: {}}; isNotFound: boolean}
+  currentEvent: {type: string; state: {[key: string]: {}}; isNotFound: boolean},
 ) {
   if (currentEvent && currentEvent.state && currentEvent.state.intent) {
     const redirectState = resolveIntentState(prevEvent ? prevEvent.state : {}, currentEvent.state)
@@ -135,7 +135,7 @@ export const state: Observable<StateEvent> = locationStore.state.pipe(
   map(maybeRedirectDefaultState),
   filter(Boolean),
   publishReplay(1),
-  refCount()
+  refCount(),
 )
 
 if (HAS_SPACES) {
@@ -144,7 +144,7 @@ if (HAS_SPACES) {
     .pipe(
       map((event) => event.state),
       filter(Boolean),
-      tap(reconfigureClient)
+      tap(reconfigureClient),
     )
     .subscribe()
 }

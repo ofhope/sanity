@@ -32,7 +32,7 @@ interface State {
 
 const currentSpace$ = urlState.pipe(
   map((event) => event.state && event.state.space),
-  map((spaceName) => CONFIGURED_SPACES.find((sp) => sp.name === spaceName))
+  map((spaceName) => CONFIGURED_SPACES.find((sp) => sp.name === spaceName)),
 )
 
 class DatasetSelect extends React.PureComponent<Props, State> {
@@ -99,5 +99,5 @@ class DatasetSelect extends React.PureComponent<Props, State> {
 }
 
 export default (withRouterHOC(
-  enhanceClickOutside(DatasetSelect as any)
+  enhanceClickOutside(DatasetSelect as any),
 ) as any) as React.ComponentType<OuterProps>

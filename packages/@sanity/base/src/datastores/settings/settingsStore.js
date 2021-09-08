@@ -14,9 +14,9 @@ const updates$ = set$.pipe(
       map((nextValue) => ({
         key: event.key,
         value: nextValue,
-      }))
-    )
-  )
+      })),
+    ),
+  ),
 )
 
 const listen = (key, defValue) => {
@@ -24,8 +24,8 @@ const listen = (key, defValue) => {
     storageBackend.get(key, defValue),
     updates$.pipe(
       filter((update) => update.key === key),
-      map((update) => update.value)
-    )
+      map((update) => update.value),
+    ),
   )
 }
 

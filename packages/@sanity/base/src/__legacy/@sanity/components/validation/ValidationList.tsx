@@ -39,7 +39,7 @@ function ValidationList(props: ValidationListProps) {
       if (onFocus) onFocus(path)
       if (onClose) onClose()
     },
-    [onFocus, onClose]
+    [onFocus, onClose],
   )
 
   const resolvePathTitle = (path: Path) => {

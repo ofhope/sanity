@@ -35,7 +35,7 @@ export const ColorPickerFields = ({onChange, rgb, hsl, hex, disableAlpha}) => {
           hex: data.hex,
           source: 'hex',
         },
-        e
+        e,
       )
     } else if (data.r || data.g || data.b) {
       onChange(
@@ -46,7 +46,7 @@ export const ColorPickerFields = ({onChange, rgb, hsl, hex, disableAlpha}) => {
           a: rgb.a,
           source: 'rgb',
         },
-        e
+        e,
       )
     } else if (data.a) {
       if (data.a < 0) {
@@ -64,7 +64,7 @@ export const ColorPickerFields = ({onChange, rgb, hsl, hex, disableAlpha}) => {
           a: data.a,
           source: 'rgb',
         },
-        e
+        e,
       )
     }
   }

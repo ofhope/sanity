@@ -41,7 +41,7 @@ export class DocumentListItemBuilder extends ListItemBuilder {
       throw new SerializeError(
         '`schemaType` is required for document list items',
         options.path,
-        options.index
+        options.index,
       ).withHelpUrl(HELP_URL.SCHEMA_TYPE_REQUIRED)
     }
 

@@ -30,7 +30,7 @@ export const ScrollContainer = React.forwardRef(function ScrollContainer<
     (event: Event) => {
       childContext.publish(event)
     },
-    [childContext]
+    [childContext],
   )
 
   React.useEffect(() => {

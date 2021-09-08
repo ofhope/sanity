@@ -12,7 +12,7 @@ test('transform config on regular routes', () => {
         },
       },
     },
-    route('/other/:page')
+    route('/other/:page'),
   )
 
   expect(router.decode('/some/bar/width=full;view=details')).toEqual({
@@ -29,7 +29,7 @@ test('transform config on regular routes', () => {
         width: 'full',
         view: 'details',
       },
-    })
+    }),
   ).toBe('/some/bar/width=full;view=details')
 
   expect(
@@ -38,7 +38,7 @@ test('transform config on regular routes', () => {
       settings: {
         width: 'full',
       },
-    })
+    }),
   ).toBe('/some/bar/width=full')
 
   expect(
@@ -48,7 +48,7 @@ test('transform config on regular routes', () => {
       settings: {
         foo: 'bar',
       },
-    })
+    }),
   ).toBe('/some/bar/foo=bar/other/stuff')
 })
 
@@ -84,6 +84,6 @@ test('transform config on scoped routes', () => {
           view: 'details',
         },
       },
-    })
+    }),
   ).toBe('/some/foo/other/width=full;view=details')
 })

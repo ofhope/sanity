@@ -17,7 +17,7 @@ const collectUntilDone = (source) =>
     .pipe(
       concatMap((panes) => (isLoading(panes) ? observableOf(panes) : observableOf(panes, false))),
       takeWhile((panes) => Boolean(panes)),
-      reduce((acc, update) => acc.concat([update]), [])
+      reduce((acc, update) => acc.concat([update]), []),
     )
     .toPromise()
 
@@ -60,17 +60,17 @@ describe.skip('resolvePanes', () => {
 
   test('can resolve asyncronous structures using mix of promises & observables', () =>
     expect(
-      collectUntilDone(resolvePanes(fullyAsyncStructure(), ['book', 'got']))
+      collectUntilDone(resolvePanes(fullyAsyncStructure(), ['book', 'got'])),
     ).resolves.toMatchSnapshot())
 
   test('emits error on observable failure', () =>
     expect(
-      collectUntilDone(resolvePanes(fullyAsyncStructure({errorAt: 2}), ['book', 'got']))
+      collectUntilDone(resolvePanes(fullyAsyncStructure({errorAt: 2}), ['book', 'got'])),
     ).rejects.toMatchSnapshot())
 
   test('emits error on promise failure', () =>
     expect(
-      collectUntilDone(resolvePanes(fullyAsyncStructure({errorAt: 1}), ['book', 'got']))
+      collectUntilDone(resolvePanes(fullyAsyncStructure({errorAt: 1}), ['book', 'got'])),
     ).rejects.toMatchSnapshot())
 
   test('emits error on root-level failure', () =>
@@ -90,7 +90,7 @@ describe.skip('resolvePanes', () => {
 
     test('root => type => document', () =>
       expect(
-        collectLast(resolvePanes(typeDocumentStructure, ['book', 'got']))
+        collectLast(resolvePanes(typeDocumentStructure, ['book', 'got'])),
       ).resolves.toMatchObject([
         typeDocumentStructure,
         typeDocumentStructure.options.items[0].child,
@@ -109,7 +109,7 @@ describe.skip('resolvePanes', () => {
 
     test('at index 1', () =>
       expect(
-        collectLast(resolvePanes(typeDocumentStructure, ['book', '404']))
+        collectLast(resolvePanes(typeDocumentStructure, ['book', '404'])),
       ).resolves.toMatchObject([
         typeDocumentStructure,
         typeDocumentStructure.options.items[0].child,
@@ -117,7 +117,7 @@ describe.skip('resolvePanes', () => {
 
     test('at index 1, with more items to go', () =>
       expect(
-        collectLast(resolvePanes(typeDocumentStructure, ['book', '404', '404']))
+        collectLast(resolvePanes(typeDocumentStructure, ['book', '404', '404'])),
       ).resolves.toMatchObject([
         typeDocumentStructure,
         typeDocumentStructure.options.items[0].child,
@@ -126,7 +126,7 @@ describe.skip('resolvePanes', () => {
 
   test('can resolve recursive structure', () =>
     expect(
-      collectLast(resolvePanes(recursiveStructure, ['List', 'List', 'List', 'Singleton']))
+      collectLast(resolvePanes(recursiveStructure, ['List', 'List', 'List', 'Singleton'])),
     ).resolves.toMatchObject([
       recursiveStructure,
       recursiveStructure,

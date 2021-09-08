@@ -24,7 +24,7 @@ const dmp = new DMP.diff_match_patch()
 export function diffMatchPatch(
   currentValue: string,
   nextValue: string,
-  path: Path = []
+  path: Path = [],
 ): DiffMatchPatch {
   const patch = dmp
     .patch_make(currentValue, nextValue)

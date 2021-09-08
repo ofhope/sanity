@@ -128,7 +128,7 @@ export default class Fieldset extends React.PureComponent<FieldsetProps, State> 
       styles[`level${level}`],
       transparent && styles.transparent,
       this.props.onFocus && styles.canFocus,
-      className
+      className,
     )
 
     // Only show a summary of validation issues if field is collapsible and has been collapsed

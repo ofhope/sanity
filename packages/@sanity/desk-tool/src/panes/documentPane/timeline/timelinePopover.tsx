@@ -40,7 +40,7 @@ export function TimelinePopover(props: TimelinePopoverProps) {
       setTimelineMode('closed')
       setRange(sinceId, revId)
     },
-    [historyController, setRange, setTimelineMode]
+    [historyController, setRange, setTimelineMode],
   )
 
   const selectSince = useCallback(
@@ -49,14 +49,14 @@ export function TimelinePopover(props: TimelinePopoverProps) {
       setTimelineMode('closed')
       setRange(sinceId, revId)
     },
-    [historyController, setRange, setTimelineMode]
+    [historyController, setRange, setTimelineMode],
   )
 
   const loadMoreHistory = useCallback(
     (state: boolean) => {
       historyController.setLoadMore(state)
     },
-    [historyController]
+    [historyController],
   )
 
   const content = (

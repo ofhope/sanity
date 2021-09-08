@@ -129,7 +129,7 @@ export function HistoryStatusBarActions(props: HistoryStatusBarActionsProps) {
       ...(editState || {}),
       revision,
     }),
-    [editState, revision]
+    [editState, revision],
   )
 
   if (!editState) {

@@ -7,7 +7,5 @@
     "outDir": "./dist/dts",
     "jsx": "react"
   },
-  "references": [
-    {"path": "../types"}
-  ]
+  "references": [{"path": "../types"}]
 }

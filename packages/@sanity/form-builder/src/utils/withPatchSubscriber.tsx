@@ -37,7 +37,7 @@ function isAncestor(path1, path2) {
 }
 function shouldReset(path, patches) {
   return patches.some(
-    (patch) => isAncestor(patch.path, path) && (patch.type === 'set' || patch.type === 'unset')
+    (patch) => isAncestor(patch.path, path) && (patch.type === 'set' || patch.type === 'unset'),
   )
 }
 function getValueAtPath(value, path) {

@@ -28,6 +28,6 @@ module.exports = (url, headers = {}) =>
 
         res.resume()
         resolve(res.headers)
-      }
+      },
     )
   })

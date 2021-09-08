@@ -89,7 +89,7 @@ function historyEventsFor(documentId) {
       mutations: trans.mutations,
       timestamp: trans.timestamp,
     })),
-    reduce(compileTransactions, {})
+    reduce(compileTransactions, {}),
   )
 
   const realtimeTransactions$ = versionedClient.observable.listen(query, {documentIds: pairs}).pipe(
@@ -100,7 +100,7 @@ function historyEventsFor(documentId) {
       mutations: item.mutations,
       timestamp: item.timestamp,
     })),
-    scan(compileTransactions, {})
+    scan(compileTransactions, {}),
   )
 
   return merge(realtimeTransactions$, pastTransactions$).pipe(
@@ -110,9 +110,9 @@ function historyEventsFor(documentId) {
     map((transactions) =>
       transactionsToEvents(
         pairs,
-        Object.keys(transactions).map((key) => transactions[key])
-      ).reverse()
-    )
+        Object.keys(transactions).map((key) => transactions[key]),
+      ).reverse(),
+    ),
   )
 }
 
@@ -123,7 +123,7 @@ const getAllRefIds = (doc) =>
       node && typeof node === 'object' && '_ref' in node && !acc.includes(node._ref)
         ? [...acc, node._ref]
         : acc,
-    []
+    [],
   )
 
 function jsonMap(value, mapFn) {
@@ -140,7 +140,7 @@ function jsonMap(value, mapFn) {
         }
 
         return res
-      }, {})
+      }, {}),
     )
   }
 
@@ -174,11 +174,11 @@ function restore(id, targetId, rev) {
       ({
         ...omit(documentAtRevision, '_updatedAt'),
         _id: targetId,
-      })
+      }),
     ),
     mergeMap((restoredDraft: any) =>
-      versionedClient.observable.transaction().createOrReplace(restoredDraft).commit()
-    )
+      versionedClient.observable.transaction().createOrReplace(restoredDraft).commit(),
+    ),
   )
 }
 

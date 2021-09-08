@@ -147,7 +147,7 @@ export function chunkFromTransaction(transaction: Transaction): Chunk {
 
 function combineState(
   left: 'present' | 'missing' | 'unknown',
-  right: 'present' | 'missing' | 'unknown'
+  right: 'present' | 'missing' | 'unknown',
 ) {
   return right === 'unknown' ? left : right
 }

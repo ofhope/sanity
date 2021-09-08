@@ -14,7 +14,7 @@ describe('child rules', () => {
 
     await expect(rule.validate('Sanity')).resolves.toMatchSnapshot('all() rules - match')
     await expect(rule.validate('moop')).resolves.toMatchSnapshot(
-      'all() rules - single failure, custom message'
+      'all() rules - single failure, custom message',
     )
   })
 
@@ -31,7 +31,7 @@ describe('child rules', () => {
 
     await expect(rule.validate('Sanity')).resolves.toMatchSnapshot('all() rules - match')
     await expect(rule.validate('moop')).resolves.toMatchSnapshot(
-      'all() rules - multiple failures, custom messages'
+      'all() rules - multiple failures, custom messages',
     )
   })
 
@@ -41,7 +41,7 @@ describe('child rules', () => {
       .error('Needs to start with a capital letter and then follow with lowercase characters')
 
     await expect(rule.validate('moop')).resolves.toMatchSnapshot(
-      'all() rules - single failure, common error'
+      'all() rules - single failure, common error',
     )
   })
 
@@ -51,7 +51,7 @@ describe('child rules', () => {
       .error('Needs to be a capital letter followed by at least 4 lowercase characters')
 
     await expect(rule.validate('moop')).resolves.toMatchSnapshot(
-      'all() rules - multiple failures, common error'
+      'all() rules - multiple failures, common error',
     )
   })
 
@@ -67,10 +67,10 @@ describe('child rules', () => {
     ])
 
     await expect(rule.validate('rgb(16, 22, 133)')).resolves.toMatchSnapshot(
-      'either() rules - match'
+      'either() rules - match',
     )
     await expect(rule.validate('#bf')).resolves.toMatchSnapshot(
-      'either() rules - single failure, custom message'
+      'either() rules - single failure, custom message',
     )
   })
 
@@ -90,7 +90,7 @@ describe('child rules', () => {
       .error("Needs to start with a capital letter, unless it's an iProduct")
 
     await expect(rule.validate('mopatis!')).resolves.toMatchSnapshot(
-      'either() rules - all fail, common error'
+      'either() rules - all fail, common error',
     )
   })
 })

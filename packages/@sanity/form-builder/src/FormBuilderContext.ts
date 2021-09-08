@@ -103,7 +103,7 @@ export default class FormBuilderContext extends React.Component<Props> {
           : () => {
               // eslint-disable-next-line no-console
               console.warn(
-                'No patch channel provided to form-builder. If you need input based patch updates, please provide one'
+                'No patch channel provided to form-builder. If you need input based patch updates, please provide one',
               )
               return () => {
                 // no-op

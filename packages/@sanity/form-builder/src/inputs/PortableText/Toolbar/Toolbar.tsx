@@ -77,7 +77,7 @@ function PTEToolbar(props: Props) {
         })
         .finally(() => clearTimeout(slowTimer))
     },
-    [toast]
+    [toast],
   )
 
   const handleInsertBlock = useCallback(
@@ -87,7 +87,7 @@ function PTEToolbar(props: Props) {
 
       setTimeout(() => onFocus(path.concat(FOCUS_TERMINATOR)), 0)
     },
-    [editor, onFocus, resolveInitialValue]
+    [editor, onFocus, resolveInitialValue],
   )
 
   const handleInsertInline = useCallback(
@@ -97,7 +97,7 @@ function PTEToolbar(props: Props) {
 
       setTimeout(() => onFocus(path.concat(FOCUS_TERMINATOR)), 0)
     },
-    [editor, onFocus, resolveInitialValue]
+    [editor, onFocus, resolveInitialValue],
   )
 
   const handleInsertAnnotation = useCallback(
@@ -109,13 +109,13 @@ function PTEToolbar(props: Props) {
         onFocus(paths.markDefPath.concat(FOCUS_TERMINATOR))
       }
     },
-    [editor, onFocus, resolveInitialValue]
+    [editor, onFocus, resolveInitialValue],
   )
 
   const actionGroups = React.useMemo(
     () =>
       editor ? getPTEToolbarActionGroups(editor, selection, handleInsertAnnotation, hotkeys) : [],
-    [editor, selection, handleInsertAnnotation, hotkeys]
+    [editor, selection, handleInsertAnnotation, hotkeys],
   )
   const actionsLen = actionGroups.reduce((acc, x) => acc + x.actions.length, 0)
   const blockStyleSelectProps = editor ? getBlockStyleSelectProps(editor) : null
@@ -123,7 +123,7 @@ function PTEToolbar(props: Props) {
   const insertMenuItems = React.useMemo(
     () =>
       editor ? getInsertMenuItems(editor, selection, handleInsertBlock, handleInsertInline) : [],
-    [editor, handleInsertBlock, handleInsertInline, selection]
+    [editor, handleInsertBlock, handleInsertInline, selection],
   )
 
   return (

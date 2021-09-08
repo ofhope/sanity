@@ -17,14 +17,14 @@ export const DocumentSnapshots = streamingComponent(
         merge(
           observePaths(getDraftId(props.id), props.paths).pipe(map((draft) => ({draft}))),
           observePaths(getPublishedId(props.id), props.paths).pipe(
-            map((published) => ({published}))
-          )
+            map((published) => ({published})),
+          ),
         ).pipe(
           scan((prev, res) => ({...prev, ...res}), {}),
           filter((res) => 'draft' in res && 'published' in res),
-          map((res) => props.children(res as any))
-        )
-      )
+          map((res) => props.children(res as any)),
+        ),
+      ),
     )
-  }
+  },
 )

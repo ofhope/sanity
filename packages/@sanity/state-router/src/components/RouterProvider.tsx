@@ -58,7 +58,7 @@ export default class RouterProvider extends React.Component<Props> {
   navigateIntent = (
     intentName: string,
     params?: IntentParameters,
-    options: NavigateOptions = {}
+    options: NavigateOptions = {},
   ): void => {
     this.navigateUrl(this.resolveIntentLink(intentName, params), options)
   }

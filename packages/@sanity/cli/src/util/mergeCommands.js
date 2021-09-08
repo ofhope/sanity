@@ -21,10 +21,10 @@ export default (baseCommands, corePath, options = {}) => {
     /* eslint-disable no-console, no-process-exit */
     console.error(
       `The version of @sanity/core installed in this project requires @sanity/cli @ ${chalk.green(
-        core.requiredCliVersionRange
+        core.requiredCliVersionRange,
       )}. Currently installed version is ${chalk.red(
-        version
-      )}.\n\nPlease upgrade by running:\n\n  ${upgradeCmd}\n\n`
+        version,
+      )}.\n\nPlease upgrade by running:\n\n  ${upgradeCmd}\n\n`,
     )
     process.exit(1)
     /* eslint-enable no-console, no-process-exit */

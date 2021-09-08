@@ -12,7 +12,7 @@ export interface ReviewChangesButtonProps
 
 export const ReviewChangesButton = forwardRef(function ReviewChangesButton(
   props: ReviewChangesButtonProps & React.HTMLProps<HTMLButtonElement>,
-  ref: React.ForwardedRef<HTMLButtonElement>
+  ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
   const {lastUpdatedTimeAgo, ...restProps} = props
 

@@ -44,8 +44,8 @@ export default function apply(value, patch) {
         // eslint-disable-line max-depth
         throw new Error(
           `Invalid value of 'move' patch. Expected a value with "from" and "to" indexes, instead got: ${JSON.stringify(
-            patch.value
-          )}`
+            patch.value,
+          )}`,
         )
       }
       return move(nextValue, patch.value.from, patch.value.to)

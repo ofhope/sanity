@@ -60,7 +60,7 @@ export const Element: FunctionComponent<ElementProps> = ({
     const path = ReactEditor.findPath(editor, element)
     const [block] = Editor.node(editor, path, {depth: 1})
     const type = portableTextFeatures.types.inlineObjects.find(
-      (_type) => _type.name === element._type
+      (_type) => _type.name === element._type,
     )
     if (!type) {
       throw new Error('Could not find type for inline block element')
@@ -90,20 +90,20 @@ export const Element: FunctionComponent<ElementProps> = ({
                   fromSlateValue(
                     [element],
                     portableTextFeatures.types.block.name,
-                    KEY_TO_VALUE_ELEMENT.get(editor)
+                    KEY_TO_VALUE_ELEMENT.get(editor),
                   )[0],
                   type,
                   {focused, selected, path: elmPath},
                   defaultRender,
-                  inlineBlockObjectRef
+                  inlineBlockObjectRef,
                 )}
               {!renderChild &&
                 defaultRender(
                   fromSlateValue(
                     [element],
                     portableTextFeatures.types.block.name,
-                    KEY_TO_VALUE_ELEMENT.get(editor)
-                  )[0]
+                    KEY_TO_VALUE_ELEMENT.get(editor),
+                  )[0],
                 )}
               {children}
             </span>
@@ -138,7 +138,7 @@ export const Element: FunctionComponent<ElementProps> = ({
           path: [{_key: element._key}],
         },
         () => textBlock,
-        blockObjectRef
+        blockObjectRef,
       )
     className = `pt-block pt-text-block pt-text-block-style-${element.style}`
     if (element.listItem) {
@@ -182,7 +182,7 @@ export const Element: FunctionComponent<ElementProps> = ({
   const block = fromSlateValue(
     [element],
     portableTextFeatures.types.block.name,
-    KEY_TO_VALUE_ELEMENT.get(editor)
+    KEY_TO_VALUE_ELEMENT.get(editor),
   )[0]
   const renderedBlockFromProps =
     renderBlock &&
@@ -195,7 +195,7 @@ export const Element: FunctionComponent<ElementProps> = ({
         path: [{_key: block._key}],
       },
       defaultRender,
-      blockObjectRef
+      blockObjectRef,
     )
   return (
     <div {...attributes} className={className} key={element._key}>
@@ -212,8 +212,8 @@ export const Element: FunctionComponent<ElementProps> = ({
                 fromSlateValue(
                   [element],
                   portableTextFeatures.types.block.name,
-                  KEY_TO_VALUE_ELEMENT.get(editor)
-                )[0]
+                  KEY_TO_VALUE_ELEMENT.get(editor),
+                )[0],
               )}
             </BlockObjectContainer>
           )}

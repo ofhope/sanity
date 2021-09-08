@@ -55,14 +55,14 @@ function GeopointDiff({api, diff}: DiffProps & {api: typeof window.google.maps})
 function getBounds(
   fromValue: google.maps.LatLngLiteral,
   toValue: google.maps.LatLngLiteral,
-  api: typeof window.google.maps
+  api: typeof window.google.maps,
 ): google.maps.LatLngBounds {
   return new api.LatLngBounds().extend(fromValue).extend(toValue)
 }
 
 function getCenter(
   diff: DiffProps['diff'],
-  api: typeof window.google.maps
+  api: typeof window.google.maps,
 ): google.maps.LatLngLiteral {
   const {fromValue, toValue} = diff
   if (fromValue && toValue) {

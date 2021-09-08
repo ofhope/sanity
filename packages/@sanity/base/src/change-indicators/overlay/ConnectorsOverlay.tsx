@@ -28,7 +28,7 @@ interface Props {
 
 function useResizeObserver(
   element: HTMLDivElement,
-  onResize: (event: ResizeObserverEntry) => void
+  onResize: (event: ResizeObserverEntry) => void,
 ) {
   React.useEffect(() => resizeObserver.observe(element, onResize), [element, onResize])
 }

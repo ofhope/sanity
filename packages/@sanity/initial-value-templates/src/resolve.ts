@@ -13,7 +13,7 @@ export function isBuilder(template: Template | TemplateBuilder): template is Tem
 export async function resolveInitialValue(
   schema: Schema,
   template: Template | TemplateBuilder,
-  params: {[key: string]: any} = {}
+  params: {[key: string]: any} = {},
 ): Promise<{[key: string]: any}> {
   // Template builder?
   if (isBuilder(template)) {
@@ -29,7 +29,7 @@ export async function resolveInitialValue(
 
   if (!isRecord(resolvedValue)) {
     throw new Error(
-      `Template "${id}" has invalid "value" property - must be a plain object or a resolver function returning a plain object`
+      `Template "${id}" has invalid "value" property - must be a plain object or a resolver function returning a plain object`,
     )
   }
 
@@ -39,7 +39,7 @@ export async function resolveInitialValue(
   // Get deep initial values from schema types (note: the initial value from template overrides the types)
   const newValue = deepAssign(
     (await resolveInitialValueForType(schema.get(schemaType), params)) || {},
-    resolvedValue as Record<string, unknown>
+    resolvedValue as Record<string, unknown>,
   )
 
   // revalidate and return new initial values

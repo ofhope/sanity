@@ -47,7 +47,7 @@ export abstract class GenericViewBuilder<L extends Partial<View>, ConcreteImpl>
       throw new SerializeError(
         '`id` is required for view item',
         options.path,
-        options.index
+        options.index,
       ).withHelpUrl(HELP_URL.ID_REQUIRED)
     }
 
@@ -55,7 +55,7 @@ export abstract class GenericViewBuilder<L extends Partial<View>, ConcreteImpl>
       throw new SerializeError(
         '`title` is required for view item',
         options.path,
-        options.index
+        options.index,
       ).withHelpUrl(HELP_URL.TITLE_REQUIRED)
     }
 
@@ -80,7 +80,7 @@ function isSerializable(view: View | Serializable): view is Serializable {
 export function maybeSerializeView(
   item: View | Serializable,
   index: number,
-  path: SerializePath
+  path: SerializePath,
 ): View {
   return isSerializable(item) ? (item.serialize({path, index}) as View) : item
 }

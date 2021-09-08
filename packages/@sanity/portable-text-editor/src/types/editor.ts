@@ -9,7 +9,7 @@ export interface EditableAPI {
   activeAnnotations: () => PortableTextBlock[]
   addAnnotation: (
     type: Type,
-    value?: {[prop: string]: any}
+    value?: {[prop: string]: any},
   ) => {spanPath: Path; markDefPath: Path} | undefined
   blur: () => void
   delete: (selection?: EditorSelection, options?: {mode?: 'block' | 'children'}) => void
@@ -261,7 +261,7 @@ export type OnPasteFn = (arg0: {
 export type OnBeforeInputFn = (event: Event) => void
 
 export type OnCopyFn = (
-  event: React.ClipboardEvent<HTMLDivElement | HTMLSpanElement>
+  event: React.ClipboardEvent<HTMLDivElement | HTMLSpanElement>,
 ) => undefined | any
 
 export type PatchObservable = Observable<Patch>
@@ -280,7 +280,7 @@ export type RenderBlockFunction = (
   type: Type,
   attributes: RenderAttributes,
   defaultRender: (val: PortableTextBlock) => JSX.Element,
-  ref: React.RefObject<HTMLDivElement>
+  ref: React.RefObject<HTMLDivElement>,
 ) => JSX.Element
 
 export type RenderChildFunction = (
@@ -288,7 +288,7 @@ export type RenderChildFunction = (
   type: Type,
   attributes: RenderAttributes,
   defaultRender: (val: PortableTextChild) => JSX.Element,
-  ref: React.RefObject<HTMLSpanElement>
+  ref: React.RefObject<HTMLSpanElement>,
 ) => JSX.Element
 
 export type RenderAnnotationFunction = (
@@ -296,7 +296,7 @@ export type RenderAnnotationFunction = (
   type: Type,
   attributes: RenderAttributes,
   defaultRender: () => JSX.Element,
-  ref: React.RefObject<HTMLSpanElement>
+  ref: React.RefObject<HTMLSpanElement>,
 ) => JSX.Element
 
 export type RenderDecoratorFunction = (
@@ -304,5 +304,5 @@ export type RenderDecoratorFunction = (
   type: {title: string},
   attributes: RenderAttributes,
   defaultRender: () => JSX.Element,
-  ref: React.RefObject<HTMLSpanElement>
+  ref: React.RefObject<HTMLSpanElement>,
 ) => JSX.Element

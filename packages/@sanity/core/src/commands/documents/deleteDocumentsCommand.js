@@ -48,7 +48,7 @@ export default {
 
       if (notFound.length > 0) {
         output.error(
-          chalk.red(`${pluralize('Document', notFound.length)} not found: ${notFound.join(', ')}`)
+          chalk.red(`${pluralize('Document', notFound.length)} not found: ${notFound.join(', ')}`),
         )
       }
     } catch (err) {

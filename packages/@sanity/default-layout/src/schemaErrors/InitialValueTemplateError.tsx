@@ -22,6 +22,6 @@ InitialValueTemplateError.propTypes = {
   errors: PropTypes.arrayOf(
     PropTypes.shape({
       message: PropTypes.string.isRequired,
-    })
+    }),
   ).isRequired,
 }

@@ -59,12 +59,12 @@ export function ChangesPanel({
       rootDiff: diff,
       isComparingCurrent,
     }),
-    [documentId, schemaType, diff, isComparingCurrent]
+    [documentId, schemaType, diff, isComparingCurrent],
   )
 
   const changeAnnotations = React.useMemo(
     () => (diff ? collectLatestAuthorAnnotations(diff) : []),
-    [diff]
+    [diff],
   )
 
   // This is needed to stop the ClickOutside-handler (in the Popover) to treat the click

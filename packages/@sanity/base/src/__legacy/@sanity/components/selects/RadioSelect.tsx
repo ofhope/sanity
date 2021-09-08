@@ -25,7 +25,7 @@ const RadioSelect = React.forwardRef((props: RadioSelectProps, ref: React.Ref<HT
     <div
       className={classNames(
         styles.root,
-        direction == 'vertical' ? styles.vertical : styles.horizontal
+        direction == 'vertical' ? styles.vertical : styles.horizontal,
       )}
       ref={ref}
     >

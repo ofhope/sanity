@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Styleable(
   Component: React.ComponentType<{styles: Record<string, string>}>,
-  defaultStyles: Record<string, string>
+  defaultStyles: Record<string, string>,
 ) {
   function Styled(props: {styles: Record<string, string>}) {
     const {styles, ...rest} = props // eslint-disable-line react/prop-types

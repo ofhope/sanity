@@ -21,7 +21,7 @@ function omitDeprecatedRole(user: CurrentUser): Omit<CurrentUser, 'role'> {
 
 function useCheckCondition(
   hidden: HiddenOptionCallback,
-  {document, parent, value, currentUser}: HiddenOptionCallbackContext
+  {document, parent, value, currentUser}: HiddenOptionCallbackContext,
 ) {
   const didWarn = useRef(false)
   return useMemo(() => {
@@ -39,7 +39,7 @@ function useCheckCondition(
     }
     if (isThenable(result) && !didWarn.current) {
       console.warn(
-        'The hidden option is either a promise or a promise returning function. Async callbacks for `hidden` option is not currently supported.'
+        'The hidden option is either a promise or a promise returning function. Async callbacks for `hidden` option is not currently supported.',
       )
       return false
     }
@@ -65,7 +65,7 @@ export const ConditionalField = ({hidden, ...rest}: Props) => {
 const ConditionalFieldWithDocument = withDocument(
   forwardRef(function ConditionalFieldWithDocument(
     props: Omit<Props, 'hidden'> & {document: SanityDocument; hidden: HiddenOptionCallback},
-    ref /* ignore ref as there's no place to put it */
+    ref /* ignore ref as there's no place to put it */,
   ) {
     const {document, parent, value, hidden, children} = props
 
@@ -78,5 +78,5 @@ const ConditionalFieldWithDocument = withDocument(
     })
 
     return <>{shouldHide ? null : children}</>
-  })
+  }),
 )

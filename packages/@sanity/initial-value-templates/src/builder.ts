@@ -4,7 +4,7 @@ import {Schema, getDefaultSchema} from './parts/Schema'
 
 function defaultTemplateForType(
   schemaType: string | SchemaType,
-  sanitySchema?: Schema
+  sanitySchema?: Schema,
 ): TemplateBuilder {
   let type: SchemaType
   if (typeof schemaType === 'string') {
@@ -27,7 +27,7 @@ function defaults(sanitySchema?: Schema): TemplateBuilder[] {
   const schema = sanitySchema || getDefaultSchema()
   if (!schema) {
     throw new Error(
-      'Unable to automatically resolve schema. Pass schema explicitly: `defaults(schema)`'
+      'Unable to automatically resolve schema. Pass schema explicitly: `defaults(schema)`',
     )
   }
 

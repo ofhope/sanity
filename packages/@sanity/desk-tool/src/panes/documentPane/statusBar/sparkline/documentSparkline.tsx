@@ -52,7 +52,7 @@ export function DocumentSparkline(props: DocumentSparklineProps) {
   // Use the size of the review changes button as a element query breakpoint
   const metadataBoxBreakpoints = useMemo(
     () => [reviewChangesButtonWidth || reviewChangesButtonWidthRef.current, 225],
-    [reviewChangesButtonWidth]
+    [reviewChangesButtonWidth],
   )
 
   // Only transition between subsequent state, not the initial
@@ -74,7 +74,7 @@ export function DocumentSparkline(props: DocumentSparklineProps) {
           ? `${reviewChangesButtonWidth}px`
           : undefined,
       } as React.CSSProperties),
-    [reviewChangesButtonWidth]
+    [reviewChangesButtonWidth],
   )
 
   // Maintain the last known width of the review changes button

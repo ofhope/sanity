@@ -59,7 +59,7 @@ const createErrorStatus = ({
 
 export const connectionStatus$: Observable<ConnectionStatus> = merge(
   bifur.heartbeats,
-  onOffline$.pipe(mergeMapTo(throwError(new Error('The browser went offline'))))
+  onOffline$.pipe(mergeMapTo(throwError(new Error('The browser went offline')))),
 ).pipe(
   map((ts): ConnectionStatus => ({type: 'connected', lastHeartbeat: ts})),
   catchWithCount((error, successiveErrorsCount, caught) => {
@@ -75,10 +75,10 @@ export const connectionStatus$: Observable<ConnectionStatus> = merge(
     })
 
     const triggerRetry$ = NEVER.pipe(
-      takeUntil(isOffline ? onOnline$ : merge(expiry$, onOnline$, onRetry$))
+      takeUntil(isOffline ? onOnline$ : merge(expiry$, onOnline$, onRetry$)),
     )
 
     return concat(of(initialErrorStatus), triggerRetry$.pipe(take(1)), caught)
   }),
-  startWith(CONNECTING)
+  startWith(CONNECTING),
 )

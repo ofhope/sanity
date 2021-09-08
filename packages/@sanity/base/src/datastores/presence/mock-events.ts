@@ -71,7 +71,7 @@ export const mock$ = defer(() => from(USERIDS)).pipe(
           path: sample(PATHS),
         },
       ] as any,
-    })
+    }),
   ),
-  shareReplay()
+  shareReplay(),
 )

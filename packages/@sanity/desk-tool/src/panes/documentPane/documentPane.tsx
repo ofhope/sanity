@@ -86,7 +86,7 @@ export function DocumentPane(props: DocumentPaneProps) {
   const paneRouter = usePaneRouter()
   const activeViewId = paneRouter.params.view || (views[0] && views[0].id)
   const [formInputFocusPath, setFocusPath] = React.useState<Path>(() =>
-    paneRouter.params.path ? PathUtils.fromString(paneRouter.params.path) : []
+    paneRouter.params.path ? PathUtils.fromString(paneRouter.params.path) : [],
   )
   const isInspectOpen = paneRouter.params.inspect === 'on'
 
@@ -102,7 +102,7 @@ export function DocumentPane(props: DocumentPaneProps) {
         },
       ])
     },
-    [documentId]
+    [documentId],
   )
 
   const toggleInspect = useCallback(
@@ -114,7 +114,7 @@ export function DocumentPane(props: DocumentPaneProps) {
         paneRouter.setParams(params)
       }
     },
-    [isInspectOpen, paneRouter]
+    [isInspectOpen, paneRouter],
   )
 
   const previewUrl = usePreviewUrl(value)
@@ -135,7 +135,7 @@ export function DocumentPane(props: DocumentPaneProps) {
         }
       }
     },
-    [previewUrl, showValidationTooltip, toggleInspect]
+    [previewUrl, showValidationTooltip, toggleInspect],
   )
 
   const handleInspectClose = useCallback(() => toggleInspect(false), [toggleInspect])

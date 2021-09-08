@@ -84,11 +84,11 @@ export const ELEMENT_MAP = {
 export const DEFAULT_SUPPORTED_STYLES = uniq(
   Object.keys(ELEMENT_MAP)
     .filter((tag) => ELEMENT_MAP[tag].style)
-    .map((tag) => ELEMENT_MAP[tag].style)
+    .map((tag) => ELEMENT_MAP[tag].style),
 )
 
 export const DEFAULT_SUPPORTED_DECORATORS = uniq(
-  Object.keys(HTML_DECORATOR_TAGS).map((tag) => HTML_DECORATOR_TAGS[tag])
+  Object.keys(HTML_DECORATOR_TAGS).map((tag) => HTML_DECORATOR_TAGS[tag]),
 )
 
 export const DEFAULT_SUPPORTED_ANNOTATIONS = ['link']

@@ -10,7 +10,7 @@ function render(RootComponent) {
     <AppContainer>
       <RootComponent />
     </AppContainer>,
-    document.getElementById('sanity')
+    document.getElementById('sanity'),
   )
 }
 

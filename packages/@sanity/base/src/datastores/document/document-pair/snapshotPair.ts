@@ -10,7 +10,7 @@ import {DocumentVersion} from './checkoutPair'
 
 // return true if the event comes with a document snapshot
 function isSnapshotEvent(
-  event: BufferedDocumentEvent | ReconnectEvent
+  event: BufferedDocumentEvent | ReconnectEvent,
 ): event is SnapshotEvent & {
   version: 'published' | 'draft'
 } {
@@ -23,7 +23,7 @@ function withSnapshots(pair: DocumentVersion): DocumentVersionSnapshots {
       filter(isSnapshotEvent),
       map((event) => event.document),
       publishReplay(1),
-      refCount()
+      refCount(),
     ),
 
     patch: pair.patch,
@@ -64,11 +64,11 @@ export const snapshotPair = memoize(
             published: withSnapshots(published),
             draft: withSnapshots(draft),
           }
-        }
+        },
       ),
       publishReplay(1),
-      refCount()
+      refCount(),
     )
   },
-  (idPair) => idPair.publishedId
+  (idPair) => idPair.publishedId,
 )

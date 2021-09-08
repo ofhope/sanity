@@ -11,7 +11,7 @@ interface CustomSelectProps {
   value: Record<any, any>
   renderItem: (
     item: any,
-    params?: {index: number; isActive: boolean; isSelected: boolean}
+    params?: {index: number; isActive: boolean; isSelected: boolean},
   ) => React.ReactNode
   items: any[]
 }
@@ -99,7 +99,7 @@ export default class CustomSelect extends React.Component<CustomSelectProps> {
                 const className = cx(
                   styles.item,
                   isSelected && styles.selectedItem,
-                  isActive && styles.activeItem
+                  isActive && styles.activeItem,
                 )
                 return (
                   <li

@@ -99,7 +99,7 @@ export const typingSpeedSummary = {
       return {
         title: hardwareProfileCpu.model,
         subtitle: `Avg. last ${runs.length} runs: ${Math.round(
-          runs.reduce(plus, 0) / runs.length
+          runs.reduce(plus, 0) / runs.length,
         )}ms`,
       }
     },

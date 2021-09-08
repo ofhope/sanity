@@ -41,7 +41,7 @@ function getStream(uri) {
       }
 
       resolve(stream)
-    })
+    }),
   )
 }
 

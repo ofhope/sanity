@@ -52,7 +52,7 @@ export const InvalidValueInput = forwardRef(
       (converted) => {
         onChange(PatchEvent.from(set(converted)))
       },
-      [onChange]
+      [onChange],
     )
 
     const converters = useMemo(() => getConverters(value, actualType, validTypes), [
@@ -142,7 +142,7 @@ export const InvalidValueInput = forwardRef(
         </Details>
       </Alert>
     )
-  }
+  },
 )
 
 InvalidValueInput.displayName = 'InvalidValueInput'

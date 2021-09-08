@@ -92,7 +92,7 @@ export class Rect {
       (this.left || 0) + this.width * rect.left,
       (this.top || 0) + this.height * rect.top,
       this.width * rect.width,
-      this.height * rect.height
+      this.height * rect.height,
     )
   }
 
@@ -101,7 +101,7 @@ export class Rect {
       this.left - delta,
       this.top - delta,
       this.width + delta * 2,
-      this.height + delta * 2
+      this.height + delta * 2,
     )
   }
 

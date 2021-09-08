@@ -4,7 +4,7 @@ import {SerializeError, HELP_URL} from './SerializeError'
 export function maybeSerializeMenuItemGroup(
   item: MenuItemGroup | MenuItemGroupBuilder,
   index: number,
-  path: SerializePath
+  path: SerializePath,
 ): MenuItemGroup {
   return item instanceof MenuItemGroupBuilder ? item.serialize({path, index}) : item
 }
@@ -46,7 +46,7 @@ export class MenuItemGroupBuilder implements Serializable {
         '`id` is required for a menu item group',
         options.path,
         options.index,
-        _title
+        _title,
       ).withHelpUrl(HELP_URL.ID_REQUIRED)
     }
 
@@ -54,7 +54,7 @@ export class MenuItemGroupBuilder implements Serializable {
       throw new SerializeError(
         '`title` is required for a menu item group',
         options.path,
-        _id
+        _id,
       ).withHelpUrl(HELP_URL.TITLE_REQUIRED)
     }
 

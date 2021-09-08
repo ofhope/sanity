@@ -14,7 +14,7 @@ interface StructureResolver {
 }
 
 const isSubscribable = (
-  thing: SerializableStructureNode
+  thing: SerializableStructureNode,
 ): thing is ObservableInput<StructureNode> => {
   if (!thing) {
     return false
@@ -37,7 +37,7 @@ const isResolver = (thing: SerializableStructureNode): thing is StructureResolve
 export default function serializeStructure(
   item: SerializableStructureNode,
   context?: any,
-  resolverArgs: any[] = []
+  resolverArgs: any[] = [],
 ): Observable<StructureNode> {
   // Lazy
   if (isResolver(item)) {
@@ -48,7 +48,7 @@ export default function serializeStructure(
   // Promise/observable returning a function, builder or plain JSON structure
   if (isSubscribable(item)) {
     return observableFrom(item).pipe(
-      mergeMap((val) => serializeStructure(val as StructureNode, context, resolverArgs))
+      mergeMap((val) => serializeStructure(val as StructureNode, context, resolverArgs)),
     )
   }
 

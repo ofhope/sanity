@@ -19,7 +19,7 @@ test('warn on invalid characters', () => {
 test('warn on splats', () => {
   const restore = mock(console, 'error', (error) => {
     expect(error.message).toEqual(
-      'Warning: Param segments ":pa*ram" includes invalid characters. Splats are not supported. Consider using child routes instead'
+      'Warning: Param segments ":pa*ram" includes invalid characters. Splats are not supported. Consider using child routes instead',
     )
     restore()
   })

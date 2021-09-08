@@ -19,6 +19,6 @@ export function useSyncState(publishedDocId: string): SyncState {
         .consistencyStatus(publishedDocId)
         .pipe(map((isConsistent) => (isConsistent ? NOT_SYNCING : SYNCING))),
     [publishedDocId],
-    NOT_SYNCING
+    NOT_SYNCING,
   )
 }

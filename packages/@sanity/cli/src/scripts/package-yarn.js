@@ -17,7 +17,7 @@ const request = (url) =>
       } else {
         resolve(body.toString())
       }
-    })
+    }),
   )
 
 function download() {

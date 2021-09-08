@@ -32,7 +32,7 @@ export function useRefValue<T = unknown>(refId: string | undefined | null): T | 
 
 export function useRefPreview(
   value: Reference | undefined | null,
-  schemaType: SchemaType
+  schemaType: SchemaType,
 ): PreviewSnapshot | undefined {
   const [preview, setPreview] = useState<PreviewSnapshot | undefined>(undefined)
 
@@ -40,7 +40,7 @@ export function useRefPreview(
     let subscription
     if (value) {
       subscription = observeForPreview(value, schemaType).subscribe((result) =>
-        setPreview(result.snapshot)
+        setPreview(result.snapshot),
       )
     }
 

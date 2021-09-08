@@ -26,8 +26,8 @@ export default function apply(value, patch) {
   if (!SUPPORTED_PATCH_TYPES.includes(patch.type)) {
     throw new Error(
       `Received patch of unsupported type: "${JSON.stringify(
-        patch.type
-      )}" for string. This is most likely a bug.`
+        patch.type,
+      )}" for string. This is most likely a bug.`,
     )
   }
 
@@ -35,7 +35,7 @@ export default function apply(value, patch) {
     throw new Error(
       `Cannot apply deep operations on string values. Received patch with type "${
         patch.type
-      }" and path "${patch.path.join('.')} that targeted the value "${JSON.stringify(value)}"`
+      }" and path "${patch.path.join('.')} that targeted the value "${JSON.stringify(value)}"`,
     )
   }
 

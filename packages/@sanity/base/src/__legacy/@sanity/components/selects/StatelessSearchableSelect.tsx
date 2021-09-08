@@ -80,7 +80,7 @@ const StatelessSearchableSelectResults = forwardRef(
       (item: Item) => {
         return <div className={styles.item}>{renderItemProp(item)}</div>
       },
-      [renderItemProp]
+      [renderItemProp],
     )
 
     const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
@@ -91,7 +91,7 @@ const StatelessSearchableSelectResults = forwardRef(
         if (typeof ref === 'function') ref(el)
         else if (ref) ref.current = el
       },
-      [ref]
+      [ref],
     )
 
     useClickOutside(
@@ -100,9 +100,9 @@ const StatelessSearchableSelectResults = forwardRef(
           if (!isTopLayer) return
           onClose(event)
         },
-        [isTopLayer, onClose]
+        [isTopLayer, onClose],
       ),
-      [rootElement]
+      [rootElement],
     )
 
     useEffect(() => {
@@ -144,7 +144,7 @@ const StatelessSearchableSelectResults = forwardRef(
         </div>
       </div>
     )
-  }
+  },
 )
 
 StatelessSearchableSelectResults.displayName = 'StatelessSearchableSelectResults'
@@ -213,14 +213,14 @@ const StatelessSearchableSelect = forwardRef(
       (item: Item) => {
         if (onChange) onChange(item)
       },
-      [onChange]
+      [onChange],
     )
 
     const handleClose = useCallback(
       (event?: Event) => {
         if (onClose) onClose(event)
       },
-      [onClose]
+      [onClose],
     )
 
     const handleArrowClick = useCallback(() => {
@@ -235,14 +235,14 @@ const StatelessSearchableSelect = forwardRef(
           handleArrowClick()
         }
       },
-      [handleArrowClick]
+      [handleArrowClick],
     )
 
     const handleInputChange = useCallback(
       (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onInputChange) onInputChange(event.target.value)
       },
-      [onInputChange]
+      [onInputChange],
     )
 
     const handleKeyDown = useCallback(
@@ -286,7 +286,7 @@ const StatelessSearchableSelect = forwardRef(
           }
         }
       },
-      [highlightIndex, isOpen, itemsLen, onClose, onHighlightIndexChange, onOpen]
+      [highlightIndex, isOpen, itemsLen, onClose, onHighlightIndexChange, onOpen],
     )
 
     const handleKeyUp = useCallback(
@@ -295,7 +295,7 @@ const StatelessSearchableSelect = forwardRef(
           if (onChange) onChange(items[highlightIndex])
         }
       },
-      [highlightIndex, items, onChange]
+      [highlightIndex, items, onChange],
     )
 
     return (
@@ -368,7 +368,7 @@ const StatelessSearchableSelect = forwardRef(
         )}
       </>
     )
-  }
+  },
 )
 
 StatelessSearchableSelect.displayName = 'StatelessSearchableSelect'

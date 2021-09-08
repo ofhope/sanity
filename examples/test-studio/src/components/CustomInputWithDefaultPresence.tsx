@@ -46,8 +46,8 @@ export const CustomInputWithDefaultPresence = React.forwardRef(
                             PatchEvent.from(
                               setIfMissing({}),
                               setIfMissing({}, [rowField]),
-                              set(e.currentTarget.value, path)
-                            )
+                              set(e.currentTarget.value, path),
+                            ),
                           )
                         }}
                         onFocus={() => {
@@ -57,11 +57,11 @@ export const CustomInputWithDefaultPresence = React.forwardRef(
                     </div>
                   </div>
                 )
-              })
+              }),
             )}
           </div>
         </div>
       </>
     )
-  }
+  },
 )

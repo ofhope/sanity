@@ -39,7 +39,7 @@ interface PopoverProps {
 const PopoverChildren = forwardRef(
   (
     props: PopoverProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
-    ref
+    ref,
   ): React.ReactElement => {
     const {
       allowedAutoPlacements,
@@ -122,7 +122,7 @@ const PopoverChildren = forwardRef(
         setPopperElement(el)
         setRef(ref as any, el)
       },
-      [ref]
+      [ref],
     )
 
     if (disabled) {
@@ -162,7 +162,7 @@ const PopoverChildren = forwardRef(
         {popperNode}
       </>
     )
-  }
+  },
 )
 
 PopoverChildren.displayName = 'Popover'
@@ -170,7 +170,7 @@ PopoverChildren.displayName = 'Popover'
 export const Popover = forwardRef(
   (
     props: PopoverProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'children' | 'content'>,
-    ref
+    ref,
   ) => {
     if (!props.open) {
       return <PopoverChildren {...props} ref={ref} />
@@ -181,7 +181,7 @@ export const Popover = forwardRef(
         <PopoverChildren {...props} ref={ref} />
       </LegacyLayerProvider>
     )
-  }
+  },
 )
 
 Popover.displayName = 'Popover'

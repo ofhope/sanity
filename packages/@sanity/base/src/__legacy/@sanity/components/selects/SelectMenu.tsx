@@ -31,7 +31,7 @@ export default class SelectMenu extends React.Component<SelectMenuProps> {
 
     if (prevProps.highlightIndex !== this.props.highlightIndex) {
       const itemElement = this.scrollContainer.querySelector(
-        `[data-item-index="${this.props.highlightIndex}"]`
+        `[data-item-index="${this.props.highlightIndex}"]`,
       )
       scrollIntoView(itemElement, this.scrollContainer, {onlyScrollIfNeeded: true})
     }
@@ -51,7 +51,7 @@ export default class SelectMenu extends React.Component<SelectMenuProps> {
               const classes = cx(
                 styles.item,
                 index === highlightIndex && styles.highlighted,
-                item === value && styles.selected
+                item === value && styles.selected,
               )
               return (
                 <Item

@@ -93,7 +93,7 @@ export const ObjectInput = memo(
             value || {},
             // unset the `_type` when computing the result since its auto-populated.
             // see note below for `_key`
-            event.append(unset(['_type'])).patches
+            event.append(unset(['_type'])).patches,
           )
 
         // if the result has no keys left in it.
@@ -122,7 +122,7 @@ export const ObjectInput = memo(
         }
         onChange?.(event)
       },
-      [isRoot, onChange, type.name, value]
+      [isRoot, onChange, type.name, value],
     )
 
     const renderField = React.useCallback(
@@ -165,7 +165,7 @@ export const ObjectInput = memo(
         readOnly,
         type,
         value,
-      ]
+      ],
     )
 
     const renderFields = useCallback(() => {
@@ -191,7 +191,7 @@ export const ObjectInput = memo(
               // lazy render children
               // eslint-disable-next-line max-nested-callbacks
               fieldset.fields.map((field, fieldIndex) =>
-                renderField(field, level + 2, fieldsetIndex + fieldIndex)
+                renderField(field, level + 2, fieldsetIndex + fieldIndex),
               )
             }
           </ObjectFieldSet>
@@ -206,7 +206,7 @@ export const ObjectInput = memo(
 
       const knownFieldNames = type.fields.map((field) => field.name)
       const unknownFields = Object.keys(value || {}).filter(
-        (key) => !key.startsWith('_') && !knownFieldNames.includes(key)
+        (key) => !key.startsWith('_') && !knownFieldNames.includes(key),
       )
 
       if (unknownFields.length === 0) {
@@ -246,7 +246,7 @@ export const ObjectInput = memo(
           onFocus([type.fields[0].name])
         }
       },
-      [onFocus, type.fields]
+      [onFocus, type.fields],
     )
 
     React.useEffect(() => {
@@ -284,5 +284,5 @@ export const ObjectInput = memo(
         {renderAllFields}
       </FormFieldSet>
     )
-  })
+  }),
 )

@@ -9,9 +9,9 @@ function getDisplayName(component) {
 function warnMissingFocusMethod(ComposedComponent) {
   console.warn(
     `withDocument(${getDisplayName(
-      ComposedComponent
+      ComposedComponent,
     )}): The passed component did not expose a ".focus()" method. Either implement an imperative focus method on the component instance, or forward it's received ref to an element that exposes a .focus() method. The component passed to withDocument was: %O`,
-    ComposedComponent
+    ComposedComponent,
   )
 }
 
@@ -20,7 +20,7 @@ interface WithDocumentProps<Doc extends SanityDocument = SanityDocument> {
 }
 
 export default function withDocument<T extends WithDocumentProps = WithDocumentProps>(
-  ComposedComponent: React.ComponentType<T>
+  ComposedComponent: React.ComponentType<T>,
 ) {
   return class WithDocument extends React.PureComponent<Omit<T, 'document'>> {
     _input: any

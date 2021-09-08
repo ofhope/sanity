@@ -6,7 +6,7 @@ interface CollapsibleOptions {
 }
 export function getCollapsedWithDefaults(
   options: ObjectSchemaTypeWithOptions['options'] = {},
-  level: number
+  level: number,
 ): CollapsibleOptions {
   if (options.collapsible === true || options.collapsable === true) {
     // collapsible explicit set to true

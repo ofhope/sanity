@@ -149,12 +149,12 @@ export abstract class GenericListBuilder<L extends BuildableGenericList, Concret
         `\`layout\` must be one of ${layoutOptions.map((item) => `"${item}"`).join(', ')}`,
         path,
         id || options.index,
-        this.spec.title
+        this.spec.title,
       )
     }
 
     const initialValueTemplates = (this.spec.initialValueTemplates || []).map((item, i) =>
-      maybeSerializeInitialValueTemplateItem(item, i, path)
+      maybeSerializeInitialValueTemplateItem(item, i, path),
     )
 
     return {
@@ -168,7 +168,7 @@ export abstract class GenericListBuilder<L extends BuildableGenericList, Concret
       initialValueTemplates,
       menuItems: menuItemsWithCreateIntents(this.spec, {path, initialValueTemplates}),
       menuItemGroups: (this.spec.menuItemGroups || []).map((item, i) =>
-        maybeSerializeMenuItemGroup(item, i, path)
+        maybeSerializeMenuItemGroup(item, i, path),
       ),
     }
   }
@@ -181,7 +181,7 @@ export abstract class GenericListBuilder<L extends BuildableGenericList, Concret
 
 function menuItemsWithCreateIntents(
   list: BuildableGenericList,
-  options: {path: SerializePath; initialValueTemplates?: InitialValueTemplateItem[]}
+  options: {path: SerializePath; initialValueTemplates?: InitialValueTemplateItem[]},
 ): MenuItem[] {
   const {path, initialValueTemplates = []} = options
   const items = (list.menuItems || []).map((item, i) => maybeSerializeMenuItem(item, i, path))
@@ -213,7 +213,7 @@ function menuItemsWithCreateIntents(
       actionButton
         .title(`Create new ${loneTemplate.title || templateTitle || ''}`)
         .intent(getCreateIntent(loneTemplate))
-        .serialize()
+        .serialize(),
     )
   } else {
     // More than one item, so we'll want that dropdown of choices

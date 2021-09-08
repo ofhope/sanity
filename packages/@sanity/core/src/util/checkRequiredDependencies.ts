@@ -108,14 +108,14 @@ export async function checkRequiredDependencies(context: CliCommandContext): Pro
  * @returns Object of peer dependencies (name => version), if any
  */
 async function readBasePeerDependencies(
-  studioPath: string
+  studioPath: string,
 ): Promise<Record<string, string | undefined>> {
   const manifestPath = resolveFrom.silent(studioPath, path.join('@sanity/base', 'package.json'))
 
   // If we can't resolve the manifest path, that means `@sanity/base` is not installed
   if (!manifestPath) {
     throw new Error(
-      'Failed to resolve @sanity/base/package.json - install dependencies with `npm install` or `yarn`.'
+      'Failed to resolve @sanity/base/package.json - install dependencies with `npm install` or `yarn`.',
     )
   }
 
@@ -144,7 +144,7 @@ async function readModuleVersion(studioPath: string, moduleName: string): Promis
  */
 async function readPackageManifest(
   packageJsonPath: string,
-  defaults: Partial<PartialPackageManifest> = {}
+  defaults: Partial<PartialPackageManifest> = {},
 ): Promise<PackageManifest> {
   let manifest: unknown
   try {
@@ -171,7 +171,7 @@ async function readPackageManifest(
  */
 async function installDependenciesWithPrompt(
   dependencies: Record<string, string>,
-  context: CliCommandContext
+  context: CliCommandContext,
 ): Promise<unknown> {
   const {output, prompt, workDir, yarn} = context
   const yarnLockExists = await fileExists(path.join(workDir, 'yarn.lock'))

@@ -15,7 +15,7 @@ const fetch = (query: string, params: Params, options: ListenQueryOptions) =>
     versionedClient.observable.fetch(query, params, {
       tag: options.tag,
       filterResponse: true,
-    })
+    }),
   )
 
 const listen = (query: string, params: Params, options: ListenQueryOptions) =>
@@ -25,11 +25,11 @@ const listen = (query: string, params: Params, options: ListenQueryOptions) =>
       includeResult: false,
       visibility: 'query',
       tag: options.tag,
-    })
+    }),
   ) as Observable<ReconnectEvent | WelcomeEvent | MutationEvent>
 
 function isWelcomeEvent(
-  event: MutationEvent | ReconnectEvent | WelcomeEvent
+  event: MutationEvent | ReconnectEvent | WelcomeEvent,
 ): event is WelcomeEvent {
   return event.type === 'welcome'
 }
@@ -39,7 +39,7 @@ function isWelcomeEvent(
 export const listenQuery = (
   query: string,
   params: Params = {},
-  options: ListenQueryOptions = {}
+  options: ListenQueryOptions = {},
 ) => {
   const fetchOnce$ = fetch(query, params, options)
 
@@ -53,19 +53,19 @@ export const listenQuery = (
           new Error(
             ev.type === 'reconnect'
               ? 'Could not establish EventSource connection'
-              : `Received unexpected type of first event "${ev.type}"`
-          )
+              : `Received unexpected type of first event "${ev.type}"`,
+          ),
         )
       }
       return of(ev)
     }),
-    share()
+    share(),
   )
 
   const [welcome$, mutationAndReconnect$] = partition(events$, isWelcomeEvent)
 
   return merge(
     welcome$.pipe(take(1)),
-    mutationAndReconnect$.pipe(throttleTime(1000, asyncScheduler, {leading: true, trailing: true}))
+    mutationAndReconnect$.pipe(throttleTime(1000, asyncScheduler, {leading: true, trailing: true})),
   ).pipe(exhaustMapToWithTrailing(fetchOnce$))
 }

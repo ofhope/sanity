@@ -49,7 +49,7 @@ const DocumentLink = ({document}: {document: SanityDocument}) => {
     (linkProps: Omit<React.HTMLProps<HTMLAnchorElement>, 'ref'>) => (
       <IntentLink {...linkProps} params={{id: document._id, type: document._type}} intent="edit" />
     ),
-    [document]
+    [document],
   )
 
   return (

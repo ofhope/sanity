@@ -94,7 +94,7 @@ const DEFAULT_PROPS = {
 
 const ObjectInputTester = forwardRef(function ObjectInputTester(
   props: Partial<Omit<Props, 'type'>> & {type: Props['type']},
-  ref: ForwardedRef<any>
+  ref: ForwardedRef<any>,
 ) {
   return (
     <ThemeProvider scheme="light" theme={studioTheme}>
@@ -119,7 +119,7 @@ const TOGGLE_BUTTON_SELECTOR = 'legend div'
 describe('collapsible behavior', () => {
   it('does not render collapsible fields on objects configured with collapsed: true', () => {
     const {queryByTestId} = render(
-      <ObjectInputTester type={schema.get('collapsibleTest')} focusPath={[]} />
+      <ObjectInputTester type={schema.get('collapsibleTest')} focusPath={[]} />,
     )
     expect(queryByTestId('input-field1')).toBeNull()
   })
@@ -129,7 +129,7 @@ describe('collapsible behavior', () => {
       <ObjectInputTester
         type={schema.get('collapsibleTest')}
         focusPath={['collapsibleAndCollapsedByDefault', 'field1']}
-      />
+      />,
     )
     expect(queryByTestId('input-field1')).toBeVisible()
   })
@@ -138,7 +138,7 @@ describe('collapsible behavior', () => {
     const firstFieldPath = ['collapsibleAndCollapsedByDefault', 'field1']
     const onFocus = jest.fn()
     const {container, queryByTestId, rerender} = render(
-      <ObjectInputTester level={0} onFocus={onFocus} type={schema.get('collapsibleTest')} />
+      <ObjectInputTester level={0} onFocus={onFocus} type={schema.get('collapsibleTest')} />,
     )
     expect(queryByTestId('input-field1')).toBeNull()
     const button = container.querySelector(TOGGLE_BUTTON_SELECTOR)!
@@ -151,7 +151,7 @@ describe('collapsible behavior', () => {
         focusPath={firstFieldPath}
         onFocus={onFocus}
         type={schema.get('collapsibleTest')}
-      />
+      />,
     )
     expect(queryByTestId('input-field1')).toBeVisible()
     userEvent.click(button)
@@ -165,7 +165,7 @@ describe('collapsible behavior', () => {
     const onFocus = jest.fn()
 
     const {queryByTestId} = render(
-      <ObjectInputTester onFocus={onFocus} type={schema.get('hiddenTest')} />
+      <ObjectInputTester onFocus={onFocus} type={schema.get('hiddenTest')} />,
     )
 
     expect(queryByTestId('input-thisIsVisible')).toBeVisible()
@@ -181,7 +181,7 @@ describe('collapsible behavior', () => {
         onFocus={onFocus}
         type={schema.get('hiddenTest')}
         filterField={(type, field) => field.name !== 'thisMayBeVisible'}
-      />
+      />,
     )
 
     expect(queryByTestId('input-thisIsVisible')).toBeVisible()
@@ -195,7 +195,7 @@ describe('collapsible behavior', () => {
     const onFocus = jest.fn()
 
     const {container, queryByTestId, rerender} = render(
-      <ObjectInputTester onFocus={onFocus} type={schema.get('collapsibleTest')} />
+      <ObjectInputTester onFocus={onFocus} type={schema.get('collapsibleTest')} />,
     )
     expect(queryByTestId('input-field1')).toBeNull()
 
@@ -209,7 +209,7 @@ describe('collapsible behavior', () => {
         type={schema.get('collapsibleTest')}
         focusPath={firstFieldPath}
         onFocus={onFocus}
-      />
+      />,
     )
 
     expect(queryByTestId('input-field1')).toBeVisible()
@@ -220,7 +220,7 @@ describe('collapsible behavior', () => {
         type={schema.get('collapsibleTest')}
         focusPath={['collapsibleAndCollapsedByDefault']}
         onFocus={onFocus}
-      />
+      />,
     )
 
     expect(queryByTestId('input-field1')).toBeNull()
@@ -231,7 +231,7 @@ describe('collapsible behavior', () => {
         type={schema.get('collapsibleTest')}
         focusPath={['collapsibleAndCollapsedByDefault', 'field1']}
         onFocus={onFocus}
-      />
+      />,
     )
 
     expect(queryByTestId('input-field1')).toBeVisible()
@@ -246,7 +246,7 @@ describe('focus handling', () => {
   it('calling .focus() on its ref puts focus on DOM node for its first field', () => {
     let inputRef: undefined | {focus: () => void}
     const {queryByTestId} = render(
-      <ObjectInputTester type={schema.get('focusTest')} ref={(ref: any) => (inputRef = ref)} />
+      <ObjectInputTester type={schema.get('focusTest')} ref={(ref: any) => (inputRef = ref)} />,
     )
 
     expect(inputRef).toBeDefined()
@@ -256,7 +256,7 @@ describe('focus handling', () => {
 
   it('updates input focus based on passed focusPath', () => {
     const {queryByTestId} = render(
-      <ObjectInputTester type={schema.get('focusTest')} focusPath={['focusTest', 'field1']} />
+      <ObjectInputTester type={schema.get('focusTest')} focusPath={['focusTest', 'field1']} />,
     )
     expect(queryByTestId('input-field1')?.querySelector('input')).toHaveFocus()
   })
@@ -270,7 +270,7 @@ describe('focus handling', () => {
         type={schema.get('focusTest')}
         onFocus={onFocus}
         ref={(ref: any) => (inputRef = ref)}
-      />
+      />,
     )
 
     inputRef!.focus()

@@ -15,7 +15,7 @@ import {
 // NOTE: this is a small utility function to avoid having to _cast_ the
 // filtered array below to `DocumentActionComponent[]`.
 function isDocumentAction(
-  value: DocumentActionComponent | false
+  value: DocumentActionComponent | false,
 ): value is DocumentActionComponent {
   return value !== false
 }

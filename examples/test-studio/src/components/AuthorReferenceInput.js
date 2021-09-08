@@ -44,7 +44,7 @@ export default class AuthorReferenceInput extends React.Component {
     this.fetchObservable = client.observable
       .fetch(
         // Select authors, with a defined image, which are published
-        '*[_type == "author" && defined(image) && _id in path("*")][0...10] {_id, image, name}'
+        '*[_type == "author" && defined(image) && _id in path("*")][0...10] {_id, image, name}',
       )
       .subscribe(this.handleAuthorsReceived)
   }
@@ -77,8 +77,8 @@ export default class AuthorReferenceInput extends React.Component {
         type.weak === true ? set(true, ['_weak']) : unset(['_weak']),
 
         // Set the actual reference value
-        set(item._id, ['_ref'])
-      )
+        set(item._id, ['_ref']),
+      ),
     )
   }
 

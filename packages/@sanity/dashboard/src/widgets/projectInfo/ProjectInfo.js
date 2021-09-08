@@ -60,7 +60,7 @@ class ProjectInfo extends React.PureComponent {
             },
           })
         },
-      })
+      }),
     )
 
     // ping assumed graphql endpoint
@@ -84,7 +84,7 @@ class ProjectInfo extends React.PureComponent {
               })
             }
           },
-        })
+        }),
     )
   }
 
@@ -125,7 +125,7 @@ class ProjectInfo extends React.PureComponent {
           ],
         },
       ],
-      propsData.filter((item) => item.category === 'apis')
+      propsData.filter((item) => item.category === 'apis'),
     )
 
     // Handle whatever else there might be

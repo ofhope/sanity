@@ -13,12 +13,12 @@ export function formatMessage(message) {
       .replace(
         // Babel syntax error
         'Module build failed: SyntaxError:',
-        friendlySyntaxErrorLabel
+        friendlySyntaxErrorLabel,
       )
       .replace(
         // Webpack file not found error
         /Module not found: Error: Cannot resolve 'file' or 'directory'/,
-        'Module not found:'
+        'Module not found:',
       )
       // Internal stacks are generally useless so we strip them
       .replace(/^\s*at\s.*:\d+:\d+[\s)]*\n/gm, '') // at ... ...:x:y

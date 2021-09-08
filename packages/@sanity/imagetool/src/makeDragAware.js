@@ -68,7 +68,7 @@ export default function makeDragAware(Component) {
       const nextPos = getPos(event)
       debug('Drag started %o', nextPos)
       onDragStart(
-        getPositionRelativeToRect(nextPos.x, nextPos.y, this.domNode.getBoundingClientRect())
+        getPositionRelativeToRect(nextPos.x, nextPos.y, this.domNode.getBoundingClientRect()),
       )
 
       this.currentPos = nextPos
@@ -93,7 +93,7 @@ export default function makeDragAware(Component) {
       }
       const nextPos = getPos(event)
       onDragEnd(
-        getPositionRelativeToRect(nextPos.x, nextPos.y, this.domNode.getBoundingClientRect())
+        getPositionRelativeToRect(nextPos.x, nextPos.y, this.domNode.getBoundingClientRect()),
       )
       this.isDragging = false
       this.currentPos = null
@@ -110,8 +110,8 @@ export default function makeDragAware(Component) {
         getPositionRelativeToRect(
           this.currentPos.x,
           this.currentPos.y,
-          this.domNode.getBoundingClientRect()
-        )
+          this.domNode.getBoundingClientRect(),
+        ),
       )
       this.currentPos = null
     }

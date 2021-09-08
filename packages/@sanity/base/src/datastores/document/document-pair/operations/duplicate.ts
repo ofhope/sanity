@@ -20,7 +20,7 @@ export const duplicate = {
       },
       {
         tag: 'document.duplicate',
-      }
+      },
     )
   },
 }

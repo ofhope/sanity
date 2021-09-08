@@ -12,7 +12,7 @@ function parseCliFlags(args) {
       cmd
         .positional('script', {type: 'string', demandOption: true})
         .option('with-user-token', {type: 'boolean', default: false})
-        .option('mock-browser-env', {type: 'boolean', default: false})
+        .option('mock-browser-env', {type: 'boolean', default: false}),
   ).argv
 }
 

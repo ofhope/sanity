@@ -23,7 +23,7 @@ import {
 
 export function createSortableList(
   element: ListComponent,
-  defaultProps: Partial<SortableContainerProps> = {}
+  defaultProps: Partial<SortableContainerProps> = {},
 ): SortableListComponent {
   const Sortable = SortableContainer(element)
 
@@ -55,7 +55,7 @@ export function createSortableItem(element: ItemComponent): SortableItemComponen
 }
 
 export function createDragHandle(
-  element: React.ComponentType<{className?: string}>
+  element: React.ComponentType<{className?: string}>,
 ): DragHandleComponent {
   return SortableHandle(element) as any
 }

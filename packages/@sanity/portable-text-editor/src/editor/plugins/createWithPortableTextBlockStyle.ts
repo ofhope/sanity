@@ -9,7 +9,7 @@ const debug = debugWithName('plugin:withPortableTextBlockStyle')
 
 export function createWithPortableTextBlockStyle(
   portableTextFeatures: PortableTextFeatures,
-  change$: Subject<EditorChange>
+  change$: Subject<EditorChange>,
 ) {
   return function withPortableTextBlockStyle(editor: PortableTextSlateEditor) {
     const normalStyle = portableTextFeatures.styles[0].value
@@ -82,7 +82,7 @@ export function createWithPortableTextBlockStyle(
               ...rest,
               style: blockStyle || defaultStyle,
             },
-            {at: path}
+            {at: path},
           )
         }
       })

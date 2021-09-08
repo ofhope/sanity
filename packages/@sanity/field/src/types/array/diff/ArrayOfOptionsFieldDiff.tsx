@@ -77,7 +77,7 @@ export const ArrayOfOptionsFieldDiff: DiffComponent<ArrayDiff> = ({diff, schemaT
 function normalizeItems(
   item: ItemDiff,
   parentDiff: ArrayDiff,
-  schemaType: ArraySchemaType
+  schemaType: ArraySchemaType,
 ): NormalizedListOption | null {
   if (item.diff.action === 'unchanged') {
     return null

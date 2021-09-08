@@ -53,7 +53,7 @@ export default async function initSanity(args, context) {
     throw new Error(
       projectManifest
         ? 'Reconfigure flag passed, but no `sanity.json` found'
-        : 'Reconfigure flag passed, but `sanity.json` does not have "root" property set'
+        : 'Reconfigure flag passed, but `sanity.json` does not have "root" property set',
     )
   }
 
@@ -64,7 +64,7 @@ export default async function initSanity(args, context) {
     reconfigure = await promptImplicitReconfigure(prompt)
     if (!reconfigure) {
       print(
-        'Init cancelled. If you want to create a new project, try running `sanity init` in an empty folder'
+        'Init cancelled. If you want to create a new project, try running `sanity init` in an empty folder',
       )
       return
     }
@@ -123,7 +123,7 @@ export default async function initSanity(args, context) {
       aclMode: flags.visibility,
       defaultConfig: flags['dataset-default'],
     },
-    context
+    context,
   )
 
   debug(`Dataset with name ${datasetName} selected`)
@@ -229,7 +229,7 @@ export default async function initSanity(args, context) {
       {extOptions: {quiet: true}},
       Object.assign({}, context, {
         workDir: outputPath,
-      })
+      }),
     )
 
     // Prompt for dataset import (if a dataset is defined)
@@ -320,7 +320,7 @@ export default async function initSanity(args, context) {
       const project = projects.find((proj) => proj.id === flags.project)
       if (!project && !unattended) {
         throw new Error(
-          `Given project ID (${flags.project}) not found, or you do not have access to it`
+          `Given project ID (${flags.project}) not found, or you do not have access to it`,
         )
       }
 
@@ -476,7 +476,7 @@ export default async function initSanity(args, context) {
             {
               message: 'Dataset name:',
             },
-            existingDatasetNames
+            existingDatasetNames,
           )
       const aclMode = await getAclMode()
       const spinner = context.output.spinner('Creating dataset').start()
@@ -563,7 +563,7 @@ export default async function initSanity(args, context) {
 
     if (cliFlags.project && createProjectName) {
       throw new Error(
-        'Both `--project` and `--create-project` specified, only a single is supported'
+        'Both `--project` and `--create-project` specified, only a single is supported',
       )
     }
 
@@ -586,7 +586,7 @@ export default async function initSanity(args, context) {
 
       if (!cliFlags.project && !createProjectName) {
         throw new Error(
-          '`--project <id>` or `--create-project <name>` must be specified in unattended mode'
+          '`--project <id>` or `--create-project <name>` must be specified in unattended mode',
         )
       }
     }
@@ -691,7 +691,7 @@ async function promptForAclMode(prompt, output) {
 
   if (mode === 'private') {
     output.print(
-      'Please note that while documents are private, assets (files and images) are still public\n'
+      'Please note that while documents are private, assets (files and images) are still public\n',
     )
   }
 
@@ -713,6 +713,6 @@ async function doDatasetImport(options) {
       apiClient: clientWrapper(manifest, manifestPath),
       workDir: outputPath,
       fromInitCommand: true,
-    })
+    }),
   )
 }

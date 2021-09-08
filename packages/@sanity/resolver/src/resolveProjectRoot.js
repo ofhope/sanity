@@ -31,7 +31,7 @@ function isRoot(manifestDir, options) {
       Object.assign({}, options, {
         manifestDir,
         sync: true,
-      })
+      }),
     )
 
     return manifest.root || false

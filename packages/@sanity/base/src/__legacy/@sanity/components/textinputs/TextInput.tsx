@@ -72,7 +72,7 @@ export default class DefaultTextInput extends React.PureComponent<DefaultTextInp
           styles.container,
           isClearable && styles.isClearable,
           disabled && styles.isDisabled,
-          classNameProp
+          classNameProp,
         )}
       >
         <input

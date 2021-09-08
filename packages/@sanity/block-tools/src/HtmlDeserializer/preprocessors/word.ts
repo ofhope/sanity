@@ -47,7 +47,7 @@ export default (html, doc) => {
       return null
     },
     _XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-    null
+    null,
   )
   for (let i = unwantedNodes.snapshotLength - 1; i >= 0; i--) {
     const unwanted = unwantedNodes.snapshotItem(i)
@@ -60,7 +60,7 @@ export default (html, doc) => {
     doc,
     null,
     _XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-    null
+    null,
   )
   for (let i = mappedElements.snapshotLength - 1; i >= 0; i--) {
     const mappedElm = mappedElements.snapshotItem(i)

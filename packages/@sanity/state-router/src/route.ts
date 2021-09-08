@@ -30,7 +30,7 @@ function normalizeArgs(...args: any[]): NodeOptions
 function normalizeArgs(
   path: string | NodeOptions,
   childrenOrOpts?: NodeOptions | Router | RouteChildren,
-  children?: Router | RouteChildren
+  children?: Router | RouteChildren,
 ): NodeOptions {
   if (typeof path === 'object') {
     return path
@@ -51,7 +51,7 @@ function normalizeArgs(
 export default function route(
   routeOrOpts: string | NodeOptions,
   childrenOrOpts?: NodeOptions | RouteChildren | null,
-  children?: Router | RouteChildren
+  children?: Router | RouteChildren,
 ): Router {
   return createNode(normalizeArgs(routeOrOpts, childrenOrOpts, children))
 }
@@ -91,7 +91,7 @@ route.intents = function intents(base) {
             },
           },
         }),
-      ]
+      ],
     ),
   ])
 }

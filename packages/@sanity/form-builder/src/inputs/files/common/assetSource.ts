@@ -52,9 +52,9 @@ export function handleSelectAssetFromSource({
               _type: 'reference',
               _ref: firstAsset.value,
             },
-            ['asset']
+            ['asset'],
           ),
-        ])
+        ]),
       )
       break
     case 'file': {

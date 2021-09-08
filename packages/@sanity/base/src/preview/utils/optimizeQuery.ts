@@ -29,7 +29,7 @@ export function combineSelections(selections: Selection[]): CombinedSelection[] 
       output[key].ids[idx] = id
       output[key].map[idx] = index
       return output
-    }, {})
+    }, {}),
   )
 }
 

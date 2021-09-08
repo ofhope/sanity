@@ -2,13 +2,6 @@
   "name": "@sanity/default-login",
   "version": "2.18.0",
   "description": "Lets the user log in to Sanity.",
-  "main": "./lib/index.js",
-  "types": "./dist/dts",
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "clean": "rimraf lib dest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -18,6 +11,22 @@
     "default-login",
     "sanity-plugin"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/default-login"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "./lib/index.js",
+  "types": "./dist/dts",
+  "scripts": {
+    "clean": "rimraf lib dest"
+  },
   "dependencies": {
     "@sanity/generate-help-url": "2.18.0",
     "@sanity/logos": "^1.1.6",
@@ -32,14 +41,5 @@
   "peerDependencies": {
     "react": "^16.9 || ^17",
     "styled-components": "^5.2.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/default-login"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/"
+  }
 }

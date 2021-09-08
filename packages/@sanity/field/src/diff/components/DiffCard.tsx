@@ -134,7 +134,7 @@ const DiffCardWithAnnotation = forwardRef(
     }
 
     return element
-  }
+  },
 )
 
 DiffCardWithAnnotation.displayName = 'DiffCardWithAnnotation'

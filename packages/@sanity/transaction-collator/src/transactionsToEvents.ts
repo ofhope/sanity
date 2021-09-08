@@ -6,7 +6,7 @@ const EDIT_EVENT_TIME_TRESHHOLD_MS = 1000 * 60 * 5 // 5 minutes
 
 export function transactionsToEvents(
   documentIds: string[],
-  transactions: string | Buffer | Transaction[]
+  transactions: string | Buffer | Transaction[],
 ): HistoryEvent[] {
   const rawItems = Array.isArray(transactions) ? transactions : ndjsonToArray(transactions)
   return (
@@ -14,7 +14,7 @@ export function transactionsToEvents(
       // Make sure we only deal with transactions that are relevant for our documents
       .filter(
         (transaction: Transaction) =>
-          transaction.documentIDs && transaction.documentIDs.some((id) => documentIds.includes(id))
+          transaction.documentIDs && transaction.documentIDs.some((id) => documentIds.includes(id)),
       )
       // ensure transactions are sorted by time
       .sort(compareTimestamp)
@@ -30,7 +30,7 @@ export function transactionsToEvents(
 function mapToEvents(transaction: Transaction, documentIds: string[], index = 0): HistoryEvent {
   const {type, documentId} = mutationsToEventTypeAndDocumentId(
     filterRelevantMutations(transaction.mutations, documentIds),
-    index
+    index,
   )
   const timestamp = transaction.timestamp
   const userIds = findUserIds(transaction, type)
@@ -50,7 +50,7 @@ function reduceEdits(
   acc: HistoryEvent[],
   current: HistoryEvent,
   index: number,
-  arr: HistoryEvent[]
+  arr: HistoryEvent[],
 ) {
   const nextEvent = arr[index + 1]
   const skipEvent =
@@ -85,10 +85,10 @@ function createReduceTruncatedFn() {
     }
     if (index === arr.length - 1) {
       const draftTruncationEvent = truncated.find(
-        (evt) => !!evt.displayDocumentId && evt.displayDocumentId.startsWith('drafts.')
+        (evt) => !!evt.displayDocumentId && evt.displayDocumentId.startsWith('drafts.'),
       )
       const publishedTruncationEvent = truncated.find(
-        (evt) => !!evt.displayDocumentId && !evt.displayDocumentId.startsWith('drafts.')
+        (evt) => !!evt.displayDocumentId && !evt.displayDocumentId.startsWith('drafts.'),
       )
       if (draftTruncationEvent && publishedTruncationEvent) {
         acc.unshift({...draftTruncationEvent, type: 'edited'})
@@ -105,7 +105,7 @@ function createReduceTruncatedFn() {
 
 export function mutationsToEventTypeAndDocumentId(
   mutations: Mutation[],
-  transactionIndex: number
+  transactionIndex: number,
 ): {type: EventType; documentId: string | null} {
   const withoutPatches = mutations.filter((mut) => mut.patch === undefined)
   const createOrReplaceMutation = withoutPatches.find((mut) => mut.createOrReplace !== undefined)
@@ -115,7 +115,7 @@ export function mutationsToEventTypeAndDocumentId(
   const createPatch = createMutation && createMutation.create
 
   const createIfNotExistsMutation = withoutPatches.find(
-    (mut) => mut.createIfNotExists !== undefined
+    (mut) => mut.createIfNotExists !== undefined,
   )
   const createIfNotExistsPatch =
     createIfNotExistsMutation && createIfNotExistsMutation.createIfNotExists

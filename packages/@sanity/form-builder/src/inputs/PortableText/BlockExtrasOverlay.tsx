@@ -63,7 +63,7 @@ type BlockExtrasWithBlockActionsAndHeightProps = {
 }
 
 function BlockExtrasWithBlockActionsAndHeight(
-  props: BlockExtrasWithBlockActionsAndHeightProps
+  props: BlockExtrasWithBlockActionsAndHeightProps,
 ): JSX.Element {
   const {
     block,

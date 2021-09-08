@@ -26,13 +26,13 @@ export function isGroupChange(change: ChangeNode): change is GroupChangeNode {
 }
 
 export function isAddedItemDiff(
-  item: ItemDiff
+  item: ItemDiff,
 ): item is ItemDiff & {diff: Diff & {action: 'added'}} {
   return item.diff.action === 'added'
 }
 
 export function isRemovedItemDiff(
-  item: ItemDiff
+  item: ItemDiff,
 ): item is ItemDiff & {diff: Diff & {action: 'removed'}} {
   return item.diff.action === 'removed'
 }

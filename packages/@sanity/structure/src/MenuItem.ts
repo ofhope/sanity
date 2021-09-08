@@ -12,7 +12,7 @@ const SortIcon = getSortIcon()
 export function maybeSerializeMenuItem(
   item: MenuItem | MenuItemBuilder,
   index: number,
-  path: SerializePath
+  path: SerializePath,
 ): MenuItem {
   return item instanceof MenuItemBuilder ? item.serialize({path, index}) : item
 }
@@ -104,7 +104,7 @@ export class MenuItemBuilder implements Serializable {
         '`title` is required for menu item',
         options.path,
         options.index,
-        hint
+        hint,
       ).withHelpUrl(HELP_URL.TITLE_REQUIRED)
     }
 
@@ -113,7 +113,7 @@ export class MenuItemBuilder implements Serializable {
         `\`action\` or \`intent\` required for menu item with title ${this.spec.title}`,
         options.path,
         options.index,
-        `"${title}"`
+        `"${title}"`,
       ).withHelpUrl(HELP_URL.ACTION_OR_INTENT_REQUIRED)
     }
 
@@ -122,7 +122,7 @@ export class MenuItemBuilder implements Serializable {
         'cannot set both `action` AND `intent`',
         options.path,
         options.index,
-        `"${title}"`
+        `"${title}"`,
       ).withHelpUrl(HELP_URL.ACTION_AND_INTENT_MUTUALLY_EXCLUSIVE)
     }
 
@@ -161,6 +161,6 @@ export function getOrderingMenuItemsForSchemaType(typeName: SchemaType | string)
     ? type.orderings.concat(DEFAULT_ORDERING_OPTIONS)
     : DEFAULT_ORDERING_OPTIONS
   ).map((ordering: Ordering) =>
-    getOrderingMenuItem(ordering, getExtendedProjection(type, ordering.by))
+    getOrderingMenuItem(ordering, getExtendedProjection(type, ordering.by)),
   )
 }

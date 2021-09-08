@@ -32,7 +32,7 @@ const MenuButtonChildren = forwardRef(
         if (typeof ref === 'function') ref(el)
         else if (ref) ref.current = el
       },
-      [ref]
+      [ref],
     )
 
     useClickOutside(
@@ -40,7 +40,7 @@ const MenuButtonChildren = forwardRef(
         if (!isTopLayer) return
         onClose()
       }, [isTopLayer, onClose]),
-      [rootElement]
+      [rootElement],
     )
 
     useEffect(() => {
@@ -65,7 +65,7 @@ const MenuButtonChildren = forwardRef(
         {children}
       </div>
     )
-  }
+  },
 )
 
 MenuButtonChildren.displayName = 'MenuButtonChildren'
@@ -105,7 +105,7 @@ export const MenuButton = forwardRef(
         </Popover>
       </div>
     )
-  }
+  },
 )
 
 MenuButton.displayName = 'MenuButton'

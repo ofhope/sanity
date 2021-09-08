@@ -30,7 +30,7 @@ export default class ColorInput extends PureComponent {
       fields: PropTypes.arrayOf(
         PropTypes.shape({
           name: PropTypes.string.isRequired,
-        })
+        }),
       ),
     }).isRequired,
     onChange: PropTypes.func.isRequired,
@@ -58,7 +58,7 @@ export default class ColorInput extends PureComponent {
         const isObject = field.type.jsonType === 'object'
         return set(
           isObject ? Object.assign({_type: field.type.name}, nextFieldValue) : nextFieldValue,
-          [field.name]
+          [field.name],
         )
       })
 
@@ -68,7 +68,7 @@ export default class ColorInput extends PureComponent {
         set(type.name, ['_type']),
         set(nextColor.rgb.a, ['alpha']),
         ...fieldPatches,
-      ])
+      ]),
     )
   }
 

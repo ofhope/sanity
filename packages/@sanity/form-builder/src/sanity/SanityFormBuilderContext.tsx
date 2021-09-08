@@ -54,7 +54,7 @@ SanityFormBuilderContext.createPatchChannel = () => {
         return
       }
       patchChannel.receivePatches(
-        event.type === 'mutation' ? prepareMutationEvent(event) : prepareRebaseEvent(event)
+        event.type === 'mutation' ? prepareMutationEvent(event) : prepareRebaseEvent(event),
       )
     },
     onPatch: patchChannel.onPatch,

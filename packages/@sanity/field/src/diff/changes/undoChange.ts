@@ -27,7 +27,7 @@ const diffOptions = {diffMatchPatch: {enabled: false}}
 export function undoChange(
   change: ChangeNode,
   rootDiff: ObjectDiff | null,
-  documentOperations: OperationsAPI
+  documentOperations: OperationsAPI,
 ): void {
   if (!rootDiff) {
     return
@@ -47,8 +47,8 @@ export function undoChange(
     patches.push(
       ...buildUnsetPatches(
         rootDiff,
-        unsetChanges.map((unsetChange) => unsetChange.path)
-      )
+        unsetChanges.map((unsetChange) => unsetChange.path),
+      ),
     )
   } else if (change.diff.action === 'added') {
     // The reverse of an add operation is an unset -
@@ -109,7 +109,7 @@ function furthestEmptyAncestor(
   previousValue: Record<string, unknown>,
   currentPath: Path,
   ignorePaths: Path[] = [],
-  initialPath?: Path
+  initialPath?: Path,
 ): Path {
   if (currentPath.length <= 0) {
     /*
@@ -153,7 +153,7 @@ function furthestEmptyAncestor(
 function buildMovePatches(
   itemDiff: ItemDiff,
   parentDiff: ArrayDiff,
-  path: Path
+  path: Path,
 ): PatchOperations[] {
   const basePath = path.slice(0, -1)
   const {parentValue, fromIndex, fromValue} = getFromItem(parentDiff, itemDiff)

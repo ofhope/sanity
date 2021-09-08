@@ -78,7 +78,7 @@ export default function PaneItem(props) {
       forwardRef(function LinkComponent(linkProps, ref) {
         return <ChildLink {...linkProps} childId={id} ref={ref} />
       }),
-    [ChildLink, id]
+    [ChildLink, id],
   )
 
   return useMemo(
@@ -96,6 +96,6 @@ export default function PaneItem(props) {
         {preview}
       </Card>
     ),
-    [isActive, isSelected, LinkComponent, preview]
+    [isActive, isSelected, LinkComponent, preview],
   )
 }

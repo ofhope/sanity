@@ -32,7 +32,7 @@ export function AbsoluteOverlay(props) {
       <div style={OVERLAY_STYLE}>
         {sortBy(
           regions.filter((r) => r.data.presence?.length > 0),
-          (region) => -region.rect.top
+          (region) => -region.rect.top,
         ).map((region) => {
           return (
             <div

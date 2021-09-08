@@ -25,11 +25,11 @@ test('warns if useCdn is not given', (t) => {
     stub(console, 'warn', (message) => {
       t.equal(
         message,
-        'You are not using the Sanity CDN. That means your data is always fresh, but the CDN is faster and cheaper. Think about it! For more info, see https://docs.sanity.io/help/js-client-cdn-configuration. To hide this warning, please set the `useCdn` option to either `true` or `false` when creating the client.'
+        'You are not using the Sanity CDN. That means your data is always fresh, but the CDN is faster and cheaper. Think about it! For more info, see https://docs.sanity.io/help/js-client-cdn-configuration. To hide this warning, please set the `useCdn` option to either `true` or `false` when creating the client.',
       )
       restore()
       t.end()
-    })
+    }),
   )
   sanityClient({projectId: 'abc123', apiVersion: '1'})
 })
@@ -40,11 +40,11 @@ test('warns if in browser on localhost and a token is provided', (t) => {
     stub(console, 'warn', (message) => {
       t.equal(
         message,
-        'You have configured Sanity client to use a token in the browser. This may cause unintentional security issues. See https://docs.sanity.io/help/js-client-browser-token for more information and how to hide this warning.'
+        'You have configured Sanity client to use a token in the browser. This may cause unintentional security issues. See https://docs.sanity.io/help/js-client-browser-token for more information and how to hide this warning.',
       )
       restore()
       t.end()
-    })
+    }),
   )
   sanityClient({projectId: 'abc123', useCdn: false, token: 'foo', apiVersion: '1'})
 })
@@ -54,11 +54,11 @@ test('warns a token is provided together with useCdn:true (and not in browser)',
     stub(console, 'warn', (message) => {
       t.equal(
         message,
-        'You have set `useCdn` to `true` while also specifying a token. This is usually not what you want. The CDN cannot be used with an authorization token, since private data cannot be cached. See https://docs.sanity.io/help/js-client-usecdn-token for more information.'
+        'You have set `useCdn` to `true` while also specifying a token. This is usually not what you want. The CDN cannot be used with an authorization token, since private data cannot be cached. See https://docs.sanity.io/help/js-client-usecdn-token for more information.',
       )
       restore()
       t.end()
-    })
+    }),
   )
   sanityClient({projectId: 'abc123', token: 'foo', useCdn: true, apiVersion: '1'})
 })
@@ -69,7 +69,7 @@ test('warns if server sends warning back', (t) => {
       t.equal(message, 'Friction endures')
       restore()
       t.end()
-    })
+    }),
   )
 
   nock('https://abc123.api.sanity.io')

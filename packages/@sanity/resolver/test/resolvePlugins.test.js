@@ -218,7 +218,7 @@ describe('plugin resolver', () => {
       mockFs(getResolutionOrderFixture({chosenMethod: 'subNodeModules'}))
       return resolvePlugins(opts).then((plugins) => {
         expect(plugins[0].path).toBe(
-          '/sanity/node_modules/sanity-plugin-foo/node_modules/sanity-plugin-bar'
+          '/sanity/node_modules/sanity-plugin-foo/node_modules/sanity-plugin-bar',
         )
       })
     })
@@ -301,7 +301,7 @@ describe('plugin resolver', () => {
     mockFs(getScopedPluginsTree())
     return resolveParts(opts).catch((err) => {
       expect(
-        err.locations.some((location, index) => err.locations.indexOf(location, index + 1) !== -1)
+        err.locations.some((location, index) => err.locations.indexOf(location, index + 1) !== -1),
       ).toBe(false)
     })
   })
@@ -421,7 +421,7 @@ describe('plugin resolver', () => {
 
       expect(res.implementations).toHaveProperty('part:@sanity/config/schema')
       expect(res.implementations['part:@sanity/config/schema'][0].path).toEqual(
-        path.join('/sanity', 'schema', 'schema.js')
+        path.join('/sanity', 'schema', 'schema.js'),
       )
 
       const last = res.plugins[res.plugins.length - 1]
@@ -438,7 +438,7 @@ describe('plugin resolver', () => {
 
       expect(res.implementations).toHaveProperty('part:@sanity/core/root')
       expect(res.implementations['part:@sanity/core/root'][0].path).toBe(
-        '/sanity/myRootComponent.js'
+        '/sanity/myRootComponent.js',
       )
     })
   })
@@ -470,7 +470,7 @@ describe('plugin resolver', () => {
 
     return resolveParts({basePath: '/sanity/app'}).then((parts) => {
       expect(Object.keys(parts.plugins[3])).toEqual(
-        expect.arrayContaining(['name', 'path', 'manifest'])
+        expect.arrayContaining(['name', 'path', 'manifest']),
       )
 
       expect(parts.implementations['part:my-parent-plugin/foo/bar'][0]).toEqual({

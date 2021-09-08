@@ -1,4 +1,15 @@
 {
-  "hiddenTypes": ["block", "span", "mark", "link", "address", "code", "localeString", "localeSlug", "videoEmbed", "protein"],
+  "hiddenTypes": [
+    "block",
+    "span",
+    "mark",
+    "link",
+    "address",
+    "code",
+    "localeString",
+    "localeSlug",
+    "videoEmbed",
+    "protein"
+  ],
   "listOptions": {}
 }

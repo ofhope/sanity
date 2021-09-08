@@ -33,7 +33,7 @@ export default async (args, context) => {
         'Studio URL': project.studioHostname || project.studioHost,
         'User role': project.userRole,
       },
-      context
+      context,
     )
   }
 
@@ -47,7 +47,7 @@ export default async (args, context) => {
         'User type': globalConfig.authType || 'normal',
         'Auth token': flags.secrets ? authToken : `<redacted>`,
       },
-      context
+      context,
     )
 
     if (!flags.secrets) {
@@ -109,8 +109,8 @@ async function gatherInfo(context) {
         project: gatherProjectInfo(context, baseInfo),
         versions: findSanityModuleVersions(context),
       },
-      baseInfo
-    )
+      baseInfo,
+    ),
   )
 }
 
@@ -132,7 +132,7 @@ async function gatherProjectConfigInfo(context) {
     const config = await fse.readJson(configLocation)
     if (!config.api || !config.api.projectId) {
       throw new Error(
-        `Project config (${configLocation}) does not contain required "api.projectId" key`
+        `Project config (${configLocation}) does not contain required "api.projectId" key`,
       )
     }
 

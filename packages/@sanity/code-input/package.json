@@ -2,13 +2,6 @@
   "name": "@sanity/code-input",
   "version": "2.18.0",
   "description": "Ace editor for editing code",
-  "main": "./lib/index.js",
-  "types": "./dist/dts",
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "clean": "rimraf lib dest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -19,6 +12,22 @@
     "sanity-plugin",
     "code-editor"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/code-input"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "./lib/index.js",
+  "types": "./dist/dts",
+  "scripts": {
+    "clean": "rimraf lib dest"
+  },
   "dependencies": {
     "@reach/auto-id": "^0.13.2",
     "@sanity/base": "2.18.0",
@@ -36,14 +45,5 @@
     "prop-types": "^15.6 || ^16",
     "react": "^16.9 || ^17",
     "styled-components": "^5.2.0"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/code-input"
   }
 }

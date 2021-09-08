@@ -22,7 +22,7 @@ export interface IntentChecker {
   (
     intentName: string,
     params: {[key: string]: any},
-    context: {pane: StructureNode; index: number}
+    context: {pane: StructureNode; index: number},
   ): boolean
   identity?: Symbol
 }

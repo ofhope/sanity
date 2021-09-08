@@ -43,9 +43,9 @@ export const wrappedClient = {
       console.warn(
         new Error(
           `Setting configuration on the global studio client is deprecated - please use \`withConfig()\` instead - see ${generateHelpUrl(
-            'studio-client-global-config'
-          )}`
-        )
+            'studio-client-global-config',
+          )}`,
+        ),
       )
     }
 
@@ -63,8 +63,8 @@ export const wrappedClient = {
     if (!newConfig || !newConfig.apiVersion) {
       throw new Error(
         `Client \`withConfig()\` called without an \`apiVersion\` - see ${generateHelpUrl(
-          'studio-client-specify-api-version'
-        )}`
+          'studio-client-specify-api-version',
+        )}`,
       )
     }
 
@@ -86,9 +86,9 @@ getKeys(configuredClient).forEach((key) => {
         // Using Error to get a stack that makes it easier to see where it originates from
         new Error(
           `Used property "${key}" on versionless client - this is deprecated. Please specify API version using \`withConfig\` - see ${generateHelpUrl(
-            'studio-client-specify-api-version'
-          )}`
-        )
+            'studio-client-specify-api-version',
+          )}`,
+        ),
       )
 
       return typeof configuredClient[key] === 'function'

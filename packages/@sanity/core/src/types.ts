@@ -49,5 +49,5 @@ export interface CliYarnOptions {
 
 export type CliBundledYarn = (
   args: string[],
-  options?: CliYarnOptions
+  options?: CliYarnOptions,
 ) => Promise<ChildProcessWithoutNullStreams>

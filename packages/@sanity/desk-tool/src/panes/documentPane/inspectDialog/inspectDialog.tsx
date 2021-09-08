@@ -33,7 +33,7 @@ interface InnerInspectDialogProps extends InspectDialogProps {
 const viewModeSettings = settings.forKey('inspect-view-preferred-view-mode')
 
 function mapReceivedPropsToChildProps(
-  props$: Observable<InspectDialogProps>
+  props$: Observable<InspectDialogProps>,
 ): Observable<InnerInspectDialogProps> {
   const onViewModeChange = (nextViewMode: InspectViewMode) => viewModeSettings.set(nextViewMode.id)
 
@@ -42,7 +42,7 @@ function mapReceivedPropsToChildProps(
     .pipe(map((id: string) => VIEW_MODES.find((mode) => mode.id === id)))
 
   return combineLatest(props$, viewModeSetting$).pipe(
-    map(([props, viewMode]) => ({...props, viewMode, onViewModeChange}))
+    map(([props, viewMode]) => ({...props, viewMode, onViewModeChange})),
   )
 }
 
@@ -123,5 +123,5 @@ function InspectDialogComponent(props: InnerInspectDialogProps) {
 
 export const InspectDialog = withPropsStream<InspectDialogProps, InnerInspectDialogProps>(
   mapReceivedPropsToChildProps,
-  InspectDialogComponent
+  InspectDialogComponent,
 )

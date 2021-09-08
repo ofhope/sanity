@@ -27,7 +27,7 @@ export function TimelineItem(props: {
       evt.stopPropagation()
       onSelect(chunk)
     },
-    [onSelect, chunk]
+    [onSelect, chunk],
   )
 
   return (

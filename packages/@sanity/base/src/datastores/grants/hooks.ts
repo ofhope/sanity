@@ -25,10 +25,10 @@ export function unstable_useCanCreateAnyOf(typeNames: string[]) {
       pipe(
         distinctUntilChanged(shallowEquals),
         debounceTime(10),
-        switchMap(() => canCreateAnyOf(typeNames))
-      )
+        switchMap(() => canCreateAnyOf(typeNames)),
+      ),
     ),
-    INITIAL
+    INITIAL,
   )
 }
 
@@ -36,7 +36,7 @@ export function unstable_useCanCreateAnyOf(typeNames: string[]) {
 export function unstable_useCheckDocumentPermission(
   id: string,
   type: string,
-  permission: 'update' | 'create' | 'delete' | 'publish' | 'unpublish' | 'discardDraft'
+  permission: 'update' | 'create' | 'delete' | 'publish' | 'unpublish' | 'discardDraft',
 ) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   return useObservable(
@@ -67,9 +67,9 @@ export function unstable_useCheckDocumentPermission(
             return canDiscardDraft(id, type)
           }
           throw new Error(`Unknown permission: "${permission}"`)
-        })
-      )
+        }),
+      ),
     ),
-    INITIAL
+    INITIAL,
   )
 }

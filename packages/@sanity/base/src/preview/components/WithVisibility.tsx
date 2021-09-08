@@ -23,7 +23,7 @@ const STYLE = {
 
 const documentVisibility$ = concat(
   defer(() => observableOf(!document.hidden)),
-  isVisible$
+  isVisible$,
 ).pipe(distinctUntilChanged(), publishReplay(1), refCount())
 
 type Props = {
@@ -49,18 +49,18 @@ export default class WithVisibility extends React.Component<Props, State> {
       return
     }
     const inViewport$ = intersectionObservableFor(this.element.current).pipe(
-      map((event) => event.isIntersecting)
+      map((event) => event.isIntersecting),
     )
     this.subscription = documentVisibility$
       .pipe(
         switchMap((isVisible) => (isVisible ? inViewport$ : observableOf(false))),
         switchMap((isVisible) =>
-          isVisible ? observableOf(true) : observableOf(false).pipe(delay(hideDelay))
+          isVisible ? observableOf(true) : observableOf(false).pipe(delay(hideDelay)),
         ),
         distinctUntilChanged(),
         tap((isVisible) => {
           this.setState({isVisible})
-        })
+        }),
       )
       .subscribe()
   }
@@ -82,7 +82,7 @@ export default class WithVisibility extends React.Component<Props, State> {
         style: {...STYLE, ...style},
         ...rest,
       }, // Render a nonbreaking space here because of https://bugs.chromium.org/p/chromium/issues/detail?id=972196
-      isVisible ? children(isVisible) : '\u00A0' // &nbsp
+      isVisible ? children(isVisible) : '\u00A0', // &nbsp
     )
   }
 }

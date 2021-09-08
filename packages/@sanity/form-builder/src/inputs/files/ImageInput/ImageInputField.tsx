@@ -29,7 +29,7 @@ export function ImageInputField(props: ImageInputFieldProps) {
     (ev: PatchEvent) => {
       onChange(ev.prefixAll(field.name))
     },
-    [onChange, field]
+    [onChange, field],
   )
 
   return (

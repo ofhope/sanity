@@ -60,7 +60,7 @@ async function extractCssCustomProperties(basePath, entryPath, isSanityMonorepo)
         hasVarRefs = hasVarRefs || VAR_RE.test(customProperties[key])
       } else if (varDecl && !customProperties[variableName]) {
         console.warn(
-          `variable ${customProperties[key]} references undeclared variable, "${variableName}" - skipping`
+          `variable ${customProperties[key]} references undeclared variable, "${variableName}" - skipping`,
         )
         delete customProperties[key]
       }

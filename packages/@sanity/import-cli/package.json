@@ -2,18 +2,6 @@
   "name": "@sanity/import-cli",
   "version": "2.18.0",
   "description": "CLI tool that imports documents from an ndjson file or URL",
-  "main": "lib/sanity-import.js",
-  "bin": {
-    "sanity-import": "./lib/sanity-import.js"
-  },
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "clean": "rimraf lib dest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -24,6 +12,24 @@
     "import",
     "ndjson"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/import-cli"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/sanity-import.js",
+  "bin": {
+    "sanity-import": "./lib/sanity-import.js"
+  },
+  "scripts": {
+    "clean": "rimraf lib dest"
+  },
   "dependencies": {
     "@sanity/client": "2.18.0",
     "@sanity/import": "2.18.0",
@@ -35,13 +41,7 @@
   "devDependencies": {
     "rimraf": "^2.7.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/import-cli"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/"
+  "engines": {
+    "node": ">=10.0.0"
+  }
 }

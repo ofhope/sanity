@@ -11,7 +11,7 @@ async function genParts() {
 
   await writeFile(
     path.resolve(__dirname, './parts.js'),
-    `export default ${JSON.stringify(parts)}\n`
+    `export default ${JSON.stringify(parts)}\n`,
   )
 }
 

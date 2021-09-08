@@ -19,7 +19,7 @@ describe('toSlateValue', () => {
           _key: '123',
         },
       ],
-      'block'
+      'block',
     )
 
     expect(result).toMatchObject([
@@ -51,7 +51,7 @@ describe('toSlateValue', () => {
           ],
         },
       ],
-      'block'
+      'block',
     )
     expect(result).toEqual([
       {
@@ -90,7 +90,7 @@ describe('toSlateValue', () => {
           ],
         },
       ],
-      'block'
+      'block',
     )
     expect(result).toEqual([
       {
@@ -160,7 +160,7 @@ describe('fromSlateValue', () => {
           },
         },
       ],
-      'block'
+      'block',
     )
     expect(ptValue).toEqual([
       {

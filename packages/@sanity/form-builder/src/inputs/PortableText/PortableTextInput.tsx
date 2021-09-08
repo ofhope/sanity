@@ -62,7 +62,7 @@ type Props = {
 
 const PortableTextInputWithRef = React.forwardRef(function PortableTextInput(
   props: Omit<Props, 'level'>,
-  ref: React.RefObject<PortableTextEditor>
+  ref: React.RefObject<PortableTextEditor>,
 ) {
   const {
     focusPath,
@@ -97,7 +97,7 @@ const PortableTextInputWithRef = React.forwardRef(function PortableTextInput(
   useEffect(forceUpdate, [validationHash, value])
 
   const [editorErrorNotification, setEditorErrorNotification]: [ErrorChange, any] = useState(
-    undefined
+    undefined,
   )
 
   // Reset invalidValue if new value is coming in from props
@@ -238,7 +238,7 @@ const PortableTextInputWithRef = React.forwardRef(function PortableTextInput(
         />
       </PortableTextEditor>
     ),
-    [focusPath, hasFocus, isFullscreen, presence, readOnly, valueTouchedByMarkers]
+    [focusPath, hasFocus, isFullscreen, presence, readOnly, valueTouchedByMarkers],
   )
   return (
     <>
@@ -287,5 +287,5 @@ export default withPatchSubscriber(
         </FormField>
       )
     }
-  }
+  },
 )

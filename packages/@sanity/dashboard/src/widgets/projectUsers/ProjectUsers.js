@@ -72,15 +72,15 @@ class ProjectUsers extends React.PureComponent {
         switchMap((project) =>
           userStore.observable
             .getUsers(project.members.map((mem) => mem.id))
-            .pipe(map((users) => ({project, users})))
-        )
+            .pipe(map((users) => ({project, users}))),
+        ),
       )
       .subscribe({
         next: ({users, project}) =>
           this.setState({
             project,
             users: (Array.isArray(users) ? users : [users]).sort((userA, userB) =>
-              sortUsersByRobotStatus(userA, userB, project)
+              sortUsersByRobotStatus(userA, userB, project),
             ),
           }),
         error: (error) => this.setState({error}),

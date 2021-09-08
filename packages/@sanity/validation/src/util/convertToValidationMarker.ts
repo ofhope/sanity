@@ -19,7 +19,7 @@ export default function convertToValidationMarker(
     | ValidationErrorLike
     | ValidationErrorLike[],
   level: 'error' | 'warning' | undefined,
-  context: ValidationContext
+  context: ValidationContext,
 ): ValidationMarker[] {
   if (validatorResult === true) return []
 
@@ -39,8 +39,8 @@ export default function convertToValidationMarker(
     if (typeof validatorResult?.message !== 'string') {
       throw new Error(
         `${pathToString(
-          context.path
-        )}: Validator must return 'true' if valid or an error message as a string on errors`
+          context.path,
+        )}: Validator must return 'true' if valid or an error message as a string on errors`,
       )
     }
 
@@ -49,7 +49,7 @@ export default function convertToValidationMarker(
     return convertToValidationMarker(
       new ValidationErrorClass(validatorResult.message, validatorResult),
       level,
-      context
+      context,
     )
   }
 
@@ -77,6 +77,6 @@ export default function convertToValidationMarker(
       path: (context.path || []).concat(path),
       level: level || 'error',
       item: validatorResult,
-    }))
+    })),
   )
 }

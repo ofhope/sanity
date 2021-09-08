@@ -42,7 +42,7 @@ const serialize = (date: Date) => format(date, VALUE_FORMAT)
 
 export const DateInput = React.forwardRef(function DateInput(
   props: Props,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {type, onChange, ...rest} = props
   const {title, description, placeholder} = type
@@ -53,7 +53,7 @@ export const DateInput = React.forwardRef(function DateInput(
     (nextDate: string | null) => {
       onChange(PatchEvent.from([nextDate === null ? unset() : set(nextDate)]))
     },
-    [onChange]
+    [onChange],
   )
 
   const formatInputValue = React.useCallback((date: Date) => format(date, dateFormat), [dateFormat])

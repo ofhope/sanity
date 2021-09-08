@@ -52,9 +52,9 @@ export default async (args, context) => {
   await Promise.all(
     needsUpdate.map((mod) =>
       deleteIfNotSymlink(
-        path.join(context.workDir, 'node_modules', mod.name.replace(/\//g, path.sep))
-      )
-    )
+        path.join(context.workDir, 'node_modules', mod.name.replace(/\//g, path.sep)),
+      ),
+    ),
   )
 
   // Replace versions in `package.json`

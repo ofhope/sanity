@@ -55,7 +55,7 @@ function renderInput() {
           description="Some description"
         />
       </LayerProvider>
-    </ThemeProvider>
+    </ThemeProvider>,
   )
 
   const textInput = container.querySelector('input') as HTMLInputElement

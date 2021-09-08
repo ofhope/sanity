@@ -16,7 +16,7 @@ const OVERRIDABLE_FIELDS = [
 const normalizeSearchConfig = (configs) => {
   if (!Array.isArray(configs)) {
     throw new Error(
-      'The search config of a document type must be an array of search config objects'
+      'The search config of a document type must be an array of search config objects',
     )
   }
   return configs.map((conf) => {
@@ -87,14 +87,14 @@ export const ObjectType = {
 
         if (userProvidedSearchConfig) {
           return userProvidedSearchConfig.map((entry) =>
-            entry === 'defaults' ? resolveSearchConfig(subTypeDef) : entry
+            entry === 'defaults' ? resolveSearchConfig(subTypeDef) : entry,
           )
         }
         return resolveSearchConfig(parsed)
       },
       {
         enumerable: false,
-      }
+      },
     )
 
     return subtype(parsed)
@@ -144,7 +144,7 @@ function createFieldsets(typeDef, fields) {
         const fieldset = fieldsetsByName[field.fieldset]
         if (!fieldset) {
           throw new Error(
-            `Group '${field.fieldset}' is not defined in schema for type '${typeDef.name}'`
+            `Group '${field.fieldset}' is not defined in schema for type '${typeDef.name}'`,
           )
         }
         fieldset.fields.push(field)

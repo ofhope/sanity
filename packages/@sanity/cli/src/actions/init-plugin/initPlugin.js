@@ -26,7 +26,7 @@ export default async function initPlugin(args, context, initOpts = {}) {
     debug(
       'User wanted template "%s", match found at %s',
       specifiedTemplateUrl,
-      specifiedTemplate.url
+      specifiedTemplate.url,
     )
 
     return bootstrapFromUrl(context, specifiedTemplate.url)

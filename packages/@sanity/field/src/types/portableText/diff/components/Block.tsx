@@ -30,7 +30,7 @@ export default function Block({
         onSetFocus(fullPath)
       }
     },
-    [fullPath, isRemoved]
+    [fullPath, isRemoved],
   )
 
   if (block.style === 'blockquote') {

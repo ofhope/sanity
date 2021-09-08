@@ -9,13 +9,13 @@ import {Props} from './types'
 
 const NumberInput = React.forwardRef(function NumberInput(
   props: Props<number, NumberSchemaType>,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {value = '', readOnly, markers, type, level, onFocus, onChange, presence} = props
 
   const errors = useMemo(
     () => markers.filter((marker) => marker.type === 'validation' && marker.level === 'error'),
-    [markers]
+    [markers],
   )
 
   const id = useId()
@@ -29,7 +29,7 @@ const NumberInput = React.forwardRef(function NumberInput(
       const nextValue = event.currentTarget.value
       onChange(PatchEvent.from(nextValue === '' ? unset() : set(Number(nextValue))))
     },
-    [onChange]
+    [onChange],
   )
   return (
     <FormField

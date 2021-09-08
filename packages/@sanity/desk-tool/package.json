@@ -2,21 +2,6 @@
   "name": "@sanity/desk-tool",
   "version": "2.18.0",
   "description": "Tool for managing all sorts of content in a structured manner",
-  "main": "./lib/_exports/index.js",
-  "types": "index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/dts/_exports/*"
-      ]
-    }
-  },
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "clean": "rimraf lib dest",
-    "test": "jest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -27,6 +12,30 @@
     "sanity-plugin",
     "sanity-tool"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/desk-tool"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "./lib/_exports/index.js",
+  "types": "index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/dts/_exports/*"
+      ]
+    }
+  },
+  "scripts": {
+    "clean": "rimraf lib dest",
+    "test": "jest"
+  },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
     "@reach/auto-id": "^0.13.2",
@@ -70,14 +79,5 @@
     "prop-types": "^15.6 || ^16",
     "react": "^16.9 || ^17",
     "styled-components": "^5.2.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/desk-tool"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/"
+  }
 }

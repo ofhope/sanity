@@ -1,6 +1,6 @@
 # 👋 This is a placeholder package. In order to get started with Sanity, please head over to our [getting started guide](https://sanity.io/docs/introduction/getting-started)
 
------
+---
 
 ###### Looking for [adamyanalunas/sanity](https://github.com/adamyanalunas/sanity)?
 

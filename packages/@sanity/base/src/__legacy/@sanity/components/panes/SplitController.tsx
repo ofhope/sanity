@@ -39,7 +39,7 @@ export default class PanesSplitController extends React.PureComponent<SplitContr
           styles.root,
           isResizing ? styles.splitWrapperResizing : styles.splitWrapper,
           pane2 ? '' : styles.singleWrapper,
-          isCollapsed && styles.collapsed
+          isCollapsed && styles.collapsed,
         )}
       >
         <SplitPane

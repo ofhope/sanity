@@ -38,7 +38,7 @@ function mockBrowserEnvironment(basePath) {
     {
       ignoreNodeModules: false,
       exts: getFileExtensions(),
-    }
+    },
   )
 
   registerBabelLoader(basePath)

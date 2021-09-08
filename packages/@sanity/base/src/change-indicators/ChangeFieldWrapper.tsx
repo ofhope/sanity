@@ -35,14 +35,14 @@ export const ChangeFieldWrapper = (props: {
       hasRevertHover: props.hasHover,
     }),
     // note: deepCompare should be ok here since we're not comparing deep values
-    deepCompare
+    deepCompare,
   )
 
   const handleClick = useCallback(
     (event: SyntheticEvent) => {
       setFocusWithStopPropagation(event, onSetFocus, props.path)
     },
-    [onSetFocus, props.path]
+    [onSetFocus, props.path],
   )
 
   return (

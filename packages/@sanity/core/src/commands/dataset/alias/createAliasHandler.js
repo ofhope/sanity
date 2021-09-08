@@ -56,7 +56,7 @@ export default async (args, context) => {
     output.print(
       `Dataset alias ${aliasOutputName} created ${
         datasetName && `and linked to ${datasetName}`
-      } successfully`
+      } successfully`,
     )
   } catch (err) {
     throw new Error(`Dataset alias creation failed:\n${err.message}`)

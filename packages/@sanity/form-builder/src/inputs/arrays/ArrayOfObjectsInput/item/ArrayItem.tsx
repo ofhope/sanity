@@ -64,7 +64,7 @@ export const ArrayItem = memo(function ArrayItem(props: ArrayInputListItemProps)
         onFocus([{_key: itemKey}, ...path])
       }
     },
-    [onFocus, itemKey]
+    [onFocus, itemKey],
   )
 
   const handleFocus = useCallback(() => emitFocus(), [emitFocus])
@@ -79,7 +79,7 @@ export const ArrayItem = memo(function ArrayItem(props: ArrayInputListItemProps)
   const handleChange = useCallback(
     (event: PatchEvent, valueOverride?: ArrayMember) =>
       onChange(event, typeof valueOverride === 'undefined' ? value : valueOverride),
-    [onChange, value]
+    [onChange, value],
   )
 
   const handleRemove = useCallback(() => onRemove(value), [onRemove, value])
@@ -91,7 +91,7 @@ export const ArrayItem = memo(function ArrayItem(props: ArrayInputListItemProps)
         handleEditOpen()
       }
     },
-    [handleEditOpen]
+    [handleEditOpen],
   )
 
   const options = type.options || {}
@@ -104,7 +104,7 @@ export const ArrayItem = memo(function ArrayItem(props: ArrayInputListItemProps)
 
   const itemMarkers = React.useMemo(
     () => markers.filter((marker: Marker) => startsWith(itemPath, marker.path)),
-    [itemPath, markers]
+    [itemPath, markers],
   )
 
   const scopedValidation = useMemo(
@@ -118,13 +118,13 @@ export const ArrayItem = memo(function ArrayItem(props: ArrayInputListItemProps)
             const level = marker.level === 'error' ? 'errors' : 'warnings'
             return {...marker, item: marker.item.cloneWithMessage(`Contains ${level}`)}
           }),
-    [itemMarkers]
+    [itemMarkers],
   )
 
   const itemPresence = useMemo(
     () =>
       presence.filter((presenceItem: FormFieldPresence) => startsWith(itemPath, presenceItem.path)),
-    [itemPath, presence]
+    [itemPath, presence],
   )
 
   return (

@@ -17,7 +17,7 @@ import {diffBoolean, diffNumber} from './diffSimple'
 export function diffInput<A>(
   fromInput: Input<A>,
   toInput: Input<A>,
-  options: DiffOptions = {}
+  options: DiffOptions = {},
 ): Diff<A> {
   if (fromInput.type !== toInput.type) {
     if (fromInput.type === 'null') {
@@ -38,7 +38,7 @@ function diffWithType<A>(
   type: Input<A>['type'],
   fromInput: Input<A>,
   toInput: Input<A>,
-  options: DiffOptions
+  options: DiffOptions,
 ): Diff<A> {
   switch (type) {
     case 'null':
@@ -67,7 +67,7 @@ function diffWithType<A>(
 export function removedInput<A>(
   input: Input<A>,
   toValue: null | undefined,
-  options: DiffOptions
+  options: DiffOptions,
 ): Diff<A> & {action: 'removed'} {
   switch (input.type) {
     case 'null':
@@ -111,7 +111,7 @@ export function removedInput<A>(
 export function addedInput<A>(
   input: Input<A>,
   fromValue: null | undefined,
-  options: DiffOptions
+  options: DiffOptions,
 ): Diff<A> & {action: 'added'} {
   switch (input.type) {
     case 'null':

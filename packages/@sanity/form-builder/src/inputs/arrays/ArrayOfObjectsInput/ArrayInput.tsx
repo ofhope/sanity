@@ -43,7 +43,7 @@ function getUploadTargetFieldset() {
 function createProtoValue(type: SchemaType): ArrayMember {
   if (!isObjectSchemaType(type)) {
     throw new Error(
-      `Invalid item type: "${type.type}". Default array input can only contain objects (for now)`
+      `Invalid item type: "${type.type}". Default array input can only contain objects (for now)`,
     )
   }
 
@@ -118,7 +118,7 @@ export class ArrayInput extends React.Component<Props> {
           })
           this.insert(value, 'after', -1)
           this.handleFocusItem(value)
-        }
+        },
       )
       .finally(() => {
         this.setState({isResolvingInitialValue: false})
@@ -142,7 +142,7 @@ export class ArrayInput extends React.Component<Props> {
 
     // create a patch for removing the item
     const patch = PatchEvent.from(
-      unset(isKeySegment(item) ? [{_key: item._key}] : [value.indexOf(item)])
+      unset(isKeySegment(item) ? [{_key: item._key}] : [value.indexOf(item)]),
     )
     // apply the patch to the current value
     const result = applyAll(value || [], patch.patches)
@@ -183,7 +183,9 @@ export class ArrayInput extends React.Component<Props> {
     const key = item._key || randomKey(12)
 
     onChange(
-      event.prefixAll({_key: key}).prepend(item._key ? [] : set(key, [value.indexOf(item), '_key']))
+      event
+        .prefixAll({_key: key})
+        .prepend(item._key ? [] : set(key, [value.indexOf(item), '_key'])),
     )
   }
   handleSortEnd = (event: {newIndex: number; oldIndex: number}) => {
@@ -194,7 +196,7 @@ export class ArrayInput extends React.Component<Props> {
     if (!item._key || !refItem._key) {
       // eslint-disable-next-line no-console
       console.error(
-        'Neither the item you are moving nor the item you are moving to have a key. Cannot continue.'
+        'Neither the item you are moving nor the item you are moving to have a key. Cannot continue.',
       )
       return
     }
@@ -206,8 +208,10 @@ export class ArrayInput extends React.Component<Props> {
     onChange(
       PatchEvent.from(
         unset([{_key: item._key}]),
-        insert([item], event.oldIndex > event.newIndex ? 'before' : 'after', [{_key: refItem._key}])
-      )
+        insert([item], event.oldIndex > event.newIndex ? 'before' : 'after', [
+          {_key: refItem._key},
+        ]),
+      ),
     )
   }
 
@@ -258,8 +262,8 @@ export class ArrayInput extends React.Component<Props> {
       .upload(file, type)
       .pipe(
         map((uploadEvent: UploadEvent) =>
-          PatchEvent.from(uploadEvent.patches || []).prefixAll({_key: key})
-        )
+          PatchEvent.from(uploadEvent.patches || []).prefixAll({_key: key}),
+        ),
       )
 
     this.uploadSubscriptions = {

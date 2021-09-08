@@ -16,7 +16,7 @@ const debug = debugWithName('plugin:withInsertData')
 export function createWithInsertData(
   change$: EditorChanges,
   portableTextFeatures: PortableTextFeatures,
-  keyGenerator: () => string
+  keyGenerator: () => string,
 ) {
   return function withInsertData(editor: PortableTextSlateEditor & ReactEditor) {
     const {setFragmentData} = editor
@@ -44,7 +44,7 @@ export function createWithInsertData(
                             [...child.marks].filter((mark) => mark !== oldKey).concat(newKey)
                           : child.marks,
                       }
-                    : child
+                    : child,
                 )
               }
               return {...def, _key: newKey}
@@ -105,11 +105,11 @@ export function createWithInsertData(
           portableText = htmlToBlocks(html, portableTextFeatures.types.portableText)
             // Ensure it has keys
             .map((block: any) =>
-              normalizeBlock(block, {blockTypeName: portableTextFeatures.types.block.name})
+              normalizeBlock(block, {blockTypeName: portableTextFeatures.types.block.name}),
             )
           fragment = (toSlateValue(
             portableText,
-            portableTextFeatures.types.block.name
+            portableTextFeatures.types.block.name,
           ) as unknown) as Node[]
           insertedType = 'HTML'
         } else {
@@ -117,14 +117,14 @@ export function createWithInsertData(
           const blocks = escapeHtml(text)
             .split(/\n{2,}/)
             .map((line) =>
-              line ? `<p>${line.replace(/(?:\r\n|\r|\n)/g, '<br/>')}</p>` : '<p></p>'
+              line ? `<p>${line.replace(/(?:\r\n|\r|\n)/g, '<br/>')}</p>` : '<p></p>',
             )
             .join('')
           const textToHtml = `<html><body>${blocks}</body></html>`
           portableText = htmlToBlocks(textToHtml, portableTextFeatures.types.portableText)
           fragment = (toSlateValue(
             portableText,
-            portableTextFeatures.types.block.name
+            portableTextFeatures.types.block.name,
           ) as unknown) as Node[]
           insertedType = 'text'
         }
@@ -183,7 +183,7 @@ export function createWithInsertData(
                     ...(Array.isArray(markDefs) ? markDefs : []),
                   ],
                 },
-                {at: insertAtPath}
+                {at: insertAtPath},
               )
               // If the focus block is not empty, use the style from the block.
               if (

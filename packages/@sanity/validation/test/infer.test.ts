@@ -41,7 +41,7 @@ describe('schema validation inference', () => {
       await expectError(
         type.validation as Rule[],
         {value: '#ccc', title: 'Gray'},
-        'Value did not match any allowed value'
+        'Value did not match any allowed value',
       )
     })
   })
@@ -72,18 +72,18 @@ describe('schema validation inference', () => {
 
     test('field validations defined on an object type does not affect the field type validation', () => {
       const documentType = inferFromSchema(schema).get(
-        'fieldValidationInferReproDoc'
+        'fieldValidationInferReproDoc',
       ) as ObjectSchemaType
       const fieldWithoutValidation = documentType.fields.find(
-        (field) => field.name === 'stringField'
+        (field) => field.name === 'stringField',
       )
 
       // The first field should only have the validation rules that comes with its type
       expect(
         (fieldWithoutValidation?.type.validation as Rule[]).flatMap(
           // eslint-disable-next-line dot-notation
-          (validation) => validation['_rules']
-        )
+          (validation) => validation['_rules'],
+        ),
       ).toEqual([{flag: 'type', constraint: 'String'}])
     })
   })
@@ -121,8 +121,8 @@ describe('schema validation inference', () => {
       ;(client.fetch as jest.Mock).mockImplementation(() =>
         Promise.resolve(
           // return true to mock a unique result (valid)
-          true
-        )
+          true,
+        ),
       )
       await expect(validateDocument(mockDocument, schema)).resolves.toEqual([])
 
@@ -146,8 +146,8 @@ describe('schema validation inference', () => {
       ;(client.fetch as jest.Mock).mockImplementation(() =>
         Promise.resolve(
           // return false to mock a non-unique result (invalid)
-          false
-        )
+          false,
+        ),
       )
 
       await expect(validateDocument(mockDocument, schema)).resolves.toMatchObject([
@@ -192,7 +192,7 @@ async function expectError(
   validations: Rule[],
   value: unknown,
   message: string | undefined,
-  level = 'error'
+  level = 'error',
 ) {
   const errors = (await Promise.all(validations.map((rule) => rule.validate(value)))).flat()
   if (!errors.length) {

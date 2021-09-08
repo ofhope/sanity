@@ -56,7 +56,7 @@ export default class SnackbarProvider extends React.Component<SnackbarProviderPr
   handleSetHeight = (id: number, height: number) => {
     this.setState(({activeSnacks}) => ({
       activeSnacks: activeSnacks.map((snack) =>
-        snack.id === id ? {...snack, height} : {...snack}
+        snack.id === id ? {...snack, height} : {...snack},
       ),
     }))
   }
@@ -90,7 +90,7 @@ export default class SnackbarProvider extends React.Component<SnackbarProviderPr
     } else {
       this.setState(({activeSnacks}) => ({
         activeSnacks: activeSnacks.map((snack) =>
-          snack.id === snackId ? {...snack, ...contextSnack} : snack
+          snack.id === snackId ? {...snack, ...contextSnack} : snack,
         ),
       }))
     }
@@ -137,7 +137,7 @@ export default class SnackbarProvider extends React.Component<SnackbarProviderPr
 
     const persistedSnackCount = activeSnacks.reduce(
       (count, current) => count + (current.isOpen && current.isPersisted ? 1 : 0),
-      0
+      0,
     )
 
     if (persistedSnackCount === this.maxStack) {
@@ -167,7 +167,7 @@ export default class SnackbarProvider extends React.Component<SnackbarProviderPr
           return {...snack}
         }),
       }),
-      () => this.handleRemoveSnack(id)
+      () => this.handleRemoveSnack(id),
     )
   }
 

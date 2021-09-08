@@ -14,7 +14,7 @@ type Partial<T> = {
 
 function keepObjectEquality(
   object: PortableTextBlock | PortableTextChild,
-  keyMap: Record<string, PortableTextBlock | PortableTextChild>
+  keyMap: Record<string, PortableTextBlock | PortableTextChild>,
 ) {
   const value = keyMap[object._key]
   if (value && isEqual(object, value)) {
@@ -27,7 +27,7 @@ function keepObjectEquality(
 export function toSlateValue(
   value: PortableTextBlock[] | undefined,
   textBlockType: string,
-  keyMap: Record<string, any> = {}
+  keyMap: Record<string, any> = {},
 ): Node[] {
   if (value && Array.isArray(value)) {
     return value.map((block) => {
@@ -42,7 +42,7 @@ export function toSlateValue(
             hasInlines = true
             return keepObjectEquality(
               {_type: cType, _key: cKey, children: [{text: ''}], value: cRest, __inline: true},
-              keyMap
+              keyMap,
             )
           }
           // Original object
@@ -63,7 +63,7 @@ export function toSlateValue(
 export function fromSlateValue(
   value: (Node | Partial<Node>)[],
   textBlockType: string,
-  keyMap: Record<string, PortableTextBlock | PortableTextChild> = {}
+  keyMap: Record<string, PortableTextBlock | PortableTextChild> = {},
 ): PortableTextBlock[] {
   if (value && Array.isArray(value)) {
     return value.map((block) => {
@@ -78,7 +78,7 @@ export function fromSlateValue(
             const {value: v, _key: k, _type: t, __inline: _i, children: _c, ...rest} = child
             return keepObjectEquality(
               {_key: k as string, _type: t as string, ...rest, ...v},
-              keyMap
+              keyMap,
             )
           }
           return child as PortableTextChild
@@ -90,7 +90,7 @@ export function fromSlateValue(
           }
           return keepObjectEquality(
             {_key: block._key, _type: block._type, ...block, children},
-            keyMap
+            keyMap,
           ) as PortableTextBlock
         }
         throw new Error('Not a valid block type')
@@ -99,7 +99,7 @@ export function fromSlateValue(
       const blockValue = block.value as PortableTextBlock | undefined
       return keepObjectEquality(
         {_key, _type, ...(typeof blockValue === 'object' ? blockValue : {})},
-        keyMap
+        keyMap,
       ) as PortableTextBlock
     })
   }
@@ -108,7 +108,7 @@ export function fromSlateValue(
 
 export function isEqualToEmptyEditor(
   children: Node[] | undefined,
-  portableTextFeatures: PortableTextFeatures
+  portableTextFeatures: PortableTextFeatures,
 ) {
   return (
     children === undefined ||
@@ -126,7 +126,7 @@ export function isEqualToEmptyEditor(
 
 export function findBlockAndIndexFromPath(
   firstPathSegment: PathSegment,
-  children: (Node | Partial<Node>)[]
+  children: (Node | Partial<Node>)[],
 ): [Element | undefined, number | undefined] {
   let blockIndex = -1
   const isNumber = Number.isInteger(Number(firstPathSegment))
@@ -143,7 +143,7 @@ export function findBlockAndIndexFromPath(
 
 export function findChildAndIndexFromPath(
   secondPathSegment: PathSegment,
-  block: Element
+  block: Element,
 ): [Element | Text | undefined, number] {
   let childIndex = -1
   const isNumber = Number.isInteger(Number(secondPathSegment))

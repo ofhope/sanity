@@ -111,12 +111,12 @@ export default function PortableTextInput(props: Props) {
         }
       } else if (isAnnotation) {
         const block = (PortableTextEditor.getValue(editor) || []).find(
-          (blk) => blk._key === blockSegment._key
+          (blk) => blk._key === blockSegment._key,
         )
         const markDefSegment = focusPath[2]
         if (block && isKeySegment(markDefSegment)) {
           const span = block.children.find(
-            (child) => Array.isArray(child.marks) && child.marks.includes(markDefSegment._key)
+            (child) => Array.isArray(child.marks) && child.marks.includes(markDefSegment._key),
           )
           if (span) {
             const spanPath = [blockSegment, 'children', {_key: span._key}]
@@ -242,7 +242,7 @@ export default function PortableTextInput(props: Props) {
     } else {
       // Object blocks
       const blockMarkers = markers.filter(
-        (marker) => isKeySegment(marker.path[0]) && marker.path[0]._key === block._key
+        (marker) => isKeySegment(marker.path[0]) && marker.path[0]._key === block._key,
       )
       returned = (
         <BlockObject
@@ -268,7 +268,7 @@ export default function PortableTextInput(props: Props) {
     }
     // eslint-disable-next-line react/prop-types
     const inlineMarkers = markers.filter(
-      (marker) => isKeySegment(marker.path[2]) && marker.path[2]._key === child._key
+      (marker) => isKeySegment(marker.path[2]) && marker.path[2]._key === child._key,
     )
     return (
       <InlineObject
@@ -285,7 +285,7 @@ export default function PortableTextInput(props: Props) {
 
   function renderAnnotation(annotation, annotationType, attributes, defaultRender) {
     const annotationMarkers = markers.filter(
-      (marker) => isKeySegment(marker.path[2]) && marker.path[2]._key === annotation._key
+      (marker) => isKeySegment(marker.path[2]) && marker.path[2]._key === annotation._key,
     )
     return (
       <Annotation
@@ -365,7 +365,7 @@ export default function PortableTextInput(props: Props) {
         value={value}
       />
     ),
-    [hasFocus, focusPath, isFullscreen, readOnly, value]
+    [hasFocus, focusPath, isFullscreen, readOnly, value],
   )
 
   const editObject = useMemo(() => {

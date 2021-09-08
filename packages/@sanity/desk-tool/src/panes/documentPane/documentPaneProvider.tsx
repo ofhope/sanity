@@ -61,7 +61,7 @@ export const DocumentPaneProvider = withInitialValue(function DocumentPaneProvid
     (patches) => {
       patch.execute(patches, props.initialValue)
     },
-    [patch, props.initialValue]
+    [patch, props.initialValue],
   )
 
   if (!schemaType) {

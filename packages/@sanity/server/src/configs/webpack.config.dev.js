@@ -25,7 +25,7 @@ export default (config) => {
           'react-dom': getModulePath('@hot-loader/react-dom'),
           'webpack-hot-middleware/client': require.resolve('../browser/hot-client'),
         },
-        config.isSanityMonorepo ? getMonorepoAliases() : {}
+        config.isSanityMonorepo ? getMonorepoAliases() : {},
       ),
       extensions: baseConfig.resolve.extensions,
     },

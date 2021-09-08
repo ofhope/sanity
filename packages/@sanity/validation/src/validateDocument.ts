@@ -23,7 +23,7 @@ const isNonNullable = <T>(value: T): value is NonNullable<T> =>
  */
 export function resolveTypeForArrayItem(
   item: unknown,
-  candidates: SchemaType[]
+  candidates: SchemaType[],
 ): SchemaType | undefined {
   // if there is only one type available, assume that it's the correct one
   if (candidates.length === 1) return candidates[0]
@@ -45,7 +45,7 @@ export function resolveTypeForArrayItem(
 
 export default async function validateDocument(
   doc: SanityDocument,
-  schema: Schema
+  schema: Schema,
 ): Promise<ValidationMarker[]> {
   const documentType = schema.get(doc._type)
   if (!documentType) {
@@ -105,7 +105,7 @@ export async function validateItem({
       parent,
       path,
       type,
-    })
+    }),
   )
 
   // run validation for nested values (conditionally)
@@ -143,7 +143,7 @@ export async function validateItem({
               type: fieldType,
             })
           })
-        })
+        }),
     )
 
     // Validation from each field's schema `validation: Rule => {/* ... */}` function
@@ -155,8 +155,8 @@ export async function validateItem({
           value: isRecord(value) ? value[field.name] : undefined,
           path: path.concat(field.name),
           type: field.type,
-        })
-      )
+        }),
+      ),
     )
   }
 
@@ -175,8 +175,8 @@ export async function validateItem({
           value: item,
           path: path.concat(isKeyedObject(item) ? {_key: item._key} : value.indexOf(item)),
           type: resolveTypeForArrayItem(item, type.of),
-        })
-      )
+        }),
+      ),
     )
   }
 

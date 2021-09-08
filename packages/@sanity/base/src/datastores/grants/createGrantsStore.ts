@@ -65,18 +65,18 @@ export function createGrantsStore(): GrantsStore {
         throw new Error('Missing projectId or dataset')
       }
       return getDatasetGrants(projectId, dataset)
-    })
+    }),
   )
   const currentUserDatasetGrants = debugGrants$.pipe(
     switchMap((debugGrants) => (debugGrants ? of(debugGrants) : datasetGrants$)),
     publishReplay(1),
-    refCountDelay(1000)
+    refCountDelay(1000),
   )
 
   return {
     checkDocumentPermission(permission: DocumentPermissionName, document: SanityDocument) {
       return currentUserDatasetGrants.pipe(
-        switchMap((grants) => grantsPermissionOn(grants, permission, document))
+        switchMap((grants) => grantsPermissionOn(grants, permission, document)),
       )
     },
   }
@@ -92,7 +92,7 @@ export function createGrantsStore(): GrantsStore {
 async function grantsPermissionOn(
   grants: Grant[],
   permission: DocumentPermissionName,
-  document: SanityDocument
+  document: SanityDocument,
 ): Promise<PermissionCheckResult> {
   if (!grants.length) {
     return {granted: false, reason: 'No document grants'}

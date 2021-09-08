@@ -94,7 +94,7 @@ const requestRollCall = () => sendMessage({type: 'rollCall'})
 const rollCallRequests$ = presenceEvents$.pipe(
   filter((event: TransportEvent): event is RollCallEvent => event.type === 'rollCall'),
   // do not respond to my own rollcall requests
-  filter((event: RollCallEvent) => event.sessionId !== SESSION_ID)
+  filter((event: RollCallEvent) => event.sessionId !== SESSION_ID),
 )
 
 const REPORT_MIN_INTERVAL = 30000
@@ -109,7 +109,7 @@ const reportLocation$ = defer(() => merge(locationChange$, rollCallRequests$)).p
   auditTime(200),
   switchMap((locations) => reportLocations(locations)),
   mergeMapTo(EMPTY),
-  share()
+  share(),
 )
 
 // This represents my rollcall request to other clients
@@ -119,15 +119,15 @@ const myRollCall$ = defer(() => requestRollCall()).pipe(mergeMapTo(EMPTY))
 const connectionChange$ = connectionStatus$.pipe(
   map((status) => status.type),
   filter((statusType) => statusType === 'connected' || statusType === 'error'),
-  distinctUntilChanged()
+  distinctUntilChanged(),
 )
 
 const debugParams$ = concat(of(0), fromEvent(window, 'hashchange')).pipe(
-  map(() => document.location.hash.toLowerCase().substring(1).split(';'))
+  map(() => document.location.hash.toLowerCase().substring(1).split(';')),
 )
 const useMock$ = debugParams$.pipe(
   filter((args) => args.includes('give_me_company')),
-  switchMapTo(mock$)
+  switchMapTo(mock$),
 )
 
 const debugIntrospect$ = debugParams$.pipe(map((args) => args.includes('introspect')))
@@ -135,8 +135,8 @@ const debugIntrospect$ = debugParams$.pipe(map((args) => args.includes('introspe
 const syncEvent$ = merge(myRollCall$, presenceEvents$).pipe(
   filter(
     (event: TransportEvent): event is StateEvent | DisconnectEvent =>
-      event.type === 'state' || event.type === 'disconnect'
-  )
+      event.type === 'state' || event.type === 'disconnect',
+  ),
 )
 
 const stateEventToSession = (stateEvent: StateEvent): Session => {
@@ -154,8 +154,8 @@ const states$: Observable<{[sessionId: string]: Session}> = merge(syncEvent$, us
       event.type === 'disconnect'
         ? omit(keyed, event.sessionId)
         : {...keyed, [event.sessionId]: stateEventToSession(event)},
-    {}
-  )
+    {},
+  ),
 )
 
 const allSessions$: Observable<UserSessionPair[]> = connectionChange$.pipe(
@@ -170,22 +170,22 @@ const allSessions$: Observable<UserSessionPair[]> = connectionChange$.pipe(
             // eslint-disable-next-line max-nested-callbacks
             user: users.find((res) => res.id === session.userId) as User,
             session: session,
-          })
-        )
-      )
+          }),
+        ),
+      ),
     )
   }),
   takeUntil(
-    fromEvent(window, 'beforeunload').pipe(switchMap(() => sendMessage({type: 'disconnect'})))
+    fromEvent(window, 'beforeunload').pipe(switchMap(() => sendMessage({type: 'disconnect'}))),
   ),
-  shareReplay({refCount: true, bufferSize: 1})
+  shareReplay({refCount: true, bufferSize: 1}),
 )
 
 export const globalPresence$: Observable<GlobalPresence[]> = allSessions$.pipe(
   map((sessions): {user: User; sessions: Session[]}[] => {
     const grouped = groupBy(
       sessions.map((s) => s.session),
-      (e) => e.userId
+      (e) => e.userId,
     )
 
     return Object.keys(grouped).map((userId): {user: User; sessions: Session[]} => ({
@@ -203,7 +203,7 @@ export const globalPresence$: Observable<GlobalPresence[]> = allSessions$.pipe(
       const isCurrent = userAndSession.sessions.some((sess) => sess.sessionId === SESSION_ID)
 
       return !isCurrent
-    })
+    }),
   ),
   map((userAndSessions) =>
     userAndSessions.map((userAndSession) => ({
@@ -218,8 +218,8 @@ export const globalPresence$: Observable<GlobalPresence[]> = allSessions$.pipe(
           lastActiveAt: location.lastActiveAt,
         }))
         .reduce((prev, curr) => prev.concat(curr), [] as PresenceLocation[]),
-    }))
-  )
+    })),
+  ),
 )
 
 export const documentPresence = (documentId: string): Observable<DocumentPresence[]> => {
@@ -228,7 +228,7 @@ export const documentPresence = (documentId: string): Observable<DocumentPresenc
     switchMap(([userAndSessions, debugIntrospect]) =>
       from(userAndSessions).pipe(
         filter(
-          (userAndSession) => debugIntrospect || userAndSession.session.sessionId !== SESSION_ID
+          (userAndSession) => debugIntrospect || userAndSession.session.sessionId !== SESSION_ID,
         ),
         flatMap((userAndSession) =>
           (userAndSession.session.locations || [])
@@ -237,10 +237,10 @@ export const documentPresence = (documentId: string): Observable<DocumentPresenc
               user: userAndSession.user,
               lastActiveAt: userAndSession.session.lastActiveAt,
               path: location.path || [],
-            }))
+            })),
         ),
-        toArray()
-      )
-    )
+        toArray(),
+      ),
+    ),
   )
 }

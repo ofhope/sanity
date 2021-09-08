@@ -26,7 +26,7 @@ const userLoader = new DataLoader(
       .then((response) => userIds.map((id) => response.find((user) => user?.id === id) || null)),
   {
     batchScheduleFn: (cb) => raf(cb),
-  }
+  },
 )
 
 const debugRoles$ = debugRolesParam$.pipe(map(getDebugRolesByNames))
@@ -37,7 +37,7 @@ function fetchCurrentUser(): Observable<CurrentUser | null> {
     userLoader.prime(
       'me',
       // @ts-expect-error although not reflected in typings, priming with a promise is indeed supported, see https://github.com/graphql/dataloader/issues/235#issuecomment-692495153 and this PR for fixing it https://github.com/graphql/dataloader/pull/252
-      currentUserPromise.then((u) => (u ? normalizeOwnUser(u) : null))
+      currentUserPromise.then((u) => (u ? normalizeOwnUser(u) : null)),
     )
     return currentUserPromise
   }).pipe(
@@ -51,10 +51,10 @@ function fetchCurrentUser(): Observable<CurrentUser | null> {
       concat(
         of(user),
         debugRoles$.pipe(
-          map((debugRoles) => (debugRoles.length > 0 ? {...user, roles: debugRoles} : user))
-        )
-      )
-    )
+          map((debugRoles) => (debugRoles.length > 0 ? {...user, roles: debugRoles} : user)),
+        ),
+      ),
+    ),
   )
 }
 
@@ -63,12 +63,12 @@ const currentUser: Observable<CurrentUser | null> = merge(
   refresh$.pipe(switchMap(() => fetchCurrentUser())), // re-fetch as response to request to refresh current user
   logout$.pipe(
     mergeMap(() => authenticationFetcher.logout()),
-    mapTo(null)
-  )
+    mapTo(null),
+  ),
 ).pipe(shareReplay({refCount: true, bufferSize: 1}))
 
 const normalizedCurrentUser = currentUser.pipe(
-  map((user) => (user ? normalizeOwnUser(user) : user))
+  map((user) => (user ? normalizeOwnUser(user) : user)),
 )
 
 function fetchApiEndpoint<T>(endpoint: string, {tag}: {tag: string}): Promise<T> {
@@ -106,7 +106,7 @@ function isUser(thing: any): thing is User {
 
 const currentUserEvents = currentUser.pipe(
   map((user): CurrentUserSnapshot => ({type: 'snapshot', user})),
-  catchError((error: Error) => of({type: 'error', error} as const))
+  catchError((error: Error) => of({type: 'error', error} as const)),
 )
 
 let warned = false
@@ -114,8 +114,8 @@ function getDeprecatedCurrentUserEvents() {
   if (!warned) {
     console.warn(
       `userStore.currentUser is deprecated. Instead use \`userStore.me\`, which is an observable of the current user (or null if not logged in). ${generateHelpUrl(
-        'studio-user-store-currentuser-deprecated'
-      )}`
+        'studio-user-store-currentuser-deprecated',
+      )}`,
     )
     warned = true
   }

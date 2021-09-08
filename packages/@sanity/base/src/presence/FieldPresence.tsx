@@ -124,7 +124,7 @@ export const FieldPresenceInner = memo(function FieldPresenceInner({
                 >
                   {av.element}
                 </div>
-              )
+              ),
           )}
         </div>
       </PresenceTooltip>

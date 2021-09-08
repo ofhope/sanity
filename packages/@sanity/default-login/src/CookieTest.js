@@ -72,7 +72,7 @@ class CookieTest extends PureComponent {
   componentDidMount() {
     this._isMounted = true
     this.popupUrl = `${hostname}/auth/views/cookie/interact?redirectTo=${encodeURIComponent(
-      window.location.toString()
+      window.location.toString(),
     )}`
   }
 
@@ -96,7 +96,7 @@ class CookieTest extends PureComponent {
       .pipe(
         mapTo('Successfully performed the cookie allowal routine'),
         finalize(() => window.location.reload()),
-        catchError((error) => of(error.message))
+        catchError((error) => of(error.message)),
       )
       .subscribe(console.log) // eslint-disable-line no-console
   }

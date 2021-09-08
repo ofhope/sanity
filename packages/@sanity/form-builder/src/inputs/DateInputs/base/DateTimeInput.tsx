@@ -20,7 +20,7 @@ type Props = {
 
 export const DateTimeInput = React.forwardRef(function DateTimeInput(
   props: Props,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {value, inputValue, onInputChange, onChange, selectTime, timeStep, ...rest} = props
 

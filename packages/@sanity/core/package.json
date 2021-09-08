@@ -2,17 +2,6 @@
   "name": "@sanity/core",
   "version": "2.18.0",
   "description": "Sanity core bundle, containing required packages for the development and build process",
-  "main": "lib/index.js",
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "build": "babel src --copy-files --out-dir lib",
-    "clean": "rimraf lib dest",
-    "prebuild": "npm run clean"
-  },
-  "engines": {
-    "node": ">=10.0.0"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -21,6 +10,23 @@
     "content",
     "core"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/core"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/index.js",
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "babel src --copy-files --out-dir lib",
+    "clean": "rimraf lib dest"
+  },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.5",
@@ -76,13 +82,7 @@
     "@types/semver": "^6.2.3",
     "inquirer": "^6.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/core"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/"
+  "engines": {
+    "node": ">=10.0.0"
+  }
 }

@@ -31,7 +31,7 @@ fs.readFile(bundlePath, (bundleErr, bundle) => {
           padding: 1,
           borderColor: 'yellow',
           align: 'right',
-        })
+        }),
       )
     })
   })

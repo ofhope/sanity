@@ -6,6 +6,6 @@ export default Object.assign({}, singletonStructure, {
       setTimeout(resolve, 25, {
         type: 'document',
         options: {id, type: 'someType'},
-      })
+      }),
     ),
 })

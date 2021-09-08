@@ -2,9 +2,27 @@
   "name": "@sanity/schema",
   "version": "2.18.0",
   "description": "",
+  "keywords": [
+    "sanity",
+    "cms",
+    "headless",
+    "realtime",
+    "content",
+    "schema"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/schema"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
   "main": "./lib/_exports/index.js",
   "types": "index.d.ts",
-  "//": "the typesVersion config below is a workaround for TypeScript's lack of support for package exports",
   "typesVersions": {
     "*": {
       "*": [
@@ -19,16 +37,6 @@
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
-  "keywords": [
-    "sanity",
-    "cms",
-    "headless",
-    "realtime",
-    "content",
-    "schema"
-  ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
   "dependencies": {
     "@sanity/generate-help-url": "2.18.0",
     "arrify": "^1.0.1",
@@ -40,13 +48,5 @@
   "devDependencies": {
     "rimraf": "^2.7.1"
   },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/schema"
-  }
+  "//": "the typesVersion config below is a workaround for TypeScript's lack of support for package exports"
 }

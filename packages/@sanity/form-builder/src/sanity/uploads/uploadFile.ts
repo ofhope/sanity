@@ -20,11 +20,11 @@ export default function uploadFile(file: File, options?: UploadOptions): Observa
         set(event.percent, [UPLOAD_STATUS_KEY, 'progress']),
         set(new Date().toISOString(), [UPLOAD_STATUS_KEY, 'updated']),
       ])
-    })
+    }),
   )
 
   return observableOf(createInitialUploadEvent(file)).pipe(
     concat(upload$),
-    concat(observableOf(CLEANUP_EVENT))
+    concat(observableOf(CLEANUP_EVENT)),
   )
 }

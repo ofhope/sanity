@@ -58,7 +58,7 @@ function ValidationStatus(props: ValidationStatusProps & React.HTMLProps<HTMLDiv
         styles.root,
         className,
         hasErrors && styles.error,
-        !hasErrors && hasWarnings && styles.warning
+        !hasErrors && hasWarnings && styles.warning,
       )}
       tabIndex={0}
     >

@@ -11,7 +11,7 @@ const MAX_CONCURRENT_UPLOADS = 4
 function uploadSanityAsset(
   assetType: 'file' | 'image',
   file: File | Blob,
-  options: UploadOptions = {}
+  options: UploadOptions = {},
 ) {
   const extract = options.metadata
   const preserveFilename = options.storeOriginalFilename
@@ -19,11 +19,11 @@ function uploadSanityAsset(
   return hashFile(file).pipe(
     catchError(() =>
       // ignore if hashing fails for some reason
-      observableOf(null)
+      observableOf(null),
     ),
     mergeMap((hash) =>
       // note: the sanity api will still dedupe unique files, but this saves us from uploading the asset file entirely
-      hash ? fetchExisting(`sanity.${assetType}Asset`, hash) : observableOf(null)
+      hash ? fetchExisting(`sanity.${assetType}Asset`, hash) : observableOf(null),
     ),
     mergeMap((existing: FileAsset | ImageAsset | null) => {
       if (existing) {
@@ -54,10 +54,10 @@ function uploadSanityAsset(
                   id: event.body.document._id,
                   asset: event.body.document,
                 }
-              : event
-          )
+              : event,
+          ),
         )
-    })
+    }),
   )
 }
 
@@ -86,7 +86,7 @@ function fetchExisting(type: string, hash: string): Observable<ImageAsset | File
   return versionedClient.observable.fetch(
     '*[_type == $documentType && sha1hash == $hash][0]',
     {documentType: type, hash},
-    {tag: 'asset.find-duplicate'}
+    {tag: 'asset.find-duplicate'},
   )
 }
 
@@ -113,7 +113,7 @@ function hashFile(file: File | Blob): Observable<string | null> {
   }
   return readFile(file).pipe(
     mergeMap((arrayBuffer) => crypto.subtle.digest('SHA-1', arrayBuffer)),
-    map(hexFromBuffer)
+    map(hexFromBuffer),
   )
 }
 

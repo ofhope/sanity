@@ -36,7 +36,7 @@ type Props = {
   regions: ReportedRegionWithRect<FieldPresenceData>[]
   render: (
     regionsWithIntersectionDetails: RegionWithIntersectionDetails[],
-    containerWidth: number
+    containerWidth: number,
   ) => React.ReactNode | null
   children: React.ReactNode
   margins: [number, number, number, number]
@@ -47,7 +47,7 @@ const invert = (num: number) => -num
 
 export const RegionsWithIntersections = React.forwardRef(function RegionsWithIntersections(
   props: Props,
-  ref: any
+  ref: any,
 ) {
   const {regions, render, children, margins} = props
 
@@ -59,7 +59,7 @@ export const RegionsWithIntersections = React.forwardRef(function RegionsWithInt
         rootMargin: margins.map(invert).map(toPx).join(' '),
         threshold: INTERSECTION_THRESHOLDS,
       }),
-    []
+    [],
   )
 
   const [intersections, setIntersections] = React.useState({})

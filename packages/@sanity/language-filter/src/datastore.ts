@@ -32,7 +32,7 @@ const persistOn = (key: string, defaultValue: string[]) => (input$: Observable<s
     startWith(persisted || defaultValue),
     tap((value) => {
       window.localStorage.setItem(key, JSON.stringify(value))
-    })
+    }),
   )
 }
 
@@ -41,7 +41,7 @@ const SUPPORTED_LANG_IDS = config.supportedLanguages.map((lang: SupportedLanguag
 export const selectedLanguages$ = onSelect$.pipe(
   persistOn(
     '@sanity/plugin/language-filter/selected-languages',
-    config.defaultLanguages || SUPPORTED_LANG_IDS
+    config.defaultLanguages || SUPPORTED_LANG_IDS,
   ),
   // constrain persisted/selected languages to the ones currently supported
   map((selectedLangs: SelectedLanguages) => intersection(selectedLangs, SUPPORTED_LANG_IDS)),
@@ -50,13 +50,13 @@ export const selectedLanguages$ = onSelect$.pipe(
     ? map((selectedLangs) => union(selectedLangs, config.defaultLanguages || []))
     : id,
   publishReplay(1),
-  refCount()
+  refCount(),
 )
 
 const defaultFilterField = (
   enclosingType: SchemaType,
   field: ObjectField,
-  selectedLanguages: string[]
+  selectedLanguages: string[],
 ) => !enclosingType.name.startsWith('locale') || selectedLanguages.includes(field.name)
 
 const filterField = config.filterField || defaultFilterField
@@ -65,5 +65,5 @@ export const filterFn$ = selectedLanguages$.pipe(
   map((langs) => {
     return (enclosingType: SchemaType, field: ObjectField) =>
       filterField(enclosingType, field, langs)
-  })
+  }),
 )

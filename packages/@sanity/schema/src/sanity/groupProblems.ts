@@ -4,7 +4,7 @@ import {TypeWithProblems} from './typedefs'
 
 function createTypeWithMembersProblemsAccessor(
   memberPropertyName,
-  getMembers = (type) => get(type, memberPropertyName)
+  getMembers = (type) => get(type, memberPropertyName),
 ) {
   return function getProblems(type, parentPath) {
     const currentPath = [...parentPath, {kind: 'type', type: type.type, name: type.name}]
@@ -86,6 +86,6 @@ export function getTypeProblems(type, path = []): TypeWithProblems[] {
 
 export default function groupProblems(types) {
   return flatten<TypeWithProblems>(types.map((type) => getTypeProblems(type))).filter(
-    (type) => type.problems.length > 0
+    (type) => type.problems.length > 0,
   )
 }

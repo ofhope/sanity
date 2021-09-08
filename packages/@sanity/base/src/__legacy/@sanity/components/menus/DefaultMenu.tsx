@@ -46,7 +46,7 @@ class DefaultMenu extends React.Component<DefaultMenuProps, State> {
 
         return acc.includes(item.group) ? acc : acc.concat(item.group)
       },
-      (props.groups || []).map((group) => group.id)
+      (props.groups || []).map((group) => group.id),
     )
 
     const byGroup = groupBy(props.items, (item) => item.group || ungrouped)
@@ -154,5 +154,5 @@ class DefaultMenu extends React.Component<DefaultMenuProps, State> {
 }
 
 export default (withRouterHOC(
-  enhanceWithClickOutside(DefaultMenu as any)
+  enhanceWithClickOutside(DefaultMenu as any),
 ) as any) as React.ComponentClass<DefaultMenuProps>

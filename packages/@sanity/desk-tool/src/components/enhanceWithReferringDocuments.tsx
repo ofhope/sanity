@@ -9,12 +9,12 @@ export interface WithReferringDocumentsProps {
 }
 
 export function enhanceWithReferringDocuments<ComponentProps extends WithReferringDocumentsProps>(
-  WrappedComponent: React.ComponentType<ComponentProps>
+  WrappedComponent: React.ComponentType<ComponentProps>,
 ): React.ComponentType<
   Omit<ComponentProps, 'referringDocuments' | 'isCheckingReferringDocuments'>
 > {
   function EnhancedWithReferringDocuments(
-    props: Omit<ComponentProps, 'referringDocuments' | 'isCheckingReferringDocuments'>
+    props: Omit<ComponentProps, 'referringDocuments' | 'isCheckingReferringDocuments'>,
   ) {
     const renderChild = (renderProps: {
       isLoading: boolean

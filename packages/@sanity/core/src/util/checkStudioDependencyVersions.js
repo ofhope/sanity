@@ -22,7 +22,9 @@ module.exports = (workDir) => {
 
     const manifestPath = resolveFrom.silent(workDir, path.join(pkg.name, 'package.json'))
     const installed = semver.coerce(
-      manifestPath ? readPackageJson(manifestPath).version : dependencies[pkg].replace(/[\D.]/g, '')
+      manifestPath
+        ? readPackageJson(manifestPath).version
+        : dependencies[pkg].replace(/[\D.]/g, ''),
     )
 
     const supported = pkg.supported.join(' || ')
@@ -99,7 +101,7 @@ function listPackages(pkgs) {
       (pkg) =>
         `${pkg.name} (installed: ${pkg.installed}, want: ${
           pkg.deprecatedBelow || pkg.supported.join(' || ')
-        })`
+        })`,
     )
     .join('\n  ')
 }

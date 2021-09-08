@@ -71,7 +71,7 @@ const noop = () => {}
 
 const ObjectInputTester = forwardRef(function ObjectInputTester(
   props: Partial<Omit<Props, 'type'>> & {type: Props['type']},
-  ref: ForwardedRef<any>
+  ref: ForwardedRef<any>,
 ) {
   return (
     <ThemeProvider scheme="light" theme={studioTheme}>
@@ -147,7 +147,7 @@ describe('collapsible fieldset with default options', () => {
       <ObjectInputTester
         focusPath={['collapsibleWithDefaults1']}
         type={schema.get('fieldsetsTest')}
-      />
+      />,
     )
     expect(queryByTestId('input-collapsibleWithDefaults1')).toBeVisible()
   })
@@ -155,7 +155,7 @@ describe('collapsible fieldset with default options', () => {
   it('emits a focus path targeting the field when clicking toggle button', () => {
     const onFocus = jest.fn()
     const {queryByTestId} = render(
-      <ObjectInputTester onFocus={onFocus} type={schema.get('fieldsetsTest')} />
+      <ObjectInputTester onFocus={onFocus} type={schema.get('fieldsetsTest')} />,
     )
     const fieldset = queryByTestId('fieldset-collapsibleWithDefaults')
     expect(fieldset).toBeVisible()
@@ -172,7 +172,7 @@ describe('collapsible fieldset with default options', () => {
   it('toggles collapse/expand despite focus path targeting field inside', () => {
     const innerFieldPath = ['collapsibleWithDefaults1']
     const {queryByTestId, rerender} = render(
-      <ObjectInputTester focusPath={innerFieldPath} type={schema.get('fieldsetsTest')} />
+      <ObjectInputTester focusPath={innerFieldPath} type={schema.get('fieldsetsTest')} />,
     )
 
     const fieldset = queryByTestId('fieldset-collapsibleWithDefaults')
@@ -211,7 +211,7 @@ describe('collapsible fieldset with default options', () => {
         onFocus={onFocus}
         focusPath={['collapsibleWithDefaults1']}
         type={schema.get('fieldsetsTest')}
-      />
+      />,
     )
     const fieldset = queryByTestId('fieldset-collapsibleWithDefaults')
 

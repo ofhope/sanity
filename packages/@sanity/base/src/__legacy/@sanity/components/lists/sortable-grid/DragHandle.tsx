@@ -13,7 +13,7 @@ const DragHandle = forwardRef(
     <div {...props} className={classNames(styles.root, props.className)} ref={ref}>
       <DragHandleIcon />
     </div>
-  )
+  ),
 )
 
 DragHandle.displayName = 'DragHandle'

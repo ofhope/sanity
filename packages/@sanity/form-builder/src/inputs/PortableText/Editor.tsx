@@ -81,7 +81,7 @@ function PortableTextSanityEditor(props: Props) {
   // eslint-disable-next-line no-unused-vars
   const handleOpenObjectHotkey = (
     event: React.BaseSyntheticEvent,
-    ptEditor: PortableTextEditor
+    ptEditor: PortableTextEditor,
   ) => {
     const selection = PortableTextEditor.getSelection(ptEditor)
     if (selection) {
@@ -169,7 +169,7 @@ function PortableTextSanityEditor(props: Props) {
         value={value}
       />
     ),
-    [isFullscreen, value]
+    [isFullscreen, value],
   )
 
   // Needed for rendering the overlay in the correct place when toggling fullscreen.
@@ -241,7 +241,7 @@ function PortableTextSanityEditor(props: Props) {
         </div>
       </div>
     ),
-    [initialSelection, isFullscreen, value, readOnly, forceUpdate]
+    [initialSelection, isFullscreen, value, readOnly, forceUpdate],
   )
   return _editor
 }

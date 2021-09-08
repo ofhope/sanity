@@ -4,7 +4,7 @@ type ClickOutsideListener = (event: Event) => void
 
 export function useClickOutside(
   listener: ClickOutsideListener,
-  elementsArg: Array<HTMLElement | null> = []
+  elementsArg: Array<HTMLElement | null> = [],
 ) {
   const [element, setElement] = useState<HTMLElement | null>(null)
   const elements = [element, ...elementsArg]

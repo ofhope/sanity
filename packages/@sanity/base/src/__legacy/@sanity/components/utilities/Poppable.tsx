@@ -44,7 +44,7 @@ const PoppableChildren = forwardRef(
       onClickOutside?: (ev: MouseEvent) => void
       popperClassName?: string
     } & React.HTMLProps<HTMLDivElement>,
-    ref
+    ref,
   ) => {
     const {children, onEscape, onClickOutside, popperClassName, ...restProps} = props
     const {isTopLayer} = useLayer()
@@ -56,7 +56,7 @@ const PoppableChildren = forwardRef(
         if (typeof ref === 'function') ref(el)
         else if (ref) ref.current = el
       },
-      [ref]
+      [ref],
     )
 
     useClickOutside(
@@ -64,7 +64,7 @@ const PoppableChildren = forwardRef(
         if (!isTopLayer) return
         if (onClickOutside) onClickOutside(event as MouseEvent)
       },
-      [rootElement]
+      [rootElement],
     )
 
     useEffect(() => {
@@ -89,7 +89,7 @@ const PoppableChildren = forwardRef(
         {children}
       </div>
     )
-  }
+  },
 )
 
 PoppableChildren.displayName = 'PoppableChildren'

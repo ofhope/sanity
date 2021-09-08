@@ -62,7 +62,7 @@ PartResolverPlugin.prototype.apply = function (compiler) {
     return extractCssCustomProperties(basePath, impl[0].path, isSanityMonorepo).then(
       (cssCustomProperties) => {
         instance.sanity.cssCustomProperties = cssCustomProperties
-      }
+      },
     )
   }
 
@@ -85,7 +85,7 @@ PartResolverPlugin.prototype.apply = function (compiler) {
             request: request,
           }),
           null,
-          callback
+          callback,
         )
       }
 
@@ -98,7 +98,7 @@ PartResolverPlugin.prototype.apply = function (compiler) {
             request: request,
           }),
           null,
-          callback
+          callback,
         )
       }
 
@@ -111,7 +111,7 @@ PartResolverPlugin.prototype.apply = function (compiler) {
             request: request,
           }),
           null,
-          callback
+          callback,
         )
       }
 
@@ -144,7 +144,7 @@ PartResolverPlugin.prototype.apply = function (compiler) {
             target,
             {request: unimplementedPart, path: unimplementedPart},
             null,
-            callback
+            callback,
           )
         }
 

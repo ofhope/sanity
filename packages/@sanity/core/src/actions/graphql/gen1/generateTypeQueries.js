@@ -12,7 +12,7 @@ function pluralizeTypeName(name) {
 function generateTypeQueries(types, filters) {
   const queries = []
   const queryable = types.filter(
-    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document')
+    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document'),
   )
 
   // Single ID-based result lookup queries

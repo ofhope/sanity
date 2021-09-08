@@ -31,7 +31,7 @@ function ValidationListItem(props: ValidationListItemProps) {
         onClick(marker.path)
       }
     },
-    [marker.path, onClick]
+    [marker.path, onClick],
   )
 
   const handleClick = useCallback(() => {
@@ -65,7 +65,7 @@ function ValidationListItem(props: ValidationListItemProps) {
     hasOnClick ? styles.interactive : styles.root,
     marker.level && styles[marker.level],
     truncate && styles.truncate,
-    styles[`kind_${kind}`]
+    styles[`kind_${kind}`],
   )
 
   if (!hasOnClick) {

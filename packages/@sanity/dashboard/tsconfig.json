@@ -1,17 +1,16 @@
 {
-    "extends": "../../../tsconfig",
-    "include": ["src"],
-    "compilerOptions": {
-      "composite": true,
-      "outDir": "./dist/dts",
-      "rootDir": "./src",
-      "jsx": "react",
-      "noImplicitAny": false
-    },
-    "references": [
-      {
-        "path": "../base"
-      },
-    ]
-  }
-
+  "extends": "../../../tsconfig",
+  "include": ["src"],
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist/dts",
+    "rootDir": "./src",
+    "jsx": "react",
+    "noImplicitAny": false
+  },
+  "references": [
+    {
+      "path": "../base"
+    }
+  ]
+}

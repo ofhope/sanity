@@ -25,8 +25,8 @@ export default function apply(value, patch) {
   if (!SUPPORTED_PATCH_TYPES.includes(patch.type)) {
     throw new Error(
       `Received patch of unsupported type: "${JSON.stringify(
-        patch.type
-      )}" for primitives. This is most likely a bug.`
+        patch.type,
+      )}" for primitives. This is most likely a bug.`,
     )
   }
 
@@ -36,7 +36,7 @@ export default function apply(value, patch) {
         patch.type
       }" and path "${patch.path
         .map((path) => JSON.stringify(path))
-        .join('.')} that targeted the value "${JSON.stringify(value)}"`
+        .join('.')} that targeted the value "${JSON.stringify(value)}"`,
     )
   }
 

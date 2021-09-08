@@ -83,7 +83,7 @@ const EMPTY_ARRAY = []
 export const FormFieldSet = forwardRef(
   (
     props: FormFieldSetProps & Omit<React.HTMLProps<HTMLDivElement>, 'as' | 'height' | 'ref'>,
-    ref: React.ForwardedRef<HTMLDivElement>
+    ref: React.ForwardedRef<HTMLDivElement>,
   ) => {
     const {
       __unstable_changeIndicator: changeIndicator = false,
@@ -119,7 +119,7 @@ export const FormFieldSet = forwardRef(
           if (onFocus) onFocus(event)
         }
       },
-      [forwardedRef, onFocus]
+      [forwardedRef, onFocus],
     )
 
     const content = useMemo(() => {
@@ -193,7 +193,7 @@ export const FormFieldSet = forwardRef(
         </Content>
       </Root>
     )
-  }
+  },
 )
 
 FormFieldSet.displayName = 'FormFieldSet'

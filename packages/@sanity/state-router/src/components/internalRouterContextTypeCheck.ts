@@ -3,7 +3,7 @@ export default function internalRouterContextTypeCheck(context, propName, compon
     throw new Error(
       'The router is accessed outside the context of a <RouterProvider>.' +
         ' No router state will be accessible and links will not go anywhere. To fix this,' +
-        ` make sure ${componentName} is rendered in the context of a <RouterProvider /> element`
+        ` make sure ${componentName} is rendered in the context of a <RouterProvider /> element`,
     )
   }
 }

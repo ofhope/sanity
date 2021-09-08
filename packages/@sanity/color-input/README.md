@@ -20,8 +20,8 @@ Use it in your schema types:
     {
       name: 'favoriteColor',
       title: 'Favorite color',
-      type: 'color'
-    }
+      type: 'color',
+    },
   ]
 }
 ```

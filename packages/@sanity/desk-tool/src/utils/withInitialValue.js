@@ -34,8 +34,8 @@ const withInitialValue = (Pane) => {
         return merge(
           observePaths(getDraftId(options.id), ['_type']).pipe(map((draft) => ({draft}))),
           observePaths(getPublishedId(options.id), ['_type']).pipe(
-            map((published) => ({published}))
-          )
+            map((published) => ({published})),
+          ),
         ).pipe(
           scan((prev, res) => ({...prev, ...res}), {}),
           // Wait until we know the state of both draft and published
@@ -57,7 +57,7 @@ const withInitialValue = (Pane) => {
               return of(
                 <BrokenReferences document={{}} type={documentType} schema={schema}>
                   <Pane {...paneProps} options={paneOptions} />
-                </BrokenReferences>
+                </BrokenReferences>,
               )
             }
 
@@ -74,15 +74,15 @@ const withInitialValue = (Pane) => {
                   /* eslint-enable no-console */
 
                   return of({resolveError})
-                })
-              )
+                }),
+              ),
             ).pipe(
               switchMap(({isResolving, initialValue, resolveError}) => {
                 if (resolveError) {
                   return of(
                     <ErrorPane {...props} title="Failed to resolve initial value">
                       <p>Check developer console for details</p>
-                    </ErrorPane>
+                    </ErrorPane>,
                   )
                 }
 
@@ -96,14 +96,14 @@ const withInitialValue = (Pane) => {
                     <BrokenReferences document={initialValue} type={documentType} schema={schema}>
                       <Pane {...paneProps} initialValue={initialValue} options={paneOptions} />
                     </BrokenReferences>
-                  )
+                  ),
                 )
-              })
+              }),
             )
-          })
+          }),
         )
-      })
-    )
+      }),
+    ),
   )
 
   const WithInitialValueWrapper = (props) => (
@@ -127,7 +127,7 @@ function getInitialValueProps(document, props, paneContext) {
   if (urlTemplate && definedTemplate && definedTemplate !== urlTemplate) {
     // eslint-disable-next-line no-console
     console.warn(
-      `Conflicting templates: URL says "${urlTemplate}", structure node says "${definedTemplate}". Using "${definedTemplate}".`
+      `Conflicting templates: URL says "${urlTemplate}", structure node says "${definedTemplate}". Using "${definedTemplate}".`,
     )
   }
 
@@ -155,7 +155,7 @@ function resolveInitialValueWithParameters(templateName, parameters) {
   }
 
   return from(resolveInitialValue(schema, getTemplateById(templateName), parameters)).pipe(
-    map((initialValue) => ({isResolving: false, initialValue}))
+    map((initialValue) => ({isResolving: false, initialValue})),
   )
 }
 

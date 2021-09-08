@@ -7,6 +7,6 @@ import {memoizedPair} from './memoizedPair'
 // that specifies which version (draft|published) the event is about
 export function documentEvents(idPair: IdPair) {
   return memoizedPair(idPair).pipe(
-    switchMap(({draft, published}) => merge(draft.events, published.events))
+    switchMap(({draft, published}) => merge(draft.events, published.events)),
   )
 }

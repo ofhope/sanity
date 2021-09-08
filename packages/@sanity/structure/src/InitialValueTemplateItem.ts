@@ -77,7 +77,7 @@ export class InitialValueTemplateItemBuilder implements Serializable {
         '`id` is required for initial value template item nodes',
         path,
         index,
-        hint
+        hint,
       ).withHelpUrl(HELP_URL.ID_REQUIRED)
     }
 
@@ -86,7 +86,7 @@ export class InitialValueTemplateItemBuilder implements Serializable {
         'template id (`templateId`) is required for initial value template item nodes',
         path,
         id,
-        hint
+        hint,
       ).withHelpUrl(HELP_URL.ID_REQUIRED)
     }
 
@@ -106,7 +106,7 @@ export class InitialValueTemplateItemBuilder implements Serializable {
 }
 
 export function defaultInitialValueTemplateItems(
-  schema: Schema = getDefaultSchema()
+  schema: Schema = getDefaultSchema(),
 ): InitialValueTemplateItemBuilder[] {
   const templates = getTemplates()
     // Don't list templates that require parameters
@@ -117,7 +117,7 @@ export function defaultInitialValueTemplateItems(
   // Sort templates by their schema type, in order or definition
   const typeNames = schema.getTypeNames()
   const ordered = templates.sort(
-    (a, b) => typeNames.indexOf(a.schemaType) - typeNames.indexOf(b.schemaType)
+    (a, b) => typeNames.indexOf(a.schemaType) - typeNames.indexOf(b.schemaType),
   )
 
   // Create actual template items out of the templates
@@ -127,13 +127,13 @@ export function defaultInitialValueTemplateItems(
 export function maybeSerializeInitialValueTemplateItem(
   item: InitialValueTemplateItem | InitialValueTemplateItemBuilder,
   index: number,
-  path: SerializePath
+  path: SerializePath,
 ): InitialValueTemplateItem {
   return item instanceof InitialValueTemplateItemBuilder ? item.serialize({path, index}) : item
 }
 
 export function menuItemsFromInitialValueTemplateItems(
-  templateItems: InitialValueTemplateItem[]
+  templateItems: InitialValueTemplateItem[],
 ): MenuItem[] {
   return templateItems.map((item) => {
     const tpl = getTemplateById(item.templateId)

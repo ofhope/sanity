@@ -17,7 +17,7 @@ export const getDefaultDocumentNode = ({schemaType}) => {
       S.view.form().icon(EditIcon),
       schemaType === 'author' &&
         S.view.component(DeveloperPreview).options({some: 'option'}).icon(EyeIcon).title('Preview'),
-    ].filter(Boolean)
+    ].filter(Boolean),
   )
 }
 
@@ -41,8 +41,8 @@ export default () =>
               options: {
                 filter: 'defined(title)',
               },
-            })
-          )
+            }),
+          ),
         ),
 
       S.listItem()
@@ -50,9 +50,9 @@ export default () =>
         .child(
           delay(
             S.editor({id: 'editor', options: {id: 'circular', type: 'referenceTest'}}).title(
-              'Specific title!'
-            )
-          )
+              'Specific title!',
+            ),
+          ),
         )
         .showIcon(false),
 
@@ -65,7 +65,7 @@ export default () =>
             .options({pass: 'through'})
             .menuItems([
               S.menuItem().title('Reload').action('reload').icon(RefreshIcon).showAsAction(true),
-            ])
+            ]),
         ),
       S.listItem()
         .title('Deep')
@@ -75,7 +75,7 @@ export default () =>
             .items([
               S.documentTypeListItem('book').title('Books'),
               S.documentTypeListItem('author').title('Authors'),
-            ])
+            ]),
         ),
       S.listItem()
         .title('Deep panes')
@@ -108,15 +108,15 @@ export default () =>
                                             .title('Depth 5')
                                             .items([
                                               S.documentListItem().id('grrm').schemaType('author'),
-                                            ])
+                                            ]),
                                         ),
-                                    ])
+                                    ]),
                                 ),
-                            ])
+                            ]),
                         ),
-                    ])
+                    ]),
                 ),
-            ])
+            ]),
         ),
 
       S.listItem({
@@ -142,7 +142,7 @@ export default () =>
               .title('Books by author')
               .filter('_type == $type && author._ref == $authorId')
               .params({type: 'book', authorId})
-              .initialValueTemplates([S.initialValueTemplateItem('book-by-author', {authorId})])
+              .initialValueTemplates([S.initialValueTemplateItem('book-by-author', {authorId})]),
           ),
       }),
 
@@ -157,7 +157,7 @@ export default () =>
             .title('Unspecified books list')
             .menuItems(S.documentTypeList('book').getMenuItems())
             .filter('_type == $type')
-            .params({type: 'book'})
+            .params({type: 'book'}),
         ),
 
       S.documentTypeListItem('sanity.imageAsset').title('Images').icon(ImagesIcon),

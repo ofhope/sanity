@@ -139,7 +139,7 @@ export default class FileInput extends React.PureComponent<Props, FileInputState
     // value and remove it for us
     const allKeys = Object.keys(value || {})
     const remainingKeys = allKeys.filter(
-      (key) => !['_type', '_key', '_upload', 'asset'].includes(key)
+      (key) => !['_type', '_key', '_upload', 'asset'].includes(key),
     )
 
     const isEmpty = remainingKeys.length === 0
@@ -371,8 +371,8 @@ export default class FileInput extends React.PureComponent<Props, FileInputState
       event.prepend(
         setIfMissing({
           _type: type.name,
-        })
-      )
+        }),
+      ),
     )
   }
   handleStartAdvancedEdit = () => {
@@ -523,7 +523,7 @@ export default class FileInput extends React.PureComponent<Props, FileInputState
     const {isAdvancedEditOpen, hoveringFiles, selectedAssetSource} = this.state
     const [highlightedFields, otherFields] = partition(
       type.fields.filter((field) => !HIDDEN_FIELDS.includes(field.name)),
-      'type.options.isHighlighted'
+      'type.options.isHighlighted',
     )
     const accept = get(type, 'options.accept', '')
 

@@ -15,7 +15,7 @@ export function getTimelineEventIconComponent(type: ChunkType): IconComponent | 
 
 export function sinceTimelineProps(
   since: Chunk,
-  rev: Chunk
+  rev: Chunk,
 ): {
   topSelection: Chunk
   bottomSelection: Chunk
@@ -29,7 +29,7 @@ export function sinceTimelineProps(
 }
 
 export function revTimelineProps(
-  rev: Chunk
+  rev: Chunk,
 ): {
   topSelection: Chunk
   bottomSelection: Chunk

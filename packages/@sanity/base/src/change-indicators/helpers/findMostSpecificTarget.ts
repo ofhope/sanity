@@ -5,7 +5,7 @@ import {TrackedChange, TrackedArea} from '../'
 export function findMostSpecificTarget(
   targetType: 'change' | 'field',
   id: string,
-  values: Map<string, TrackedChange | TrackedArea>
+  values: Map<string, TrackedChange | TrackedArea>,
 ): TrackedChange | undefined {
   const path = PathUtils.fromString(id.slice(id.indexOf('-') + 1))
   const exactId = `${targetType}-${PathUtils.toString(path)}`

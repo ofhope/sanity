@@ -3,11 +3,11 @@ const {upperFirst} = require('lodash')
 function generateTypeQueries(types, sortings) {
   const queries = []
   const documentTypes = types.filter(
-    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document')
+    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document'),
   )
 
   const documentTypeNames = documentTypes.map((docType) =>
-    JSON.stringify(docType.originalName || docType.name)
+    JSON.stringify(docType.originalName || docType.name),
   )
   const documentsFilter = `_type in [${documentTypeNames.join(', ')}]`
 

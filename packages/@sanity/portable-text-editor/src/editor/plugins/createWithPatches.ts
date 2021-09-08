@@ -54,7 +54,7 @@ export function createWithPatches(
   }: PatchFunctions,
   change$: Subject<EditorChange>,
   portableTextFeatures: PortableTextFeatures,
-  incomingPatches$?: PatchObservable
+  incomingPatches$?: PatchObservable,
 ): (editor: PortableTextSlateEditor) => PortableTextSlateEditor {
   const patchToOperations = createPatchToOperations(portableTextFeatures)
   let previousChildren: (Node | Partial<Node>)[]
@@ -155,7 +155,7 @@ export function createWithPatches(
           previousValue: fromSlateValue(
             previousChildren,
             portableTextFeatures.types.block.name,
-            KEY_TO_VALUE_ELEMENT.get(editor)
+            KEY_TO_VALUE_ELEMENT.get(editor),
           ),
         })
       }
@@ -219,7 +219,7 @@ function adjustSelection(
   editor: Editor,
   patch: Patch,
   previousChildren: (Node | Partial<Node>)[],
-  portableTextFeatures: PortableTextFeatures
+  portableTextFeatures: PortableTextFeatures,
 ): Range | null {
   const selection = editor.selection
   if (selection === null) {

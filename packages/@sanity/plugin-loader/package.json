@@ -2,19 +2,6 @@
   "name": "@sanity/plugin-loader",
   "version": "2.18.0",
   "description": "Monkey-patches node's require algorithm to allow requiring of Sanity parts",
-  "main": "loader.js",
-  "scripts": {
-    "test": "tape test/*.test.js",
-    "coverage": "nyc --reporter=html ava"
-  },
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/plugin-loader"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -26,14 +13,21 @@
     "parts",
     "require"
   ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
+  "homepage": "https://www.sanity.io/",
   "bugs": {
     "url": "https://github.com/sanity-io/sanity/issues"
   },
-  "homepage": "https://www.sanity.io/",
-  "devDependencies": {
-    "tape": "^4.8.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/plugin-loader"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "loader.js",
+  "scripts": {
+    "test": "tape test/*.test.js",
+    "coverage": "nyc --reporter=html ava"
   },
   "dependencies": {
     "@sanity/resolver": "2.18.0",
@@ -41,5 +35,11 @@
     "@sanity/webpack-integration": "2.18.0",
     "css-modules-require-hook": "4.1.0",
     "interop-require": "^1.0.0"
+  },
+  "devDependencies": {
+    "tape": "^4.8.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }

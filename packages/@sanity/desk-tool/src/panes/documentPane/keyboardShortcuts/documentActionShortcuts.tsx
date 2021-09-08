@@ -18,7 +18,7 @@ export interface KeyboardShortcutResponderProps {
 }
 
 function KeyboardShortcutResponder(
-  props: KeyboardShortcutResponderProps & React.HTMLProps<HTMLDivElement>
+  props: KeyboardShortcutResponderProps & React.HTMLProps<HTMLDivElement>,
 ) {
   const {
     actionsBoxElement,
@@ -35,7 +35,7 @@ function KeyboardShortcutResponder(
   const handleKeyDown = useCallback(
     (event) => {
       const matchingStates = states.filter(
-        (state) => state.shortcut && isHotkey(state.shortcut, event)
+        (state) => state.shortcut && isHotkey(state.shortcut, event),
       )
 
       const matchingState = matchingStates[0]
@@ -43,7 +43,7 @@ function KeyboardShortcutResponder(
       if (matchingStates.length > 1) {
         // eslint-disable-next-line no-console
         console.warn(
-          `Keyboard shortcut conflict: More than one document action matches the shortcut "${matchingState.shortcut}"`
+          `Keyboard shortcut conflict: More than one document action matches the shortcut "${matchingState.shortcut}"`,
         )
       }
 
@@ -58,7 +58,7 @@ function KeyboardShortcutResponder(
         onKeyDown(event)
       }
     },
-    [onActionStart, onKeyDown, states]
+    [onActionStart, onKeyDown, states],
   )
 
   return (
@@ -105,7 +105,7 @@ export const DocumentActionShortcuts = React.memo(
         {children}
       </RenderActionCollectionState>
     ) : null
-  }
+  },
 )
 
 DocumentActionShortcuts.displayName = 'DocumentActionShortcuts'

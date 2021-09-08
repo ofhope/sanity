@@ -51,7 +51,7 @@ const migrateNextBatch = async () => {
   }
   console.log(
     `Migrating batch:\n %s`,
-    patches.map((patch) => `${patch.id} => ${JSON.stringify(patch.patch)}`).join('\n')
+    patches.map((patch) => `${patch.id} => ${JSON.stringify(patch.patch)}`).join('\n'),
   )
   const transaction = createTransaction(patches)
   await commitTransaction(transaction)

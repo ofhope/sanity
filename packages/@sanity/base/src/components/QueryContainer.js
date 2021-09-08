@@ -43,17 +43,17 @@ export const getQueryResults = (receivedProps$, options = {}) => {
     map((props) => ({query: props.query, params: props.params})),
     distinctUntilChanged(deepEquals),
     publishReplay(1),
-    refCount()
+    refCount(),
   )
 
   const queryResults$ = queryProps$.pipe(
     switchMap((queryProps) => {
       const query$ = listenQuery(queryProps.query, queryProps.params, options).pipe(
         map(createResultChildProps),
-        share()
+        share(),
       )
       return merge(of({loading: true}).pipe(delay(400), takeUntil(query$)), query$)
-    })
+    }),
   )
 
   return queryResults$.pipe(
@@ -61,10 +61,10 @@ export const getQueryResults = (receivedProps$, options = {}) => {
     catchError((err, caught$) =>
       concat(
         of(createErrorChildProps(err)),
-        merge(fromEvent(window, 'online'), onRetry$).pipe(take(1), mergeMapTo(caught$))
-      )
+        merge(fromEvent(window, 'online'), onRetry$).pipe(take(1), mergeMapTo(caught$)),
+      ),
     ),
-    scan((prev, next) => ({...prev, ...next, onRetry}))
+    scan((prev, next) => ({...prev, ...next, onRetry})),
   )
 }
 
@@ -80,6 +80,6 @@ export default streamingComponent((receivedProps$) => {
       }
 
       return children(queryResult)
-    })
+    }),
   )
 })

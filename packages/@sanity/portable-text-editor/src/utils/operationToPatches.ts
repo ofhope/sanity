@@ -35,12 +35,12 @@ function findBlock(path: Path, value: PortableTextBlock[] | undefined) {
 }
 
 export function createOperationToPatches(
-  portableTextFeatures: PortableTextFeatures
+  portableTextFeatures: PortableTextFeatures,
 ): PatchFunctions {
   function insertTextPatch(
     editor: Editor,
     operation: InsertTextOperation,
-    beforeValue: PortableTextBlock[]
+    beforeValue: PortableTextBlock[],
   ) {
     const block = editor && editor.children[operation.path[0]]
     if (!block) {
@@ -67,7 +67,7 @@ export function createOperationToPatches(
   function removeTextPatch(
     editor: Editor,
     operation: RemoveTextOperation,
-    beforeValue: PortableTextBlock[]
+    beforeValue: PortableTextBlock[],
   ) {
     const block = editor && editor.children[operation.path[0]]
     if (!block) {
@@ -98,7 +98,7 @@ export function createOperationToPatches(
       }
       const setNode = omitBy(
         {...editor.children[operation.path[0]], ...operation.newProperties},
-        isUndefined
+        isUndefined,
       )
       return [
         set(fromSlateValue([setNode], portableTextFeatures.types.block.name)[0], [
@@ -120,7 +120,7 @@ export function createOperationToPatches(
                 'children',
                 {_key: childKey},
                 key,
-              ])
+              ]),
             )
           })
           return patches
@@ -136,7 +136,7 @@ export function createOperationToPatches(
   function insertNodePatch(
     editor: Editor,
     operation: InsertNodeOperation,
-    beforeValue: (Node | Partial<Node>)[]
+    beforeValue: (Node | Partial<Node>)[],
   ): Patch[] {
     const block = beforeValue[operation.path[0]] as PortableTextBlock
     if (operation.path.length === 1) {
@@ -151,7 +151,7 @@ export function createOperationToPatches(
           insert(
             [fromSlateValue([operation.node], portableTextFeatures.types.block.name)[0]],
             position,
-            [{_key: targetKey}]
+            [{_key: targetKey}],
           ),
         ]
       }
@@ -161,7 +161,7 @@ export function createOperationToPatches(
           insert(
             [fromSlateValue([operation.node], portableTextFeatures.types.block.name)[0]],
             'before',
-            [operation.path[0]]
+            [operation.path[0]],
           ),
         ]
       }
@@ -182,7 +182,7 @@ export function createOperationToPatches(
             ],
           },
         ],
-        portableTextFeatures.types.block.name
+        portableTextFeatures.types.block.name,
       )[0].children[0]
       return [
         insert([child], position, [
@@ -196,8 +196,8 @@ export function createOperationToPatches(
     } else {
       throw new Error(
         `Unexpected path encountered: ${JSON.stringify(operation.path)} - ${JSON.stringify(
-          beforeValue
-        )}`
+          beforeValue,
+        )}`,
       )
     }
   }
@@ -205,7 +205,7 @@ export function createOperationToPatches(
   function splitNodePatch(
     editor: Editor,
     operation: SplitNodeOperation,
-    beforeValue: PortableTextBlock[]
+    beforeValue: PortableTextBlock[],
   ) {
     const patches: Patch[] = []
     const splitBlock = editor.children[operation.path[0]]
@@ -234,10 +234,10 @@ export function createOperationToPatches(
       }
       const targetSpans = splitBlock.children.slice(operation.path[1] + 1, operation.path[1] + 2)
       patches.push(
-        insert(targetSpans, 'after', [{_key: splitBlock._key}, 'children', {_key: splitSpan._key}])
+        insert(targetSpans, 'after', [{_key: splitBlock._key}, 'children', {_key: splitSpan._key}]),
       )
       patches.push(
-        set(splitSpan.text, [{_key: splitBlock._key}, 'children', {_key: splitSpan._key}, 'text'])
+        set(splitSpan.text, [{_key: splitBlock._key}, 'children', {_key: splitSpan._key}, 'text']),
       )
       return patches
     }
@@ -247,7 +247,7 @@ export function createOperationToPatches(
   function removeNodePatch(
     _: Editor,
     operation: RemoveNodeOperation,
-    beforeValue: PortableTextBlock[]
+    beforeValue: PortableTextBlock[],
   ) {
     const block = beforeValue[operation.path[0]]
     if (operation.path.length === 1) {
@@ -272,7 +272,7 @@ export function createOperationToPatches(
   function mergeNodePatch(
     editor: Editor,
     operation: MergeNodeOperation,
-    beforeValue: PortableTextBlock[]
+    beforeValue: PortableTextBlock[],
   ) {
     const patches: Patch[] = []
     if (operation.path.length === 1) {
@@ -281,7 +281,7 @@ export function createOperationToPatches(
       if (targetKey) {
         const newBlock = fromSlateValue(
           [editor.children[operation.path[0] - 1]],
-          portableTextFeatures.types.block.name
+          portableTextFeatures.types.block.name,
         )[0]
         patches.push(set(newBlock, [{_key: newBlock._key}]))
         patches.push(unset([{_key: targetKey}]))
@@ -304,7 +304,7 @@ export function createOperationToPatches(
       }
       // Set the merged span with it's new value
       patches.push(
-        set(targetSpan.text, [{_key: block._key}, 'children', {_key: targetSpan._key}, 'text'])
+        set(targetSpan.text, [{_key: block._key}, 'children', {_key: targetSpan._key}, 'text']),
       )
       patches.push(unset([{_key: block._key}, 'children', {_key: mergedSpan._key}]))
     } else {
@@ -316,7 +316,7 @@ export function createOperationToPatches(
   function moveNodePatch(
     editor: Editor,
     operation: MoveNodeOperation,
-    beforeValue: PortableTextBlock[]
+    beforeValue: PortableTextBlock[],
   ) {
     const patches: Patch[] = []
     const block = beforeValue[operation.path[0]]
@@ -327,7 +327,7 @@ export function createOperationToPatches(
       patches.push(
         insert([fromSlateValue([block], portableTextFeatures.types.block.name)[0]], position, [
           {_key: targetBlock._key},
-        ])
+        ]),
       )
     } else if (operation.path.length === 2) {
       const child = block.children[operation.path[1]] as PortableTextChild
@@ -341,7 +341,7 @@ export function createOperationToPatches(
           {_key: targetBlock._key},
           'children',
           {_key: targetChild._key},
-        ])
+        ]),
       )
     }
     return patches

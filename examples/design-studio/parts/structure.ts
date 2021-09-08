@@ -33,7 +33,7 @@ const settingsListItem = S.listItem()
 
 // The default root list items (except custom ones)
 const defaultListItems = S.documentTypeListItems().filter(
-  (listItem: any) => !STRUCTURE_CUSTOM_TYPES.includes(listItem.getId())
+  (listItem: any) => !STRUCTURE_CUSTOM_TYPES.includes(listItem.getId()),
 )
 
 const listExample = S.listItem()
@@ -59,7 +59,7 @@ const listExample = S.listItem()
             },
           }),
         // S.menuItem().title('No action'),
-      ])
+      ]),
   )
 
 const customPaneExample = S.listItem()
@@ -70,7 +70,7 @@ const customPaneExample = S.listItem()
       .title('Custom')
       .child((id) => {
         return S.list().id(id).title(id)
-      })
+      }),
   )
 
 export default () =>

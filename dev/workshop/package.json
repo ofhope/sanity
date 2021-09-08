@@ -1,16 +1,16 @@
 {
-  "private": true,
   "name": "sanity-workshop",
   "version": "2.18.0",
-  "main": "package.json",
+  "private": true,
   "license": "MIT",
+  "main": "package.json",
   "scripts": {
+    "prebuild": "npm run clean && npm run parts:generate",
     "build": "echo '@todo: NODE_ENV=production vite build'",
     "clean": "rimraf parts.ts public",
     "dev": "npm run parts:generate && vite",
     "lint": "eslint . --ext .js,.jsx,.mjs,.ts,.tsx --quiet",
     "parts:generate": "node -r esbuild-register __legacy/gen-parts.ts",
-    "prebuild": "npm run clean && npm run parts:generate",
     "start": "http-server -a localhost -c-0 -p 9009 -s -P http://localhost:9009/index.html? public",
     "type-check": "tsc -b"
   },

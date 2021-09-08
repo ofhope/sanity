@@ -2,11 +2,6 @@
   "name": "@sanity/form-builder",
   "version": "2.18.0",
   "description": "Sanity form builder",
-  "main": "lib/index.js",
-  "scripts": {
-    "clean": "rimraf lib dest",
-    "test": "jest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -15,8 +10,25 @@
     "content",
     "form-builder"
   ],
-  "author": "Sanity.io <hello@sanity.io>",
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/form-builder"
+  },
   "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "clean": "rimraf lib dest",
+    "test": "jest"
+  },
   "dependencies": {
     "@reach/auto-id": "^0.13.2",
     "@sanity/base": "2.18.0",
@@ -73,17 +85,5 @@
     "react": "^16.9 || ^17",
     "react-dom": "^16.9 || ^17",
     "styled-components": "^5.2.0"
-  },
-  "directories": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/form-builder"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/"
+  }
 }

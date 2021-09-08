@@ -7,7 +7,7 @@ import {DeskToolFeatures} from './types'
 export function createDeskToolFeaturesController() {
   // determine if the screen is narrow
   const isNarrowScreen$: Observable<boolean> = windowWidth$.pipe(
-    map((windowWidth: number) => windowWidth < BREAKPOINT_SCREEN_MEDIUM)
+    map((windowWidth: number) => windowWidth < BREAKPOINT_SCREEN_MEDIUM),
   )
 
   // determine if "reviewChanges" are available
@@ -29,7 +29,7 @@ export function createDeskToolFeaturesController() {
       reviewChanges,
       splitPanes,
       splitViews,
-    }))
+    })),
   )
 
   return {state$}

@@ -16,7 +16,7 @@ test('throws if neither action nor intent is set', () => {
 
 test('throws if setting both action AND intent', () => {
   expect(() =>
-    S.menuItem().title('foo').action('foo').intent({type: 'create'}).serialize()
+    S.menuItem().title('foo').action('foo').intent({type: 'create'}).serialize(),
   ).toThrowErrorMatchingSnapshot()
 })
 
@@ -29,7 +29,7 @@ test('builds menu items with setters', () => {
       .icon(() => null)
       .params({foo: 'bar'})
       .showAsAction(false)
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 

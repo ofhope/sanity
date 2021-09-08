@@ -1,8 +1,5 @@
 {
-  "plugins": [
-    "date",
-    "better-date"
-  ],
+  "plugins": ["date", "better-date"],
 
   "env": {
     "development": {

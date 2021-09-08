@@ -55,14 +55,14 @@ export function getValueAtPath(rootValue: unknown, path: Path): unknown {
   if (isKeySegment(segment)) {
     return getValueAtPath(
       Array.isArray(rootValue) ? rootValue.find((item) => item._key === segment._key) : undefined,
-      tail
+      tail,
     )
   }
 
   if (typeof segment === 'string') {
     return getValueAtPath(
       typeof rootValue === 'object' && rootValue !== null ? rootValue[segment] : undefined,
-      tail
+      tail,
     )
   }
 

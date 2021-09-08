@@ -92,7 +92,7 @@ export function ChangeBar(props: {
       onOpenReviewChanges,
       isChanged,
       disabled,
-    ]
+    ],
   )
 
   return (
@@ -105,7 +105,7 @@ export function ChangeBar(props: {
               hover && styles.hover,
               hasFocus && styles.focus,
               isChanged && styles.changed,
-              isReviewChangesOpen && styles.reviewChangesOpen
+              isReviewChangesOpen && styles.reviewChangesOpen,
             )
       }
     >

@@ -30,7 +30,7 @@ export function applyLocalWebpackConfig(sanityWebpackConfig, basePath, mode) {
   } catch (err) {
     console.error(
       'Failed to load custom webpack config file: %s. Using default webpack config.',
-      err.message
+      err.message,
     )
     return sanityWebpackConfig
   }
@@ -47,13 +47,13 @@ export function applyLocalWebpackConfig(sanityWebpackConfig, basePath, mode) {
     }
 
     console.error(
-      'Invalid webpack config after extending Sanity config, did not include "module.rules" array. Using default webpack config.'
+      'Invalid webpack config after extending Sanity config, did not include "module.rules" array. Using default webpack config.',
     )
     return sanityWebpackConfig
   } catch (err) {
     console.error(
       'Failed to extend Sanity webpack config:\n%s\n\nUsing default webpack config.',
-      err.stack
+      err.stack,
     )
     return sanityWebpackConfig
   }

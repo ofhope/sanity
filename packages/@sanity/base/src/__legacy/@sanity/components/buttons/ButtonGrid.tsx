@@ -31,7 +31,7 @@ export default class ButtonGrid extends React.PureComponent<
 
     const className = classNames(
       classNameProp,
-      align === 'start' ? styles.alignStart : styles.alignEnd
+      align === 'start' ? styles.alignStart : styles.alignEnd,
     )
 
     return (

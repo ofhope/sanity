@@ -92,7 +92,7 @@ export const Editor = ({
       }
       return defaultRender(child)
     },
-    []
+    [],
   )
 
   const renderDecorator: RenderDecoratorFunction = useCallback(
@@ -112,7 +112,7 @@ export const Editor = ({
           return defaultRender()
       }
     },
-    []
+    [],
   )
 
   const handleChange = useCallback(
@@ -138,7 +138,7 @@ export const Editor = ({
           throw new Error(`Unhandled editor change ${JSON.stringify(change)}`)
       }
     },
-    [onMutation]
+    [onMutation],
   )
 
   if (!editorId) {

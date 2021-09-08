@@ -30,7 +30,7 @@ const validateFilter = (spec: PartialDocumentList, options: SerializeOptions) =>
       `\`filter\` cannot start with \`${filter[0]}\` - looks like you are providing a query, not a filter`,
       options.path,
       spec.id,
-      spec.title
+      spec.title,
     ).withHelpUrl(HELP_URL.QUERY_PROVIDED_FOR_FILTER)
   }
 
@@ -39,14 +39,14 @@ const validateFilter = (spec: PartialDocumentList, options: SerializeOptions) =>
 
 const resolveDocumentChildForItem: ChildResolver = (
   itemId: string,
-  options: ChildResolverOptions
+  options: ChildResolverOptions,
 ): ItemChild | Promise<ItemChild> | undefined => {
   const parentItem = options.parent as DocumentList
   const schemaType = parentItem.schemaTypeName || resolveTypeForDocument(itemId)
   return Promise.resolve(schemaType).then((schemaType) =>
     schemaType
       ? getDefaultDocumentNode({schemaType, documentId: itemId})
-      : new DocumentBuilder().id('editor').documentId(itemId).schemaType('')
+      : new DocumentBuilder().id('editor').documentId(itemId).schemaType(''),
   )
 }
 
@@ -130,7 +130,7 @@ export class DocumentListBuilder extends GenericListBuilder<
         '`id` is required for document lists',
         options.path,
         options.index,
-        this.spec.title
+        this.spec.title,
       ).withHelpUrl(HELP_URL.ID_REQUIRED)
     }
 
@@ -139,7 +139,7 @@ export class DocumentListBuilder extends GenericListBuilder<
         '`filter` is required for document lists',
         options.path,
         this.spec.id,
-        this.spec.title
+        this.spec.title,
       ).withHelpUrl(HELP_URL.FILTER_REQUIRED)
     }
 
@@ -176,7 +176,7 @@ export class DocumentListBuilder extends GenericListBuilder<
 }
 
 function inferInitialValueTemplates(
-  spec: PartialDocumentList
+  spec: PartialDocumentList,
 ): InitialValueTemplateItem[] | undefined {
   const schema = getDefaultSchema()
   const {schemaTypeName, options} = spec
@@ -200,8 +200,8 @@ function inferInitialValueTemplates(
           type: 'initialValueTemplateItem',
           id: tpl.id,
           templateId: tpl.id,
-        })
-      )
+        }),
+      ),
     )
   }, templateItems)
 }
@@ -215,7 +215,7 @@ function inferTypeName(spec: PartialDocumentList): string | undefined {
 
 export function getTypeNamesFromFilter(
   filter: string,
-  params: {[key: string]: any} = {}
+  params: {[key: string]: any} = {},
 ): string[] {
   let typeNames = getTypeNamesFromEqualityFilter(filter, params)
 
@@ -229,7 +229,7 @@ export function getTypeNamesFromFilter(
 // From _type == "movie" || _type == $otherType
 function getTypeNamesFromEqualityFilter(
   filter: string,
-  params: {[key: string]: any} = {}
+  params: {[key: string]: any} = {},
 ): string[] {
   const pattern = /\b_type\s*==\s*(['"].*?['"]|\$.*?(?:\s|$))|\B(['"].*?['"]|\$.*?(?:\s|$))\s*==\s*_type/g
   const matches: string[] = []
@@ -250,7 +250,7 @@ function getTypeNamesFromEqualityFilter(
 // From _type in ["dog", "cat", $otherSpecies]
 function getTypeNamesFromInTypesFilter(
   filter: string,
-  params: {[key: string]: any} = {}
+  params: {[key: string]: any} = {},
 ): string[] {
   const pattern = /\b_type\s+in\s+\[(.*?)\]/
   const matches = filter.match(pattern)

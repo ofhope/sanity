@@ -35,7 +35,7 @@ export function DocumentHistoryProvider(props: DocumentHistoryProviderProps) {
         documentId,
         client: versionedClient,
       }),
-    [documentId, timeline]
+    [documentId, timeline],
   )!
 
   const {since, rev} = paneRouter.params as Record<string, string | undefined>
@@ -57,7 +57,7 @@ export function DocumentHistoryProvider(props: DocumentHistoryProviderProps) {
         rev: newRev ? newRev : undefined,
       })
     },
-    [paneRouter]
+    [paneRouter],
   )
 
   let displayed = value

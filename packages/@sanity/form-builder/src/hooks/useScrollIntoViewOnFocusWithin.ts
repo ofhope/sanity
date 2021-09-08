@@ -12,7 +12,7 @@ const SCROLL_OPTIONS = {scrollMode: 'if-needed'} as const
  */
 export function useScrollIntoViewOnFocusWithin(
   elementRef: {current: HTMLElement | null},
-  hasFocusWithin: boolean
+  hasFocusWithin: boolean,
 ): void {
   return useDidUpdate(
     hasFocusWithin,
@@ -22,7 +22,7 @@ export function useScrollIntoViewOnFocusWithin(
           scrollIntoView(elementRef.current, SCROLL_OPTIONS)
         }
       },
-      [elementRef]
-    )
+      [elementRef],
+    ),
   )
 }

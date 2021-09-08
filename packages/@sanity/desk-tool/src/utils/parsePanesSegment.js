@@ -25,7 +25,7 @@ function parseChunks(chunks, initial = {}) {
 
       return pane
     },
-    {...initial, params: EMPTY_PARAMS, payload: undefined}
+    {...initial, params: EMPTY_PARAMS, payload: undefined},
   )
 }
 
@@ -68,7 +68,7 @@ export function parsePanesSegment(str) {
           const [id, ...chunks] = segment.split(',')
           return parseChunks(chunks, {id})
         })
-        .map((pane, i, siblings) => (pane.id ? pane : {...pane, id: siblings[0].id}))
+        .map((pane, i, siblings) => (pane.id ? pane : {...pane, id: siblings[0].id})),
     )
     .filter((group) => group.length > 0)
 }

@@ -34,8 +34,8 @@ function warnAboutHiddenTypes() {
   console.warn(
     "👋 Hi there! Looks like you have hidden types configured in your studio's config/@sanity/data-aspects.json" +
       ` This config is now obsolete and should be removed. Read more at ${generateHelpUrl(
-        'toplevel-objects-to-document-type'
-      )}`
+        'toplevel-objects-to-document-type',
+      )}`,
   )
 }
 
@@ -77,7 +77,7 @@ class DataAspectsResolver {
     return this.schema
       .getTypeNames()
       .filter(
-        (typeName) => !isBundledDocType(typeName) && isDocumentType(this.schema.get(typeName))
+        (typeName) => !isBundledDocType(typeName) && isDocumentType(this.schema.get(typeName)),
       )
   }
 

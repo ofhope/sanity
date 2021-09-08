@@ -20,7 +20,7 @@ test('[gradient] throws when creating client without specifying namespace', (t) 
   t.throws(
     () => sanityClient({gradientMode: true}),
     /must contain `namespace`/,
-    'throws on create()'
+    'throws on create()',
   )
   t.end()
 })

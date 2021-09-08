@@ -19,8 +19,8 @@ const getClient = (options) =>
         useCdn: false,
         apiVersion: '1',
       },
-      options
-    )
+      options,
+    ),
   )
 
 const testSse = (onRequest, options) =>
@@ -66,7 +66,7 @@ test('[listener] can listen for mutations', (t) => {
         '?query=*%5B_type%20%3D%3D%20%22beer%22%20%26%26%20title%20%3D%3D%20%24beerName%5D',
         '&%24beerName=%22Headroom%20Double%20IPA%22&includeResult=true',
       ].join(''),
-      'url should be correct'
+      'url should be correct',
     )
 
     channel.send({event: 'mutation', data: eventData})
@@ -81,7 +81,7 @@ test('[listener] can listen for mutations', (t) => {
           t.deepEqual(
             msg,
             assign({}, eventData, {type: 'mutation'}),
-            'event data should be correct'
+            'event data should be correct',
           )
           subscription.unsubscribe()
           server.close()
@@ -109,7 +109,7 @@ test('[listener] listener sends auth token if given (node)', (t) => {
         t.end()
       })
     },
-    {token: 'foobar'}
+    {token: 'foobar'},
   )
     .then(({server, client}) => {
       httpServer = server

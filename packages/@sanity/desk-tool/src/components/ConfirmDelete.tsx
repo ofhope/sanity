@@ -18,7 +18,7 @@ export interface ConfirmDeleteProps extends WithReferringDocumentsProps {
 }
 
 export const ConfirmDelete = enhanceWithReferringDocuments(function ConfirmDelete(
-  props: ConfirmDeleteProps
+  props: ConfirmDeleteProps,
 ) {
   const {
     isCheckingReferringDocuments,

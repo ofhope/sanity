@@ -1,7 +1,7 @@
 {
   "name": "some-project",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
   "description": "Fake project, used for testing",
   "dependencies": {
     "@sanity/base": "^0.999.0",

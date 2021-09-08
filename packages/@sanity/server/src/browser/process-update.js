@@ -25,7 +25,7 @@ const applyOptions = {
   },
   onErrored(data) {
     console.warn(
-      `Ignored an error while updating module ${data.moduleId} (${data.type}): ${data.error.message}`
+      `Ignored an error while updating module ${data.moduleId} (${data.type}): ${data.error.message}`,
     )
   },
 }
@@ -106,7 +106,7 @@ module.exports = function processUpdate(hash, moduleMap, callbacks = {}) {
 
   function logUpdates(updatedModules, renewedModules) {
     const unacceptedModules = updatedModules.filter(
-      (moduleId) => renewedModules && renewedModules.indexOf(moduleId) < 0
+      (moduleId) => renewedModules && renewedModules.indexOf(moduleId) < 0,
     )
 
     if (unacceptedModules.length > 0) {
@@ -114,7 +114,7 @@ module.exports = function processUpdate(hash, moduleMap, callbacks = {}) {
         "[HMR] The following modules couldn't be hot updated: " +
           '(Full reload needed)\n' +
           'This is usually because the modules which have changed ' +
-          '(and their parents) do not know how to hot reload themselves. '
+          '(and their parents) do not know how to hot reload themselves. ',
       )
       unacceptedModules.forEach((moduleId) => {
         console.warn(`[HMR]  - ${normalizeModulePath(moduleMap[moduleId] || moduleId).path}`)
@@ -139,13 +139,13 @@ module.exports = function processUpdate(hash, moduleMap, callbacks = {}) {
 
   function triggerCallbacks(updatedModules, renewedModules) {
     const unacceptedModules = updatedModules.filter(
-      (moduleId) => renewedModules && renewedModules.indexOf(moduleId) < 0
+      (moduleId) => renewedModules && renewedModules.indexOf(moduleId) < 0,
     )
 
     if (unacceptedModules.length > 0) {
       callbacks.handleUnaccepted({
         modules: unacceptedModules.map((moduleId) =>
-          normalizeModulePath(moduleMap[moduleId] || moduleId)
+          normalizeModulePath(moduleMap[moduleId] || moduleId),
         ),
       })
       return
@@ -156,7 +156,7 @@ module.exports = function processUpdate(hash, moduleMap, callbacks = {}) {
     } else {
       callbacks.handleUpdated({
         modules: renewedModules.map((moduleId) =>
-          normalizeModulePath(moduleMap[moduleId] || moduleId)
+          normalizeModulePath(moduleMap[moduleId] || moduleId),
         ),
       })
     }

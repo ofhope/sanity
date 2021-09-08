@@ -129,7 +129,7 @@ function TooltipPopper(
     setArrowElement: (el: HTMLDivElement | null) => void
     setPopperElement: (el: HTMLDivElement | null) => void
     tone?: 'navbar'
-  }
+  },
 ) {
   const {
     arrowStyle,

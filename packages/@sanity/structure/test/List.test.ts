@@ -16,7 +16,7 @@ test('throws if no id is set', () => {
 
 test('builds lists with ID and title through setters', () => {
   expect(
-    S.list({id: 'books', title: 'Books'}).id('authors').title('Authors').serialize()
+    S.list({id: 'books', title: 'Books'}).id('authors').title('Authors').serialize(),
   ).toMatchSnapshot()
 })
 
@@ -25,7 +25,7 @@ test('builds lists with specific items', () => {
     S.list()
       .id('books')
       .items([{id: 'asoiaf-wow', title: 'The Winds of Winter', type: 'listItem'}])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -34,7 +34,7 @@ test('builds lists where items are specified using builder', () => {
     S.list()
       .id('books')
       .items([S.listItem({id: 'foo', title: 'Foo'})])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -43,7 +43,7 @@ test('enforces unique IDs', () => {
     S.list()
       .id('books')
       .items([S.listItem({id: 'foo', title: 'Foo'}), S.listItem().title('Foo')])
-      .serialize()
+      .serialize(),
   ).toThrowErrorMatchingSnapshot()
 })
 
@@ -56,10 +56,10 @@ test('enforces unique IDs (more than one dupe, caps max items)', () => {
           [0, 1, 2, 3, 4, 5, 6, 7].map((i) => [
             S.listItem().title(`Zing ${i}`),
             S.listItem().title(`Zing ${i}`),
-          ])
-        )
+          ]),
+        ),
       )
-      .serialize()
+      .serialize(),
   ).toThrowErrorMatchingSnapshot()
 })
 
@@ -139,7 +139,7 @@ test('can set menu items', () => {
     S.list()
       .id('yeah')
       .menuItems([{title: 'Print', action: noop}])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -148,7 +148,7 @@ test('can set menu items with builder', () => {
     S.list()
       .id('yeah')
       .menuItems([S.menuItem().title('Purge').action(noop)])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -158,7 +158,7 @@ test('can set menu item groups', () => {
       .id('yeah')
       .menuItems([{title: 'Print', action: noop, group: 'old-school'}])
       .menuItemGroups([{title: 'Old-school', id: 'old-school'}])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -168,7 +168,7 @@ test('can set menu items groups with builder', () => {
       .id('yeah')
       .menuItems([S.menuItem().title('Print').action(noop).group('old-school')])
       .menuItemGroups([S.menuItemGroup().id('old-school').title('Old-school')])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 

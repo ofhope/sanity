@@ -109,7 +109,7 @@ function registerLoader(options) {
           request,
           reduceConfig(sanityConfig, env, {
             studioRootPath: basePath,
-          })
+          }),
         )
         return request
       }

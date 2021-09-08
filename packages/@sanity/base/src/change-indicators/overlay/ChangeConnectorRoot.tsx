@@ -30,7 +30,7 @@ function EnabledChangeConnectorRoot({
       onOpenReviewChanges,
       onSetFocus,
     }),
-    [isReviewChangesOpen, onOpenReviewChanges, onSetFocus]
+    [isReviewChangesOpen, onOpenReviewChanges, onSetFocus],
   )
 
   return (

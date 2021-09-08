@@ -21,7 +21,7 @@ interface Props extends Omit<FormFieldSetProps, 'onFocus'> {
  */
 export const ObjectFieldSet = forwardRef(function ObjectFieldSet(
   props: Props,
-  forwardedRef: ForwardedRef<HTMLDivElement>
+  forwardedRef: ForwardedRef<HTMLDivElement>,
 ) {
   const {fieldset, focusPath, children, level, presence, markers, onFocus, ...rest} = props
   const columns = fieldset.options && fieldset.options.columns
@@ -35,7 +35,7 @@ export const ObjectFieldSet = forwardRef(function ObjectFieldSet(
   const childPresence = useMemo(() => {
     return isCollapsed && presence.length > 0
       ? presence.filter(
-          (item) => typeof item.path[0] === 'string' && fieldNames.includes(item.path[0])
+          (item) => typeof item.path[0] === 'string' && fieldNames.includes(item.path[0]),
         )
       : EMPTY_ARRAY
   }, [fieldNames, isCollapsed, presence])
@@ -44,7 +44,7 @@ export const ObjectFieldSet = forwardRef(function ObjectFieldSet(
     return markers.length === 0
       ? markers
       : markers.filter(
-          (item) => typeof item.path[0] === 'string' && fieldNames.includes(item.path[0])
+          (item) => typeof item.path[0] === 'string' && fieldNames.includes(item.path[0]),
         )
   }, [fieldNames, markers])
 
@@ -62,7 +62,7 @@ export const ObjectFieldSet = forwardRef(function ObjectFieldSet(
         setCollapsed(false)
       }
     },
-    [onFocus, fieldNames]
+    [onFocus, fieldNames],
   )
 
   React.useEffect(() => {

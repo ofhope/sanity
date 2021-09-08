@@ -17,13 +17,13 @@ export function createPreviewObserver(
   observePaths: (value: any, paths: Path[]) => any,
   resolveRefType: (
     value: Reference,
-    ownerType: ReferenceSchemaType
-  ) => Observable<SchemaType | undefined>
+    ownerType: ReferenceSchemaType,
+  ) => Observable<SchemaType | undefined>,
 ) {
   return function observeForPreview(
     value: any,
     type: SchemaType,
-    viewOptions?: PrepareViewOptions
+    viewOptions?: PrepareViewOptions,
   ): Observable<PreparedSnapshot> {
     if (isReferenceSchemaType(type)) {
       // if the value is of type reference, but has no _ref property, we cannot prepare any value for the preview
@@ -54,7 +54,7 @@ export function createPreviewObserver(
           }
 
           return observeForPreview(value, refType)
-        })
+        }),
       )
     }
 
@@ -65,7 +65,7 @@ export function createPreviewObserver(
         map((snapshot) => ({
           type: type,
           snapshot: snapshot && prepareForPreview(snapshot, type, viewOptions),
-        }))
+        })),
       )
     }
 

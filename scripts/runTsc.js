@@ -21,7 +21,7 @@ exports.runTsc = function runTsc(projectPath, watch) {
       shell: isWindows,
       cwd: projectPath,
       env: getProjectEnv(projectPath),
-    }
+    },
   )
 
   if (!watch) {
@@ -37,12 +37,12 @@ exports.runTsc = function runTsc(projectPath, watch) {
       through((data, enc, cb) => {
         const stdout = data.toString().trim()
         cb(null, stdout)
-      })
+      }),
     ),
     proc.stderr.pipe(
       through((data, enc, cb) => {
         cb(new Error(data.toString()))
-      })
+      }),
     ),
   ])
 }

@@ -579,7 +579,7 @@ ace.define(
     oop.inherits(GroqHighlightRules, TextHighlightRules)
 
     exports.GroqHighlightRules = GroqHighlightRules
-  }
+  },
 )
 
 ace.define(
@@ -623,5 +623,5 @@ ace.define(
     }.call(Mode.prototype))
 
     exports.Mode = Mode
-  }
+  },
 )

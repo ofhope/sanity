@@ -33,7 +33,7 @@ const MAX_RECURSION_DEPTH = 10
 export function resolveInitialValueForType(
   type: SchemaType,
   params: InitialValueParams = {},
-  maxDepth = MAX_RECURSION_DEPTH
+  maxDepth = MAX_RECURSION_DEPTH,
 ) {
   if (maxDepth <= 0) {
     return undefined
@@ -60,14 +60,14 @@ async function resolveInitialArrayValue(type, params: InitialValueParams, maxDep
                 _key: randomKey(),
               }
             : initialItem
-        })
+        }),
       )
     : undefined
 }
 export async function resolveInitialObjectValue(
   type: ObjectSchemaType,
   params: InitialValueParams,
-  maxDepth: number
+  maxDepth: number,
 ) {
   const initialObject: Record<string, unknown> = {
     ...((await resolveValue(type.initialValue, params)) || {}),
@@ -80,7 +80,7 @@ export async function resolveInitialObjectValue(
       if (initialFieldValue !== undefined && initialFieldValue !== null) {
         fieldValues[field.name] = initialFieldValue
       }
-    })
+    }),
   )
 
   const merged = deepAssign(fieldValues, initialObject)

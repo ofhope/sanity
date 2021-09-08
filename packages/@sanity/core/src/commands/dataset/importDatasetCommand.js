@@ -57,8 +57,8 @@ export default {
     if (!file) {
       throw new Error(
         `Source file name and target dataset must be specified ("sanity dataset import ${chalk.bold(
-          '[file]'
-        )} [dataset]")`
+          '[file]',
+        )} [dataset]")`,
       )
     }
 

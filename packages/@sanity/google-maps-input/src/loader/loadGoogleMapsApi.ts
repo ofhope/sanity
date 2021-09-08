@@ -55,7 +55,7 @@ export function loadGoogleMapsApi(): Observable<GoogleLoadState> {
     source?: string,
     lineno?: number,
     colno?: number,
-    error?: Error
+    error?: Error,
   ) =>
     subject.next({
       loadState: 'loadError',

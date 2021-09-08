@@ -35,7 +35,7 @@ function resolveEnabledStyles(blockType) {
   if (!textStyles || textStyles.length === 0) {
     throw new Error(
       'The style fields need at least one style ' +
-        "defined. I.e: {title: 'Normal', value: 'normal'}."
+        "defined. I.e: {title: 'Normal', value: 'normal'}.",
     )
   }
   return textStyles

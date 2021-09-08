@@ -42,7 +42,7 @@ export default function CorsCheck() {
       setState({
         result: res,
         isLoading: false,
-      })
+      }),
     )
   }, [])
 

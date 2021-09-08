@@ -11,7 +11,7 @@ test('can override defaults', () => {
       .title('Custom editor')
       .id('custom-editor')
       .icon(() => null)
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 

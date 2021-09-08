@@ -71,7 +71,7 @@ const InnerAssetUsageDialog = ({
   useEffect(() => {
     const drafts = referringDocuments.reduce(
       (acc, doc) => (doc._id.startsWith('drafts.') ? acc.concat(doc._id.slice(7)) : acc),
-      []
+      [],
     )
     const documentsWithoutDrafts = referringDocuments.filter((doc) => !drafts.includes(doc._id))
 

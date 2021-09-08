@@ -1,6 +1,7 @@
 # Quickstart
 
 ## Use standalone
+
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -17,21 +18,21 @@ const schema = Schema.compile({
         {
           name: 'title',
           type: 'string',
-          title: 'Book title'
+          title: 'Book title',
         },
         {
           name: 'author',
           type: 'string',
-          title: 'Name of author'
+          title: 'Name of author',
         },
         {
           name: 'isbn',
           type: 'string',
-          title: 'ISBN'
-        }
-      ]
-    }
-  ]
+          title: 'ISBN',
+        },
+      ],
+    },
+  ],
 })
 
 let currentValue = {_type: 'book'}
@@ -44,13 +45,10 @@ function handleChange(event) {
 
 function render() {
   const mountNode = document.getElementById('some-container')
-  ReactDOM.render((
-    <FormBuilder
-      schema={schema}
-      value={currentValue}
-      onChange={handleChange}
-    />
-  ), mountNode)
+  ReactDOM.render(
+    <FormBuilder schema={schema} value={currentValue} onChange={handleChange} />,
+    mountNode,
+  )
 }
 
 // Initial render
@@ -65,16 +63,16 @@ class MyComponent extends React.Component {
     super(...args)
     this.handleChange = this.handleChange.bind(this)
     this.state = {
-      editorValue: {_type: 'book'}
+      editorValue: {_type: 'book'},
     }
   }
-  
+
   handleChange(event) {
     this.setState({editorValue: this.state.editorValue.patch(event.patch)})
   }
 
   render() {
-   return (
+    return (
       <div>
         {/* ... */}
         <FormBuilder schema={schema} value={this.state.editorValue} onChange={this.handleChange} />
@@ -83,4 +81,3 @@ class MyComponent extends React.Component {
   }
 }
 ```
-

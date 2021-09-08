@@ -14,7 +14,7 @@ npm install --save @sanity/webpack-integration
 const sanityWebpack = require('@sanity/webpack-integration/v1')
 const options = {
   basePath: '/path/to/project',
-  env: 'production'
+  env: 'production',
 }
 
 // Get array of plugins required for part loading
@@ -28,8 +28,6 @@ sanityWebpack.getPostcssPlugins(options)
 
 // Get a partial webpack configuration for the Sanity-specific parts. You'll have to merge this with your existing webpack config.
 sanityWebpack.getConfig(options)
-
-
 
 // Less common, but if you need more fine-grained access to internals:
 

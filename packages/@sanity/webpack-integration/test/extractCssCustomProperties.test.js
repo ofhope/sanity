@@ -51,7 +51,7 @@ describe('extract css custom properties', () => {
         `)
 
     expect(spy).toHaveBeenCalledWith(
-      'variable var(--bar) references undeclared variable, "--bar" - skipping'
+      'variable var(--bar) references undeclared variable, "--bar" - skipping',
     )
     spy.mockRestore()
   })

@@ -11,7 +11,7 @@ export const blockValidator: BlockValidator = async (value, context) => {
   }
   if (type.jsonType !== 'object') {
     throw new Error(
-      `Expected schema type with jsonType \`object\` but found \`${type.jsonType}\` instead.`
+      `Expected schema type with jsonType \`object\` but found \`${type.jsonType}\` instead.`,
     )
   }
 
@@ -27,7 +27,7 @@ export const blockValidator: BlockValidator = async (value, context) => {
   const activeAnnotationTypes: any[] = spanType?.annotations.filter((annotation) =>
     // eslint-disable-next-line no-warning-comments
     // @ts-expect-error TODO (eventually): fix these types
-    value.markDefs.map((def) => def._type).includes(annotation.name)
+    value.markDefs.map((def) => def._type).includes(annotation.name),
   )
   const annotationValidations: Promise<ValidationMarker[]>[] = []
   value.markDefs.forEach((markDef: any) => {

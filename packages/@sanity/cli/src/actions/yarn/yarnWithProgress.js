@@ -36,7 +36,7 @@ export default function yarnWithProgress(args, options = {}) {
       cwd: options.rootDir || process.cwd(),
       env: {PATH: [binDir, process.env.PATH].join(path.delimiter)},
     },
-    options.execOpts || {}
+    options.execOpts || {},
   )
 
   const nodePath = process.argv[0]

@@ -1,7 +1,6 @@
 {
   "name": "sanity",
   "private": true,
-  "isSanityMonorepo": true,
   "scripts": {
     "workshop": "cd dev/workshop && npm run dev",
     "bootstrap": "lerna bootstrap && npm run build:cli && npm run package",
@@ -125,5 +124,6 @@
     "stylelint-prettier": "^1.2.0",
     "typescript": "^4.4.2",
     "yarn": "^1.3.2"
-  }
+  },
+  "isSanityMonorepo": true
 }

@@ -47,6 +47,6 @@ export default async (args, context) => {
   }
 
   output.print(
-    `Studio undeploy scheduled. It might take a few minutes before ${url} is unavailable.`
+    `Studio undeploy scheduled. It might take a few minutes before ${url} is unavailable.`,
   )
 }

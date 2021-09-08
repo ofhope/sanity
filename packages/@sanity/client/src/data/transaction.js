@@ -82,13 +82,13 @@ assign(Transaction.prototype, {
     if (!this.client) {
       throw new Error(
         'No `client` passed to transaction, either provide one or pass the ' +
-          'transaction to a clients `mutate()` method'
+          'transaction to a clients `mutate()` method',
       )
     }
 
     return this.client.mutate(
       this.serialize(),
-      assign({transactionId: this.trxId}, defaultMutateOptions, options || {})
+      assign({transactionId: this.trxId}, defaultMutateOptions, options || {}),
     )
   },
 

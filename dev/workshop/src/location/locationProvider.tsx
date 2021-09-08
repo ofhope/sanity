@@ -55,12 +55,12 @@ export function LocationProvider(props: LocationProviderProps): React.ReactEleme
         }
       }
     },
-    [pushState]
+    [pushState],
   )
 
   const contextValue = useMemo(
     () => ({...state, handleLinkClick, pushState, replaceState, segments}),
-    [handleLinkClick, pushState, replaceState, segments, state]
+    [handleLinkClick, pushState, replaceState, segments, state],
   )
 
   return <LocationContext.Provider value={contextValue}>{children}</LocationContext.Provider>

@@ -30,8 +30,8 @@ function handleApiError(errObj, observer) {
   if (errObj.code === 'NOT_FOUND_ERROR') {
     return observer.error(
       new NotFoundError(
-        `An project with label '${config.api.dataset}' not found. Check your project's sanity.json file.`
-      )
+        `An project with label '${config.api.dataset}' not found. Check your project's sanity.json file.`,
+      ),
     )
   }
   return observer.error(new UnknownApiError(errObj))

@@ -18,7 +18,7 @@ export default async function (inputFile) {
     })
   } catch (e) {
     throw new Error(
-      `Failed to minify bundle (${path.basename(inputFile)}):\n\n${e?.message || 'Terser Error'}`
+      `Failed to minify bundle (${path.basename(inputFile)}):\n\n${e?.message || 'Terser Error'}`,
     )
   }
 
@@ -26,7 +26,7 @@ export default async function (inputFile) {
     throw new Error(
       `Failed to minify bundle (${path.basename(inputFile)}):\n\n${
         result.error?.message || 'No code output from Terser.'
-      }`
+      }`,
     )
   }
 

@@ -90,14 +90,14 @@ class SearchContainer extends React.PureComponent<Props, State> {
             of({activeIndex: -1, error: null, value: queryStr, isLoading: true}),
             timer(100).pipe(
               mergeMapTo(searchOrEmpty(queryStr)),
-              map((results: ResultItem[]) => ({results, isLoading: false}))
-            )
-          )
+              map((results: ResultItem[]) => ({results, isLoading: false})),
+            ),
+          ),
         ),
         // catch any error
         catchError((error: Error, caught$) => concat(of({error}), caught$)),
         tap((nextState) => this.setState(nextState as State)),
-        takeUntil(this.componentWillUnmount$.asObservable())
+        takeUntil(this.componentWillUnmount$.asObservable()),
       )
       .subscribe()
 
@@ -249,7 +249,7 @@ class SearchContainer extends React.PureComponent<Props, State> {
             layout="default"
             type={type}
             status={<div className={resultsStyles.itemType}>{type.title}</div>}
-          />
+          />,
         )}
       </IntentLink>
     )

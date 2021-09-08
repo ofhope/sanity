@@ -30,7 +30,7 @@ export function canCreateType(id: string, typeName: string) {
         _id: type.liveEdit ? id : `drafts.${id}`,
         _type: typeName,
       })
-    })
+    }),
   )
 }
 
@@ -44,7 +44,7 @@ export function canCreateAnyOf(types: string[]) {
           ? 'can create at least one document type'
           : 'cannot create any document type',
       }
-    })
+    }),
   )
 }
 
@@ -61,15 +61,15 @@ export function canUpdate(id: string, typeName: string) {
       return type.liveEdit
         ? grantsStore.checkDocumentPermission(
             'update',
-            published || stub(idPair.publishedId, typeName)
+            published || stub(idPair.publishedId, typeName),
           )
         : grantsStore.checkDocumentPermission(
             'update',
             // note: we check against the published document (if it exist) here since that's the
             // document that will be created as new draft when user edits it
-            draft || published || stub(idPair.draftId, typeName)
+            draft || published || stub(idPair.draftId, typeName),
           )
-    })
+    }),
   )
 }
 
@@ -86,7 +86,7 @@ export function canDelete(id: string, typeName: string) {
       return type.liveEdit
         ? grantsStore.checkDocumentPermission('update', published)
         : checkDeletePermission({draft, published})
-    })
+    }),
   )
 }
 
@@ -100,7 +100,7 @@ export function canPublish(id: string, typeName: string) {
     ]),
     switchMap(([draft, published]) => {
       return checkPublishPermission({draft, published})
-    })
+    }),
   )
 }
 
@@ -114,7 +114,7 @@ export function canUnpublish(id: string, typeName: string) {
     ]),
     switchMap(([draft, published]) => {
       return checkUnpublishPermission({draft, published})
-    })
+    }),
   )
 }
 
@@ -123,7 +123,7 @@ export function canDiscardDraft(id: string, typeName: string) {
   return snapshotPair(idPair).pipe(
     mergeMap((pair) => pair.draft.snapshots$),
     map((draft) => draft || stub(idPair.draftId, typeName)),
-    switchMap((draft) => grantsStore.checkDocumentPermission('update', draft))
+    switchMap((draft) => grantsStore.checkDocumentPermission('update', draft)),
   )
 }
 

@@ -135,7 +135,7 @@ class VisionGui extends React.PureComponent {
       },
       () => {
         this.handleQueryExecution()
-      }
+      },
     )
   }
 
@@ -199,7 +199,7 @@ class VisionGui extends React.PureComponent {
         }
 
         this.client.config({apiVersion: this.state.customApiVersion})
-      }
+      },
     )
   }
 
@@ -232,7 +232,7 @@ class VisionGui extends React.PureComponent {
 
     const paramsError = params instanceof Error && params
     const url = this.client.getUrl(
-      this.client.getDataUrl('listen', encodeQueryString(query, params))
+      this.client.getDataUrl('listen', encodeQueryString(query, params)),
     )
     storeState('lastQuery', query)
     storeState('lastParams', rawParams)
@@ -288,7 +288,7 @@ class VisionGui extends React.PureComponent {
     }
 
     const url = this.client.getUrl(
-      this.client.getDataUrl('query', encodeQueryString(query, params))
+      this.client.getDataUrl('query', encodeQueryString(query, params)),
     )
     this.setState({url})
 
@@ -527,7 +527,7 @@ VisionGui.propTypes = {
   datasets: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-    })
+    }),
   ),
 }
 

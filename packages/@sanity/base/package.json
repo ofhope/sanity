@@ -2,9 +2,27 @@
   "name": "@sanity/base",
   "version": "2.18.0",
   "description": "Sanity plugin containing the base components and roles for a Sanity configuration",
+  "keywords": [
+    "sanity",
+    "cms",
+    "headless",
+    "realtime",
+    "content",
+    "base"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/base"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
   "main": "./lib/_exports/index.js",
   "types": "index.d.ts",
-  "//": "the typesVersion config below is a workaround for TypeScript's lack of support for package exports",
   "typesVersions": {
     "*": {
       "__legacy/*": [
@@ -21,25 +39,6 @@
     "prepublishOnly": "node scripts/writeRequiredUIVersion.js",
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/base"
-  },
-  "keywords": [
-    "sanity",
-    "cms",
-    "headless",
-    "realtime",
-    "content",
-    "base"
-  ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/",
   "dependencies": {
     "@juggle/resize-observer": "^3.3.0",
     "@popperjs/core": "^2.5.4",
@@ -111,5 +110,6 @@
     "react": "^16.9 || ^17",
     "react-dom": "^16.9 || ^17",
     "styled-components": "^5.2.0"
-  }
+  },
+  "//": "the typesVersion config below is a workaround for TypeScript's lack of support for package exports"
 }

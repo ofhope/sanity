@@ -12,7 +12,7 @@ async function reinitializePluginConfigs(options, flags = {}) {
   const localChecksums = await getChecksums(workDir)
   const allPlugins = await resolveTree({basePath: workDir, env})
   const pluginsWithDistConfig = (await Promise.all(allPlugins.map(pluginHasDistConfig))).filter(
-    Boolean
+    Boolean,
   )
   const distChecksums = await Promise.all(pluginsWithDistConfig.map(getPluginConfigChecksum))
   const withLocalConfigs = await Promise.all(distChecksums.map(hasLocalConfig))
@@ -23,7 +23,7 @@ async function reinitializePluginConfigs(options, flags = {}) {
 
   function hasLocalConfig(plugin) {
     return localConfigExists(workDir, plugin.name).then((configDeployed) =>
-      Object.assign({}, plugin, {configDeployed})
+      Object.assign({}, plugin, {configDeployed}),
     )
   }
 
@@ -38,7 +38,7 @@ async function reinitializePluginConfigs(options, flags = {}) {
 
     if (!flags.quiet) {
       output.print(
-        `Plugin "${plugin.name}" is missing local configuration file, creating ${prtPath}`
+        `Plugin "${plugin.name}" is missing local configuration file, creating ${prtPath}`,
       )
     }
 
@@ -91,7 +91,7 @@ export async function tryInitializePluginConfigs(options, flags = {}) {
       .catch(() => ({}))
 
     const dependencies = Object.keys(
-      Object.assign({}, manifest.dependencies, manifest.devDependencies)
+      Object.assign({}, manifest.dependencies, manifest.devDependencies),
     )
     const depName = err.plugin[0] === '@' ? err.plugin : `sanity-plugin-${err.plugin}`
     if (dependencies.includes(depName)) {
@@ -117,6 +117,6 @@ function pluginHasDistConfig(plugin) {
 
 function getPluginConfigChecksum(plugin) {
   return generateConfigChecksum(getPluginConfigPath(plugin)).then((configChecksum) =>
-    Object.assign({}, plugin, {configChecksum})
+    Object.assign({}, plugin, {configChecksum}),
   )
 }

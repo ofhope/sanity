@@ -14,7 +14,7 @@ function createRouteFromExample(path, children = []) {
     path,
     children.map(([subPath, subChildren]) => {
       return createRouteFromExample(subPath, subChildren)
-    })
+    }),
   )
 }
 
@@ -56,7 +56,7 @@ function runExample(exampleName) {
           assert.deepEqual(
             actualState,
             expectedState,
-            `Expected state to be ${inspect(expectedState)} but got ${inspect(actualState)}`
+            `Expected state to be ${inspect(expectedState)} but got ${inspect(actualState)}`,
           )
         }
       })
@@ -69,7 +69,7 @@ function runExample(exampleName) {
           assert.deepEqual(
             actualPath,
             expectedPath,
-            `Expected path to be ${inspect(expectedPath)} but got ${inspect(actualPath)}`
+            `Expected path to be ${inspect(expectedPath)} but got ${inspect(actualPath)}`,
           )
         }
       })

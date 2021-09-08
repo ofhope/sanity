@@ -28,10 +28,10 @@ export function hasPTMemberType(schemaType: ArraySchemaType): boolean {
 }
 
 const startMarkSymbols = TextSymbols.DECORATOR_SYMBOLS.map((set) => set[0]).concat(
-  TextSymbols.ANNOTATION_SYMBOLS.map((set) => set[0])
+  TextSymbols.ANNOTATION_SYMBOLS.map((set) => set[0]),
 )
 const endMarkSymbols = TextSymbols.DECORATOR_SYMBOLS.map((set) => set[1]).concat(
-  TextSymbols.ANNOTATION_SYMBOLS.map((set) => set[1])
+  TextSymbols.ANNOTATION_SYMBOLS.map((set) => set[1]),
 )
 const allSymbols = startMarkSymbols
   .concat(endMarkSymbols)
@@ -54,7 +54,7 @@ export function findChildDiff(diff: ObjectDiff, child: PortableTextChild): Objec
   return childrenDiff.items
     .filter(
       (item) =>
-        item.diff.isChanged && (item.diff.toValue === child || item.diff.fromValue === child)
+        item.diff.isChanged && (item.diff.toValue === child || item.diff.fromValue === child),
     )
     .map((item) => item.diff)
     .map((childDiff) => childDiff as ObjectDiff)[0]
@@ -62,7 +62,7 @@ export function findChildDiff(diff: ObjectDiff, child: PortableTextChild): Objec
 
 export function getChildSchemaType(
   fields: ObjectField<SchemaType>[],
-  child: PortableTextChild
+  child: PortableTextChild,
 ): ObjectSchemaType<Record<string, SchemaType>> | undefined {
   const childrenField = fields.find((f) => f.name === 'children')
   const cSchemaType =
@@ -97,7 +97,7 @@ export function blockToSymbolizedText(
   block: PortableTextBlock | undefined,
   decoratorMap: MarkSymbolMap,
   annotationMap: MarkSymbolMap,
-  inlineMap: InlineSymbolMap
+  inlineMap: InlineSymbolMap,
 ): string {
   if (!block) {
     return ''
@@ -140,7 +140,7 @@ export function blockToSymbolizedText(
 
 export function createPortableTextDiff(
   diff: ObjectDiff,
-  schemaType: ObjectSchemaType
+  schemaType: ObjectSchemaType,
 ): PortableTextDiff {
   const displayValue =
     diff.action === 'removed'
@@ -175,14 +175,14 @@ export function createPortableTextDiff(
       _diff.fromValue as PortableTextBlock,
       decoratorMap,
       annotationMap,
-      inlineMap
+      inlineMap,
     )
     const toText = blockToSymbolizedText(
       _diff.origin,
       _diff.toValue as PortableTextBlock,
       decoratorMap,
       annotationMap,
-      inlineMap
+      inlineMap,
     )
     const toPseudoValue = {
       ...displayValue,
@@ -324,7 +324,7 @@ function buildSegments(fromInput: string, toInput: string): StringDiffSegment[] 
         newSegments.push(seg)
       }
       return newSegments
-    })
+    }),
   )
 }
 
@@ -345,7 +345,7 @@ export function getInlineObjects(diff: ObjectDiff): PortableTextChild[] {
 
 export function findSpanDiffFromChild(
   diff: ObjectDiff,
-  child: PortableTextChild
+  child: PortableTextChild,
 ): ObjectDiff | undefined {
   // Find span in original diff which has a string segment similar to the one from the input
   const candidate =
@@ -358,7 +358,7 @@ export function findSpanDiffFromChild(
         item.diff.type === 'object' &&
         (item.diff.action === 'removed'
           ? item.diff.fromValue && item.diff.fromValue._key === child._key
-          : (item.diff.toValue && item.diff.toValue._key) === child._key)
+          : (item.diff.toValue && item.diff.toValue._key) === child._key),
     )
   if (candidate) {
     return candidate.diff as ObjectDiff
@@ -378,7 +378,7 @@ export function findAnnotationDiff(diff: ObjectDiff, markDefKey: string): Object
           ((item.diff.toValue && item.diff.toValue._key && item.diff.toValue._key === markDefKey) ||
             (item.diff.fromValue &&
               item.diff.fromValue._key &&
-              item.diff.fromValue._key === markDefKey))
+              item.diff.fromValue._key === markDefKey)),
       )?.diff) as ObjectDiff) || undefined
   )
 }

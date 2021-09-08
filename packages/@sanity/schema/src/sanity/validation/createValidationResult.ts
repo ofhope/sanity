@@ -28,11 +28,11 @@ export const HELP_IDS = {
 function createValidationResult(
   severity: Severity,
   message: string,
-  helpId: string | null
+  helpId: string | null,
 ): ValidationResult {
   if (helpId && !Object.keys(HELP_IDS).some((id) => HELP_IDS[id] === helpId)) {
     throw new Error(
-      `Used the unknown helpId "${helpId}", please add it to the array in createValidationResult.js`
+      `Used the unknown helpId "${helpId}", please add it to the array in createValidationResult.js`,
     )
   }
   return {

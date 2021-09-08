@@ -12,7 +12,7 @@ export default class CustomMyObjectInput extends React.Component {
   handleChange = (field, event) => {
     const {type, onChange} = this.props
     onChange(
-      PatchEvent.from(setIfMissing({_type: type.name}), set(event.target.value, [field.name]))
+      PatchEvent.from(setIfMissing({_type: type.name}), set(event.target.value, [field.name])),
     )
   }
 

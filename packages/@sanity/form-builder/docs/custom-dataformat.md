@@ -1,1 +1,1 @@
-$type vs _type
+\$type vs \_type

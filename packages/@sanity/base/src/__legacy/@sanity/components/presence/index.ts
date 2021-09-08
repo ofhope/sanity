@@ -3,7 +3,7 @@
 
 // eslint-disable-next-line no-console
 console.warn(
-  'Importing from `@sanity/components/lib/presence` is deprecated - please import from `@sanity/base/presence` instead'
+  'Importing from `@sanity/components/lib/presence` is deprecated - please import from `@sanity/base/presence` instead',
 )
 
 export * from '../../../../presence'

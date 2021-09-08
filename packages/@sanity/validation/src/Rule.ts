@@ -277,7 +277,7 @@ const Rule: RuleClass = class Rule implements IRule {
   regex(
     pattern: RegExp,
     a?: string | {name?: string; invert?: boolean},
-    b?: {name?: string; invert?: boolean}
+    b?: {name?: string; invert?: boolean},
   ): Rule {
     const name = typeof a === 'string' ? a : a?.name ?? b?.name
     const invert = typeof a === 'string' ? false : a?.invert ?? b?.invert
@@ -402,13 +402,13 @@ const Rule: RuleClass = class Rule implements IRule {
           const errorFromException = new ValidationErrorClass(
             `${pathToString(context.path)}: Exception occurred while validating value: ${
               err.message
-            }`
+            }`,
           )
           return convertToValidationMarker(errorFromException, 'error', context)
         }
 
         return convertToValidationMarker(result, this._level, context)
-      })
+      }),
     )
 
     return results.flat()

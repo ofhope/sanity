@@ -25,7 +25,7 @@ const UPLOAD_TEXT: UploaderDef = {
       map((content) => ({
         type: 'uploadEvent',
         patches: [set(content)],
-      }))
+      })),
     ),
   // Todo: promote this to a "first-class" form-builder abstraction
   // and make it possible to register custom uploaders

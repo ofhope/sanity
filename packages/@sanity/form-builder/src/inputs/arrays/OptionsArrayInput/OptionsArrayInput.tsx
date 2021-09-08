@@ -75,7 +75,7 @@ export default class OptionsArrayInput extends React.PureComponent<OptionsArrayI
       .filter((item) =>
         isEqual(optionValue, item)
           ? isChecked
-          : inArray(value, resolveValueWithLegacyOptionsSupport(item))
+          : inArray(value, resolveValueWithLegacyOptionsSupport(item)),
       )
       .map(resolveValueWithLegacyOptionsSupport)
     this.props.onChange(PatchEvent.from(nextValue.length > 0 ? set(nextValue) : unset()))
@@ -85,7 +85,7 @@ export default class OptionsArrayInput extends React.PureComponent<OptionsArrayI
     const {type} = this.props
     return type.of.find(
       (memberType) =>
-        memberType.name === resolveTypeName(resolveValueWithLegacyOptionsSupport(option))
+        memberType.name === resolveTypeName(resolveValueWithLegacyOptionsSupport(option)),
     )
   }
 

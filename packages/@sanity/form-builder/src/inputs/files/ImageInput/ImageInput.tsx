@@ -247,7 +247,7 @@ export default class ImageInput extends React.PureComponent<Props, ImageInputSta
     // the array logic will check for an "empty" value and remove it for us
     const allKeys = Object.keys(value || {})
     const remainingKeys = allKeys.filter(
-      (key) => !['_type', '_key', '_upload', 'asset', 'crop', 'hotspot'].includes(key)
+      (key) => !['_type', '_key', '_upload', 'asset', 'crop', 'hotspot'].includes(key),
     )
 
     const isEmpty = remainingKeys.length === 0
@@ -264,8 +264,8 @@ export default class ImageInput extends React.PureComponent<Props, ImageInputSta
       event.prepend(
         setIfMissing({
           _type: type.name,
-        })
-      )
+        }),
+      ),
     )
   }
 
@@ -615,7 +615,7 @@ export default class ImageInput extends React.PureComponent<Props, ImageInputSta
     const fieldPresence = presence.filter(
       (item) =>
         item.path[0] === 'asset' ||
-        fieldGroups.imageToolAndDialog.some((field) => item.path[0] === field.name)
+        fieldGroups.imageToolAndDialog.some((field) => item.path[0] === field.name),
     )
     const showAdvancedEditButton =
       value && (fieldGroups.dialog.length > 0 || (value?.asset && this.isImageToolEnabled()))

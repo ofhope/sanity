@@ -16,7 +16,7 @@ function toDocument(body) {
     get: () => {
       // eslint-disable-next-line no-console
       console.warn(
-        'The promise returned from client.asset.upload(...) now resolves with the asset document'
+        'The promise returned from client.asset.upload(...) now resolves with the asset document',
       )
       return document
     },
@@ -34,7 +34,7 @@ function optionsFromFile(opts, file) {
       filename: opts.preserveFilename === false ? undefined : file.name,
       contentType: file.type,
     },
-    opts
+    opts,
   )
 }
 
@@ -104,7 +104,7 @@ assign(AssetsClient.prototype, {
       ? observable
           .pipe(
             filter((event) => event.type === 'response'),
-            map((event) => toDocument(event.body))
+            map((event) => toDocument(event.body)),
           )
           .toPromise()
       : observable
@@ -130,13 +130,13 @@ assign(AssetsClient.prototype, {
     const id = ref._ref || ref
     if (typeof id !== 'string') {
       throw new Error(
-        'getImageUrl() needs either an object with a _ref, or a string with an asset document ID'
+        'getImageUrl() needs either an object with a _ref, or a string with an asset document ID',
       )
     }
 
     if (!/^image-[A-Za-z0-9_]+-\d+x\d+-[a-z]{1,5}$/.test(id)) {
       throw new Error(
-        `Unsupported asset ID "${id}". URL generation only works for auto-generated IDs.`
+        `Unsupported asset ID "${id}". URL generation only works for auto-generated IDs.`,
       )
     }
 

@@ -32,8 +32,8 @@ export default class PertEstimateInput extends React.Component {
       PatchEvent.from(
         setIfMissing({_type: type.name}),
         set(event.target.valueAsNumber, [field.name]),
-        calculated ? set(calculated, ['calculated']) : unset(['calculated'])
-      )
+        calculated ? set(calculated, ['calculated']) : unset(['calculated']),
+      ),
     )
   }
 

@@ -88,12 +88,12 @@ export class DocumentPaneItemPreview extends React.Component<
           : observeForPreview(
               // @todo: fix typings
               {_id: getDraftId(value._id)} as any,
-              schemaType
+              schemaType,
             ),
         observeForPreview(
           // @todo: fix typings
           {_id: getPublishedId(value._id)} as any,
-          schemaType
+          schemaType,
         ),
       ]).pipe(
         map(([draft, published]) => ({
@@ -110,8 +110,8 @@ export class DocumentPaneItemPreview extends React.Component<
               }
             : null,
           isLoading: false,
-        }))
-      )
+        })),
+      ),
     ).subscribe((state) => {
       if (sync) {
         this.state = state

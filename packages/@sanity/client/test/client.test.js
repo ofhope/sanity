@@ -121,7 +121,7 @@ test('throws on invalid project ids', (t) => {
 test('throws on invalid dataset names', (t) => {
   t.throws(
     () => sanityClient({projectId: 'abc123', dataset: '*foo*'}),
-    /Datasets can only contain/i
+    /Datasets can only contain/i,
   )
   t.end()
 })
@@ -129,7 +129,7 @@ test('throws on invalid dataset names', (t) => {
 test('throws on invalid request tag prefix', (t) => {
   t.throws(
     () => sanityClient({projectId: 'abc123', dataset: 'foo', requestTagPrefix: 'no#shot'}),
-    /tag can only contain alphanumeric/i
+    /tag can only contain alphanumeric/i,
   )
   t.end()
 })
@@ -137,7 +137,7 @@ test('throws on invalid request tag prefix', (t) => {
 test('accepts alias in dataset field', (t) => {
   t.doesNotThrow(
     () => sanityClient({projectId: 'abc123', dataset: '~alias'}),
-    /Datasets can only contain/i
+    /Datasets can only contain/i,
   )
   t.end()
 })
@@ -170,7 +170,7 @@ test('can use getUrl() to get API-relative paths', (t) => {
 test('can use getUrl() to get API-relative paths (custom api version)', (t) => {
   t.equal(
     getClient({apiVersion: '2019-01-29'}).getUrl('/bar/baz'),
-    `${projectHost()}/v2019-01-29/bar/baz`
+    `${projectHost()}/v2019-01-29/bar/baz`,
   )
   t.end()
 })
@@ -179,17 +179,17 @@ test('validation', (t) => {
   t.doesNotThrow(
     () => validators.validateDocumentId('op', 'barfoo'),
     /document ID in format/,
-    'does not throw on valid ID'
+    'does not throw on valid ID',
   )
   t.doesNotThrow(
     () => validators.validateDocumentId('op', 'bar.foo.baz'),
     /document ID in format/,
-    'does not throw on valid ID'
+    'does not throw on valid ID',
   )
   t.throws(
     () => validators.validateDocumentId('op', 'blah#blah'),
     /not a valid document ID/,
-    'throws on invalid ID'
+    'throws on invalid ID',
   )
   t.end()
 })
@@ -587,7 +587,7 @@ test('throws if trying to perform data request without dataset', (t) => {
   t.throws(
     () => sanityClient({projectId: 'foo'}).fetch('blah'),
     Error,
-    /dataset.*?must be provided/
+    /dataset.*?must be provided/,
   )
   t.end()
 })
@@ -649,7 +649,7 @@ test('can create documents with request tag', (t) => {
   nock(projectHost())
     .post(
       '/v1/data/mutate/foo?tag=dino.import&returnIds=true&returnDocuments=true&visibility=sync',
-      expectedBody
+      expectedBody,
     )
     .reply(200, {
       transactionId: '123abc',
@@ -812,7 +812,7 @@ test('delete() can use request tag', (t) => {
   nock(projectHost())
     .post(
       '/v1/data/mutate/foo?tag=delete.abc&returnIds=true&returnDocuments=true&visibility=sync',
-      expectedBody
+      expectedBody,
     )
     .reply(200, {transactionId: 'abc123', results: [{id: 'abc123', operation: 'delete'}]})
 
@@ -1079,7 +1079,7 @@ test('can apply insert()', (t) => {
 test('throws on invalid insert()', (t) => {
   t.throws(
     () => getClient().patch('abc123').insert('bitter', 'sel', ['raf']),
-    /one of: "before", "after", "replace"/
+    /one of: "before", "after", "replace"/,
   )
 
   t.throws(() => getClient().patch('abc123').insert('before', 123, ['raf']), /must be a string/)
@@ -1159,19 +1159,19 @@ test('all patch methods throw on non-objects being passed as argument', (t) => {
   t.throws(
     () => patch.setIfMissing('foo'),
     /setIfMissing\(\) takes an object of properties/,
-    'setIfMissing throws'
+    'setIfMissing throws',
   )
   t.throws(
     () => patch.replace('foo'),
     /replace\(\) takes an object of properties/,
-    'replace throws'
+    'replace throws',
   )
   t.throws(() => patch.inc('foo'), /inc\(\) takes an object of properties/, 'inc throws')
   t.throws(() => patch.dec('foo'), /dec\(\) takes an object of properties/, 'dec throws')
   t.throws(
     () => patch.diffMatchPatch('foo'),
     /diffMatchPatch\(\) takes an object of properties/,
-    'diffMatchPatch throws'
+    'diffMatchPatch throws',
   )
   t.end()
 })
@@ -1295,7 +1295,7 @@ test('each patch operation returns same patch', (t) => {
   t.deepEqual(
     combined.serialize(),
     {id: 'abc123', inc: {count: 1}, dec: {count: 1}},
-    'combined patch should have both inc and dec ops'
+    'combined patch should have both inc and dec ops',
   )
 
   t.end()
@@ -1315,7 +1315,7 @@ test('patch has toJSON() which serializes patch', (t) => {
   const patch = getClient().patch('abc123').inc({count: 1})
   t.deepEqual(
     JSON.parse(JSON.stringify(patch)),
-    JSON.parse(JSON.stringify({id: 'abc123', inc: {count: 1}}))
+    JSON.parse(JSON.stringify({id: 'abc123', inc: {count: 1}})),
   )
   t.end()
 })
@@ -1325,7 +1325,7 @@ test('Patch is available on client and can be used without instantiated client',
   t.deepEqual(
     patch.inc({foo: 1}).dec({bar: 2}).serialize(),
     {id: 'foo.bar', inc: {foo: 1}, dec: {bar: 2}},
-    'patch should work without context'
+    'patch should work without context',
   )
   t.end()
 })
@@ -1349,7 +1349,7 @@ test('can apply ifRevisionId constraint', (t) => {
   t.deepEqual(
     getClient().patch('abc123').inc({count: 1}).ifRevisionId('someRev').serialize(),
     {id: 'abc123', inc: {count: 1}, ifRevisionID: 'someRev'},
-    'patch should be able to apply ifRevisionId constraint'
+    'patch should be able to apply ifRevisionId constraint',
   )
   t.end()
 })
@@ -1379,7 +1379,7 @@ test('each transaction operation mutates transaction', (t) => {
   t.deepEqual(
     combined.serialize(),
     [{create: {count: 1}}, {delete: {id: 'foobar'}}],
-    'combined transaction should have both create and delete ops'
+    'combined transaction should have both create and delete ops',
   )
 
   t.end()
@@ -1517,12 +1517,12 @@ test('throws when not including document ID in createOrReplace/createIfNotExists
   t.throws(
     () => trans.createIfNotExists({_type: 'movie', a: 1}),
     /contains an ID/,
-    'throws on createIfNotExists()'
+    'throws on createIfNotExists()',
   )
   t.throws(
     () => trans.createOrReplace({_type: 'movie', a: 1}),
     /contains an ID/,
-    'throws on createOrReplace()'
+    'throws on createOrReplace()',
   )
   t.end()
 })
@@ -1547,7 +1547,7 @@ test('Transaction is available on client and can be used without instantiated cl
   t.deepEqual(
     trans.delete('barfoo').serialize(),
     [{delete: {id: 'barfoo'}}],
-    'transaction should work without context'
+    'transaction should work without context',
   )
   t.end()
 })
@@ -1653,7 +1653,7 @@ test('listeners connect to listen endpoint with request tag, emits events', (t) 
 
   nock(projectHost())
     .get(
-      '/v1/data/listen/foo?tag=sfcraft.checkins&query=*%5B_type%20%3D%3D%20%22checkin%22%5D&includeResult=true'
+      '/v1/data/listen/foo?tag=sfcraft.checkins&query=*%5B_type%20%3D%3D%20%22checkin%22%5D&includeResult=true',
     )
     .reply(200, response, {
       'cache-control': 'no-cache',
@@ -1695,7 +1695,7 @@ test('listeners connect to listen endpoint with prefixed request tag, emits even
 
   nock(projectHost())
     .get(
-      '/v1/data/listen/foo?tag=sf.craft.checkins&query=*%5B_type%20%3D%3D%20%22checkin%22%5D&includeResult=true'
+      '/v1/data/listen/foo?tag=sf.craft.checkins&query=*%5B_type%20%3D%3D%20%22checkin%22%5D&includeResult=true',
     )
     .reply(200, response, {
       'cache-control': 'no-cache',
@@ -1836,7 +1836,7 @@ test('uploads images with progress events', (t) => {
     .subscribe(
       (event) => t.equal(event.type, 'progress'),
       ifError(t),
-      () => t.end()
+      () => t.end(),
     )
 })
 

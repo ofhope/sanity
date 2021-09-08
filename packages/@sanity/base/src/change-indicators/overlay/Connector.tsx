@@ -37,14 +37,14 @@ export function Connector({from, to, hovered, focused, revertHovered}: Props) {
     styles.path,
     focused && styles.focused,
     revertHovered && styles.revertHovered,
-    hovered && !focused && !revertHovered && styles.hovered
+    hovered && !focused && !revertHovered && styles.hovered,
   )
 
   const rightBarClassName = classNames(
     styles.rightBar,
     focused && styles.rightBarFocused,
     revertHovered && styles.rightBarRevertHovered,
-    hovered && !focused && !revertHovered && styles.rightBarHovered
+    hovered && !focused && !revertHovered && styles.rightBarHovered,
   )
 
   return (
@@ -71,7 +71,7 @@ export function Connector({from, to, hovered, focused, revertHovered}: Props) {
           d={arrowPath(
             line.from.left + ARROW_MARGIN_X,
             line.from.bounds.top - ARROW_THRESHOLD + ARROW_MARGIN_Y,
-            -1
+            -1,
           )}
           strokeWidth={STROKE_WIDTH}
         />
@@ -83,7 +83,7 @@ export function Connector({from, to, hovered, focused, revertHovered}: Props) {
           d={arrowPath(
             line.from.left + ARROW_MARGIN_X,
             line.from.bounds.top + line.from.bounds.height + ARROW_THRESHOLD - ARROW_MARGIN_Y,
-            1
+            1,
           )}
           strokeWidth={STROKE_WIDTH}
         />
@@ -95,7 +95,7 @@ export function Connector({from, to, hovered, focused, revertHovered}: Props) {
           d={arrowPath(
             line.to.bounds.left + ARROW_MARGIN_X,
             line.to.bounds.top - ARROW_THRESHOLD + ARROW_MARGIN_Y,
-            -1
+            -1,
           )}
           strokeWidth={STROKE_WIDTH}
         />
@@ -107,7 +107,7 @@ export function Connector({from, to, hovered, focused, revertHovered}: Props) {
           d={arrowPath(
             line.to.bounds.left + ARROW_MARGIN_X,
             line.to.bounds.top + line.to.bounds.height + ARROW_THRESHOLD - ARROW_MARGIN_Y,
-            1
+            1,
           )}
           strokeWidth={STROKE_WIDTH}
         />

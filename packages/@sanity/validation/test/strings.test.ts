@@ -60,20 +60,20 @@ describe('string', () => {
   test('regex constraint (custom pattern name)', async () => {
     const rule = Rule.string().regex(/^[A-Z][a-z]+$/, 'PascalCase')
     await expect(rule.validate('SANITY')).resolves.toMatchSnapshot(
-      'regex: non-match w/ custom pattern name'
+      'regex: non-match w/ custom pattern name',
     )
     await expect(rule.validate('Sanity')).resolves.toMatchSnapshot(
-      'regex: match w/ custom pattern name'
+      'regex: match w/ custom pattern name',
     )
   })
 
   test('regex constraint (custom pattern name, as options)', async () => {
     const rule = Rule.string().regex(/^[A-Z][a-z]+$/, {name: 'PascalCase'})
     await expect(rule.validate('SANITY')).resolves.toMatchSnapshot(
-      'regex: non-match w/ custom pattern name (opt)'
+      'regex: non-match w/ custom pattern name (opt)',
     )
     await expect(rule.validate('Sanity')).resolves.toMatchSnapshot(
-      'regex: match w/ custom pattern name (opt)'
+      'regex: match w/ custom pattern name (opt)',
     )
   })
 
@@ -95,7 +95,7 @@ describe('string', () => {
   test('uri constraint (invalid protocol)', async () => {
     const rule = Rule.string().uri({scheme: ['http', 'ftp']})
     await expect(rule.validate('https://sanity.io/')).resolves.toMatchSnapshot(
-      'uri: protocol non-match'
+      'uri: protocol non-match',
     )
     await expect(rule.validate('ftp://code.sanity.io/')).resolves.toHaveLength(0)
   })
@@ -108,16 +108,16 @@ describe('string', () => {
     rule = Rule.string().uri({allowCredentials: false})
     await expect(rule.validate('http://sanity.io/')).resolves.toHaveLength(0)
     await expect(rule.validate('http://foo:bar@sanity.io/')).resolves.toMatchSnapshot(
-      'uri: credentials specified but not allowed'
+      'uri: credentials specified but not allowed',
     )
     await expect(rule.validate('http://espen@sanity.io/')).resolves.toMatchSnapshot(
-      'uri: username specified but not allowed'
+      'uri: username specified but not allowed',
     )
   })
 
   test('custom rule with string', async () => {
     const rule = Rule.string().custom<string>((val) =>
-      val.split('').reverse().join('') === val ? true : 'Must be a palindrome!'
+      val.split('').reverse().join('') === val ? true : 'Must be a palindrome!',
     )
 
     await expect(rule.validate('hei')).resolves.toMatchSnapshot('not a palindrome')
@@ -131,9 +131,9 @@ describe('string', () => {
           setTimeout(
             () =>
               resolve(val.split('').reverse().join('') === val ? true : 'Must be a palindrome!'),
-            50
-          )
-        )
+            50,
+          ),
+        ),
     )
 
     await expect(rule.validate('hei')).resolves.toMatchSnapshot('not a palindrome')

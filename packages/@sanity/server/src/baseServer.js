@@ -28,7 +28,7 @@ const getDocumentComponent = (basePath, isSanityMonorepo = false) => {
     const part = res.implementations[docPart]
     if (!part) {
       throw new Error(
-        `Part '${docPart}' is not implemented by any plugins, are you missing @sanity/base?`
+        `Part '${docPart}' is not implemented by any plugins, are you missing @sanity/base?`,
       )
     }
 
@@ -54,12 +54,12 @@ export function getDocumentElement({project, basePath, hashes, isSanityMonorepo}
           title: getTitle(project),
           stylesheets: ['css/main.css'].map((item) => assetify(item, assetHashes)),
           scripts: ['js/vendor.bundle.js', 'js/app.bundle.js'].map((item) =>
-            assetify(item, assetHashes)
+            assetify(item, assetHashes),
           ),
         },
-        props
-      )
-    )
+        props,
+      ),
+    ),
   )
 }
 

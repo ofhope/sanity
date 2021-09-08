@@ -84,7 +84,7 @@ export default class CardPreview extends React.PureComponent<CardPreviewProps> {
     const el = this.dateElement
     if (el) {
       const fontSize = Number(
-        window.getComputedStyle(el, null).getPropertyValue('font-size').split('px')[0]
+        window.getComputedStyle(el, null).getPropertyValue('font-size').split('px')[0],
       )
       const emWidth = el.offsetWidth / fontSize
       this.setState({

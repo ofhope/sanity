@@ -26,7 +26,7 @@ const pathWithMapper = ({mapWith, path}: SearchPath): string =>
 export function createWeightedSearch(
   types: ObjectSchemaType[],
   client: SanityClient,
-  options: WeightedSearchOptions = {}
+  options: WeightedSearchOptions = {},
 ): (query: string) => Observable<WeightedHit[]> {
   const {filter, params, tag} = options
   const searchSpec = types.map((type) => ({
@@ -39,7 +39,7 @@ export function createWeightedSearch(
   }))
 
   const combinedSearchPaths = combinePaths(
-    searchSpec.map((configForType) => configForType.paths.map((opt) => pathWithMapper(opt)))
+    searchSpec.map((configForType) => configForType.paths.map((opt) => pathWithMapper(opt))),
   )
 
   const selections = searchSpec.map((spec) => {
@@ -74,13 +74,13 @@ export function createWeightedSearch(
           __limit: 1000,
           ...(params || {}),
         },
-        {tag}
+        {tag},
       )
       .pipe(
         map(removeDupes),
         map((hits: SearchHit[]) => applyWeights(searchSpec, hits, terms)),
         map((hits) => sortBy(hits, (hit) => -hit.score)),
-        map((hits) => hits.slice(0, 100))
+        map((hits) => hits.slice(0, 100)),
       )
   }
 }

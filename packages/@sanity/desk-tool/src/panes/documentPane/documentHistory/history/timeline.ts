@@ -303,7 +303,7 @@ export class Timeline {
   replayBackwardsBetween(
     firstIdx: number,
     lastIdx: number,
-    doc: CombinedDocument
+    doc: CombinedDocument,
   ): CombinedDocument {
     let draft = doc.draft
     let published = doc.published
@@ -331,7 +331,7 @@ export class Timeline {
     initialDoc: CombinedDocument,
     finalDoc: CombinedDocument,
     firstIdx: number,
-    lastIdx: number
+    lastIdx: number,
   ): Diff<Annotation> {
     let draftValue = incremental.wrap<Meta>(initialDoc.draft, null)
     let publishedValue = incremental.wrap<Meta>(initialDoc.published, null)
@@ -364,7 +364,7 @@ export class Timeline {
           publishedValue = incremental.applyPatch(
             publishedValue,
             transaction.publishedEffect.apply,
-            meta
+            meta,
           )
         }
 

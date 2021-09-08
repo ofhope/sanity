@@ -19,7 +19,7 @@ test('merges env config', () => {
         },
       },
     },
-    'production'
+    'production',
   )
 
   expect(reduced.foo).toEqual('baz')
@@ -35,7 +35,7 @@ test('does not crash if there is no env config specified', () => {
       foo: 'bar',
       nested: {structure: true, onlyInOriginal: 'yes'},
     },
-    'production'
+    'production',
   )
 
   expect(reduced.foo).toEqual('bar')
@@ -50,7 +50,7 @@ test('concats arrays', () => {
       plugins: ['@sanity/base', '@sanity/components'],
       env: {development: {plugins: ['vision']}},
     },
-    'development'
+    'development',
   )
 
   expect(reduced.root).toEqual(true)

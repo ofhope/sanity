@@ -4,7 +4,7 @@ const VALID_INSERT_LOCATIONS = ['before', 'after', 'replace']
 exports.dataset = (name) => {
   if (!/^(~[a-z0-9]{1}[-\w]{0,25}|[a-z0-9]{1}[-\w]{0,19})$/.test(name)) {
     throw new Error(
-      'Datasets can only contain lowercase characters, numbers, underscores and dashes, and start with tilde, and be maximum 20 characters'
+      'Datasets can only contain lowercase characters, numbers, underscores and dashes, and start with tilde, and be maximum 20 characters',
     )
   }
 }
@@ -68,7 +68,7 @@ exports.hasDataset = (config) => {
 exports.requestTag = (tag) => {
   if (typeof tag !== 'string' || !/^[a-z0-9._-]{1,75}$/i.test(tag)) {
     throw new Error(
-      `Tag can only contain alphanumeric characters, underscores, dashes and dots, and be between one and 75 characters long.`
+      `Tag can only contain alphanumeric characters, underscores, dashes and dots, and be between one and 75 characters long.`,
     )
   }
 

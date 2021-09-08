@@ -22,7 +22,7 @@ export default React.forwardRef(function Switch(
     children,
     ...rest
   }: SwitchProps & Omit<React.HTMLProps<HTMLInputElement>, 'aria-described-by' | 'id' | 'type'>,
-  ref: any
+  ref: any,
 ) {
   const elementId = useId()
   const innerRef = useRef<HTMLInputElement | null>(null)
@@ -39,7 +39,7 @@ export default React.forwardRef(function Switch(
       if (typeof ref === 'function') ref(el)
       else if (ref && typeof ref === 'object') ref.current = el
     },
-    [ref]
+    [ref],
   )
 
   return (

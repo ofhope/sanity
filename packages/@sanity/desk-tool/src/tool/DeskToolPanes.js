@@ -113,7 +113,7 @@ export default class DeskToolPanes extends React.Component {
       if (this._rootElement && this._rootElement.current) {
         this.unobserveRootElementResize = resizeObserver.observe(
           this._rootElement.current,
-          this.handleResize
+          this.handleResize,
         )
       }
 
@@ -269,7 +269,7 @@ export default class DeskToolPanes extends React.Component {
               </PaneRouterContext.Provider>
             </SplitPaneWrapper>
           )
-        })
+        }),
       )
     }, [])
   }

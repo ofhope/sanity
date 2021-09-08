@@ -16,7 +16,7 @@ export default class SearchableArrayFunctions extends React.Component {
           type: PropTypes.shape({
             name: PropTypes.string.isRequired,
           }).isRequired,
-        })
+        }),
       ),
     }).isRequired,
     value: PropTypes.array,

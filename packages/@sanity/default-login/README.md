@@ -2,14 +2,13 @@
 
 Let a user log into Sanity, and get access to the child content.
 
-
 ## Configuration
 
 By default this component will ask the Sanity API and get a list of providers, which the user can login with.
 
 However it is possible for enterprise customers to supply their own third party authentication server as a provider as well.
 
-This is done through configuring the studio with the file ``./config/@sanity/default-login.json``
+This is done through configuring the studio with the file `./config/@sanity/default-login.json`
 
 Example:
 
@@ -36,7 +35,6 @@ Example:
   }
 }
 ```
-
 
 ## Using the component
 

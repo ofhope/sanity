@@ -117,21 +117,21 @@ export default class DocumentTester {
     this.tap.notSame(
       this.doc.EDGE,
       this.doc.HEAD,
-      `HEAD and EDGE should be different ${this.context}`
+      `HEAD and EDGE should be different ${this.context}`,
     )
     return this
   }
   hasUnresolvedLocalMutations() {
     this.tap.ok(
       this.doc.anyUnresolvedMutations(),
-      `should be unresolved local mutations ${this.context}`
+      `should be unresolved local mutations ${this.context}`,
     )
     return this
   }
   noUnresolvedLocalMutations() {
     this.tap.notOk(
       this.doc.anyUnresolvedMutations(),
-      `should be no unresolved local mutations ${this.context}`
+      `should be no unresolved local mutations ${this.context}`,
     )
     return this
   }

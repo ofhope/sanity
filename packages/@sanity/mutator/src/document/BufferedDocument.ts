@@ -108,7 +108,7 @@ export default class BufferedDocument {
     debug('Remote mutation arrived %s -> %s', mutation.previousRev, mutation.resultRev)
     if (mutation.previousRev == mutation.resultRev) {
       throw new Error(
-        `Mutation ${mutation.transactionId} has previousRev == resultRev (${mutation.previousRev})`
+        `Mutation ${mutation.transactionId} has previousRev == resultRev (${mutation.previousRev})`,
       )
     }
     return this.document.arrive(mutation)
@@ -259,7 +259,7 @@ export default class BufferedDocument {
       this.onRebase(
         this.LOCAL,
         remoteMutations.reduce(mutReducerFn, []),
-        localMutations.reduce(mutReducerFn, [])
+        localMutations.reduce(mutReducerFn, []),
       )
     }
   }

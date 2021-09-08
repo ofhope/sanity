@@ -74,7 +74,7 @@ export default async (args, context) => {
 
     if (!hasErrors && !hasWarnings) {
       output.print(
-        chalk.green(`Content Studio successfully compiled! Go to http://${httpHost}:${httpPort}`) // eslint-disable-line max-len
+        chalk.green(`Content Studio successfully compiled! Go to http://${httpHost}:${httpPort}`), // eslint-disable-line max-len
       )
       return
     }
@@ -182,7 +182,7 @@ async function ensureProjectConfig(context) {
       ...projectManifest,
       ...newProps,
     },
-    {spaces: 2}
+    {spaces: 2},
   )
 
   output.print(`Project ID + dataset written to "${manifestPath}"`)
@@ -205,7 +205,7 @@ function gracefulDeath(httpHost, config, err) {
         : `do you have access to listen to the given host (${httpHost})?`
 
     throw new Error(
-      `The Content Studio server does not have access to listen to given port - ${help}`
+      `The Content Studio server does not have access to listen to given port - ${help}`,
     ) // eslint-disable-line max-len
   }
 

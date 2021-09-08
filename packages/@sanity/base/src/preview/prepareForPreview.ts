@@ -57,7 +57,7 @@ const reportErrors = debounce(() => {
     Object.keys(errorsByType).map((typeName) => {
       const entries = errorsByType[typeName]
       return uniqBy(entries, (entry: any) => entry.error.message)
-    })
+    }),
   )
   const errorCount = uniqueErrors.length
   if (errorCount === 0) {
@@ -68,7 +68,7 @@ const reportErrors = debounce(() => {
     `%cHeads up! Got ${
       errorCount === 1 ? 'error' : `${errorCount} errors`
     } while preparing data for preview. Click for details.`,
-    'color: #ff7e7c'
+    'color: #ff7e7c',
   )
 
   Object.keys(errorsByType).forEach((typeName) => {
@@ -86,7 +86,7 @@ const reportErrors = debounce(() => {
               ? 'return value when calling prepare(%o)'
               : 'value targeted by preview.select'
           }:`,
-          value
+          value,
         )
         console.error(error)
       }
@@ -119,9 +119,9 @@ const isRenderable = (fieldName) => (value) => {
       'returnValueError',
       new Error(
         `The "${fieldName}" field should be a string, number, boolean, undefined or null, instead saw ${inspect(
-          value
-        )}`
-      )
+          value,
+        )}`,
+      ),
     ),
   ]
 }
@@ -172,9 +172,9 @@ function validatePreparedValue(preparedValue: any) {
         'returnValueError',
         new Error(
           `Invalid return value. Expected a plain object with at least a 'title' field, instead saw ${inspect(
-            preparedValue
-          )}`
-        )
+            preparedValue,
+          )}`,
+        ),
       ),
     ]
   }
@@ -203,7 +203,7 @@ function defaultPrepare(value: SelectedValue) {
 export function invokePrepare(
   type: Type,
   value: SelectedValue,
-  viewOptions: PrepareViewOptions = {}
+  viewOptions: PrepareViewOptions = {},
 ): PrepareInvocationResult {
   const prepare = type.preview?.prepare
   try {
@@ -233,7 +233,7 @@ interface EnumListOptions {
 }
 
 function hasEnumListOptions(
-  type: SchemaType
+  type: SchemaType,
 ): type is SchemaType & {options: SchemaType['options'] & EnumListOptions} {
   const options = type.options && typeof type.options === 'object' ? type.options : false
   if (!options || !('list' in options)) {
@@ -251,14 +251,14 @@ function getListOptions(type: SchemaType): TitledListValue[] | undefined {
 
   const listOptions = type.options.list as EnumListOptions['list']
   return listOptions.map((option) =>
-    isTitledListValue(option) ? option : {title: option, value: option}
+    isTitledListValue(option) ? option : {title: option, value: option},
   )
 }
 
 export default function prepareForPreview(
   rawValue: unknown,
   type: SchemaType,
-  viewOptions: PrepareViewOptions = {}
+  viewOptions: PrepareViewOptions = {},
 ): PreparedValue {
   const hasCustomPrepare = typeof type.preview?.prepare === 'function'
   const selection = type.preview?.select || {}

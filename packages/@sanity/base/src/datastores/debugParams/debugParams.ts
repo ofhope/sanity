@@ -11,8 +11,8 @@ export const debugParams$ = concat(of(0), fromEvent(window, 'hashchange')).pipe(
       .substring(1)
       .split(';')
       .filter((p) => p.toLowerCase().startsWith(DEBUG_PREFIX))
-      .map((param) => param.substring(DEBUG_PREFIX.length))
-  )
+      .map((param) => param.substring(DEBUG_PREFIX.length)),
+  ),
 )
 
 export const debugRolesParam$ = debugParams$.pipe(
@@ -22,6 +22,6 @@ export const debugRolesParam$ = debugParams$.pipe(
       arg
         ?.split('roles=')[1]
         .split(',')
-        .map((r) => r.trim()) || []
-  )
+        .map((r) => r.trim()) || [],
+  ),
 )

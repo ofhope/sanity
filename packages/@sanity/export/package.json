@@ -2,18 +2,6 @@
   "name": "@sanity/export",
   "version": "2.18.0",
   "description": "Export Sanity documents and assets",
-  "main": "lib/export.js",
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "build": "babel src --copy-files --out-dir lib",
-    "clean": "rimraf lib dest",
-    "prebuild": "npm run clean",
-    "test": "jest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -23,6 +11,24 @@
     "export",
     "ndjson"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/export"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/export.js",
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "babel src --copy-files --out-dir lib",
+    "clean": "rimraf lib dest",
+    "test": "jest"
+  },
   "dependencies": {
     "agentkeepalive": "^4.1.0",
     "archiver": "^5.0.0",
@@ -38,16 +44,10 @@
     "rimraf": "^2.7.1",
     "string-to-stream": "^1.1.0"
   },
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "publishConfig": {
     "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/export"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/"
+  }
 }

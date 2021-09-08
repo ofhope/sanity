@@ -56,7 +56,7 @@ export function getDocumentTypeListItem(typeName: string, sanitySchema?: Schema)
 
 export function getDocumentTypeList(
   typeNameOrSpec: string | DocumentTypeListInput,
-  sanitySchema?: Schema
+  sanitySchema?: Schema,
 ): DocumentListBuilder {
   const schemaType = typeof typeNameOrSpec === 'string' ? typeNameOrSpec : typeNameOrSpec.schemaType
   const typeName = typeof schemaType === 'string' ? schemaType : schemaType.name
@@ -86,11 +86,11 @@ export function getDocumentTypeList(
         {id: 'sorting', title: 'Sort'},
         {id: 'layout', title: 'Layout'},
         {id: 'actions', title: 'Actions'},
-      ]
+      ],
     )
     .child(
       spec.child ||
-        ((documentId: string) => getDefaultDocumentNode({schemaType: typeName, documentId}))
+        ((documentId: string) => getDefaultDocumentNode({schemaType: typeName, documentId})),
     )
     .canHandleIntent(spec.canHandleIntent || defaultIntentChecker)
     .menuItems(
@@ -116,6 +116,6 @@ export function getDocumentTypeList(
           .params({layout: 'detail'}),
 
         // Create new (from menu) will be added in serialization step of GenericList
-      ]
+      ],
     )
 }

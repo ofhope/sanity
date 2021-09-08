@@ -92,23 +92,23 @@ export const PortableTextEditable = (props: Props) => {
         },
       ],
     }),
-    [portableTextFeatures.types.block.name, keyGenerator]
+    [portableTextFeatures.types.block.name, keyGenerator],
   )
 
   // React/UI-spesific plugins
   const withInsertData = useMemo(
     () => createWithInsertData(change$, portableTextFeatures, keyGenerator),
-    []
+    [],
   )
   const withHotKeys = useMemo(
     () => createWithHotkeys(portableTextFeatures, keyGenerator, portableTextEditor, hotkeys),
-    []
+    [],
   )
 
   // Create the PortableTextEditor API
   const withEditableAPI = useMemo(
     () => createWithEditableAPI(portableTextEditor, portableTextFeatures, keyGenerator),
-    []
+    [],
   )
 
   // Init the Slate Editor
@@ -125,12 +125,12 @@ export const PortableTextEditable = (props: Props) => {
                 maxBlocks,
                 incomingPatches$,
                 readOnly,
-              })
-            )
-          )
-        )
+              }),
+            ),
+          ),
+        ),
       ),
-    []
+    [],
   )
 
   // Track editor value
@@ -139,8 +139,8 @@ export const PortableTextEditable = (props: Props) => {
     toSlateValue(
       getValueOrIntitialValue(value, [placeHolderBlock]),
       portableTextFeatures.types.block.name,
-      KEY_TO_SLATE_ELEMENT.get(editor)
-    )
+      KEY_TO_SLATE_ELEMENT.get(editor),
+    ),
   )
 
   // Track selection state
@@ -163,7 +163,7 @@ export const PortableTextEditable = (props: Props) => {
         />
       )
     },
-    [value, renderChild, renderBlock]
+    [value, renderChild, renderBlock],
   )
 
   const renderLeaf = useCallback(
@@ -183,7 +183,7 @@ export const PortableTextEditable = (props: Props) => {
         />
       )
     },
-    [value, renderChild, renderDecorator, renderAnnotation]
+    [value, renderChild, renderDecorator, renderAnnotation],
   )
 
   const handleChange = (val: any) => {
@@ -233,7 +233,7 @@ export const PortableTextEditable = (props: Props) => {
       const slateValueFromProps = toSlateValue(
         value,
         portableTextFeatures.types.block.name,
-        KEY_TO_SLATE_ELEMENT.get(editor)
+        KEY_TO_SLATE_ELEMENT.get(editor),
       )
       setStateValue(slateValueFromProps)
       VALUE_TO_SLATE_VALUE.set(value || [], slateValueFromProps)
@@ -316,7 +316,7 @@ export const PortableTextEditable = (props: Props) => {
       }
       // Resolve it as promise (can be either async promise or sync return value)
       const resolved: OnPasteResultOrPromise | Error = Promise.resolve(
-        resolveOnPasteResultOrError()
+        resolveOnPasteResultOrError(),
       )
       resolved
         .then((result: OnPasteResult) => {
@@ -332,11 +332,11 @@ export const PortableTextEditable = (props: Props) => {
             event.preventDefault() // Stop the chain
             const allowedDecorators = portableTextFeatures.decorators.map((item) => item.value)
             const blocksToInsertNormalized = result.insert.map((block) =>
-              normalizeBlock(block, {allowedDecorators})
+              normalizeBlock(block, {allowedDecorators}),
             ) as PortableTextBlock[]
             const dataTransfer = new DataTransfer()
             const stringToEncode = JSON.stringify(
-              toSlateValue(blocksToInsertNormalized, portableTextFeatures.types.block.name)
+              toSlateValue(blocksToInsertNormalized, portableTextFeatures.types.block.name),
             )
             const encoded = window.btoa(encodeURIComponent(stringToEncode))
             dataTransfer.setData('application/x-slate-fragment', encoded)
@@ -499,7 +499,7 @@ export const PortableTextEditable = (props: Props) => {
         />
       </Slate>
     ),
-    [placeholderText, readOnly, spellCheck, stateValue, selection, renderElement]
+    [placeholderText, readOnly, spellCheck, stateValue, selection, renderElement],
   )
   if (!portableTextEditor) {
     return null

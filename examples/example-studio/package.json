@@ -1,14 +1,8 @@
 {
   "name": "example-studio",
-  "private": true,
   "version": "2.18.0",
+  "private": true,
   "description": "A sanity studio with instructional examples and useful patterns",
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "start": "sanity start --port 3335",
-    "clean": "rimraf dist"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -17,6 +11,21 @@
     "content",
     "example-studio"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/example-studio"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "scripts": {
+    "start": "sanity start --port 3335",
+    "clean": "rimraf dist"
+  },
   "dependencies": {
     "@sanity/base": "2.18.0",
     "@sanity/block-tools": "2.18.0",
@@ -42,14 +51,5 @@
   },
   "devDependencies": {
     "rimraf": "^2.7.1"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/example-studio"
   }
 }

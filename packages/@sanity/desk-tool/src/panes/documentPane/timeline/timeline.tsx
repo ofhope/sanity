@@ -30,7 +30,7 @@ const LOAD_MORE_OFFSET = 20
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   (
     {timeline, disabledBeforeSelection, topSelection, bottomSelection, onSelect, onLoadMore},
-    ref
+    ref,
   ) => {
     const rootRef = useRef<HTMLDivElement | null>(null)
     const listRef = useRef<HTMLOListElement | null>(null)
@@ -63,7 +63,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         }
         rootRef.current = el
       },
-      [ref]
+      [ref],
     )
 
     // Load whenever it's needed
@@ -133,7 +133,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         )}
       </div>
     )
-  }
+  },
 )
 
 Timeline.displayName = 'Timeline'

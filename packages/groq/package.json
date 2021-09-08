@@ -2,23 +2,6 @@
   "name": "groq",
   "version": "2.15.0",
   "description": "Tagged template literal for Sanity.io GROQ-queries",
-  "main": "lib/groq.js",
-  "types": "./groq.d.ts",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  },
-  "engines": {
-    "node": ">=6"
-  },
-  "scripts": {
-    "test": "node test/groq.test.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/groq"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -31,10 +14,27 @@
     "literal",
     "string"
   ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
+  "homepage": "https://www.sanity.io/",
   "bugs": {
     "url": "https://github.com/sanity-io/sanity/issues"
   },
-  "homepage": "https://www.sanity.io/"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/groq"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/groq.js",
+  "types": "./groq.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/groq.test.js"
+  },
+  "engines": {
+    "node": ">=6"
+  }
 }

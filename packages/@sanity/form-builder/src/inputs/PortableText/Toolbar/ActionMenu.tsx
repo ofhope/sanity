@@ -80,7 +80,7 @@ export default function ActionMenu(props: Props) {
       group.actions.map((action, actionIndex) => {
         if (actionIndex === 0) return {...action, firstInGroup: true}
         return action
-      })
+      }),
     )
   }, [])
 

@@ -33,7 +33,7 @@ function BrokenRefs(props: BrokenRefsProps) {
       group.push(doc)
       return groups
     },
-    {unpublished: [], nonExistent: []}
+    {unpublished: [], nonExistent: []},
   )
 
   const renderNonExisting = nonExistent.length > 0
@@ -112,17 +112,17 @@ export const BrokenReferences = streamingComponent(
               <BrokenRefs documents={broken} type={type} schema={schema} />
             ) : (
               props.children
-            )
-          )
+            ),
+          ),
         )
-      })
-    )
+      }),
+    ),
 )
 
 function checkExistence(id: string) {
   return merge(
     observePaths(getDraftId(id), ['_type']).pipe(map((draft) => ({draft}))),
-    observePaths(getPublishedId(id), ['_type']).pipe(map((published) => ({published})))
+    observePaths(getPublishedId(id), ['_type']).pipe(map((published) => ({published}))),
   ).pipe(
     scan((prev: Record<string, any>, res: Record<string, any>) => ({...prev, ...res}), {}),
     filter((res) => 'draft' in res && 'published' in res),
@@ -131,7 +131,7 @@ function checkExistence(id: string) {
       type: getDocumentType(res as any),
       hasDraft: Boolean(res.draft),
       hasPublished: Boolean(res.published),
-    }))
+    })),
   )
 }
 
@@ -162,7 +162,7 @@ function extractStrongReferences(value) {
         key === '_ref' && !value._weak
           ? ([...refs, value[key]] as any)
           : [...refs, ...extractStrongReferences(value[key])],
-      []
+      [],
     )
   }
 

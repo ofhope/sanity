@@ -8,7 +8,7 @@ import {Props} from './types'
 
 const StringInput = React.forwardRef(function StringInput(
   props: Props<string, StringSchemaType>,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {value, readOnly, type, markers, level, onFocus, onBlur, onChange, presence} = props
   const placeholder = type.placeholder
@@ -16,7 +16,7 @@ const StringInput = React.forwardRef(function StringInput(
 
   const errors = useMemo(
     () => markers.filter((marker) => marker.type === 'validation' && marker.level === 'error'),
-    [markers]
+    [markers],
   )
 
   const handleChange = React.useCallback(
@@ -24,7 +24,7 @@ const StringInput = React.forwardRef(function StringInput(
       const inputValue = event.currentTarget.value
       onChange(PatchEvent.from(inputValue ? set(inputValue) : unset()))
     },
-    [onChange]
+    [onChange],
   )
 
   const input = useMemo(
@@ -41,7 +41,7 @@ const StringInput = React.forwardRef(function StringInput(
         ref={forwardedRef}
       />
     ),
-    [errors, forwardedRef, handleChange, inputId, onBlur, onFocus, placeholder, readOnly, value]
+    [errors, forwardedRef, handleChange, inputId, onBlur, onFocus, placeholder, readOnly, value],
   )
 
   return (

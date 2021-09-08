@@ -47,7 +47,7 @@ export default async (args, context) => {
   try {
     const result = await aliasClient.unlinkAlias(client, aliasName)
     output.print(
-      `Dataset alias ${aliasOutputName} unlinked from ${result.datasetName} successfully`
+      `Dataset alias ${aliasOutputName} unlinked from ${result.datasetName} successfully`,
     )
   } catch (err) {
     throw new Error(`Dataset alias unlink failed:\n${err.message}`)

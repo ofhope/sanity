@@ -64,7 +64,7 @@ export const DashboardWidget = forwardRef(
         {footer && <Footer borderTop>{footer}</Footer>}
       </Root>
     )
-  }
+  },
 )
 
 DashboardWidget.displayName = 'DashboardWidget'

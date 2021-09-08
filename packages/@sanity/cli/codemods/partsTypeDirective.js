@@ -12,14 +12,14 @@ function partsTypeDirective(fileInfo, api) {
     return fileInfo.source
   }
   const partImports = root.find(api.jscodeshift.ImportDeclaration, (node) =>
-    isSanityPart(node.source.value)
+    isSanityPart(node.source.value),
   )
   if (partImports.length === 0) {
     return fileInfo.source
   }
 
   const existingDirectives = root.find(api.jscodeshift.Comment, (node) =>
-    isSanityTypesReferenceDirective(node)
+    isSanityTypesReferenceDirective(node),
   )
   if (existingDirectives.length > 0) {
     // already added

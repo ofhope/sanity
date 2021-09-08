@@ -83,7 +83,7 @@ class DefaultMenuItem extends React.Component<DefaultMenuItemProps> {
     const className = classNames(
       classNameProp,
       isFocused ? styles.focusedItem : styles.item,
-      isDisabled && styles.isDisabled
+      isDisabled && styles.isDisabled,
     )
 
     return (

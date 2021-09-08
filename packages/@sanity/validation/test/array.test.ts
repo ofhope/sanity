@@ -18,7 +18,7 @@ describe('array', () => {
   test('max length constraint', async () => {
     const rule = Rule.array().max(2)
     await expect(rule.validate(['a', 'b', 'c', 'd'])).resolves.toMatchSnapshot(
-      'max length: too long'
+      'max length: too long',
     )
     await expect(rule.validate(['a'])).resolves.toMatchSnapshot('max length: valid')
   })
@@ -33,10 +33,10 @@ describe('array', () => {
   test('unique constraint (default, simple values)', async () => {
     const rule = Rule.array().unique()
     await expect(rule.validate(['a', 'b', 'c', 'd'])).resolves.toMatchSnapshot(
-      'simple unique: valid'
+      'simple unique: valid',
     )
     await expect(rule.validate(['a', 'b', 'c', 'a'])).resolves.toMatchSnapshot(
-      'simple unique: duplicates'
+      'simple unique: duplicates',
     )
   })
 
@@ -44,10 +44,10 @@ describe('array', () => {
     const rule = Rule.array().unique()
     const ref = (id) => ({_ref: id, _type: 'reference'})
     await expect(rule.validate(['a', 'b', 'c', 'd'].map(ref))).resolves.toMatchSnapshot(
-      'object unique: valid'
+      'object unique: valid',
     )
     await expect(rule.validate(['a', 'b', 'c', 'a'].map(ref))).resolves.toMatchSnapshot(
-      'object unique: duplicates'
+      'object unique: duplicates',
     )
   })
 
@@ -55,10 +55,10 @@ describe('array', () => {
     const rule = Rule.array().unique()
     const refArr = (id: string) => [{_ref: id, _type: 'reference'}]
     await expect(rule.validate(['a', 'b', 'c', 'd'].map(refArr))).resolves.toMatchSnapshot(
-      'array unique: valid'
+      'array unique: valid',
     )
     await expect(rule.validate(['a', 'a', 'c', 'd'].map(refArr))).resolves.toMatchSnapshot(
-      'array unique: duplicates'
+      'array unique: duplicates',
     )
   })
 
@@ -66,7 +66,7 @@ describe('array', () => {
     const rule = Rule.array().unique()
     await expect(rule.validate([true, false])).resolves.toMatchSnapshot('boolean unique: valid')
     await expect(rule.validate([false, true, false])).resolves.toMatchSnapshot(
-      'boolean unique: duplicates'
+      'boolean unique: duplicates',
     )
   })
 

@@ -15,7 +15,7 @@ function loadImage(url: string): Observable<HTMLImageElement> {
     //console.time("read image");
     image.onerror = () => {
       observer.error(
-        new Error(`Could not load image from url "${url}". Image may be of an unsupported format`)
+        new Error(`Could not load image from url "${url}". Image may be of an unsupported format`),
       )
     }
     image.onload = () => {
@@ -33,6 +33,6 @@ function loadImage(url: string): Observable<HTMLImageElement> {
 export default function rotateImage(file: File, orientation: Orientation) {
   /* global window */
   return loadImage(window.URL.createObjectURL(file)).pipe(
-    mergeMap((image) => orient(image, orientation))
+    mergeMap((image) => orient(image, orientation)),
   )
 }

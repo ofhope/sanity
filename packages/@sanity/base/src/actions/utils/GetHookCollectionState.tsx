@@ -28,7 +28,7 @@ function useThrottled(callback, wait, options) {
     () => () => {
       throttled.flush()
     },
-    []
+    [],
   )
   return throttled
 }
@@ -63,7 +63,7 @@ export function GetHookCollectionState<T, K>(props: Props<T, K>) {
       })
     },
     60,
-    {trailing: true}
+    {trailing: true},
   )
 
   const onNext = React.useCallback((id, hookState) => {

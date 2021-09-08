@@ -19,7 +19,7 @@ declare module 'all:part:@sanity/base/tool' {
     canHandleIntent?: (
       intent: Record<string, any>,
       params: Record<string, any>,
-      state: Record<string, any>
+      state: Record<string, any>,
     ) => void
     component?: React.ComponentType
     icon?: React.ComponentType
@@ -27,7 +27,7 @@ declare module 'all:part:@sanity/base/tool' {
       intent: Record<string, any>,
       params: Record<string, any>,
       state: Record<string, any>,
-      payload: Record<string, any>
+      payload: Record<string, any>,
     ) => void
     name: string
     title: string
@@ -75,7 +75,7 @@ declare module 'part:@sanity/base/configure-client?' {
   import type {SanityClient as OriginalSanityClient} from '@sanity/client'
 
   type Configurer = (
-    client: OriginalSanityClient
+    client: OriginalSanityClient,
   ) => OriginalSanityClient & {withConfig: (config: Partial<ClientConfig>) => SanityClient}
   const configure: Configurer | undefined
 
@@ -130,7 +130,7 @@ declare module 'part:@sanity/base/preview' {
 
   type previewObserver = (
     value: Reference | string,
-    schemaType: SchemaType
+    schemaType: SchemaType,
   ) => Observable<{snapshot: {title: string}}>
 
   export const observeForPreview: previewObserver
@@ -232,10 +232,10 @@ declare module 'part:@sanity/base/search/weighted'
 declare module 'part:@sanity/base/settings' {
   declare const settings: {
     forNamespace: (
-      namespaceKey: string
+      namespaceKey: string,
     ) => {
       forKey: (
-        key: string
+        key: string,
       ) => {
         listen: () => Observable<boolean>
         set: (val: boolean) => void
@@ -253,7 +253,7 @@ declare module 'part:@sanity/base/util/document-action-utils' {
 }
 declare module 'part:@sanity/base/util/draft-utils' {
   export declare const collate: (
-    documents: SanityDocument[]
+    documents: SanityDocument[],
   ) => {id: string; draft?: SanityDocument; published?: SanityDocument}[]
   export declare const getPublishedId: (str: string) => string
   export declare const getDraftId: (str: string) => string

@@ -6,7 +6,7 @@ export default (pkgs, {asRange}) =>
     pkgs.reduce((versions, pkg) => {
       versions[pkg] = latestVersion(pkg).then(asRange ? caretify : identity)
       return versions
-    }, {})
+    }, {}),
   )
 
 function caretify(version) {

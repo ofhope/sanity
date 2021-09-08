@@ -69,7 +69,7 @@ export const BlockObject: FunctionComponent<Props> = ({
     PortableTextEditor.delete(
       editor,
       {focus: {path, offset: 0}, anchor: {path, offset: 0}},
-      {mode: 'block'}
+      {mode: 'block'},
     )
     PortableTextEditor.focus(editor)
   }

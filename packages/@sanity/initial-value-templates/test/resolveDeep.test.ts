@@ -6,7 +6,7 @@ import {resolveValue} from '../src/util/resolveValue'
 function generateNestedObjectTest(
   obj: Record<string, any>,
   maxDepth: number,
-  depth?: number
+  depth?: number,
 ): Record<string, any> {
   depth = depth || 1
   if (depth >= maxDepth) return obj
@@ -58,7 +58,7 @@ describe('resolveDeepInitialValues', () => {
           _type: 'recursiveObject',
           name: '∞ recursion is ∞',
         },
-        9
+        9,
       ),
     })
   })

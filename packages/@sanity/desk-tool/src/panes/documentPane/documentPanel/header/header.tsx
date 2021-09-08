@@ -110,7 +110,7 @@ export function DocumentPanelHeader(props: DocumentPanelHeaderProps) {
         />
       </div>
     ),
-    [isValidationOpen, markers, onSetFormInputFocus, rootElement, schemaType]
+    [isValidationOpen, markers, onSetFormInputFocus, rootElement, schemaType],
   )
 
   const contextMenu = useMemo(
@@ -134,7 +134,7 @@ export function DocumentPanelHeader(props: DocumentPanelHeaderProps) {
       menuItemGroups,
       onContextMenuAction,
       rootElement,
-    ]
+    ],
   )
 
   const splitViewActions = useMemo(
@@ -166,7 +166,7 @@ export function DocumentPanelHeader(props: DocumentPanelHeaderProps) {
           )}
         </>
       ),
-    [features.splitViews, isClosable, onCloseView, onSplitPane, views.length]
+    [features.splitViews, isClosable, onCloseView, onSplitPane, views.length],
   )
 
   const tabs = useMemo(
@@ -181,7 +181,7 @@ export function DocumentPanelHeader(props: DocumentPanelHeaderProps) {
           />
         </div>
       ),
-    [activeViewId, idPrefix, onSetActiveView, showTabs, views]
+    [activeViewId, idPrefix, onSetActiveView, showTabs, views],
   )
 
   const versionMenu = useMemo(
@@ -218,7 +218,7 @@ export function DocumentPanelHeader(props: DocumentPanelHeaderProps) {
       showVersionMenu,
       timelineMode,
       versionSelectRef,
-    ]
+    ],
   )
 
   return (

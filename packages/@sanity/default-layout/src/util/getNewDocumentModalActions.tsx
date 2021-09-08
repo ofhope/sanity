@@ -12,7 +12,7 @@ export default function getNewDocumentModalActions() {
   if (structure && !Array.isArray(structure)) {
     // eslint-disable-next-line no-console
     console.error(
-      `Invalid "new document" configuration: "part:@sanity/base/new-document-structure" should return an array of items. Falling back to default structure.`
+      `Invalid "new document" configuration: "part:@sanity/base/new-document-structure" should return an array of items. Falling back to default structure.`,
     )
     structure = S.defaultInitialValueTemplateItems()
   } else if (structure) {
@@ -21,7 +21,7 @@ export default function getNewDocumentModalActions() {
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(
-        `Invalid "new document" configuration: ${err.message}. Falling back to default structure.`
+        `Invalid "new document" configuration: ${err.message}. Falling back to default structure.`,
       )
       structure = S.defaultInitialValueTemplateItems()
     }
@@ -50,7 +50,7 @@ function createModalAction(templateItem) {
   // We currently only allow initial value template items in the "new document" dialog
   if (item.type !== 'initialValueTemplateItem') {
     throw new Error(
-      'Only initial value template items are currently allowed in the new document structure'
+      'Only initial value template items are currently allowed in the new document structure',
     )
   }
 
@@ -89,7 +89,7 @@ function canCreateTemplateItem(item) {
   if (!canCreate) {
     // eslint-disable-next-line no-console
     console.error(
-      `Template with ID "${template}" has schema type "${type}", where the "create" action is disabled and will not be included in the "new document"-dialog.`
+      `Template with ID "${template}" has schema type "${type}", where the "create" action is disabled and will not be included in the "new document"-dialog.`,
     )
   }
   return canCreate
@@ -102,7 +102,7 @@ function hasRequiredParameters(item) {
   if (hasMissingParams) {
     // eslint-disable-next-line no-console
     console.error(
-      `Template with ID "${template.id}" requires a set of parameters, but none were given. Skipping.`
+      `Template with ID "${template.id}" requires a set of parameters, but none were given. Skipping.`,
     )
   }
 
@@ -111,7 +111,7 @@ function hasRequiredParameters(item) {
 
 function validateNewDocumentStructure(structureItems) {
   const items = structureItems.map((item) =>
-    item && typeof item.serialize === 'function' ? item.serialize() : item
+    item && typeof item.serialize === 'function' ? item.serialize() : item,
   )
 
   const idMap = new Map()
@@ -126,7 +126,7 @@ function validateNewDocumentStructure(structureItems) {
       const dupeIndex = idMap.get(item.id)
       const dupe = `${quote(items[dupeIndex].title)} at index ${dupeIndex}`
       throw new Error(
-        `Template item "${item.title}" at index ${i} has the same ID ("${item.id}") as template ${dupe}`
+        `Template item "${item.title}" at index ${i} has the same ID ("${item.id}") as template ${dupe}`,
       )
     }
 

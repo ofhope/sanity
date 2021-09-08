@@ -11,7 +11,7 @@ function sanityManifest(plugins, parts, opts = {}) {
       parts: parts,
     },
     null,
-    2
+    2,
   )
 }
 
@@ -311,7 +311,7 @@ export function getDeepTree({missingPlugin, missingManifest} = {}) {
           }),
         },
       },
-      baz
+      baz,
     ),
   })
 }
@@ -604,7 +604,7 @@ export function getRootLevelPartsTree() {
           implements: 'part:@sanity/core/root',
           path: 'myRootComponent.js',
         },
-      ]
+      ],
     ),
   })
 }

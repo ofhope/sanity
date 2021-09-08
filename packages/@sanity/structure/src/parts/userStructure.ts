@@ -4,7 +4,7 @@ import {DocumentFragmentResolveOptions} from '../userDefinedStructure'
 
 interface UserDefinedStructure {
   getDefaultDocumentNode?: (
-    options: DocumentFragmentResolveOptions
+    options: DocumentFragmentResolveOptions,
   ) => DocumentNode | DocumentBuilder | null
 }
 

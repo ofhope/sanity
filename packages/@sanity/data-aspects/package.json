@@ -2,12 +2,6 @@
   "name": "@sanity/data-aspects",
   "version": "2.18.0",
   "description": "Sanity plugin which controls how your data is presented",
-  "main": "lib/DataAspectsResolver.js",
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "clean": "rimraf lib dest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -17,20 +11,26 @@
     "data-aspects",
     "sanity-plugin"
   ],
-  "dependencies": {
-    "@sanity/generate-help-url": "2.18.0",
-    "lodash": "^4.17.15"
-  },
-  "devDependencies": {
-    "rimraf": "^2.7.1"
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sanity-io/sanity.git",
     "directory": "packages/@sanity/data-aspects"
   },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/DataAspectsResolver.js",
+  "scripts": {
+    "clean": "rimraf lib dest"
   },
-  "homepage": "https://www.sanity.io/"
+  "dependencies": {
+    "@sanity/generate-help-url": "2.18.0",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "rimraf": "^2.7.1"
+  }
 }

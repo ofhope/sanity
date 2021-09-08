@@ -158,8 +158,8 @@ export default class Document {
         if (protect++ > 10) {
           throw new Error(
             `Mutator stuck flushing incoming mutations. Probably stuck here: ${JSON.stringify(
-              nextMut
-            )}`
+              nextMut,
+            )}`,
           )
         }
       }
@@ -168,7 +168,7 @@ export default class Document {
     if (this.incoming.length > 0 && debug.enabled) {
       debug(
         'Unable to apply mutations %s',
-        this.incoming.map((mut) => mut.transactionId).join(', ')
+        this.incoming.map((mut) => mut.transactionId).join(', '),
       )
     }
 
@@ -208,7 +208,7 @@ export default class Document {
       'Applying mutation %s -> %s to rev %s',
       mut.previousRev,
       mut.resultRev,
-      this.HEAD && this.HEAD._rev
+      this.HEAD && this.HEAD._rev,
     )
 
     this.HEAD = mut.apply(this.HEAD)
@@ -224,7 +224,7 @@ export default class Document {
       const needRebase = this.consumeUnresolved(mut.transactionId)
       if (debug.enabled) {
         debug(
-          `Incoming mutation ${mut.transactionId} appeared while there were pending or submitted local mutations`
+          `Incoming mutation ${mut.transactionId} appeared while there were pending or submitted local mutations`,
         )
         debug(`Submitted txnIds: ${this.submitted.map((m) => m.transactionId).join(', ')}`)
         debug(`Pending txnIds: ${this.pending.map((m) => m.transactionId).join(', ')}`)
@@ -234,7 +234,7 @@ export default class Document {
     }
     debug(
       `Remote mutation %s arrived w/o any pending or submitted local mutations`,
-      mut.transactionId
+      mut.transactionId,
     )
     this.EDGE = this.HEAD
     if (this.onMutation) {
@@ -270,7 +270,7 @@ export default class Document {
       if (this.submitted[0].transactionId == txnId) {
         debug(
           `Remote mutation %s matches upcoming submitted mutation, consumed from 'submitted' buffer`,
-          txnId
+          txnId,
         )
         this.submitted.shift()
         return false
@@ -279,7 +279,7 @@ export default class Document {
       // There are no submitted, but some are pending so let's check the upcoming pending
       debug(
         `Remote mutation %s matches upcoming pending mutation, consumed from 'pending' buffer`,
-        txnId
+        txnId,
       )
       this.pending.shift()
       return false
@@ -287,7 +287,7 @@ export default class Document {
     debug(
       'The mutation was not the upcoming mutation, scrubbing. Pending: %d, Submitted: %d',
       this.pending.length,
-      this.submitted.length
+      this.submitted.length,
     )
     // The mutation was not the upcoming mutation, so we'll have to check everything to
     // see if we have an out of order situation

@@ -10,15 +10,15 @@ export const consistencyStatus = memoize(
   (idPair: IdPair) => {
     return memoizedPair(idPair).pipe(
       switchMap(({draft, published}) =>
-        combineLatest([draft.consistency$, published.consistency$])
+        combineLatest([draft.consistency$, published.consistency$]),
       ),
       map(
-        ([draftIsConsistent, publishedIsConsistent]) => draftIsConsistent && publishedIsConsistent
+        ([draftIsConsistent, publishedIsConsistent]) => draftIsConsistent && publishedIsConsistent,
       ),
       distinctUntilChanged(),
       publishReplay(1),
-      refCount()
+      refCount(),
     )
   },
-  (idPair) => idPair.publishedId
+  (idPair) => idPair.publishedId,
 )

@@ -15,7 +15,7 @@ export function isArraySchemaType(type: SchemaType): type is ArraySchemaType {
 }
 
 export function isReferenceSchemaType(
-  type: SchemaType | ReferenceSchemaType
+  type: SchemaType | ReferenceSchemaType,
 ): type is ReferenceSchemaType {
   return type.jsonType === 'object' && 'to' in type && Array.isArray(type.to)
 }

@@ -34,8 +34,8 @@ const IGNORED_PACKAGES = [
 
 const PACKAGE_PATHS = getPackagePaths().filter((pkgPath) =>
   IGNORED_PACKAGES.every((pattern) =>
-    typeof pattern === 'string' ? pattern !== pkgPath : !pattern.test(pkgPath)
-  )
+    typeof pattern === 'string' ? pattern !== pkgPath : !pattern.test(pkgPath),
+  ),
 )
 
 const withDisplayName = (name, fn) => {
@@ -64,10 +64,10 @@ function buildJavaScript(packageDir, destDir) {
         changed(destDir, {
           cwd: packageDir,
           transformPath: (orgPath) => orgPath.replace(/\.tsx?$/, '.js'),
-        })
+        }),
       )
       .pipe(babel())
-      .pipe(dest(destDir, {cwd: packageDir}))
+      .pipe(dest(destDir, {cwd: packageDir})),
   )
 }
 
@@ -76,14 +76,14 @@ function copyAssets(packageDir, destDir) {
     src(`${SRC_DIR}/**/*`, {cwd: packageDir})
       .pipe(filter(['**/*.*', '!**/*.js', '!**/*.ts', '!**/*.tsx']))
       .pipe(changed(destDir, {cwd: packageDir}))
-      .pipe(dest(destDir, {cwd: packageDir}))
+      .pipe(dest(destDir, {cwd: packageDir})),
   )
 }
 
 function buildPackage(packageDir) {
   return parallel(
     buildJavaScript(packageDir, LEGACY_DEST_DIR),
-    copyAssets(packageDir, LEGACY_DEST_DIR)
+    copyAssets(packageDir, LEGACY_DEST_DIR),
   )
 }
 
@@ -96,7 +96,7 @@ const watchTS = function watchTS() {
     through((data, enc, cb) => {
       log(data.toString())
       cb()
-    })
+    }),
   )
 }
 const buildTS = function buildTS() {
@@ -104,7 +104,7 @@ const buildTS = function buildTS() {
     through((data, enc, cb) => {
       log(data.toString())
       cb()
-    })
+    }),
   )
 }
 
@@ -114,9 +114,9 @@ const watchJSAndAssets = parallel(
     watchPackage(
       compileTaskName('watch', packageDir, 'JS/Assets'),
       packageDir,
-      buildPackage(packageDir)
-    )
-  )
+      buildPackage(packageDir),
+    ),
+  ),
 )
 
 function matchPackages(names) {

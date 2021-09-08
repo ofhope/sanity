@@ -17,11 +17,11 @@ export function useConnectionState(publishedDocId: string, docTypeName: string):
         map((ev: {type: string}) => ev.type),
         map((eventType) => eventType !== 'reconnect'),
         switchMap((isConnected) =>
-          isConnected ? of('connected') : timer(200).pipe(mapTo('reconnecting'))
+          isConnected ? of('connected') : timer(200).pipe(mapTo('reconnecting')),
         ),
-        distinctUntilChanged()
+        distinctUntilChanged(),
       ),
     [publishedDocId, docTypeName],
-    INITIAL
+    INITIAL,
   )
 }

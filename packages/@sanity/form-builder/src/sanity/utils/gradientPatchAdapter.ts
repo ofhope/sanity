@@ -79,7 +79,7 @@ function toFormBuilderPatches(origin: Origin, patch: GradientPatch): Patch[] {
             return null
           })
           .filter(Boolean)
-      })
+      }),
   )
 }
 

@@ -21,7 +21,7 @@ const Root = styled(Card)`
 
 export const ItemRow = React.forwardRef(function RegularItem(
   props: ItemLayoutProps,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.ForwardedRef<HTMLDivElement>,
 ) {
   const focusRef = React.useRef()
   const {

@@ -2,12 +2,6 @@
   "name": "@sanity/color-input",
   "version": "2.18.0",
   "description": "Color input",
-  "main": "lib/index.js",
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "clean": "rimraf lib dest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -17,6 +11,21 @@
     "color-input",
     "sanity-plugin"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/color-input"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib dest"
+  },
   "dependencies": {
     "@sanity/icons": "^1.1.7",
     "@sanity/ui": "^0.36.7",
@@ -35,15 +44,6 @@
     "prop-types": "^15.6 || ^16",
     "react": "^16.9 || ^17",
     "styled-components": "^5.2.0"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/color-input"
   },
   "publishConfig": {
     "access": "public"

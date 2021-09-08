@@ -61,7 +61,7 @@ export function defaultParseHtml() {
     throw new Error(
       'The native `DOMParser` global which the `Html` deserializer uses by ' +
         'default is not present in this environment. ' +
-        'You must supply the `options.parseHtml` function instead.'
+        'You must supply the `options.parseHtml` function instead.',
     )
   }
   return (html) => {

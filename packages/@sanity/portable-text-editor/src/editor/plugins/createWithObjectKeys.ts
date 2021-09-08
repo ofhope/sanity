@@ -8,7 +8,7 @@ import {PortableTextSlateEditor} from '../../types/editor'
  */
 export function createWithObjectKeys(
   portableTextFeatures: PortableTextFeatures,
-  keyGenerator: () => string
+  keyGenerator: () => string,
 ) {
   return function withKeys(editor: PortableTextSlateEditor) {
     const {apply, normalizeNode} = editor

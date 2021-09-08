@@ -23,7 +23,7 @@ export default React.forwardRef(function Checkbox(
     children,
     ...rest
   }: CheckboxProps & Omit<React.HTMLProps<HTMLInputElement>, 'aria-described-by' | 'id' | 'type'>,
-  ref: any
+  ref: any,
 ) {
   const elementId = useId()
   const innerRef = useRef<HTMLInputElement | null>(null)
@@ -40,7 +40,7 @@ export default React.forwardRef(function Checkbox(
       if (typeof ref === 'function') ref(el)
       else if (ref && typeof ref === 'object') ref.current = el
     },
-    [ref]
+    [ref],
   )
 
   return (

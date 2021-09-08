@@ -37,7 +37,7 @@ export function useTimeAgo(time: Date | string, {minimal, agoSuffix}: TimeAgoOpt
     const id: number | undefined = Number.isFinite(resolved.refreshInterval)
       ? window.setInterval(
           () => setResolved(formatRelativeTime(time, {minimal, agoSuffix})),
-          resolved.refreshInterval
+          resolved.refreshInterval,
         )
       : undefined
 

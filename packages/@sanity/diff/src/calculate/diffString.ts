@@ -12,7 +12,7 @@ const dmp = new DiffMatchPatch()
 export function diffString<A>(
   fromInput: StringInput<A>,
   toInput: StringInput<A>,
-  options: DiffOptions
+  options: DiffOptions,
 ): StringDiff<A> {
   const fromValue = fromInput.value
   const toValue = toInput.value
@@ -46,7 +46,7 @@ export function diffString<A>(
 
 function buildSegments<A>(
   fromInput: StringInput<A>,
-  toInput: StringInput<A>
+  toInput: StringInput<A>,
 ): StringDiffSegment<A>[] {
   const segments: StringDiffSegment<A>[] = []
 
@@ -96,7 +96,7 @@ function buildSegments<A>(
 export function removedString<A>(
   input: StringInput<A>,
   toValue: null | undefined,
-  options: DiffOptions
+  options: DiffOptions,
 ): StringDiff<A> & {action: 'removed'} {
   return {
     type: 'string',
@@ -119,7 +119,7 @@ export function removedString<A>(
 export function addedString<A>(
   input: StringInput<A>,
   fromValue: null | undefined,
-  options: DiffOptions
+  options: DiffOptions,
 ): StringDiff<A> & {action: 'added'} {
   return {
     type: 'string',

@@ -27,12 +27,12 @@ export default class UserComponentPane extends React.PureComponent {
     menuItems: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-      })
+      }),
     ),
     menuItemGroups: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,
-      })
+      }),
     ),
   }
 

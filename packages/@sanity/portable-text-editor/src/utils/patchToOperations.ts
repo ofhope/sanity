@@ -15,7 +15,7 @@ export function createPatchToOperations(portableTextFeatures: PortableTextFeatur
       const blocksToInsert = (toSlateValue(
         items as PortableTextBlock[],
         portableTextFeatures.types.block.name,
-        KEY_TO_SLATE_ELEMENT.get(editor)
+        KEY_TO_SLATE_ELEMENT.get(editor),
       ) as unknown) as Node[]
       const posKey = findLastKey(patch.path)
       const index = editor.children.findIndex((node, indx) => {
@@ -39,7 +39,7 @@ export function createPatchToOperations(portableTextFeatures: PortableTextFeatur
     if (patch.path.length === 1) {
       const lastKey = findLastKey(patch.path)
       const index = editor.children.findIndex((node, indx) =>
-        lastKey ? node._key === lastKey : indx === patch.path[0]
+        lastKey ? node._key === lastKey : indx === patch.path[0],
       )
       if (index > -1) {
         Transforms.removeNodes(editor, {at: [index]})

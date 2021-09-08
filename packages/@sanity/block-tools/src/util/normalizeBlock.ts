@@ -4,7 +4,7 @@ import randomKey from './randomKey'
 // For a block with _type 'block' (text), join spans where possible
 export default function normalizeBlock(
   block,
-  options: {allowedDecorators?: string[]; blockTypeName?: string} = {}
+  options: {allowedDecorators?: string[]; blockTypeName?: string} = {},
 ) {
   let newIndex = 0
   if (!block._key) {
@@ -62,7 +62,7 @@ export default function normalizeBlock(
       }
       if (allowedDecorators && child._type === 'span') {
         child.marks = child.marks.filter(
-          (mark) => allowedDecorators.includes(mark) || block.markDefs.find((def) => def._key)
+          (mark) => allowedDecorators.includes(mark) || block.markDefs.find((def) => def._key),
         )
       }
       usedMarkDefs = usedMarkDefs.concat(child.marks)

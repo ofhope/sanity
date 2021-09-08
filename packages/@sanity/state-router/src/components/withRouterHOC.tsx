@@ -6,7 +6,7 @@ const NO_CONTEXT_STATE = {
   state: {},
   navigate: (state: any) => {
     throw new Error(
-      `Cannot navigate to the state ${JSON.stringify(state)}. No router found in context`
+      `Cannot navigate to the state ${JSON.stringify(state)}. No router found in context`,
     )
   },
   navigateIntent: (intentName: string) => {
@@ -15,7 +15,7 @@ const NO_CONTEXT_STATE = {
 }
 
 export default function withRouterHOC<Props>(
-  Component: ComponentType<Props & {router: HOCRouter}>
+  Component: ComponentType<Props & {router: HOCRouter}>,
 ) {
   return class WithRouter extends React.Component<Props> {
     static displayName = `withRouter(${Component.displayName || Component.name})`

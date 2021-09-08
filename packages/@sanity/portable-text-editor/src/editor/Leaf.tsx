@@ -42,14 +42,16 @@ export const Leaf = (props: LeafProps) => {
         event.preventDefault()
       }
     },
-    [focused]
+    [focused],
   )
   if (leaf._type === portableTextFeatures.types.span.name) {
     const blockElement = children.props.parent
     const path = [{_key: blockElement._key}, 'children', {_key: leaf._key}]
     const decoratorValues = portableTextFeatures.decorators.map((dec) => dec.value)
     const marks: string[] = uniq(
-      (Array.isArray(leaf.marks) ? leaf.marks : []).filter((mark) => decoratorValues.includes(mark))
+      (Array.isArray(leaf.marks) ? leaf.marks : []).filter((mark) =>
+        decoratorValues.includes(mark),
+      ),
     )
     marks.forEach((mark) => {
       const type = portableTextFeatures.decorators.find((dec) => dec.value === mark)
@@ -65,7 +67,7 @@ export const Leaf = (props: LeafProps) => {
             type,
             {focused, selected, path},
             () => <>{returnedChildren}</>,
-            spanRef
+            spanRef,
           )
         }
       }
@@ -77,7 +79,7 @@ export const Leaf = (props: LeafProps) => {
           !decoratorValues.includes(mark) &&
           blockElement &&
           blockElement.markDefs &&
-          blockElement.markDefs.find((def: any) => def._key === mark)
+          blockElement.markDefs.find((def: any) => def._key === mark),
       )
       .filter(Boolean)
 
@@ -105,7 +107,7 @@ export const Leaf = (props: LeafProps) => {
                   type,
                   {focused, selected, path, annotations},
                   defaultRender,
-                  spanRef
+                  spanRef,
                 )}
               </span>
             )
@@ -128,7 +130,7 @@ export const Leaf = (props: LeafProps) => {
         portableTextFeatures.types.span,
         {focused, selected, path, annotations},
         () => returnedChildren,
-        spanRef
+        spanRef,
       )
     }
   }

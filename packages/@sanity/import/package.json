@@ -2,19 +2,6 @@
   "name": "@sanity/import",
   "version": "2.18.0",
   "description": "Import documents to a Sanity dataset",
-  "main": "lib/import.js",
-  "engines": {
-    "node": ">=10.0.0"
-  },
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "build": "babel src --copy-files --out-dir lib",
-    "clean": "rimraf lib dest",
-    "coverage": "jest --coverage",
-    "prebuild": "npm run clean",
-    "test": "jest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -24,6 +11,25 @@
     "import",
     "ndjson"
   ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/import"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/import.js",
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "babel src --copy-files --out-dir lib",
+    "clean": "rimraf lib dest",
+    "coverage": "jest --coverage",
+    "test": "jest"
+  },
   "dependencies": {
     "@sanity/generate-help-url": "2.18.0",
     "@sanity/mutator": "2.18.0",
@@ -50,13 +56,7 @@
     "nock": "^9.0.5",
     "rimraf": "^2.7.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/import"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/"
+  "engines": {
+    "node": ">=10.0.0"
+  }
 }

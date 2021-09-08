@@ -24,7 +24,7 @@ export const TooltipArrow = forwardRef(
         </svg>
       </div>
     )
-  }
+  },
 )
 
 TooltipArrow.displayName = 'TooltipArrow'

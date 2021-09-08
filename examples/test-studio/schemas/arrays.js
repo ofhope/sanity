@@ -486,7 +486,7 @@ export default {
       of: ['author', 'book', 'code', 'color', 'geopoint', 'image', 'slug', 'species'].map(
         (type) => ({
           type,
-        })
+        }),
       ),
     },
   ],

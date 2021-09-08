@@ -18,7 +18,7 @@ export function checkPublishPermission(snapshots: {
   return combineLatest(
     grantsStore.checkDocumentPermission('update', snapshots.draft),
     grantsStore.checkDocumentPermission('update', snapshots.published),
-    grantsStore.checkDocumentPermission('create', snapshots.published)
+    grantsStore.checkDocumentPermission('create', snapshots.published),
   ).pipe(
     map(([deleteDraftPermission, updatePublishedPermission, createPublishedPermission]) => {
       const canDeleteDraft = deleteDraftPermission.granted
@@ -39,7 +39,7 @@ export function checkPublishPermission(snapshots: {
           createPublishedPermission.granted,
         reason: reason ? `Cannot publish: ${reason}` : '',
       }
-    })
+    }),
   )
 }
 
@@ -65,7 +65,7 @@ export function checkDeletePermission(snapshots: {
         granted: deleteDraftPermission.granted && deletePublishedPermission.granted,
         reason: reason ? `Cannot publish: ${reason}` : '',
       }
-    })
+    }),
   )
 }
 
@@ -92,6 +92,6 @@ export function checkUnpublishPermission(snapshots: {
         granted: deletePublishedPermission.granted && createDraftPermission.granted,
         reason: reason ? `Cannot publish: ${reason}` : '',
       }
-    })
+    }),
   )
 }

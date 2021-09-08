@@ -62,7 +62,7 @@ const StructureBuilder = {
   defaultInitialValueTemplateItems,
   initialValueTemplateItem: (
     templateId: string,
-    parameters?: {[key: string]: any}
+    parameters?: {[key: string]: any},
   ): InitialValueTemplateItemBuilder =>
     new InitialValueTemplateItemBuilder({
       id: templateId,

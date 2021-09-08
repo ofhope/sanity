@@ -43,13 +43,13 @@ function getNewFromSource(source, valuePath, document) {
   return Promise.resolve(
     typeof source === 'function'
       ? source(document, {parentPath, parent})
-      : (PathUtils.get(document, source) as string | undefined)
+      : (PathUtils.get(document, source) as string | undefined),
   )
 }
 
 const SlugInput = React.forwardRef(function SlugInput(
   props: Props,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {
     value,
@@ -79,13 +79,13 @@ const SlugInput = React.forwardRef(function SlugInput(
 
       onChange(PatchEvent.from(setIfMissing({_type: type.name}), set(nextSlug, ['current'])))
     },
-    [onChange, type.name]
+    [onChange, type.name],
   )
 
   const [generateState, handleGenerateSlug] = useAsync(() => {
     if (!sourceField) {
       return Promise.reject(
-        new Error(`Source is missing. Check source on type "${type.name}" in schema`)
+        new Error(`Source is missing. Check source on type "${type.name}" in schema`),
       )
     }
 

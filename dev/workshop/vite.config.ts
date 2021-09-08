@@ -19,7 +19,7 @@ const partsResolver = createPartsResolver()
 const cssPartAliases = Object.entries(parts.implementations)
   .filter(
     ([, implementations]: any) =>
-      implementations.length > 0 && implementations[0].path.endsWith('.css')
+      implementations.length > 0 && implementations[0].path.endsWith('.css'),
   )
   .map(([key, implementations]: any) => {
     return {

@@ -8,7 +8,7 @@ module.exports = ({query, params = {}, options = {}}) => {
 
   const qString = Object.keys(params).reduce(
     (qs, param) => `${qs}&${enc(`$${param}`)}=${enc(JSON.stringify(params[param]))}`,
-    base
+    base,
   )
 
   return Object.keys(opts).reduce((qs, option) => {

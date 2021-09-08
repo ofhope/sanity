@@ -11,7 +11,7 @@ const readActions = (schemaType) => {
   // todo: enable this when officially deprecating experimental actions
   if (false && !(schemaType.name in hasWarned)) {
     console.warn(`Heads up! Experimental actions is now deprecated and replaced by Document Actions. Read more about how to migrate on ${helpUrl(
-      'experimental-actions-replaced-by-document-actions'
+      'experimental-actions-replaced-by-document-actions',
     )}".
 `)
     hasWarned[schemaType.name] = true
@@ -23,8 +23,8 @@ const validateActions = (typeName, actions) => {
   if (!Array.isArray(actions)) {
     throw new Error(
       `The value of <type>.${ACTIONS_FLAG} should be an array with any of the actions ${VALID_ACTIONS.join(
-        ', '
-      )}`
+        ', ',
+      )}`,
     )
   }
   const invalid = difference(actions, VALID_ACTIONS)
@@ -33,8 +33,8 @@ const validateActions = (typeName, actions) => {
       `Invalid action${
         invalid.length > 1 ? 's' : ''
       } configured for schema type "${typeName}": ${invalid.join(
-        ', '
-      )}. Valid actions are: ${VALID_ACTIONS.join(', ')}`
+        ', ',
+      )}. Valid actions are: ${VALID_ACTIONS.join(', ')}`,
     )
   }
   return actions

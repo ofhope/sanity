@@ -17,7 +17,7 @@ export default (html, doc) => {
       doc,
       null,
       _XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
-      null
+      null,
     )
     for (let i = childNodes.snapshotLength - 1; i >= 0; i--) {
       const elm = childNodes.snapshotItem(i)

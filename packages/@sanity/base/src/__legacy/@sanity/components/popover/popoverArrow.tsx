@@ -18,7 +18,7 @@ export const PopoverArrow = forwardRef(
         </svg>
       </div>
     )
-  }
+  },
 )
 
 PopoverArrow.displayName = 'PopoverArrow'

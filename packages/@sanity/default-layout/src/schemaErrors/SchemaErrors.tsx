@@ -102,14 +102,14 @@ SchemaErrors.propTypes = {
           kind: PropTypes.string,
           type: PropTypes.string,
           name: PropTypes.string,
-        })
+        }),
       ),
       problems: PropTypes.arrayOf(
         PropTypes.shape({
           severity: PropTypes.string,
-        })
+        }),
       ),
-    }).isRequired
+    }).isRequired,
   ).isRequired,
 }
 

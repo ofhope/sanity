@@ -35,7 +35,7 @@ const PRESERVE_FOCUS_ELEMENT = (
 
 export const Calendar = forwardRef(function Calendar(
   props: CalendarProps,
-  forwardedRef: React.ForwardedRef<HTMLDivElement>
+  forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
   const {
     selectTime,
@@ -53,12 +53,12 @@ export const Calendar = forwardRef(function Calendar(
 
   const setFocusedDateMonth = useCallback(
     (month: number) => setFocusedDate(setDate(setMonth(focusedDate, month), 1)),
-    [focusedDate, setFocusedDate]
+    [focusedDate, setFocusedDate],
   )
 
   const handleFocusedMonthChange = useCallback(
     (e: React.FormEvent<HTMLSelectElement>) => setFocusedDateMonth(Number(e.currentTarget.value)),
-    [setFocusedDateMonth]
+    [setFocusedDateMonth],
   )
 
   const moveFocusedDate = useCallback((by: number) => setFocusedDate(addMonths(focusedDate, by)), [
@@ -68,14 +68,14 @@ export const Calendar = forwardRef(function Calendar(
 
   const setFocusedDateYear = useCallback(
     (year: number) => setFocusedDate(setYear(focusedDate, year)),
-    [focusedDate, setFocusedDate]
+    [focusedDate, setFocusedDate],
   )
 
   const handleDateChange = useCallback(
     (date: Date) => {
       onSelect(setMinutes(setHours(date, selectedDate.getHours()), selectedDate.getMinutes()))
     },
-    [onSelect, selectedDate]
+    [onSelect, selectedDate],
   )
 
   const handleMinutesChange = useCallback(
@@ -83,7 +83,7 @@ export const Calendar = forwardRef(function Calendar(
       const m = Number(event.currentTarget.value)
       onSelect(setMinutes(selectedDate, m))
     },
-    [onSelect, selectedDate]
+    [onSelect, selectedDate],
   )
 
   const handleHoursChange = useCallback(
@@ -91,14 +91,14 @@ export const Calendar = forwardRef(function Calendar(
       const m = Number(event.currentTarget.value)
       onSelect(setHours(selectedDate, m))
     },
-    [onSelect, selectedDate]
+    [onSelect, selectedDate],
   )
 
   const handleTimeChange = useCallback(
     (hours: number, mins: number) => {
       onSelect(setHours(setMinutes(selectedDate, mins), hours))
     },
-    [onSelect, selectedDate]
+    [onSelect, selectedDate],
   )
 
   const ref = useForwardedRef(forwardedRef)
@@ -132,7 +132,7 @@ export const Calendar = forwardRef(function Calendar(
       // set focus temporarily on this element to make sure focus is still inside the calendar-grid after re-render
       ref.current?.querySelector<HTMLElement>('[data-preserve-focus]')?.focus()
     },
-    [ref, focusCurrentWeekDay, onFocusedDateChange, focusedDate]
+    [ref, focusCurrentWeekDay, onFocusedDateChange, focusedDate],
   )
 
   useEffect(() => {
@@ -141,7 +141,7 @@ export const Calendar = forwardRef(function Calendar(
 
   useEffect(() => {
     const currentFocusInCalendarGrid = document.activeElement?.matches(
-      '[data-calendar-grid], [data-calendar-grid] [data-preserve-focus]'
+      '[data-calendar-grid], [data-calendar-grid] [data-preserve-focus]',
     )
     if (
       // Only move focus if it's currently in the calendar grid

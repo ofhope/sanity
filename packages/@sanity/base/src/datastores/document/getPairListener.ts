@@ -26,7 +26,7 @@ export type ListenerEvent = MutationEvent | ReconnectEvent | InitialSnapshotEven
 export function getPairListener(
   client: SanityClient,
   idPair: IdPair,
-  options: PairListenerOptions = {}
+  options: PairListenerOptions = {},
 ) {
   const {publishedId, draftId} = idPair
   return defer(
@@ -42,8 +42,8 @@ export function getPairListener(
           events: ['welcome', 'mutation', 'reconnect'],
           effectFormat: 'mendoza',
           tag: options.tag || 'document.pair-listener',
-        }
-      ) as Observable<WelcomeEvent | MutationEvent | ReconnectEvent>
+        },
+      ) as Observable<WelcomeEvent | MutationEvent | ReconnectEvent>,
   ).pipe(
     concatMap((event) =>
       event.type === 'welcome'
@@ -51,10 +51,10 @@ export function getPairListener(
             concatMap((snapshots) => [
               createSnapshotEvent(draftId, snapshots.draft),
               createSnapshotEvent(publishedId, snapshots.published),
-            ])
+            ]),
           )
-        : observableOf(event)
-    )
+        : observableOf(event),
+    ),
   )
 
   function fetchInitialDocumentSnapshots(): Observable<Snapshots> {
@@ -64,14 +64,14 @@ export function getPairListener(
         map(([draft, published]) => ({
           draft,
           published,
-        }))
+        })),
       )
   }
 }
 
 function createSnapshotEvent(
   documentId: string,
-  document: null | SanityDocument
+  document: null | SanityDocument,
 ): InitialSnapshotEvent {
   return {
     type: 'snapshot',

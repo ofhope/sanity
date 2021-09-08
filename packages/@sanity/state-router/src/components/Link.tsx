@@ -14,7 +14,7 @@ interface LinkProps {
 }
 const Link = forwardRef(function Link(
   props: LinkProps & React.HTMLProps<HTMLAnchorElement>,
-  ref: ForwardedRef<HTMLAnchorElement>
+  ref: ForwardedRef<HTMLAnchorElement>,
 ) {
   const routerContext = useContext(RouterContext)
   const {onClick, href, target, replace = false, ...rest} = props
@@ -50,7 +50,7 @@ const Link = forwardRef(function Link(
 
       routerContext.navigateUrl(href, {replace})
     },
-    [href, onClick, replace, routerContext, target]
+    [href, onClick, replace, routerContext, target],
   )
 
   return <a {...rest} onClick={handleClick} href={href} target={target} ref={ref} />

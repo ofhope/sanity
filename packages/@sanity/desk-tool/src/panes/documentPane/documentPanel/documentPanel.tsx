@@ -67,7 +67,7 @@ export function DocumentPanel(props: DocumentPanelProps) {
   const {displayed, historyController, open: openHistory} = useDocumentHistory()
   const activeView = useMemo(
     () => views.find((view) => view.id === activeViewId) || views[0] || {type: 'form'},
-    [activeViewId, views]
+    [activeViewId, views],
   )
   const {revTime} = historyController
   const hasValue = Boolean(props.value)
@@ -102,7 +102,7 @@ export function DocumentPanel(props: DocumentPanelProps) {
 
       return false
     },
-    [openHistory, toggleInspect]
+    [openHistory, toggleInspect],
   )
 
   const {value: currentUser} = useCurrentUser()
@@ -112,7 +112,7 @@ export function DocumentPanel(props: DocumentPanelProps) {
   const permission = useCheckDocumentPermission(
     props.documentId,
     props.documentType,
-    requiredPermission
+    requiredPermission,
   )
 
   // Use a local portal container when split panes is supported

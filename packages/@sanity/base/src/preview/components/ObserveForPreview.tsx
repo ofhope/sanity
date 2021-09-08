@@ -30,8 +30,8 @@ function memoizeBy<T>(isActive$: Observable<boolean>) {
       distinctUntilChanged(),
       switchMap(
         (isActive): Observable<T> =>
-          isActive ? producer$.pipe(tap((v) => (memo = v))) : of(memo).pipe(filter(isNonNullable))
-      )
+          isActive ? producer$.pipe(tap((v) => (memo = v))) : of(memo).pipe(filter(isNonNullable)),
+      ),
     )
   }
 }
@@ -62,18 +62,18 @@ const connect = (props$: Observable<OuterProps>): Observable<ReceivedProps> => {
         observeForPreview(
           props.value,
           props.type,
-          props.ordering ? {ordering: props.ordering} : {}
+          props.ordering ? {ordering: props.ordering} : {},
         ).pipe(
           map((result) => ({
             isLoading: false,
             type: props.type,
             snapshot: result.snapshot,
             children: props.children,
-          }))
-        )
-      )
+          })),
+        ),
+      ),
     ),
-    memoizeBy(isActive$)
+    memoizeBy(isActive$),
   )
 }
 
@@ -85,7 +85,7 @@ type ReceivedProps = {
   children: (props: unknown) => React.ReactElement
 }
 export default withPropsStream<OuterProps, ReceivedProps>(connect, function ObserveForPreview(
-  props: ReceivedProps
+  props: ReceivedProps,
 ) {
   const {type, error, snapshot, isLoading, children} = props
 

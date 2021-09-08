@@ -31,7 +31,7 @@ describe('resolveInitialValue', () => {
     expect(resolveInitialValue(schema, omit(example, ['value']) as Template)).rejects.toMatchObject(
       {
         message: 'Template "author" has invalid "value" property',
-      }
+      },
     )
   })
 
@@ -51,7 +51,7 @@ describe('resolveInitialValue', () => {
 
   test('should call sync value resolvers', () => {
     expect(
-      resolveInitialValue(schema, {...example, value: () => example.value})
+      resolveInitialValue(schema, {...example, value: () => example.value}),
     ).resolves.toMatchObject({
       title: 'here',
     })
@@ -62,7 +62,7 @@ describe('resolveInitialValue', () => {
       resolveInitialValue(schema, {
         ...example,
         value: () => Promise.resolve(example.value),
-      })
+      }),
     ).resolves.toMatchObject({
       title: 'here',
     })
@@ -83,7 +83,7 @@ describe('resolveInitialValue', () => {
       resolveInitialValue(schema, {
         ...example,
         value: {image: {_type: 'image', meta: {foo: 'foo'}}},
-      })
+      }),
     ).rejects.toMatchObject({
       message: 'Template "author" initial value: missing "_type" property at path "image.meta"',
     })
@@ -94,7 +94,7 @@ describe('resolveInitialValue', () => {
       resolveInitialValue(schema, {
         ...example,
         value: {image: {_type: 'image', asset: {_ref: 'foo'}}},
-      })
+      }),
     ).resolves.toMatchObject({image: {_type: 'image', asset: {_ref: 'foo', _type: 'reference'}}})
   })
 

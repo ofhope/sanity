@@ -56,7 +56,7 @@ module.exports = {
     const options = {uri: this.getDataUrl('doc', id), json: true, tag: opts.tag}
     const observable = this._requestObservable(options).pipe(
       filter(isResponse),
-      map((event) => event.body.documents && event.body.documents[0])
+      map((event) => event.body.documents && event.body.documents[0]),
     )
 
     return this.isPromiseAPI() ? toPromise(observable) : observable
@@ -69,7 +69,7 @@ module.exports = {
       map((event) => {
         const indexed = indexBy(event.body.documents || [], (doc) => doc._id)
         return ids.map((id) => indexed[id] || null)
-      })
+      }),
     )
 
     return this.isPromiseAPI() ? toPromise(observable) : observable
@@ -166,7 +166,7 @@ module.exports = {
           results: results,
           [key]: ids,
         }
-      })
+      }),
     )
   },
 

@@ -33,7 +33,7 @@ export default class Descender {
         result = flatten(
           result.map((descender) => {
             return descender.iterateConstraints(probe)
-          })
+          }),
         )
         anyConstraints = result.some((descender) => {
           return descender.head && descender.head.isConstraint()

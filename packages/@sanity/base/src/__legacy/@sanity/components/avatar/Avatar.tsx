@@ -44,7 +44,7 @@ export function Avatar(props: AvatarProps) {
 
   const elementId = useId()
   const [arrowPosition, setArrowPosition] = useState<AvatarPosition | undefined>(
-    animateArrowFrom || arrowPositionProp || 'inside'
+    animateArrowFrom || arrowPositionProp || 'inside',
   )
 
   const [imageFailed, setImageFailed] = useState<boolean>(false)

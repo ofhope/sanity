@@ -25,7 +25,7 @@ export default {
           color &&
           color.hsl &&
           `H:${Math.round(color.hsl.l * 100)} S:${Math.round(color.hsl.l * 100)} L:${Math.round(
-            color.hsl.l * 100
+            color.hsl.l * 100,
           )} A:${Math.round(color.hsl.a * 100)}`,
         media: () => (
           <div

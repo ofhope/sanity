@@ -44,7 +44,7 @@ export function ActionMenuButton(props: ActionMenuButtonProps) {
       portal: true,
       preventOverflow: true,
     }),
-    []
+    [],
   )
 
   const currentAction = actionStates[actionIndex]

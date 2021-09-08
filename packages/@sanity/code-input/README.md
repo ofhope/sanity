@@ -22,8 +22,8 @@ Use it in your schema types:
     {
       name: 'exampleUsage',
       title: 'Example usage',
-      type: 'code'
-    }
+      type: 'code',
+    },
   ]
 }
 ```

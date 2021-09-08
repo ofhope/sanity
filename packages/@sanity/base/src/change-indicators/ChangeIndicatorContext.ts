@@ -14,5 +14,5 @@ export const ChangeIndicatorContext: React.Context<ChangeIndicatorContextValue> 
     path: [],
     fullPath: [],
     focusPath: [],
-  } as ChangeIndicatorContextValue
+  } as ChangeIndicatorContextValue,
 )

@@ -12,7 +12,7 @@ test('builds document node through constructor', () => {
           foo: 'bar',
         },
       },
-    }).serialize()
+    }).serialize(),
   ).toMatchSnapshot()
 })
 
@@ -33,7 +33,7 @@ test('can construct with schema type instead of schema type name', () => {
       .schemaType(getDefaultSchema().get('post') as SchemaType)
       .id('yeah')
       .documentId('wow')
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -45,13 +45,13 @@ test('can construct using builder', () => {
       .schemaType('book')
       .initialValueTemplate('book-by-author', {authorId: 'grrm'})
       .child(() => S.documentTypeList('post'))
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
 test('can construct using builder (alt)', () => {
   expect(
-    S.document().schemaType('book').id('yeah').documentId('wow').views([]).serialize()
+    S.document().schemaType('book').id('yeah').documentId('wow').views([]).serialize(),
   ).toMatchSnapshot()
 })
 
@@ -71,7 +71,7 @@ test('throws on duplicate view ids', () => {
       .id('got')
       .schemaType('book')
       .views([S.view.form(), S.view.form(), S.view.component(() => null).title('Not editor')])
-      .serialize()
+      .serialize(),
   ).toThrowError(/document node has views with duplicate IDs: editor/)
 })
 
@@ -86,11 +86,11 @@ test('getters work', () => {
   expect(original.documentId('moo').getDocumentId()).toEqual('moo')
   expect(original.schemaType('author').getSchemaType()).toEqual('author')
   expect(original.initialValueTemplate('book-by-author').getInitalValueTemplate()).toEqual(
-    'book-by-author'
+    'book-by-author',
   )
   expect(
     original
       .initialValueTemplate('book-by-author', {authorId: 'grrm'})
-      .getInitialValueTemplateParameters()
+      .getInitialValueTemplateParameters(),
   ).toEqual({authorId: 'grrm'})
 })

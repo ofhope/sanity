@@ -75,7 +75,6 @@ Or go to [sanity.io/create](https://www.sanity.io/create) to get started from th
 - Subscribe to our [newsletter](http://eepurl.com/b2yaDz)
 - Join the [developer community on Slack](https://slack.sanity.io)
 
-
 ## Code of Conduct
 
 We aim to be an inclusive, welcoming community for everyone. To make that explicit, we have a [code of conduct](https://github.com/sanity-io/sanity/blob/current/CODE_OF_CONDUCT.md) that applies to communication around the project.

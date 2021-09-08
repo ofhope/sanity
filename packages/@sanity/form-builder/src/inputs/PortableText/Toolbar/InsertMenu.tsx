@@ -70,7 +70,7 @@ function InsertMenuItem({
       item.handle()
       if (onClick) onClick(event)
     },
-    [item, onClick]
+    [item, onClick],
   )
 
   const title = item.type.title || item.type.type.name

@@ -85,7 +85,7 @@ function DevServerStatus() {
         handleDisconnected()
       }
     },
-    [handleBuilding, handleBuilt, handleConnected, handleConnecting, handleDisconnected]
+    [handleBuilding, handleBuilt, handleConnected, handleConnecting, handleDisconnected],
   )
 
   // Handle reconnected

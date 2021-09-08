@@ -30,7 +30,7 @@ function reduceType(type, reducer, acc, path = [], maxDepth) {
 function reduceArray(arrayType, reducer, accumulator, path, maxDepth) {
   return arrayType.of.reduce(
     (acc, ofType) => reduceType(ofType, reducer, acc, path, maxDepth - 1),
-    accumulator
+    accumulator,
   )
 }
 
@@ -81,7 +81,7 @@ function getCachedStringFieldPaths(type, maxDepth) {
           mapWith: 'pt::text',
         })),
       ],
-      (spec) => spec.path.join('.')
+      (spec) => spec.path.join('.'),
     )
   }
   return type[stringFieldsSymbol]

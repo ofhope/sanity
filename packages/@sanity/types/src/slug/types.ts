@@ -16,7 +16,7 @@ export interface SlugSourceOptions {
 
 export type SlugSourceFn = (
   document: SanityDocument,
-  options: SlugSourceOptions
+  options: SlugSourceOptions,
 ) => string | Promise<string>
 
 export type SlugifierFn = (source: string, schemaType: SlugSchemaType) => string | Promise<string>
@@ -31,7 +31,7 @@ export interface SlugUniqueOptions {
 
 export type UniqueCheckerFn = (
   slug: string,
-  options: SlugUniqueOptions
+  options: SlugUniqueOptions,
 ) => boolean | Promise<boolean>
 
 export interface SlugOptions {

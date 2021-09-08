@@ -2,12 +2,6 @@
   "name": "@sanity/production-preview",
   "version": "2.15.0",
   "description": "Production preview",
-  "main": "lib/index.js",
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
-  "scripts": {
-    "clean": "rimraf lib dest"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -18,17 +12,23 @@
     "color-input",
     "sanity-plugin"
   ],
-  "devDependencies": {
-    "rimraf": "^2.7.1"
-  },
+  "homepage": "https://www.sanity.io/",
   "bugs": {
     "url": "https://github.com/sanity-io/sanity/issues"
   },
-  "homepage": "https://www.sanity.io/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sanity-io/sanity.git",
     "directory": "packages/@sanity/production-preview"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib dest"
+  },
+  "devDependencies": {
+    "rimraf": "^2.7.1"
   },
   "publishConfig": {
     "access": "public"

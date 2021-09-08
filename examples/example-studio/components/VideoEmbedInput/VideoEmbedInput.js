@@ -81,7 +81,7 @@ export default class VideoEmbedInput extends React.Component {
     const {type, value, level} = this.props
     const placeholder = `Paste URL or embed code from ${humanizeList(
       SUPPORTED_SERVICES.map((s) => s.title),
-      {conjunction: 'or'}
+      {conjunction: 'or'},
     )}…`
     return (
       <FormField label={type.title} level={level} description={type.description}>

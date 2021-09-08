@@ -10,7 +10,7 @@ try {
 } catch (error) {
   // eslint-disable-next-line no-console
   console.error(
-    'Error: Unable to resolve "requiredSanityUiVersion.js" in ./lib. Please make sure the project has been successfully built.'
+    'Error: Unable to resolve "requiredSanityUiVersion.js" in ./lib. Please make sure the project has been successfully built.',
   )
   process.exit(1)
 }

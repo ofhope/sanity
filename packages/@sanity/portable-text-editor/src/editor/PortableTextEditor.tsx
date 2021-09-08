@@ -51,7 +51,7 @@ export class PortableTextEditor extends React.Component<Props, State> {
   static addAnnotation = (
     editor: PortableTextEditor,
     type: Type,
-    value?: {[prop: string]: any}
+    value?: {[prop: string]: any},
   ): {spanPath: Path; markDefPath: Path} | undefined => editor.editable?.addAnnotation(type, value)
   static blur = (editor: PortableTextEditor): void => {
     debug('Host blurred')
@@ -60,11 +60,11 @@ export class PortableTextEditor extends React.Component<Props, State> {
   static delete = (
     editor: PortableTextEditor,
     selection: EditorSelection,
-    options?: {mode?: 'block' | 'children'}
+    options?: {mode?: 'block' | 'children'},
   ) => editor.editable?.delete(selection, options)
   static findDOMNode = (
     editor: PortableTextEditor,
-    element: PortableTextBlock | PortableTextChild
+    element: PortableTextBlock | PortableTextChild,
   ) => {
     return editor.editable?.findDOMNode(element)
   }
@@ -105,7 +105,7 @@ export class PortableTextEditor extends React.Component<Props, State> {
   static insertChild = (
     editor: PortableTextEditor,
     type: Type,
-    value?: {[prop: string]: any}
+    value?: {[prop: string]: any},
   ): Path | undefined => {
     debug(`Host inserting child`)
     return editor.editable?.insertChild(type, value)
@@ -113,7 +113,7 @@ export class PortableTextEditor extends React.Component<Props, State> {
   static insertBlock = (
     editor: PortableTextEditor,
     type: Type,
-    value?: {[prop: string]: any}
+    value?: {[prop: string]: any},
   ): Path | undefined => {
     return editor.editable?.insertBlock(type, value)
   }
@@ -206,7 +206,7 @@ export class PortableTextEditor extends React.Component<Props, State> {
       const validation = validateValue(
         this.props.value,
         this.portableTextFeatures,
-        this.keyGenerator
+        this.keyGenerator,
       )
       if (this.props.value && !validation.valid) {
         this.change$.next({

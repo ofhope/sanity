@@ -3,7 +3,7 @@ const {upperFirst} = require('lodash')
 function generateTypeQueries(types, sortings) {
   const queries = []
   const queryable = types.filter(
-    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document')
+    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document'),
   )
 
   const isSortable = (type) => sortings.some((sorting) => sorting.name === `${type.name}Sorting`)

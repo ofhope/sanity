@@ -46,7 +46,7 @@ export default React.memo(function DefaultFormField({
     className,
     inline ? styles.inline : styles.block,
     styles[levelClass],
-    wrapped && styles.wrapped
+    wrapped && styles.wrapped,
   )
 
   return (

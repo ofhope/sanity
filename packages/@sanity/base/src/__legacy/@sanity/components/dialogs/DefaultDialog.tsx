@@ -74,7 +74,7 @@ function DefaultDialogChildren(props: DefaultDialogProps) {
         if (onClickOutside) onClickOutside()
       }
     }, [isTopLayer, onClickOutside]),
-    [cardElement]
+    [cardElement],
   )
 
   const closeButtonColor =

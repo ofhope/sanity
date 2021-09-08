@@ -13,7 +13,7 @@ export interface Location {
 }
 
 export function configure(
-  {qsImpl} = {qsImpl: require('querystring')}
+  {qsImpl} = {qsImpl: require('querystring')},
 ): {parse: (urlToParse: string) => Location; stringify: (location: Location) => string} {
   class LocationImpl {
     query: string

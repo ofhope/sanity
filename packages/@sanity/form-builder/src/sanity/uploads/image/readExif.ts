@@ -30,6 +30,6 @@ export default function readExif(file: File) {
         console.warn(`Exif read failed, continuing anyway: ${error.message}`) // eslint-disable-line no-console
       }
       return observableOf({})
-    })
+    }),
   )
 }

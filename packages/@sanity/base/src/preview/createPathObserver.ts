@@ -57,9 +57,9 @@ function observePaths(value: Value, paths: Path[], observeFields: ObserveFieldsF
               ...snapshot,
             },
             paths,
-            observeFields
+            observeFields,
           )
-        })
+        }),
       )
     }
   }
@@ -84,7 +84,7 @@ function observePaths(value: Value, paths: Path[], observeFields: ObserveFieldsF
       }
       return res
     },
-    {...value}
+    {...value},
   )
 
   return observableOf(next).pipe(props({wait: true}))
@@ -96,7 +96,7 @@ function observePaths(value: Value, paths: Path[], observeFields: ObserveFieldsF
 
 function normalizePaths(path: (FieldName | Path)[]): Path[] {
   return path.map((segment: FieldName | Path) =>
-    typeof segment === 'string' ? segment.split('.') : segment
+    typeof segment === 'string' ? segment.split('.') : segment,
   )
 }
 

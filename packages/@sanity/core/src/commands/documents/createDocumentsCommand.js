@@ -174,7 +174,7 @@ function getResultMessage(result, operation) {
       acc[mod].push(res.id)
       return acc
     },
-    {created: [], skipped: []}
+    {created: [], skipped: []},
   )
 
   if (created.length > 0 && skipped.length > 0) {

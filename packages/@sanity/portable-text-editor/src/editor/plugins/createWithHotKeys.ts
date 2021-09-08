@@ -31,7 +31,7 @@ export function createWithHotkeys(
   portableTextFeatures: PortableTextFeatures,
   keyGenerator: () => string,
   portableTextEditor: PortableTextEditor,
-  hotkeysFromOptions?: HotkeyOptions
+  hotkeysFromOptions?: HotkeyOptions,
 ): (editor: PortableTextSlateEditor & ReactEditor) => any {
   const reservedHotkeys = ['enter', 'tab', 'shift', 'delete', 'end']
   const activeHotkeys = hotkeysFromOptions || DEFAULT_HOTKEYS // TODO: Merge where possible? A union?
@@ -102,7 +102,7 @@ export function createWithHotkeys(
       ) {
         const [prevBlock, prevPath] = Editor.node(
           editor,
-          Path.previous(editor.selection.focus.path.slice(0, 1))
+          Path.previous(editor.selection.focus.path.slice(0, 1)),
         )
         const [focusBlock] = Editor.node(editor, editor.selection.focus, {depth: 1})
         if (
@@ -197,7 +197,7 @@ export function createWithHotkeys(
                 ],
               },
             ],
-            portableTextFeatures.types.block.name
+            portableTextFeatures.types.block.name,
           )[0]
           Editor.insertNode(editor, (block as unknown) as Element)
           event.preventDefault()

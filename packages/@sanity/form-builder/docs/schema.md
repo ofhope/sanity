@@ -1,6 +1,6 @@
 # Schema
 
-The schema defines the *structure* of the data produced by the form builder and their relation. To create a schema, you call `Schema.compile()` with a JSON representation of the schema types, e.g.:
+The schema defines the _structure_ of the data produced by the form builder and their relation. To create a schema, you call `Schema.compile()` with a JSON representation of the schema types, e.g.:
 
 ```js
 const mySchema = Schema.compile({
@@ -12,13 +12,12 @@ const mySchema = Schema.compile({
       fields: [
         {
           name: 'title',
-          type: 'string'
-        }
-      ]
-    }
-  ]
+          type: 'string',
+        },
+      ],
+    },
+  ],
 })
 ```
+
 <!-- refer to more detailed documentation about schemas -->
-   
-   

@@ -29,7 +29,7 @@ const arrayResolveUploader = (type: SchemaType, file: FileLike) => {
 
 export const SanityArrayInput = forwardRef(function SanityArrayInput(
   props: Props,
-  ref: ForwardedRef<ArrayInput>
+  ref: ForwardedRef<ArrayInput>,
 ) {
   return (
     <ArrayInput
@@ -44,7 +44,7 @@ export const SanityArrayInput = forwardRef(function SanityArrayInput(
 
 export const SanityArrayOfPrimitivesInput = forwardRef(function SanityArrayOfPrimitivesInput(
   props: Omit<PrimitiveArrayInputProps, 'ArrayFunctionsImpl'>,
-  ref: ForwardedRef<ArrayOfPrimitivesInput>
+  ref: ForwardedRef<ArrayOfPrimitivesInput>,
 ) {
   return <ArrayOfPrimitivesInput {...props} ArrayFunctionsImpl={ArrayFunctions} ref={ref} />
 })

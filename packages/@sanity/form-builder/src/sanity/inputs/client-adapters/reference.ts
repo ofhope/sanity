@@ -18,12 +18,12 @@ type SearchResult = {hit: SearchHit}[]
 export function search(
   textTerm: string,
   type: ReferenceSchemaType,
-  options: ReferenceFilterSearchOptions
+  options: ReferenceFilterSearchOptions,
 ): Observable<SearchHit[]> {
   const searchWeighted = createWeightedSearch(type.to, searchClient, options)
   return searchWeighted(textTerm, {includeDrafts: false}).pipe(
     map((results: SearchResult): SearchHit[] =>
-      results.map(({hit}) => ({_type: hit._type, _id: hit._id}))
-    )
+      results.map(({hit}) => ({_type: hit._type, _id: hit._id})),
+    ),
   )
 }

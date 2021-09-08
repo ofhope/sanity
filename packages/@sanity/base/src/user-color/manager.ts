@@ -17,7 +17,7 @@ const defaultCurrentUserHue: ColorHueKey = 'purple'
 const USER_COLOR_EXCLUDE_HUES = ['green', 'red', 'gray']
 
 const defaultHues: ColorHueKey[] = COLOR_HUES.filter(
-  (hue) => !USER_COLOR_EXCLUDE_HUES.includes(hue)
+  (hue) => !USER_COLOR_EXCLUDE_HUES.includes(hue),
 )
 
 const defaultColors = defaultHues.reduce((colors, hue) => {

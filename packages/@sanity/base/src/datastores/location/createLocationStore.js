@@ -59,7 +59,7 @@ const locationChange$ = new Observable((observer) => {
     type: 'change',
     location: location,
   })),
-  share()
+  share(),
 )
 
 export default function createLocationStore(options = {}) {

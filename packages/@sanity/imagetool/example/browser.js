@@ -58,7 +58,7 @@ function render(location) {
     <RouterProvider router={routes} location={location} onNavigate={handleNavigate}>
       <Root />
     </RouterProvider>,
-    document.getElementById('content')
+    document.getElementById('content'),
   )
 }
 

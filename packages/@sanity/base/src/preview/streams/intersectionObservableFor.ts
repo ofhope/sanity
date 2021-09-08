@@ -60,7 +60,7 @@ function createIntersectionObserverBased(): IntersectionObservableFor {
       filter((entry: IntersectionObserverEntry) => entry.target === element),
       map((ev) => ({
         isIntersecting: ev.isIntersecting,
-      }))
+      })),
     )
   }
 }
@@ -93,7 +93,7 @@ function createLegacyBased() {
     const isElementInViewport = inViewport(element)
     return merge(observableOf(isElementInViewport()), resize$, scroll$, orientationChange$).pipe(
       map(isElementInViewport), // todo: consider "faking" more of the IntersectionObserverEntry api if possible
-      map((isIntersecting) => ({isIntersecting}))
+      map((isIntersecting) => ({isIntersecting})),
     )
   }
 }

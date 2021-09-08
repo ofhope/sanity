@@ -6,7 +6,7 @@ import {InvalidValueResolution} from '../types/editor'
 export function validateValue(
   value: PortableTextBlock[] | undefined,
   portableTextFeatures: PortableTextFeatures,
-  keyGenerator: () => string
+  keyGenerator: () => string,
 ): {valid: boolean; resolution: InvalidValueResolution} {
   let resolution: InvalidValueResolution = null
   let valid = true
@@ -121,8 +121,8 @@ export function validateValue(
           flatten(
             blk.children
               .filter((cld: any) => cld._type === portableTextFeatures.types.span.name)
-              .map((cld: any) => cld.marks || [])
-          )
+              .map((cld: any) => cld.marks || []),
+          ),
         )
         // // Test that all markDefs are in use
         // if (blk.markDefs && blk.markDefs.length > 0) {
@@ -144,27 +144,27 @@ export function validateValue(
 
         // Test that every annotation mark used has a definition
         const annotationMarks = allUsedMarks.filter(
-          (mark) => !portableTextFeatures.decorators.map((dec) => dec.value).includes(mark)
+          (mark) => !portableTextFeatures.decorators.map((dec) => dec.value).includes(mark),
         )
         const orphanedMarks = annotationMarks.filter(
-          (mark) => !blk.markDefs.find((def: any) => def._key === mark)
+          (mark) => !blk.markDefs.find((def: any) => def._key === mark),
         )
         if (orphanedMarks.length > 0) {
           const children = blk.children.filter(
             (cld: any) =>
               Array.isArray(cld.marks) &&
-              cld.marks.some((mark: any) => orphanedMarks.includes(mark))
+              cld.marks.some((mark: any) => orphanedMarks.includes(mark)),
           ) as PortableTextChild[]
           if (children) {
             resolution = {
               patches: children.map((child) => {
                 return set(
                   child.marks.filter((cmrk: any) => !orphanedMarks.includes(cmrk)),
-                  [{_key: blk._key}, 'children', {_key: child._key}, 'marks']
+                  [{_key: blk._key}, 'children', {_key: child._key}, 'marks'],
                 )
               }),
               description: `Block with _key '${blk._key}' contains marks (${orphanedMarks.join(
-                ', '
+                ', ',
               )}) not supported by the current content model.`,
               action: 'Remove invalid marks',
               item: blk,

@@ -17,7 +17,7 @@ export const usePortableTextEditor = () => {
 
   if (!editor) {
     throw new Error(
-      `The \`usePortableTextEditor\` hook must be used inside the <PortableTextEditor> component's context.`
+      `The \`usePortableTextEditor\` hook must be used inside the <PortableTextEditor> component's context.`,
     )
   }
 

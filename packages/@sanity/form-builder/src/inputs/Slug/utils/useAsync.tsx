@@ -23,7 +23,7 @@ export type AsyncState<T> = AsyncPendingState | AsyncCompleteState<T> | AsyncErr
  */
 export function useAsync<T, U>(
   fn: (arg: U) => Promise<T>,
-  dependencies: React.DependencyList
+  dependencies: React.DependencyList,
 ): [null | AsyncState<T>, (arg: U) => void] {
   const [state, setState] = React.useState<AsyncState<T> | null>(null)
 
@@ -46,10 +46,10 @@ export function useAsync<T, U>(
             if (asyncId === lastId.current) {
               setState({status: 'error', error: err})
             }
-          }
+          },
         )
     },
-    [fn, ...dependencies]
+    [fn, ...dependencies],
   )
 
   return [state, wrappedCallback]

@@ -7,7 +7,7 @@ export const patch = {
   execute: (
     {snapshots, idPair, draft, published, typeName}: OperationArgs,
     patches = [],
-    initialValue
+    initialValue,
   ): void => {
     if (isLiveEditEnabled(typeName)) {
       // No drafting, so patch and commit the published document

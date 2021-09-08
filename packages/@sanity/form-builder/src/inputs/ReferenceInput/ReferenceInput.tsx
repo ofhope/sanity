@@ -70,7 +70,7 @@ function nonNullable<T>(v: T): v is NonNullable<T> {
 
 export const ReferenceInput = forwardRef(function ReferenceInput(
   props: Props,
-  forwardedRef: ForwardedRef<HTMLInputElement>
+  forwardedRef: ForwardedRef<HTMLInputElement>,
 ) {
   const {
     type,
@@ -103,7 +103,7 @@ export const ReferenceInput = forwardRef(function ReferenceInput(
             ]
       onChange(PatchEvent.from(events))
     },
-    [onChange, type]
+    [onChange, type],
   )
 
   const preview = usePreviewSnapshot(value, getPreviewSnapshot)
@@ -150,16 +150,16 @@ export const ReferenceInput = forwardRef(function ReferenceInput(
                 id: `reference-search-fail-${inputId}`,
               })
               return of({hits: []})
-            })
+            }),
           ),
-          of({isLoading: false})
-        )
+          of({isLoading: false}),
+        ),
       ),
       scan(
         (prevState, nextState): SearchState => ({...prevState, ...nextState}),
-        INITIAL_SEARCH_STATE
+        INITIAL_SEARCH_STATE,
       ),
-      tap(setSearchState)
+      tap(setSearchState),
     )
   }, [])
 
@@ -180,7 +180,7 @@ export const ReferenceInput = forwardRef(function ReferenceInput(
       }
       return preview.isLoading ? 'Loading…' : preview.snapshot?.title || 'Untitled'
     },
-    [isMissing, hasInsufficientPermissions, preview]
+    [isMissing, hasInsufficientPermissions, preview],
   )
 
   const inputId = useId()
@@ -207,7 +207,7 @@ export const ReferenceInput = forwardRef(function ReferenceInput(
         </Card>
       )
     },
-    [type]
+    [type],
   )
 
   const placeholder = preview.isLoading ? 'Loading…' : 'Type to search…'

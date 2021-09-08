@@ -5,7 +5,7 @@ test('builds document lists with only required properties', () => {
   expect(
     S.documentList({id: 'foo', title: 'Foo', options: {filter: '_type == "book"'}}).serialize({
       path: [],
-    })
+    }),
   ).toMatchSnapshot()
 })
 
@@ -32,7 +32,7 @@ test('builds document lists through setters', () => {
       .params({type: 'book'})
       .defaultLayout('card')
       .defaultOrdering([{field: 'title', direction: 'asc'}])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -44,7 +44,7 @@ test('builds document lists through setters (alt order)', () => {
       .title('Books')
       .filter('_type == $type')
       .params({type: 'book'})
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -56,7 +56,7 @@ test('builds document lists through setters (alt order #2)', () => {
       .id('books')
       .title('Books')
       .filter('_type == $type')
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 

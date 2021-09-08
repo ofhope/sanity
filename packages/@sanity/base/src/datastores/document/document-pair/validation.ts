@@ -37,7 +37,7 @@ function validateEditState(_editState: any) {
   return getValidationMarkers(_editState.draft, _editState.published).pipe(
     map((markers) => ({
       markers,
-    }))
+    })),
   )
 }
 
@@ -50,15 +50,15 @@ export const validation = memoize(
           concat<Partial<ValidationStatus>>(
             of({isValidating: true}),
             timer(300).pipe(mapTo(_editState), mergeMap(validateEditState)),
-            of({isValidating: false})
-          )
+            of({isValidating: false}),
+          ),
         ),
         scan((prev, next) => ({...prev, ...next}), INITIAL_VALIDATION_STATUS),
         distinctUntilChanged(
-          (prev, next) => prev.isValidating === next.isValidating && prev.markers === next.markers
-        )
-      )
+          (prev, next) => prev.isValidating === next.isValidating && prev.markers === next.markers,
+        ),
+      ),
     ).pipe(publishReplay(1), refCount())
   },
-  (idPair) => idPair.publishedId
+  (idPair) => idPair.publishedId,
 )

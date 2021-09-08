@@ -98,7 +98,7 @@ export class ComponentBuilder implements Serializable {
       throw new SerializeError(
         '`id` is required for `component` structure item',
         options.path,
-        options.index
+        options.index,
       ).withHelpUrl(HELP_URL.ID_REQUIRED)
     }
 
@@ -106,7 +106,7 @@ export class ComponentBuilder implements Serializable {
       throw new SerializeError(
         '`component` is required for `component` structure item',
         options.path,
-        options.index
+        options.index,
       ).withHelpUrl(HELP_URL.ID_REQUIRED)
     }
 
@@ -118,10 +118,10 @@ export class ComponentBuilder implements Serializable {
       component,
       options: componentOptions || {},
       menuItems: (this.spec.menuItems || []).map((item, i) =>
-        maybeSerializeMenuItem(item, i, options.path)
+        maybeSerializeMenuItem(item, i, options.path),
       ),
       menuItemGroups: (this.spec.menuItemGroups || []).map((item, i) =>
-        maybeSerializeMenuItemGroup(item, i, options.path)
+        maybeSerializeMenuItemGroup(item, i, options.path),
       ),
     }
   }

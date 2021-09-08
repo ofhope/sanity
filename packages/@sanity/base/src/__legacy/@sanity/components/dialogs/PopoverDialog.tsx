@@ -132,7 +132,7 @@ function PopoverDialogChildren(props: PopoverDialogChildrenProps) {
         if (onClickOutside) onClickOutside()
       }
     }, [isTopLayer, onClickOutside]),
-    [rootElement]
+    [rootElement],
   )
 
   return (

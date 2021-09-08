@@ -24,7 +24,7 @@ function removeDraftPrefix(documentId: string) {
     // eslint-disable-next-line no-console
     console.warn(
       'Removed unexpected draft id in document link: All links to documents should have the `draft.`-prefix removed and something appears to have made an intent link to `%s`',
-      documentId
+      documentId,
     )
   }
   return publishedId
@@ -121,7 +121,7 @@ function useDocumentType(documentId: string, specifiedType: string) {
   }>({isLoaded: false})
   useEffect(() => {
     const sub = resolveTypeForDocument(documentId, specifiedType).subscribe((typeName) =>
-      setDocumentType({documentType: typeName, isLoaded: true})
+      setDocumentType({documentType: typeName, isLoaded: true}),
     )
     return () => sub.unsubscribe()
   })

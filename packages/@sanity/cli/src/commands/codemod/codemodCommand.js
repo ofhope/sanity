@@ -111,7 +111,7 @@ function ensureNpx() {
     }
   } catch (err) {
     throw new Error(
-      `Failed to run "npx" - required to run codemods. Do you have a recent version of npm installed?`
+      `Failed to run "npx" - required to run codemods. Do you have a recent version of npm installed?`,
     )
   }
 }

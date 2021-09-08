@@ -51,7 +51,7 @@ export default function promptForDatasetName(prompt, options = {}, existingDatas
 function printInvalid(name, invalid) {
   return invalid.reduce(
     (acc, char) => acc.replace(new RegExp(escapeRegex(char), 'g'), chalk.red.bold(char)),
-    name
+    name,
   )
 }
 

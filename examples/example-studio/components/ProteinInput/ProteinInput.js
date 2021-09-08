@@ -128,9 +128,9 @@ export default class ProteinInput extends React.Component {
             center: Array.from(_center),
             zoom: _zoom,
           },
-          ['camera']
+          ['camera'],
         ),
-      ])
+      ]),
     )
   }
 

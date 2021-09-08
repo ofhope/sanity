@@ -78,7 +78,7 @@ export interface PaneRouterContextShape {
   navigateIntent: (
     intentName: string,
     params: Record<string, any>,
-    options?: {replace?: boolean}
+    options?: {replace?: boolean},
   ) => void
 }
 
@@ -114,7 +114,7 @@ const ChildLink = React.forwardRef(function ChildLink(props: ChildLinkProps, ref
   const panes: RouterPanesState = useMemo(
     () =>
       routerPanesState.slice(0, groupIndex + 1).concat([[{id: childId, payload: childPayload}]]),
-    [childId, childPayload, groupIndex, routerPanesState]
+    [childId, childPayload, groupIndex, routerPanesState],
   )
 
   return <StateLink ref={ref} {...rest} state={{panes}} />
@@ -128,7 +128,7 @@ type ParameterizedLinkProps = {
 
 const ParameterizedLink = React.forwardRef(function ParameterizedLink(
   props: ParameterizedLinkProps,
-  ref: React.Ref<any>
+  ref: React.Ref<any>,
 ) {
   const {params: newParams, payload: newPayload, ...rest} = props
   const {routerPanesState} = useContext(PaneRouterContext)
@@ -165,7 +165,7 @@ interface DeskToolPanesProps {
 }
 
 export function getPaneRouterContextFactory(
-  instance: React.Component<DeskToolPanesProps>
+  instance: React.Component<DeskToolPanesProps>,
 ): PaneRouterContextFactory {
   const exists = contextCache.has(instance)
   const contexts = contextCache.get(instance) || new Map<string, PaneRouterContextShape>()
@@ -232,7 +232,7 @@ export function getPaneRouterContextFactory(
         if (recurseIfInherited) {
           const newParamKeys = Object.keys(params)
           const inheritedKeys = Object.keys(paneParams).filter(
-            (key) => rootParams[key] === paneParams[key]
+            (key) => rootParams[key] === paneParams[key],
           )
 
           const removedInheritedKeys = inheritedKeys.filter((key) => !params[key])
@@ -303,7 +303,7 @@ export function getPaneRouterContextFactory(
       // Removes the current pane from the group
       closeCurrent: (): void => {
         modifyCurrentGroup((siblings, item) =>
-          siblings.length > 1 ? siblings.filter((sibling) => sibling !== item) : siblings
+          siblings.length > 1 ? siblings.filter((sibling) => sibling !== item) : siblings,
         )
       },
 

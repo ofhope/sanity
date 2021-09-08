@@ -45,7 +45,7 @@ export function ChangeList({diff, fields, schemaType}: Props): React.ReactElemen
 
   const allChanges = React.useMemo(
     () => buildObjectChangeList(schemaType, diff, path, [], {fieldFilter: fields}),
-    [schemaType, fields, path, diff]
+    [schemaType, fields, path, diff],
   )
 
   const changes = fields && fields.length === 0 ? [] : maybeFlatten(allChanges)
@@ -78,7 +78,7 @@ export function ChangeList({diff, fields, schemaType}: Props): React.ReactElemen
   }, [])
 
   const [revertAllContainerElement, setRevertAllContainerElement] = useState<HTMLDivElement | null>(
-    null
+    null,
   )
 
   if (changes.length === 0) {

@@ -68,7 +68,7 @@ function extractFromSanitySchema(sanitySchema, extractOptions = {}) {
   const hasErrors =
     sanitySchema._validation &&
     sanitySchema._validation.some((group) =>
-      group.problems.some((problem) => problem.severity === 'error')
+      group.problems.some((problem) => problem.severity === 'error'),
     )
 
   if (hasErrors) {
@@ -178,12 +178,12 @@ function extractFromSanitySchema(sanitySchema, extractOptions = {}) {
     const fields = collectFields(def)
     const firstUnprefixed = Math.max(
       0,
-      fields.findIndex((field) => field.name[0] !== '_')
+      fields.findIndex((field) => field.name[0] !== '_'),
     )
     fields.splice(
       firstUnprefixed,
       0,
-      ...[createStringField('_key'), !isDocument && createStringField('_type')].filter(Boolean)
+      ...[createStringField('_key'), !isDocument && createStringField('_type')].filter(Boolean),
     )
 
     return {
@@ -194,7 +194,7 @@ function extractFromSanitySchema(sanitySchema, extractOptions = {}) {
       fields: fields.map((field) =>
         isArrayOfBlocks(field)
           ? buildRawField(field, name)
-          : convertType(field, name, {fieldName: field.name})
+          : convertType(field, name, {fieldName: field.name}),
       ),
     }
   }
@@ -245,7 +245,7 @@ function extractFromSanitySchema(sanitySchema, extractOptions = {}) {
       : Object.assign(
           {children: getUnionDefinition(candidates, def, {grandParent: parent})},
           base,
-          name
+          name,
         )
   }
 
@@ -303,7 +303,7 @@ function extractFromSanitySchema(sanitySchema, extractOptions = {}) {
             i,
             parent.name,
             def.type ? def.type.name : def.name,
-            options.grandParent
+            options.grandParent,
           )
         }
       })

@@ -73,7 +73,7 @@ function warnOnDifferentChecksum(plugin, sameChecksum, printer) {
       [
         `[Warning] Default configuration for plugin '${plugin}' has changed since you first installed it,`,
         'check local configuration vs distributed configuration to ensure your configuration is up to date',
-      ].join(' ')
+      ].join(' '),
     )
   }
 }

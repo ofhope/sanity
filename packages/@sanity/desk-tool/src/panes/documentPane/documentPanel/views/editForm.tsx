@@ -55,7 +55,7 @@ export const EditForm = memo((props: Props) => {
       .pipe(
         tap((event: any) => {
           patchChannel.receiveEvent(event)
-        })
+        }),
       )
       .subscribe()
 

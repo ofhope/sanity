@@ -39,7 +39,7 @@ function reportWarnings() {
   const problemGroups = schema._validation
 
   const groupsWithWarnings = problemGroups.filter((group) =>
-    group.problems.some((problem) => problem.severity === 'warning')
+    group.problems.some((problem) => problem.severity === 'warning'),
   )
   if (groupsWithWarnings.length === 0) {
     return
@@ -63,7 +63,7 @@ export class SchemaErrorReporter extends React.Component<Props> {
     const problemGroups = schema._validation
 
     const groupsWithErrors = problemGroups.filter((group) =>
-      group.problems.some((problem) => problem.severity === 'error')
+      group.problems.some((problem) => problem.severity === 'error'),
     )
 
     if (groupsWithErrors.length > 0) {

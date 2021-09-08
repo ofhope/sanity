@@ -10,7 +10,7 @@ test('builds document type lists with only required properties', () => {
       schemaType: 'author',
     }).serialize({
       path: [],
-    })
+    }),
   ).toMatchSnapshot()
 })
 
@@ -18,7 +18,7 @@ test('builds document type lists with schema type as string', () => {
   expect(
     S.documentTypeList('author').serialize({
       path: [],
-    })
+    }),
   ).toMatchSnapshot()
 })
 
@@ -26,7 +26,7 @@ test('builds document type lists with schema type name + schema', () => {
   expect(
     S.documentTypeList('author', getDefaultSchema()).serialize({
       path: [],
-    })
+    }),
   ).toMatchSnapshot()
 })
 
@@ -36,13 +36,13 @@ test('builds document type lists with schema type instance', () => {
       schemaType: getDefaultSchema().get('author') as SchemaType,
     }).serialize({
       path: [],
-    })
+    }),
   ).toMatchSnapshot()
 })
 
 test('throws if no filter is set', () => {
   expect(() =>
-    S.documentTypeList('author').id('foo').filter('').serialize()
+    S.documentTypeList('author').id('foo').filter('').serialize(),
   ).toThrowErrorMatchingSnapshot()
 })
 
@@ -55,7 +55,7 @@ test('builds document type lists through setters', () => {
       .params({type: 'author'})
       .defaultLayout('card')
       .defaultOrdering([{field: 'title', direction: 'asc'}])
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -67,7 +67,7 @@ test('builds document type lists through setters (alt order)', () => {
       .title('authors')
       .filter('_type == $type')
       .params({type: 'author'})
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 
@@ -79,7 +79,7 @@ test('builds document type lists through setters (alt order #2)', () => {
       .id('authors')
       .title('authors')
       .filter('_type == $type')
-      .serialize()
+      .serialize(),
   ).toMatchSnapshot()
 })
 

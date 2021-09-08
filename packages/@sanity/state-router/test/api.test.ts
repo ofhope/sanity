@@ -54,7 +54,7 @@ test('route(path, options, children)', () => {
         },
       },
     },
-    [route('/sub/:subparam')]
+    [route('/sub/:subparam')],
   )
 
   expect(router.decode('/root/banana')).toEqual({param: 'BANANA'})
@@ -93,7 +93,7 @@ test('overrides conflicting params', () => {
       },
       children: [route('/sub/:thiswillbeignored')],
     },
-    [route('/sub/:subparam')]
+    [route('/sub/:subparam')],
   )
 
   expect(router.decode('/root/banana')).toEqual({param: 'BANANA'})

@@ -33,7 +33,7 @@ const FUTURE_RESERVED = ['any', 'time', 'date']
 export default function traverseSchema(
   types: Array<SchemaTypeDef> = [],
   coreTypes: Array<SchemaTypeDef> = [],
-  visitor: Visitor = NOOP_VISITOR
+  visitor: Visitor = NOOP_VISITOR,
 ) {
   const coreTypesRegistry = Object.create(null)
   const registry = Object.create(null)
@@ -90,7 +90,7 @@ export default function traverseSchema(
   types.forEach((typeDef, i) => {
     Object.assign(
       registry[(typeDef && typeDef.name) || `__unnamed_${i}`],
-      visitType(true)(typeDef, i)
+      visitType(true)(typeDef, i),
     )
   })
 

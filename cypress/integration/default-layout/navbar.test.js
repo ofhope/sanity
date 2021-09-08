@@ -7,11 +7,11 @@ describe('@sanity/default-layout: Navbar', () => {
     cy.get('[data-testid="default-layout-global-create-dialog"]').should(
       'have.css',
       'z-index',
-      '500401'
+      '500401',
     )
 
     cy.get(
-      '[data-testid="desk-tool-list-pane"] [data-test="components-default-pane-header"]'
+      '[data-testid="desk-tool-list-pane"] [data-test="components-default-pane-header"]',
     ).should('have.css', 'z-index', '101')
   })
 })

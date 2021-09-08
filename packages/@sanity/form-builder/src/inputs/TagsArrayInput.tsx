@@ -7,7 +7,7 @@ import {Props} from './types'
 
 export const TagsArrayInput = forwardRef(function TagsArrayInput(
   props: Props<string[]>,
-  ref: React.Ref<{focus: () => void}>
+  ref: React.Ref<{focus: () => void}>,
 ) {
   const {level, markers, onChange, onFocus, presence, readOnly, type, value = []} = props
   const id = useId()
@@ -20,7 +20,7 @@ export const TagsArrayInput = forwardRef(function TagsArrayInput(
 
       onChange(PatchEvent.from(patch))
     },
-    [onChange]
+    [onChange],
   )
 
   useImperativeHandle(ref, () => ({

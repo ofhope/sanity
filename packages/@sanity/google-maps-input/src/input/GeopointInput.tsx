@@ -102,7 +102,7 @@ class GeopointInput extends React.PureComponent<InputProps, InputState> {
         } else {
           onBlur()
         }
-      }
+      },
     )
   }
 
@@ -119,7 +119,7 @@ class GeopointInput extends React.PureComponent<InputProps, InputState> {
         }),
         set(latLng.lat(), ['lat']),
         set(latLng.lng(), ['lng']),
-      ])
+      ]),
     )
   }
 

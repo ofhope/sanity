@@ -9,7 +9,7 @@ const getUserConfig = () => {
     config = new ConfigStore(
       sanityEnv && sanityEnv !== 'production' ? `sanity-${sanityEnv}` : 'sanity',
       defaults,
-      {globalConfigPath: true}
+      {globalConfigPath: true},
     )
   }
 

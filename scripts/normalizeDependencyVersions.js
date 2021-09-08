@@ -124,6 +124,6 @@ if (fixablePackages.length > 0) {
       'you might want to run "npm run bootstrap"',
       'and run some tests before pushing changes',
     ].join(' '),
-    fixablePackages.length
+    fixablePackages.length,
   )
 }

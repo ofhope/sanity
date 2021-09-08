@@ -60,7 +60,7 @@ export function App() {
         webSocket.send(JSON.stringify({type: 'mutation', patches, editorId, testId}))
       }
     },
-    [editorId, testId, webSocket]
+    [editorId, testId, webSocket],
   )
 
   return (

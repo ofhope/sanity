@@ -126,10 +126,10 @@ const CodeInput = React.forwardRef(
         const path = PATH_FILENAME
 
         onChange(
-          PatchEvent.from([setIfMissing({_type: type.name}), val ? set(val, path) : unset(path)])
+          PatchEvent.from([setIfMissing({_type: type.name}), val ? set(val, path) : unset(path)]),
         )
       },
-      [onChange, type.name]
+      [onChange, type.name],
     )
 
     const getTheme = useCallback(() => {
@@ -161,14 +161,14 @@ const CodeInput = React.forwardRef(
               currentHighlightedLines.map(
                 (line) =>
                   // ace starts at line (row) 0, but we store it starting at line 1
-                  line + 1
+                  line + 1,
               ),
-              ['highlightedLines']
-            )
-          )
+              ['highlightedLines'],
+            ),
+          ),
         )
       },
-      [aceEditorRef, onChange]
+      [aceEditorRef, onChange],
     )
 
     const handleGutterMouseDown = useCallback(
@@ -179,7 +179,7 @@ const CodeInput = React.forwardRef(
           handleToggleSelectLine(row)
         }
       },
-      [handleToggleSelectLine]
+      [handleToggleSelectLine],
     )
 
     useEffect(() => {
@@ -193,7 +193,7 @@ const CodeInput = React.forwardRef(
       (editor: any) => {
         editor?.on('guttermousedown', handleGutterMouseDown)
       },
-      [handleGutterMouseDown]
+      [handleGutterMouseDown],
     )
 
     const getLanguageAlternatives = useCallback((): {
@@ -207,7 +207,7 @@ const CodeInput = React.forwardRef(
 
       if (!Array.isArray(languageAlternatives)) {
         throw new Error(
-          `'options.languageAlternatives' should be an array, got ${typeof languageAlternatives}`
+          `'options.languageAlternatives' should be an array, got ${typeof languageAlternatives}`,
         )
       }
 
@@ -219,7 +219,7 @@ const CodeInput = React.forwardRef(
             `'options.languageAlternatives' lists a language with value "%s", which is an alias of "%s" - please replace the value to read "%s"`,
             val,
             alias,
-            alias
+            alias,
           )
 
           return acc.concat({title, value: alias})
@@ -229,7 +229,7 @@ const CodeInput = React.forwardRef(
           // eslint-disable-next-line no-console
           console.warn(
             `'options.languageAlternatives' lists a language which is not supported: "%s", syntax highlighting will be disabled.`,
-            val
+            val,
           )
         }
 
@@ -246,10 +246,10 @@ const CodeInput = React.forwardRef(
           PatchEvent.from([
             setIfMissing({_type: type.name, language: fixedLanguage}),
             code ? set(code, path) : unset(path),
-          ])
+          ]),
         )
       },
-      [onChange, type]
+      [onChange, type],
     )
 
     const handleLanguageChange = useCallback(
@@ -258,10 +258,10 @@ const CodeInput = React.forwardRef(
         const path = PATH_LANGUAGE
 
         onChange(
-          PatchEvent.from([setIfMissing({_type: type.name}), val ? set(val, path) : unset(path)])
+          PatchEvent.from([setIfMissing({_type: type.name}), val ? set(val, path) : unset(path)]),
         )
       },
-      [onChange, type.name]
+      [onChange, type.name],
     )
 
     const languages = getLanguageAlternatives().slice()
@@ -278,14 +278,14 @@ const CodeInput = React.forwardRef(
     const filenameCompareValue = PathUtils.get(compareValue, PATH_FILENAME)
 
     const languagePresence = presence.filter((presenceItem) =>
-      PathUtils.startsWith(PATH_LANGUAGE, presenceItem.path)
+      PathUtils.startsWith(PATH_LANGUAGE, presenceItem.path),
     )
     const codePresence = presence.filter((presenceItem) =>
-      PathUtils.startsWith(PATH_CODE, presenceItem.path)
+      PathUtils.startsWith(PATH_CODE, presenceItem.path),
     )
 
     const filenamePresence = presence.filter((presenceItem) =>
-      PathUtils.startsWith(PATH_FILENAME, presenceItem.path)
+      PathUtils.startsWith(PATH_FILENAME, presenceItem.path),
     )
 
     const renderEditor = useCallback(() => {
@@ -413,7 +413,7 @@ const CodeInput = React.forwardRef(
         </ChangeIndicatorProvider>
       </FormFieldSet>
     )
-  }
+  },
 )
 
 CodeInput.displayName = 'CodeInput'

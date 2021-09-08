@@ -56,7 +56,7 @@ export default class HotspotImage extends React.PureComponent {
     if (alreadyLoaded) {
       debug(
         "Image '%s' already loaded, refreshing (from cache) to trigger onLoad / onError",
-        this.props.src
+        this.props.src,
       )
       // eslint-disable-next-line no-self-assign
       imageElement.src = imageElement.src

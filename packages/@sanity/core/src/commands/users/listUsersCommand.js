@@ -73,14 +73,14 @@ export default {
 
     const ordered = sortBy(
       members.map(({id, name, role, date}) => [id, name, role, date]),
-      [sortFields.indexOf(sort)]
+      [sortFields.indexOf(sort)],
     )
 
     const rows = order === 'asc' ? ordered : ordered.reverse()
 
     const maxWidths = rows.reduce(
       (max, row) => row.map((current, index) => Math.max(size(current), max[index])),
-      sortFields.map((str) => size(str))
+      sortFields.map((str) => size(str)),
     )
 
     const printRow = (row) => {

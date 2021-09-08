@@ -35,7 +35,7 @@ function render(state, pathname) {
         {router.isNotFound(pathname) ? <NotFound /> : <Main />}
       </RouterProvider>
     </div>,
-    document.getElementById('root')
+    document.getElementById('root'),
   )
 }
 
@@ -60,7 +60,7 @@ function checkPath() {
   if (state && state.intent) {
     // get intent redirect url
     const handler = intentHandlers.find((candidate) =>
-      candidate.canHandle(state.intent, state.params)
+      candidate.canHandle(state.intent, state.params),
     )
     if (handler) {
       handleNavigate(router.encode(handler.resolveRedirectState(state.intent, state.params)), {

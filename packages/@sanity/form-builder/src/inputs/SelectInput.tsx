@@ -8,7 +8,7 @@ import PatchEvent, {set, unset} from '../PatchEvent'
 import {Props} from './types'
 
 function toSelectItem(
-  option: TitledListValue<string | number> | string | number
+  option: TitledListValue<string | number> | string | number,
 ): TitledListValue<string | number> {
   return isTitledListValue(option) ? option : {title: capitalize(`${option}`), value: option}
 }
@@ -17,7 +17,7 @@ const EMPTY_ITEM = {title: '', value: undefined}
 
 const SelectInput = React.forwardRef(function SelectInput(
   props: Props<string | number>,
-  forwardedRef: React.ForwardedRef<HTMLSelectElement | HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLSelectElement | HTMLInputElement>,
 ) {
   const {value, readOnly, markers, type, level, onChange, onFocus, presence} = props
   const items = useMemo(() => ((type.options?.list || []) as unknown[]).map(toSelectItem), [
@@ -28,7 +28,7 @@ const SelectInput = React.forwardRef(function SelectInput(
 
   const errors = useMemo(
     () => markers.filter((marker) => marker.type === 'validation' && marker.level === 'error'),
-    [markers]
+    [markers],
   )
 
   const itemFromOptionValue = useCallback(
@@ -37,14 +37,14 @@ const SelectInput = React.forwardRef(function SelectInput(
 
       return items[index]
     },
-    [items]
+    [items],
   )
 
   const optionValueFromItem = useCallback(
     (item) => {
       return String(items.indexOf(item))
     },
-    [items]
+    [items],
   )
 
   const inputId = useId()
@@ -52,10 +52,10 @@ const SelectInput = React.forwardRef(function SelectInput(
   const handleChange = React.useCallback(
     (nextItem: TitledListValue<string | number>) => {
       onChange(
-        PatchEvent.from(typeof nextItem.value === 'undefined' ? unset() : set(nextItem.value))
+        PatchEvent.from(typeof nextItem.value === 'undefined' ? unset() : set(nextItem.value)),
       )
     },
-    [onChange]
+    [onChange],
   )
 
   const handleSelectChange = useCallback(
@@ -69,7 +69,7 @@ const SelectInput = React.forwardRef(function SelectInput(
 
       handleChange(nextItem)
     },
-    [handleChange, itemFromOptionValue]
+    [handleChange, itemFromOptionValue],
   )
 
   const handleFocus = React.useCallback(() => {
@@ -152,7 +152,7 @@ const RadioSelect = forwardRef(function RadioSelect(
     customValidity?: string
     inputId?: string
   },
-  ref: React.ForwardedRef<HTMLInputElement>
+  ref: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {items, value, onChange, onFocus, readOnly, customValidity, direction, inputId} = props
 
@@ -188,7 +188,7 @@ const RadioSelectItem = forwardRef(function RadioSelectItem(
     readOnly: boolean
     value: TitledListValue<string | number>
   },
-  ref: React.ForwardedRef<HTMLInputElement>
+  ref: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {customValidity, inputId, item, onChange, onFocus, readOnly, value} = props
 

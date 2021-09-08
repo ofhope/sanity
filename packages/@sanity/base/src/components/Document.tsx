@@ -44,7 +44,7 @@ export default function Document(props: DocumentProps) {
       stylesheetsProp.map((item) => (
         <link key={item.path} rel="stylesheet" href={assetUrl(staticPath, item)} />
       )),
-    [stylesheetsProp, staticPath]
+    [stylesheetsProp, staticPath],
   )
 
   const subresources = useMemo(
@@ -52,7 +52,7 @@ export default function Document(props: DocumentProps) {
       scriptsProp.map((item) => (
         <link key={item.path} rel="subresource" href={assetUrl(staticPath, item)} />
       )),
-    [scriptsProp, staticPath]
+    [scriptsProp, staticPath],
   )
 
   const scripts = useMemo(() => scriptsProp.map((item) => assetUrl(staticPath, item)), [
@@ -68,7 +68,7 @@ export default function Document(props: DocumentProps) {
       faviconsProp.map((item) => (
         <link key={item.path} rel="icon" href={assetUrl(staticPath, item)} />
       )),
-    [faviconsProp, staticPath]
+    [faviconsProp, staticPath],
   )
 
   return (

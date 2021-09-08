@@ -18,7 +18,7 @@ console.log('Building CLI to a single file')
 // Make sure there are no native modules
 const isBinding = (file) => path.basename(file.path) === 'binding.gyp'
 const bindings = klawSync(modulesDir, {nodir: true, filter: isBinding}).filter(
-  isAllowedNativeModule
+  isAllowedNativeModule,
 )
 
 if (bindings.length > 0) {

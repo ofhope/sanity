@@ -52,7 +52,7 @@ export default class LoginWrapper extends React.PureComponent {
           user: currentUser,
           isLoading: false,
         })),
-        catchError((error) => of({user: null, error, isLoading: false}))
+        catchError((error) => of({user: null, error, isLoading: false})),
       )
       .subscribe({
         next: (userState) => {

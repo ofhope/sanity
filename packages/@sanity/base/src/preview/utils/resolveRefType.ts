@@ -12,7 +12,7 @@ function resolveRefTypeName(reference: Reference): Observable<string | null> {
     CACHE[reference._ref] = versionedClient.fetch(
       '*[_id == $id][0]._type',
       {id: reference._ref},
-      {tag: 'preview.resolve-ref-type'}
+      {tag: 'preview.resolve-ref-type'},
     )
   }
   return observableFrom(CACHE[reference._ref])
@@ -20,17 +20,17 @@ function resolveRefTypeName(reference: Reference): Observable<string | null> {
 
 export default function resolveRefType(
   value: Reference,
-  type: ReferenceSchemaType
+  type: ReferenceSchemaType,
 ): Observable<SchemaType | undefined> {
   return resolveRefTypeName(value).pipe(
     map((refTypeName) => {
       if (!refTypeName && !type.weak) {
         throw new InsufficientPermissionsError(
-          `Could not resolve _type ${refTypeName} and the reference was marked as weak.`
+          `Could not resolve _type ${refTypeName} and the reference was marked as weak.`,
         )
       }
 
       return type.to.find((toType) => toType.name === refTypeName)
-    })
+    }),
   )
 }

@@ -57,7 +57,7 @@ export class FormView extends React.PureComponent<Props> {
     if (filterFieldFn$) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.filterFieldFnSubscription = filterFieldFn$.subscribe((filterField: any) =>
-        this.setState({filterField})
+        this.setState({filterField}),
       )
     }
   }

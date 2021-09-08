@@ -133,7 +133,7 @@ export class FormBuilderInput extends React.Component<Props> {
         type.name,
         inputDisplayName,
         inputComponent,
-        generateHelpUrl('input-component-no-ref')
+        generateHelpUrl('input-component-no-ref'),
       )
       return
     }
@@ -143,7 +143,7 @@ export class FormBuilderInput extends React.Component<Props> {
       type.name,
       inputDisplayName,
       inputComponent,
-      generateHelpUrl('input-component-missing-required-method')
+      generateHelpUrl('input-component-missing-required-method'),
     )
   }
 
@@ -161,7 +161,7 @@ export class FormBuilderInput extends React.Component<Props> {
       // eslint-disable-next-line no-console
       console.warn(
         'FormBuilderInput was used without passing a required onFocus prop. Read more at %s.',
-        generateHelpUrl('form-builder-input-missing-required-prop')
+        generateHelpUrl('form-builder-input-missing-required-prop'),
       )
       return
     }
@@ -179,7 +179,7 @@ export class FormBuilderInput extends React.Component<Props> {
       // eslint-disable-next-line no-console
       console.warn(
         'FormBuilderInput was used without passing a required onBlur prop. Read more at %s.',
-        generateHelpUrl('form-builder-input-missing-required-prop')
+        generateHelpUrl('form-builder-input-missing-required-prop'),
       )
       return
     }
@@ -312,7 +312,7 @@ function FormBuilderInputInner(props: FormBuilderInputInnerProps & Props) {
       setInput,
       type,
       value,
-    ]
+    ],
   )
 
   return (

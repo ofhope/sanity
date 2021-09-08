@@ -6,6 +6,6 @@
     "outDir": "./dist/dts",
     "rootDir": "./src",
     "jsx": "react",
-    "noImplicitAny": false,
+    "noImplicitAny": false
   }
 }

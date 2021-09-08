@@ -18,6 +18,6 @@
     {"path": "../types"},
     {"path": "../base"},
     {"path": "../util"},
-    {"path": "../portable-text-editor"},
+    {"path": "../portable-text-editor"}
   ]
 }

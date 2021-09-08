@@ -129,7 +129,7 @@ export async function runTypingSpeedTest() {
             _ref: perfRunDoc._id,
           },
         ])
-        .unset(['runs[200:]'])
+        .unset(['runs[200:]']),
     )
     .create(perfRunDoc)
     .commit()

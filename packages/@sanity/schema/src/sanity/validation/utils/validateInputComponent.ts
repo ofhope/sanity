@@ -7,8 +7,8 @@ export function validateInputComponent(typeDef: any) {
     return [
       warning(
         `The \`inputComponent\` property is set but does not appear to be a valid React component (expected a function, but saw ${inspect(
-          typeDef.inputComponent
-        )}). If you have imported a custom input component, please verify that you have imported the correct named/default export.`
+          typeDef.inputComponent,
+        )}). If you have imported a custom input component, please verify that you have imported the correct named/default export.`,
       ),
     ]
   }

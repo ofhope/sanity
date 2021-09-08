@@ -14,7 +14,7 @@ const filterCreators = {
 
 function generateTypeFilters(types) {
   const queryable = types.filter(
-    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document')
+    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document'),
   )
 
   return queryable.map((type) => {

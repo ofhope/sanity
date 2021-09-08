@@ -8,7 +8,7 @@ import {InternalRouter, NavigateOptions, RouterProviderContext} from './types'
 function addScope(
   routerState: Record<string, any>,
   scope: string,
-  scopedState: Record<string, any>
+  scopedState: Record<string, any>,
 ) {
   return (
     scopedState && {

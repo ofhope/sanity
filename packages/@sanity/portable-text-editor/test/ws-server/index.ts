@@ -48,7 +48,7 @@ app.ws('/', (s, req) => {
         value: valueMap[testId],
         testId,
         revId: revisionMap[testId] || 'first',
-      })
+      }),
     )
   }
   s.on('close', () => {
@@ -67,7 +67,7 @@ app.ws('/', (s, req) => {
           value: valueMap[testId],
           testId,
           revId: revisionMap[testId],
-        })
+        }),
       )
       messages.next(JSON.stringify(data))
     }

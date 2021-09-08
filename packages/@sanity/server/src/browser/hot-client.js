@@ -196,7 +196,7 @@ function createReporter() {
       console.log(
         `%c${title}\n\t%c${newProblems.replace(/\n/g, '\n\t')}`,
         `${style}font-aweight: bold;`,
-        `${style}font-weight: normal;`
+        `${style}font-weight: normal;`,
       )
     }
   }

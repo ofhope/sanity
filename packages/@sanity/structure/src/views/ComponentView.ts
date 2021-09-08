@@ -56,7 +56,7 @@ export class ComponentViewBuilder extends GenericViewBuilder<
       throw new SerializeError(
         '`component` is required and must be a function for `component()` view item',
         options.path,
-        options.index
+        options.index,
       ).withHelpUrl(HELP_URL.COMPONENT_REQUIRED)
     }
 

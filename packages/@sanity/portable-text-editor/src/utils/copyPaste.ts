@@ -20,7 +20,7 @@ const isDOMNode = (value: any): value is DOMNode => {
  */
 export const hasEditableTarget = (
   editor: ReactEditor,
-  target: EventTarget | null
+  target: EventTarget | null,
 ): target is DOMNode => {
   return isDOMNode(target) && ReactEditor.hasDOMNode(editor, target, {editable: true})
 }
@@ -32,7 +32,7 @@ export const hasEditableTarget = (
 export const setFragmentData = (
   dataTransfer: DataTransfer,
   editor: ReactEditor,
-  portableTextFeatures: PortableTextFeatures
+  portableTextFeatures: PortableTextFeatures,
 ): void => {
   const {selection} = editor
   if (!selection) {
@@ -102,7 +102,7 @@ export const setFragmentData = (
   const fragment = fromSlateValue(
     SlateNode.fragment(editor, selection),
     portableTextFeatures.types.block.name,
-    KEY_TO_VALUE_ELEMENT.get(editor)
+    KEY_TO_VALUE_ELEMENT.get(editor),
   )
   dataTransfer.setData('application/x-portable-text', JSON.stringify(fragment))
 }

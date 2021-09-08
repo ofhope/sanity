@@ -2,9 +2,27 @@
   "name": "@sanity/state-router",
   "version": "2.18.0",
   "description": "A path pattern => state object bidirectional mapper",
+  "keywords": [
+    "sanity",
+    "cms",
+    "headless",
+    "realtime",
+    "content",
+    "state-router"
+  ],
+  "homepage": "https://www.sanity.io/",
+  "bugs": {
+    "url": "https://github.com/sanity-io/sanity/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/state-router"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
   "main": "./lib/index.js",
   "types": "./dist/dts",
-  "//": "the typesVersion config below is a workaround for TypeScript's lack of support for package exports",
   "typesVersions": {
     "*": {
       "dist/dts/index.d.ts": [
@@ -22,16 +40,6 @@
     "benchmark": "npm run compile && node --prof --logfile=benchmarks.log perf/benchmark.js",
     "clean": "rimraf coverage dist lib"
   },
-  "keywords": [
-    "sanity",
-    "cms",
-    "headless",
-    "realtime",
-    "content",
-    "state-router"
-  ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
   "dependencies": {
     "debug": "^3.2.7",
     "lodash": "^4.17.15",
@@ -52,13 +60,5 @@
     "react": "^16.9 || ^17",
     "react-dom": "^16.9 || ^17"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/state-router"
-  },
-  "bugs": {
-    "url": "https://github.com/sanity-io/sanity/issues"
-  },
-  "homepage": "https://www.sanity.io/"
+  "//": "the typesVersion config below is a workaround for TypeScript's lack of support for package exports"
 }

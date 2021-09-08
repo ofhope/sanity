@@ -32,14 +32,14 @@ function generateTypeFilters(types) {
       type.type === 'Object' &&
       !['Block', 'Span'].includes(type.name) && // TODO: What do we do with blocks?
       !type.interfaces &&
-      !builtInTypeKeys.includes(type.type)
+      !builtInTypeKeys.includes(type.type),
   )
 
   const unionTypes = types.filter((type) => type.kind === 'Union').map((type) => type.name)
   const documentTypes = types.filter(
     (type) =>
       type.name === 'Document' ||
-      (type.type === 'Object' && type.interfaces && type.interfaces.includes('Document'))
+      (type.type === 'Object' && type.interfaces && type.interfaces.includes('Document')),
   )
 
   const builtinTypeFilters = createBuiltinTypeFilters(builtinTypeValues)
@@ -78,7 +78,7 @@ function createFieldFilters(objectType, options) {
   const {unionTypes} = options
   return objectType.fields
     .filter(
-      (field) => field.type !== 'JSON' && field.kind !== 'List' && !unionTypes.includes(field.type)
+      (field) => field.type !== 'JSON' && field.kind !== 'List' && !unionTypes.includes(field.type),
     )
     .map((field) => ({
       fieldName: field.fieldName,

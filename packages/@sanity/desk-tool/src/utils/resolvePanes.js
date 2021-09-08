@@ -29,8 +29,8 @@ export function resolvePanes(structure, paneGroups, prevStructure, fromIndex, op
   const waitStructure = isSubscribable(structure) ? from(structure) : observableOf(structure)
   return waitStructure.pipe(
     switchMap((struct) =>
-      resolveForStructure(struct, paneGroups, prevStructure, fromIndex, options)
-    )
+      resolveForStructure(struct, paneGroups, prevStructure, fromIndex, options),
+    ),
   )
 }
 
@@ -116,8 +116,8 @@ function resolveForStructure(structure, paneGroups, prevStructure, fromIndex, op
       subscriptions.push(
         source.subscribe(
           (result) => emit(result, index, splitIndex),
-          (error) => subscriber.error(error)
-        )
+          (error) => subscriber.error(error),
+        ),
       )
     }
 
@@ -165,7 +165,7 @@ function resolveForStructure(structure, paneGroups, prevStructure, fromIndex, op
           'Pane at index %d returned no child %s - see %s',
           index,
           splitIndex ? `for split pane index ${splitIndex}` : '',
-          generateHelpUrl('structure-item-returned-no-child')
+          generateHelpUrl('structure-item-returned-no-child'),
         )
       }
 
@@ -251,8 +251,8 @@ export const loadStructure = () => {
   if (!isStructure(structure)) {
     return throwError(
       new Error(
-        `Structure needs to export a function, an observable, a promise or a stucture builder, got ${typeof structure}`
-      )
+        `Structure needs to export a function, an observable, a promise or a stucture builder, got ${typeof structure}`,
+      ),
     )
   }
 
@@ -278,12 +278,12 @@ export const useStructure = (segments, options = {}) => {
         distinctUntilChanged(),
         map(maybeSerialize),
         switchMap((newStructure) =>
-          resolvePanes(newStructure, segments, structure, [0, 0], options)
-        )
+          resolvePanes(newStructure, segments, structure, [0, 0], options),
+        ),
       )
       .subscribe(
         (newStructure) => setStructure({structure: newStructure}),
-        (resolveError) => setStructure({error: resolveError})
+        (resolveError) => setStructure({error: resolveError}),
       )
 
     return () => subscription.unsubscribe()
@@ -322,7 +322,7 @@ function warnOnUnknownExports(mod) {
           const distance = leven(current, key)
           return distance < 3 && distance < acc.distance ? {closest: current, distance} : acc
         },
-        {closest: null, distance: +Infinity}
+        {closest: null, distance: +Infinity},
       )
 
       const hint = closest ? ` - did you mean "${closest}"` : ''

@@ -30,7 +30,7 @@ export default {
     {id: 'en', title: 'English'},
     {id: 'es', title: 'Spanish'},
     {id: 'arb', title: 'Arabic'},
-    {id: 'pt', title: 'Portuguese'}
+    {id: 'pt', title: 'Portuguese'},
     //...
   ],
   // Select Norwegian (Bokmål) by default
@@ -38,7 +38,7 @@ export default {
   // Only show language filter for document type `page` (schemaType.name)
   documentTypes: ['page'],
   filterField: (enclosingType, field, selectedLanguageIds) =>
-    !enclosingType.name.startsWith('locale') || selectedLanguageIds.includes(field.name)
+    !enclosingType.name.startsWith('locale') || selectedLanguageIds.includes(field.name),
 }
 ```
 

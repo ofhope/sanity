@@ -20,7 +20,7 @@ import {usePrevious} from './usePrevious'
 export function useDidUpdate<T>(current: T, didUpdate: (previous: T, current: T) => void): void
 export function useDidUpdate<T>(
   current: T,
-  didUpdate: (previous: T, current: T | undefined) => void
+  didUpdate: (previous: T, current: T | undefined) => void,
 ): void {
   const previous = usePrevious<T>(current)
 

@@ -31,7 +31,7 @@ export const FromTo = forwardRef<HTMLDivElement, FromToProps>(
           ? {maxWidth: '100%', display: 'inline-flex'}
           : {gridTemplateColumns: `minmax(0, 1fr) ${rem(theme.sanity.space[5])} minmax(0, 1fr)`}),
       }),
-      [layout, style, theme]
+      [layout, style, theme],
     )
 
     const columnStyles = layout === 'inline' ? INLINE_COLUMN_STYLES : BLOCK_COLUMN_STYLES
@@ -53,7 +53,7 @@ export const FromTo = forwardRef<HTMLDivElement, FromToProps>(
         </Flex>
       </Layout>
     )
-  }
+  },
 )
 
 FromTo.displayName = 'FromTo'

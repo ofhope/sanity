@@ -34,10 +34,10 @@ function generateTypeSortings(types) {
       type.type === 'Object' &&
       !['Block', 'Span'].includes(type.name) && // TODO: What do we do with blocks?
       !type.interfaces &&
-      !builtInTypes.includes(type.name)
+      !builtInTypes.includes(type.name),
   )
   const documentTypes = types.filter(
-    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document')
+    (type) => type.type === 'Object' && type.interfaces && type.interfaces.includes('Document'),
   )
 
   const hasFields = (type) => type.fields.length > 0

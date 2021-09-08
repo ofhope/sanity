@@ -88,7 +88,7 @@ assign(SanityClient.prototype, {
       this.clientConfig,
       assign({}, options, {
         url: this.getUrl(uri, canUseCdn),
-      })
+      }),
     )
 
     return httpRequest(reqOptions, this.clientConfig.requester)
@@ -97,7 +97,7 @@ assign(SanityClient.prototype, {
   request(options) {
     const observable = this._requestObservable(options).pipe(
       filter((event) => event.type === 'response'),
-      map((event) => event.body)
+      map((event) => event.body),
     )
 
     return this.isPromiseAPI() ? toPromise(observable) : observable

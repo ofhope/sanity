@@ -39,7 +39,7 @@ describe('resolveTypeForArrayItem', () => {
         _key: 'exampleKey',
         title: 5,
       },
-      [fooType, barType]
+      [fooType, barType],
     )
 
     expect(resolved).toBe(barType)
@@ -52,7 +52,7 @@ describe('resolveTypeForArrayItem', () => {
         _key: 'exampleKey',
         title: 5,
       },
-      [fooType]
+      [fooType],
     )
 
     expect(resolved).toBe(fooType)
@@ -165,7 +165,7 @@ describe('validateItem', () => {
         path: [],
         parent: undefined,
         type: schema.get('testObj'),
-      })
+      }),
     ).resolves.toMatchObject([
       {
         type: 'validation',
@@ -235,7 +235,7 @@ describe('validateItem', () => {
         path: undefined,
         type: schema.get('testObj'),
         value: {foo: 5},
-      })
+      }),
     ).resolves.toMatchObject([
       {
         item: {message: 'Expected type "String", got "Number"'},
@@ -285,7 +285,7 @@ describe('validateItem', () => {
         path: [],
         type: schema.get('values'),
         value: values,
-      })
+      }),
     ).resolves.toEqual([
       {
         type: 'validation',
@@ -377,7 +377,7 @@ describe('validateItem', () => {
         document,
         parent: document,
         path: undefined,
-      })
+      }),
     ).resolves.toMatchObject([
       {
         item: {message: 'from root'},

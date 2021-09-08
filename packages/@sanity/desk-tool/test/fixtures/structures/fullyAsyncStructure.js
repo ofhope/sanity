@@ -37,7 +37,7 @@ export default ({errorAt} = {}) =>
       return new Promise((resolve, reject) =>
         errorAt === 1
           ? setTimeout(reject, 25, new Error(`Failed to load at ${errorAt}`))
-          : setTimeout(resolve, 25, target && target.child)
+          : setTimeout(resolve, 25, target && target.child),
       )
     },
   })

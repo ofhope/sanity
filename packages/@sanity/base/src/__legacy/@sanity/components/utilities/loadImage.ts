@@ -23,7 +23,7 @@ export function loadImage(src: string) {
 
     const onerror = () => {
       observer.error(
-        new Error(`Could not load image from ${isLocalFile(src) ? 'local file' : src}`)
+        new Error(`Could not load image from ${isLocalFile(src) ? 'local file' : src}`),
       )
     }
 

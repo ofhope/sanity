@@ -18,7 +18,7 @@ export interface ConfirmUnpublishProps extends WithReferringDocumentsProps {
 }
 
 export const ConfirmUnpublish = enhanceWithReferringDocuments(function ConfirmUnpublish(
-  props: ConfirmUnpublishProps
+  props: ConfirmUnpublishProps,
 ) {
   const {
     isCheckingReferringDocuments,

@@ -72,7 +72,7 @@ function enforceTimeStep(dateString: string, timeStep: number) {
 
 export const DateTimeInput = React.forwardRef(function DateTimeInput(
   props: Props,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {type, onChange, ...rest} = props
   const {title, description, placeholder} = type
@@ -88,17 +88,17 @@ export const DateTimeInput = React.forwardRef(function DateTimeInput(
 
       onChange(PatchEvent.from([date === null ? unset() : set(date)]))
     },
-    [onChange, timeStep]
+    [onChange, timeStep],
   )
 
   const formatInputValue = React.useCallback(
     (date: Date) => format(date, `${dateFormat} ${timeFormat}`),
-    [dateFormat, timeFormat]
+    [dateFormat, timeFormat],
   )
 
   const parseInputValue = React.useCallback(
     (inputValue: string) => parse(inputValue, `${dateFormat} ${timeFormat}`),
-    [dateFormat, timeFormat]
+    [dateFormat, timeFormat],
   )
 
   return (

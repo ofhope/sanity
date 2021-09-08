@@ -7,7 +7,7 @@ type ItemSelector<T> = (element: T) => any
 // each item, returning the value to compare for uniqueness
 export default function isUniqueBy<T>(
   array: Array<T>,
-  itemSelector: ItemSelector<T> = id
+  itemSelector: ItemSelector<T> = id,
 ): boolean {
   let prevItem
   let currItem

@@ -828,7 +828,7 @@ export class ObservableSanityClient {
     upload(
       assetType: 'file' | 'image',
       body: File | Blob | Buffer | ReadableStream,
-      options?: UploadOptions
+      options?: UploadOptions,
     ): Observable<
       ResponseEvent<{document: SanityAssetDocument | SanityImageAssetDocument}> | ProgressEvent
     >
@@ -843,7 +843,7 @@ export class ObservableSanityClient {
     upload(
       assetType: 'file',
       body: File | Blob | Buffer | ReadableStream,
-      options?: UploadOptions
+      options?: UploadOptions,
     ): Observable<ResponseEvent<{document: SanityAssetDocument}> | ProgressEvent>
 
     /**
@@ -856,7 +856,7 @@ export class ObservableSanityClient {
     upload(
       assetType: 'image',
       body: File | Blob | Buffer | ReadableStream,
-      options?: UploadOptions
+      options?: UploadOptions,
     ): Observable<ResponseEvent<{document: SanityImageAssetDocument}> | ProgressEvent>
 
     /**
@@ -868,7 +868,7 @@ export class ObservableSanityClient {
      */
     delete(
       assetType: 'file' | 'image',
-      id: string | IdentifiedSanityDocumentStub
+      id: string | IdentifiedSanityDocumentStub,
     ): Observable<SanityAssetDocument | undefined>
 
     /**
@@ -890,7 +890,7 @@ export class ObservableSanityClient {
      */
     create(
       name: string,
-      options?: {aclMode?: DatasetAclMode}
+      options?: {aclMode?: DatasetAclMode},
     ): Observable<{datasetName: string; aclMode: DatasetAclMode}>
 
     /**
@@ -901,7 +901,7 @@ export class ObservableSanityClient {
      */
     edit(
       name: string,
-      options: {aclMode?: DatasetAclMode}
+      options: {aclMode?: DatasetAclMode},
     ): Observable<{datasetName: string; aclMode: DatasetAclMode}>
 
     /**
@@ -938,7 +938,7 @@ export class ObservableSanityClient {
      * @param id User ID of the user to fetch. If `me` is provided, a minimal response including the users role is returned.
      */
     getById<T extends 'me' | string>(
-      id: T
+      id: T,
     ): T extends 'me' ? Observable<CurrentSanityUser> : Observable<SanityUser>
   }
 
@@ -997,7 +997,7 @@ export class ObservableSanityClient {
   fetch<R = any>(
     query: string,
     params: QueryParams | undefined,
-    options: FilteredResponseQueryOptions
+    options: FilteredResponseQueryOptions,
   ): Observable<R>
 
   /**
@@ -1010,7 +1010,7 @@ export class ObservableSanityClient {
   fetch<R = any>(
     query: string,
     params: QueryParams | undefined,
-    options: UnfilteredResponseQueryOptions
+    options: UnfilteredResponseQueryOptions,
   ): Observable<RawQueryResponse<R>>
 
   /**
@@ -1021,7 +1021,7 @@ export class ObservableSanityClient {
    */
   getDocument<R = any>(
     id: string,
-    options?: {tag?: string}
+    options?: {tag?: string},
   ): Observable<SanityDocument<R> | undefined>
 
   /**
@@ -1035,7 +1035,7 @@ export class ObservableSanityClient {
    */
   getDocuments<R = any>(
     ids: string[],
-    options?: {tag?: string}
+    options?: {tag?: string},
   ): Observable<(SanityDocument<R> | null)[]>
 
   /**
@@ -1047,7 +1047,7 @@ export class ObservableSanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1059,7 +1059,7 @@ export class ObservableSanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Observable<SanityDocument<R>[]>
 
   /**
@@ -1071,7 +1071,7 @@ export class ObservableSanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Observable<SingleMutationResult>
 
   /**
@@ -1083,7 +1083,7 @@ export class ObservableSanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Observable<MultipleMutationResult>
 
   /**
@@ -1095,7 +1095,7 @@ export class ObservableSanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1107,7 +1107,7 @@ export class ObservableSanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1119,7 +1119,7 @@ export class ObservableSanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Observable<SanityDocument<R>[]>
 
   /**
@@ -1131,7 +1131,7 @@ export class ObservableSanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Observable<SingleMutationResult>
 
   /**
@@ -1143,7 +1143,7 @@ export class ObservableSanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Observable<MultipleMutationResult>
 
   /**
@@ -1155,7 +1155,7 @@ export class ObservableSanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1167,7 +1167,7 @@ export class ObservableSanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1179,7 +1179,7 @@ export class ObservableSanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Observable<SanityDocument<R>[]>
 
   /**
@@ -1191,7 +1191,7 @@ export class ObservableSanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Observable<SingleMutationResult>
 
   /**
@@ -1203,7 +1203,7 @@ export class ObservableSanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Observable<MultipleMutationResult>
 
   /**
@@ -1215,7 +1215,7 @@ export class ObservableSanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1272,7 +1272,7 @@ export class ObservableSanityClient {
    */
   delete<R = any>(
     selection: MutationSelection,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1284,7 +1284,7 @@ export class ObservableSanityClient {
    */
   delete<R = any>(
     selection: MutationSelection,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Observable<SanityDocument<R>[]>
 
   /**
@@ -1296,7 +1296,7 @@ export class ObservableSanityClient {
    */
   delete(
     selection: MutationSelection,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Observable<SingleMutationResult>
 
   /**
@@ -1308,7 +1308,7 @@ export class ObservableSanityClient {
    */
   delete(
     selection: MutationSelection,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Observable<MultipleMutationResult>
 
   /**
@@ -1320,7 +1320,7 @@ export class ObservableSanityClient {
    */
   delete<R = any>(
     selection: MutationSelection,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1332,7 +1332,7 @@ export class ObservableSanityClient {
    */
   mutate<R = any>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1344,7 +1344,7 @@ export class ObservableSanityClient {
    */
   mutate<R = any>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Observable<SanityDocument<R>[]>
 
   /**
@@ -1356,7 +1356,7 @@ export class ObservableSanityClient {
    */
   mutate<R = any>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Observable<SingleMutationResult>
 
   /**
@@ -1368,7 +1368,7 @@ export class ObservableSanityClient {
    */
   mutate<R = any>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Observable<MultipleMutationResult>
 
   /**
@@ -1380,7 +1380,7 @@ export class ObservableSanityClient {
    */
   mutate<R = any>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Observable<SanityDocument<R>>
 
   /**
@@ -1482,7 +1482,7 @@ export interface SanityClient {
     upload(
       assetType: 'file' | 'image',
       body: File | Blob | Buffer | ReadableStream,
-      options?: UploadOptions
+      options?: UploadOptions,
     ): Promise<SanityAssetDocument | SanityImageAssetDocument>
 
     /**
@@ -1495,7 +1495,7 @@ export interface SanityClient {
     upload(
       assetType: 'file',
       body: File | Blob | Buffer | ReadableStream,
-      options?: UploadOptions
+      options?: UploadOptions,
     ): Promise<SanityAssetDocument>
 
     /**
@@ -1508,7 +1508,7 @@ export interface SanityClient {
     upload(
       assetType: 'image',
       body: File | Blob | Buffer | ReadableStream,
-      options?: UploadOptions
+      options?: UploadOptions,
     ): Promise<SanityImageAssetDocument>
 
     /**
@@ -1520,7 +1520,7 @@ export interface SanityClient {
      */
     delete(
       assetType: 'file' | 'image',
-      id: string | IdentifiedSanityDocumentStub
+      id: string | IdentifiedSanityDocumentStub,
     ): Promise<SanityAssetDocument | undefined>
 
     /**
@@ -1542,7 +1542,7 @@ export interface SanityClient {
      */
     create(
       name: string,
-      options?: {aclMode?: DatasetAclMode}
+      options?: {aclMode?: DatasetAclMode},
     ): Promise<{datasetName: string; aclMode: DatasetAclMode}>
 
     /**
@@ -1553,7 +1553,7 @@ export interface SanityClient {
      */
     edit(
       name: string,
-      options: {aclMode?: DatasetAclMode}
+      options: {aclMode?: DatasetAclMode},
     ): Promise<{datasetName: string; aclMode: DatasetAclMode}>
 
     /**
@@ -1590,7 +1590,7 @@ export interface SanityClient {
      * @param id User ID of the user to fetch. If `me` is provided, a minimal response including the users role is returned.
      */
     getById<T extends 'me' | string>(
-      id: T
+      id: T,
     ): T extends 'me' ? Promise<CurrentSanityUser> : Promise<SanityUser>
   }
 
@@ -1625,7 +1625,7 @@ export interface SanityClient {
   listen<R = any>(
     query: string,
     params?: QueryParams,
-    options?: ListenOptions
+    options?: ListenOptions,
   ): Observable<ListenEvent<R>>
 
   /**
@@ -1653,7 +1653,7 @@ export interface SanityClient {
   fetch<R = any>(
     query: string,
     params: QueryParams | undefined,
-    options: FilteredResponseQueryOptions
+    options: FilteredResponseQueryOptions,
   ): Promise<R>
 
   /**
@@ -1666,7 +1666,7 @@ export interface SanityClient {
   fetch<R = any>(
     query: string,
     params: QueryParams | undefined,
-    options: UnfilteredResponseQueryOptions
+    options: UnfilteredResponseQueryOptions,
   ): Promise<RawQueryResponse<R>>
 
   /**
@@ -1688,7 +1688,7 @@ export interface SanityClient {
    */
   getDocuments<R = any>(
     ids: string[],
-    options?: {tag?: string}
+    options?: {tag?: string},
   ): Promise<(SanityDocument<R> | null)[]>
 
   /**
@@ -1700,7 +1700,7 @@ export interface SanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**
@@ -1712,7 +1712,7 @@ export interface SanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Promise<SanityDocument<R>[]>
 
   /**
@@ -1724,7 +1724,7 @@ export interface SanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Promise<SingleMutationResult>
 
   /**
@@ -1736,7 +1736,7 @@ export interface SanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Promise<MultipleMutationResult>
 
   /**
@@ -1748,7 +1748,7 @@ export interface SanityClient {
    */
   create<R = any>(
     document: SanityDocumentStub<R>,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**
@@ -1760,7 +1760,7 @@ export interface SanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**
@@ -1772,7 +1772,7 @@ export interface SanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Promise<SanityDocument<R>[]>
 
   /**
@@ -1784,7 +1784,7 @@ export interface SanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Promise<SingleMutationResult>
 
   /**
@@ -1796,7 +1796,7 @@ export interface SanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Promise<MultipleMutationResult>
 
   /**
@@ -1808,7 +1808,7 @@ export interface SanityClient {
    */
   createIfNotExists<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**
@@ -1820,7 +1820,7 @@ export interface SanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**
@@ -1832,7 +1832,7 @@ export interface SanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Promise<SanityDocument<R>[]>
 
   /**
@@ -1844,7 +1844,7 @@ export interface SanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Promise<SingleMutationResult>
 
   /**
@@ -1856,7 +1856,7 @@ export interface SanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Promise<MultipleMutationResult>
 
   /**
@@ -1868,7 +1868,7 @@ export interface SanityClient {
    */
   createOrReplace<R = any>(
     document: IdentifiedSanityDocumentStub<R>,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**
@@ -1925,7 +1925,7 @@ export interface SanityClient {
    */
   delete<R = any>(
     selection: MutationSelection,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**
@@ -1937,7 +1937,7 @@ export interface SanityClient {
    */
   delete<R = any>(
     selection: MutationSelection,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Promise<SanityDocument<R>[]>
 
   /**
@@ -1949,7 +1949,7 @@ export interface SanityClient {
    */
   delete(
     selection: MutationSelection,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Promise<SingleMutationResult>
 
   /**
@@ -1961,7 +1961,7 @@ export interface SanityClient {
    */
   delete(
     selection: MutationSelection,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Promise<MultipleMutationResult>
 
   /**
@@ -1973,7 +1973,7 @@ export interface SanityClient {
    */
   delete<R = any>(
     selection: MutationSelection,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**
@@ -1985,7 +1985,7 @@ export interface SanityClient {
    */
   mutate<R = any>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options: FirstDocumentMutationOptions
+    options: FirstDocumentMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**
@@ -1997,7 +1997,7 @@ export interface SanityClient {
    */
   mutate<R = any>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options: AllDocumentsMutationOptions
+    options: AllDocumentsMutationOptions,
   ): Promise<SanityDocument<R>[]>
 
   /**
@@ -2009,7 +2009,7 @@ export interface SanityClient {
    */
   mutate<R = any>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options: FirstDocumentIdMutationOptions
+    options: FirstDocumentIdMutationOptions,
   ): Promise<SingleMutationResult>
 
   /**
@@ -2021,7 +2021,7 @@ export interface SanityClient {
    */
   mutate<R>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options: AllDocumentIdsMutationOptions
+    options: AllDocumentIdsMutationOptions,
   ): Promise<MultipleMutationResult>
 
   /**
@@ -2033,7 +2033,7 @@ export interface SanityClient {
    */
   mutate<R = any>(
     operations: Mutation<R>[] | Patch | Transaction,
-    options?: BaseMutationOptions
+    options?: BaseMutationOptions,
   ): Promise<SanityDocument<R>>
 
   /**

@@ -11,7 +11,7 @@ describe('T.template()', () => {
         schemaType: 'author',
         value: {name: 'Default name!'},
         icon,
-      }).serialize()
+      }).serialize(),
     ).toMatchSnapshot()
   })
 
@@ -25,13 +25,13 @@ describe('T.template()', () => {
 
   test('throws on missing schemaType', () => {
     expect(() => T.template().id('id').title('Blah').serialize()).toThrowError(
-      /required "schemaType"/
+      /required "schemaType"/,
     )
   })
 
   test('throws on missing value', () => {
     expect(() => T.template().id('id').title('Blah').schemaType('author').serialize()).toThrowError(
-      /required "value"/
+      /required "value"/,
     )
   })
 
@@ -43,7 +43,7 @@ describe('T.template()', () => {
         .schemaType('author')
         .icon(icon)
         .value({name: 'bar'})
-        .serialize()
+        .serialize(),
     ).toMatchSnapshot()
   })
 

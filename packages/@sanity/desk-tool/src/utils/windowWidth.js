@@ -17,7 +17,7 @@ const windowWidth$ = merge(orientationChange$, resize$).pipe(
   debounceTime(50),
   map(() => window.innerWidth),
   shareReplay(1),
-  startWith(window.innerWidth)
+  startWith(window.innerWidth),
 )
 
 export default windowWidth$

@@ -74,7 +74,7 @@ const StyleSelectList = React.forwardRef(
     <List className={styles.list} ref={ref}>
       {props.children}
     </List>
-  )
+  ),
 )
 
 StyleSelectList.displayName = 'StyleSelectList'
@@ -198,7 +198,7 @@ class StyleSelect extends React.PureComponent<StyleSelectProps> {
       classNameProp,
       styles.root,
       transparent && styles.transparent,
-      padding && styles[`padding_${padding}`]
+      padding && styles[`padding_${padding}`],
     )
 
     return (

@@ -2,14 +2,6 @@
   "name": "@sanity/eventsource",
   "version": "2.14.0",
   "description": "EventSource polyfill for browser and node.js",
-  "main": "./node.js",
-  "browser": "./browser.js",
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanity-io/sanity.git",
-    "directory": "packages/@sanity/eventsource"
-  },
   "keywords": [
     "sanity",
     "cms",
@@ -19,12 +11,20 @@
     "eventsource",
     "polyfill"
   ],
-  "author": "Sanity.io <hello@sanity.io>",
-  "license": "MIT",
+  "homepage": "https://www.sanity.io/",
   "bugs": {
     "url": "https://github.com/sanity-io/sanity/issues"
   },
-  "homepage": "https://www.sanity.io/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanity-io/sanity.git",
+    "directory": "packages/@sanity/eventsource"
+  },
+  "license": "MIT",
+  "author": "Sanity.io <hello@sanity.io>",
+  "main": "./node.js",
+  "browser": "./browser.js",
+  "scripts": {},
   "dependencies": {
     "@rexxars/eventsource-polyfill": "^1.0.0",
     "eventsource": "^1.0.6"

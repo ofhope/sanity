@@ -132,7 +132,7 @@ export class DocumentBuilder implements Serializable {
         '`id` is required for document nodes',
         path,
         index,
-        hint
+        hint,
       ).withHelpUrl(HELP_URL.ID_REQUIRED)
     }
 
@@ -141,7 +141,7 @@ export class DocumentBuilder implements Serializable {
         'document id (`id`) is required for document nodes',
         path,
         id,
-        hint
+        hint,
       ).withHelpUrl(HELP_URL.DOCUMENT_ID_REQUIRED)
     }
 
@@ -157,7 +157,7 @@ export class DocumentBuilder implements Serializable {
         `document node has views with duplicate IDs: ${dupes.join(',  ')}`,
         path,
         id,
-        hint
+        hint,
       )
     }
 
@@ -227,7 +227,7 @@ export function documentFromEditor(spec?: EditorNode) {
 
 export function documentFromEditorWithInitialValue(
   templateId: string,
-  parameters?: {[key: string]: any}
+  parameters?: {[key: string]: any},
 ) {
   const template = getTemplateById(templateId)
   if (!template) {
@@ -236,7 +236,7 @@ export function documentFromEditorWithInitialValue(
 
   return getDefaultDocumentNode({schemaType: template.schemaType}).initialValueTemplate(
     templateId,
-    parameters
+    parameters,
   )
 }
 

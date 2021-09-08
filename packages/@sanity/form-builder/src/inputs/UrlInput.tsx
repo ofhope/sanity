@@ -9,14 +9,14 @@ import {Props} from './types'
 
 const UrlInput = React.forwardRef(function UrlInput(
   props: Props<string, StringSchemaType>,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement>,
 ) {
   const {value, readOnly, type, markers, level, onFocus, onBlur, onChange, presence} = props
   const inputId = useId()
 
   const errors = useMemo(
     () => markers.filter((marker) => marker.type === 'validation' && marker.level === 'error'),
-    [markers]
+    [markers],
   )
 
   const handleChange = React.useCallback(
@@ -24,7 +24,7 @@ const UrlInput = React.forwardRef(function UrlInput(
       const inputValue = event.currentTarget.value
       onChange(PatchEvent.from(inputValue ? set(inputValue) : unset()))
     },
-    [onChange]
+    [onChange],
   )
   const uriRule = getValidationRule(type, 'uri')
   const inputType = uriRule?.constraint?.options?.allowRelative ? 'text' : 'url'

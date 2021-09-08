@@ -7,7 +7,7 @@ export interface Tool {
   canHandleIntent?: (
     intent: Record<string, any>,
     params: Record<string, any>,
-    state: Record<string, any>
+    state: Record<string, any>,
   ) => void
   component?: React.ComponentType
   icon?: React.ComponentType
@@ -15,7 +15,7 @@ export interface Tool {
     intent: Record<string, any>,
     params: Record<string, any>,
     state: Record<string, any>,
-    payload: Record<string, any>
+    payload: Record<string, any>,
   ) => void
   name: string
   title: string

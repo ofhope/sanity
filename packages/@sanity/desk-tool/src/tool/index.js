@@ -138,7 +138,7 @@ export default {
     return Boolean(
       (intentName === 'edit' && params.id) ||
         (intentName === 'create' && params.type) ||
-        (intentName === 'create' && params.template)
+        (intentName === 'create' && params.template),
     )
   },
   getIntentState,

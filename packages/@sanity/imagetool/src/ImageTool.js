@@ -159,37 +159,37 @@ export default class ImageTool extends React.PureComponent {
     return {
       left: cropHandle.setTopLeft(
         inner.left - halfCropHandleSize,
-        inner.center.y - halfCropHandleSize
+        inner.center.y - halfCropHandleSize,
       ),
       right: cropHandle.setTopLeft(
         inner.right - halfCropHandleSize,
-        inner.center.y - halfCropHandleSize
+        inner.center.y - halfCropHandleSize,
       ),
 
       top: cropHandle.setTopLeft(
         inner.center.x - halfCropHandleSize,
-        inner.top - halfCropHandleSize
+        inner.top - halfCropHandleSize,
       ),
       topLeft: cropHandle.setTopLeft(
         inner.left - halfCropHandleSize,
-        inner.top - halfCropHandleSize
+        inner.top - halfCropHandleSize,
       ),
       topRight: cropHandle.setTopLeft(
         inner.right - halfCropHandleSize,
-        inner.top - halfCropHandleSize
+        inner.top - halfCropHandleSize,
       ),
 
       bottom: cropHandle.setTopLeft(
         inner.center.x - halfCropHandleSize,
-        inner.bottom - halfCropHandleSize
+        inner.bottom - halfCropHandleSize,
       ),
       bottomLeft: cropHandle.setTopLeft(
         inner.left - halfCropHandleSize,
-        inner.bottom - halfCropHandleSize
+        inner.bottom - halfCropHandleSize,
       ),
       bottomRight: cropHandle.setTopLeft(
         inner.right - halfCropHandleSize,
-        inner.bottom - halfCropHandleSize
+        inner.bottom - halfCropHandleSize,
       ),
     }
   }
@@ -344,7 +344,7 @@ export default class ImageTool extends React.PureComponent {
         Math.abs(dest.width / 2),
         0,
         2 * Math.PI,
-        false
+        false,
       )
       context.strokeStyle = 'white'
       context.lineWidth = 1.5 * scale
@@ -373,7 +373,7 @@ export default class ImageTool extends React.PureComponent {
         dest.left,
         dest.top,
         dest.width,
-        dest.height
+        dest.height,
       )
     }
 
@@ -391,7 +391,7 @@ export default class ImageTool extends React.PureComponent {
         dest.left,
         dest.top,
         dest.width,
-        dest.height
+        dest.height,
       )
       context.globalAlpha = 0.5
       context.fillStyle = 'black'

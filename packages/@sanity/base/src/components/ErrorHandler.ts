@@ -52,7 +52,7 @@ function ErrorHandler({onUIError}) {
         description: "Check your browser's JavaScript console for details.",
       })
     },
-    [onUIError, push]
+    [onUIError, push],
   )
 
   ;(handleGlobalError as any).identity = SANITY_ERROR_HANDLER
