@@ -1,7 +1,7 @@
 import {combineLatest, Observable} from 'rxjs'
 import {map} from 'rxjs/operators'
-import {BREAKPOINT_SCREEN_MEDIUM} from '../constants'
-import windowWidth$ from '../utils/windowWidth'
+import {BREAKPOINT_SCREEN_MEDIUM} from '../../constants'
+import windowWidth$ from '../../utils/windowWidth'
 import {DeskToolFeatures} from './types'
 
 export function createDeskToolFeaturesController() {

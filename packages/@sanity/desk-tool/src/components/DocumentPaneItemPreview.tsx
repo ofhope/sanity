@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
+// @todo: remove the following line when part imports has been removed from this file
+///<reference types="@sanity/types/parts" />
+
 import {SanityDocument} from '@sanity/types'
 import React from 'react'
 import {combineLatest, concat, of, Subscription} from 'rxjs'

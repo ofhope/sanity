@@ -1,43 +1,18 @@
+// @todo: remove the following line when part imports has been removed from this file
+///<reference types="@sanity/types/parts" />
+
 import {MasterDetailIcon} from '@sanity/icons'
-import {uuid} from '@sanity/uuid'
 import {route, useRouterState} from 'part:@sanity/base/router'
 import React, {useEffect} from 'react'
 import {IntentResolver} from './components/IntentResolver'
-import {EMPTY_PARAMS} from './constants'
-import {DeskToolFeaturesProvider} from './features'
-import {parsePanesSegment, encodePanesSegment} from './utils/parsePanesSegment'
+import {DeskToolFeaturesProvider} from './contexts/features'
 import {DeskTool as DeskToolRoot} from './DeskTool'
+import {getIntentState, setActivePanes} from './getIntentState'
+import {legacyEditParamsToPath, legacyEditParamsToState, toPath, toState} from './helpers'
 
-function toState(pathSegment: string) {
-  return parsePanesSegment(decodeURIComponent(pathSegment))
-}
-
-function toPath(panes) {
-  return encodePanesSegment(panes)
-}
-
-function legacyEditParamsToState(params) {
-  try {
-    return JSON.parse(decodeURIComponent(params))
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.warn('Failed to parse JSON parameters')
-    return {}
-  }
-}
-
-function legacyEditParamsToPath(params: Record<string, unknown>) {
-  return JSON.stringify(params)
-}
-
-const state: {activePanes: any[]} = {activePanes: []}
-
-function setActivePanes(panes) {
-  state.activePanes = panes
-}
-
-function DeskToolPaneStateSyncer(props) {
+function DeskToolPaneStateSyncer() {
   const {intent, params, payload} = useRouterState()
+
   useEffect(() => {
     // Set active panes to blank on mount and unmount
     setActivePanes([])
@@ -47,31 +22,8 @@ function DeskToolPaneStateSyncer(props) {
   return intent ? (
     <IntentResolver intent={intent} params={params} payload={payload} />
   ) : (
-    <DeskToolRoot {...props} onPaneChange={setActivePanes} />
+    <DeskToolRoot onPaneChange={setActivePanes} />
   )
-}
-
-// eslint-disable-next-line complexity
-function getIntentState(intentName: string, params, currentState, payload) {
-  const paneSegments = (currentState && currentState.panes) || []
-  const activePanes = state.activePanes || []
-  const editDocumentId = params.id || uuid()
-  const isTemplate = intentName === 'create' && params.template
-
-  // Loop through open panes and see if any of them can handle the intent
-  for (let i = activePanes.length - 1; i >= 0; i--) {
-    const pane = activePanes[i]
-    if (pane.canHandleIntent && pane.canHandleIntent(intentName, params, {pane, index: i})) {
-      const paneParams = isTemplate ? {template: params.template} : EMPTY_PARAMS
-      return {
-        panes: paneSegments
-          .slice(0, i)
-          .concat([[{id: editDocumentId, params: paneParams, payload}]]),
-      }
-    }
-  }
-
-  return {intent: intentName, params, payload}
 }
 
 function DeskTool() {
@@ -82,36 +34,40 @@ function DeskTool() {
   )
 }
 
-export default {
-  router: route('/', [
-    // "Asynchronous intent resolving" route
-    route.intents('/intent'),
+const router = route('/', [
+  // "Asynchronous intent resolving" route
+  route.intents('/intent'),
 
-    // Legacy fallback route, will be redirected to new format
-    route('/edit/:type/:editDocumentId', [
-      route({
-        path: '/:params',
-        transform: {params: {toState: legacyEditParamsToState, toPath: legacyEditParamsToPath}},
-      }),
-    ]),
-
-    // The regular path - when the intent can be resolved to a specific pane
+  // Legacy fallback route, will be redirected to new format
+  route('/edit/:type/:editDocumentId', [
     route({
-      path: '/:panes',
-      // Legacy URLs, used to handle redirects
-      children: [route('/:action', route('/:legacyEditDocumentId'))],
-      transform: {
-        panes: {toState, toPath},
-      },
+      path: '/:params',
+      transform: {params: {toState: legacyEditParamsToState, toPath: legacyEditParamsToPath}},
     }),
   ]),
-  canHandleIntent(intentName, params) {
-    return Boolean(
-      (intentName === 'edit' && params.id) ||
-        (intentName === 'create' && params.type) ||
-        (intentName === 'create' && params.template)
-    )
-  },
+
+  // The regular path - when the intent can be resolved to a specific pane
+  route({
+    path: '/:panes',
+    // Legacy URLs, used to handle redirects
+    children: [route('/:action', route('/:legacyEditDocumentId'))],
+    transform: {
+      panes: {toState, toPath},
+    },
+  }),
+])
+
+function canHandleIntent(intentName: string, params: Record<string, string | undefined>) {
+  return Boolean(
+    (intentName === 'edit' && params.id) ||
+      (intentName === 'create' && params.type) ||
+      (intentName === 'create' && params.template)
+  )
+}
+
+export default {
+  router,
+  canHandleIntent,
   getIntentState,
   title: 'Desk',
   name: 'desk',

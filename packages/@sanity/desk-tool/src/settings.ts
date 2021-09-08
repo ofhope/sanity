@@ -1,3 +1,6 @@
+// @todo: remove the following line when part imports has been removed from this file
+///<reference types="@sanity/types/parts" />
+
 import {Observable} from 'rxjs'
 import settings from 'part:@sanity/base/settings'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'

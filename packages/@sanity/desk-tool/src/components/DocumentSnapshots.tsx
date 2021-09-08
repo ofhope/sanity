@@ -1,3 +1,6 @@
+// @todo: remove the following line when part imports has been removed from this file
+///<reference types="@sanity/types/parts" />
+
 import {streamingComponent} from 'react-props-stream'
 import {map, switchMap, scan, filter} from 'rxjs/operators'
 import {merge, Observable} from 'rxjs'

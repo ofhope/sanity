@@ -1,6 +1,9 @@
+// @todo: remove the following line when part imports has been removed from this file
+///<reference types="@sanity/types/parts" />
+
 import React, {useMemo, useCallback} from 'react'
 import {pick, omit} from 'lodash'
-import {Router} from 'part:@sanity/base/router'
+import {useRouter, useRouterState} from 'part:@sanity/base/router'
 import {PaneRouterContext} from './PaneRouterContext'
 import {PaneRouterContextValue, SetParamsOptions} from './types'
 import {exclusiveParams} from './constants'
@@ -17,23 +20,12 @@ export function PaneRouterProvider(props: {
   index: number
   params: Record<string, string>
   payload: unknown
-  router: Router
-  routerState: any
   siblingIndex: number
 }) {
-  const {
-    children,
-    flatIndex,
-    index,
-    params: paneParams,
-    payload: panePayload,
-    router,
-    routerState,
-    siblingIndex,
-  } = props
-
+  const {children, flatIndex, index, params: paneParams, payload: panePayload, siblingIndex} = props
+  const {navigate, navigateIntent} = useRouter()
+  const routerState = useRouterState()
   const routerPanes = useMemo(() => routerState.panes || [], [routerState.panes])
-
   const groupIndex = index - 1
 
   const getCurrentGroup = useCallback(() => {
@@ -49,11 +41,11 @@ export function PaneRouterProvider(props: {
 
       const newRouterState = {...routerState, panes: newPanes}
 
-      router.navigate(newRouterState)
+      navigate(newRouterState)
 
       return newRouterState
     },
-    [getCurrentGroup, groupIndex, router, routerPanes, routerState, siblingIndex]
+    [getCurrentGroup, groupIndex, navigate, routerPanes, routerState, siblingIndex]
   )
 
   const setPayload: PaneRouterContextValue['setPayload'] = useCallback(
@@ -197,7 +189,7 @@ export function PaneRouterProvider(props: {
       setPayload,
 
       // Proxied navigation to a given intent. Consider just exposing `router` instead?
-      navigateIntent: router.navigateIntent,
+      navigateIntent,
     }),
     [
       flatIndex,
@@ -206,7 +198,7 @@ export function PaneRouterProvider(props: {
       modifyCurrentGroup,
       paneParams,
       panePayload,
-      router.navigateIntent,
+      navigateIntent,
       routerPanes,
       setParams,
       setPayload,

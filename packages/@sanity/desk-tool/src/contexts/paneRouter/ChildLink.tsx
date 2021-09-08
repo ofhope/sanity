@@ -1,3 +1,6 @@
+// @todo: remove the following line when part imports has been removed from this file
+///<reference types="@sanity/types/parts" />
+
 import React, {forwardRef, useContext, useMemo} from 'react'
 import {StateLink} from 'part:@sanity/base/router'
 import {PaneRouterContext} from './PaneRouterContext'

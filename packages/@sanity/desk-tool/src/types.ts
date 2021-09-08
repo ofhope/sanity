@@ -13,3 +13,7 @@ export interface StructureErrorType {
   path?: Array<string | number>
   stack: string
 }
+
+export interface DeskToolContextValue {
+  narrow: boolean
+}

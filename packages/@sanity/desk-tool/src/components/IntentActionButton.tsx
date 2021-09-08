@@ -1,3 +1,6 @@
+// @todo: remove the following line when part imports has been removed from this file
+///<reference types="@sanity/types/parts" />
+
 import {Intent, MenuItem as MenuItemType} from '@sanity/base/__legacy/@sanity/components'
 import {Box, Button, Text, Tooltip} from '@sanity/ui'
 import {IntentLink} from 'part:@sanity/base/router'

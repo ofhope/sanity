@@ -1,3 +1,6 @@
+// @todo: remove the following line when part imports has been removed from this file
+///<reference types="@sanity/types/parts" />
+
 import {uuid} from '@sanity/uuid'
 import {getTemplateById} from '@sanity/base/initial-value-templates'
 import React, {useEffect, useState} from 'react'

@@ -2,6 +2,7 @@ import isHotkey from 'is-hotkey'
 import {merge, of} from 'rxjs'
 import {mapTo, delay} from 'rxjs/operators'
 import {LOADING_PANE} from './constants'
+import {parsePanesSegment, encodePanesSegment} from './utils/parsePanesSegment'
 
 export const hasLoading = (panes: any) => panes.some((item) => item === LOADING_PANE)
 
@@ -84,4 +85,26 @@ export function getWaitMessages(path) {
   const src = of(null)
 
   return merge(...thresholds.map(({ms, message}) => src.pipe(mapTo(message), delay(ms))))
+}
+
+export function toState(pathSegment: string) {
+  return parsePanesSegment(decodeURIComponent(pathSegment))
+}
+
+export function toPath(panes) {
+  return encodePanesSegment(panes)
+}
+
+export function legacyEditParamsToState(params) {
+  try {
+    return JSON.parse(decodeURIComponent(params))
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn('Failed to parse JSON parameters')
+    return {}
+  }
+}
+
+export function legacyEditParamsToPath(params: Record<string, unknown>) {
+  return JSON.stringify(params)
 }

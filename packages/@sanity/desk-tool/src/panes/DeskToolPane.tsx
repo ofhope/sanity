@@ -1,5 +1,4 @@
 import {omit} from 'lodash'
-import {Router} from 'part:@sanity/base/router'
 import React, {useMemo} from 'react'
 import {exclusiveParams, PaneRouterProvider} from '../_exports'
 import {RouterPane, StructurePane} from '../types'
@@ -8,6 +7,7 @@ import {UserComponentPane} from './userComponentPane'
 import {UnknownPane} from './unknownPane'
 import {DocumentPaneProvider} from './documentPane'
 import {ListPane} from './listPane'
+import {BaseDeskToolPaneProps} from './types'
 
 interface DeskToolPaneProps {
   group: RouterPane[]
@@ -17,13 +17,14 @@ interface DeskToolPaneProps {
   pane: StructurePane
   paneKeys: string[]
   panes: StructurePane[]
-  router: Router
-  routerState: {panes: RouterPane[]}
   sibling: RouterPane
   siblingIndex: number
 }
 
-const paneMap = {
+const paneMap: Record<
+  string,
+  React.ComponentType<BaseDeskToolPaneProps<StructurePane>> | undefined
+> = {
   list: ListPane,
   documentList: DocumentsListPane,
   document: DocumentPaneProvider,
@@ -32,22 +33,10 @@ const paneMap = {
 
 // The same pane might appear multiple times (split pane), so use index as tiebreaker
 export function DeskToolPane(props: DeskToolPaneProps) {
-  const {
-    group,
-    groupIndexes,
-    i,
-    index,
-    pane,
-    paneKeys,
-    panes,
-    router,
-    routerState,
-    sibling,
-    siblingIndex,
-  } = props
+  const {group, groupIndexes, i, index, pane, paneKeys, panes, sibling, siblingIndex} = props
   const groupRoot = group[0]
   const isDuplicate = siblingIndex > 0 && sibling.id === groupRoot.id
-  const paneKey = `${i}-${paneKeys[i] || 'root'}-${groupIndexes[i - 1]}`
+  const paneKey = `${pane.type || 'unknown'}-${paneKeys[i] || 'root'}-${groupIndexes[i - 1] || '0'}`
   const itemId = paneKeys[i]
   const childItemId = paneKeys[i + 1] || ''
   const rootParams = useMemo(() => omit(groupRoot.params || {}, exclusiveParams), [
@@ -61,8 +50,7 @@ export function DeskToolPane(props: DeskToolPaneProps) {
   const isSelected = i === panes.length - 1
   const isActive = i === panes.length - 2
   const isClosable = siblingIndex > 0
-  const {type, ...restPane} = pane
-  const PaneComponent = paneMap[type] || UnknownPane
+  const PaneComponent = paneMap[pane.type] || UnknownPane
 
   return (
     <PaneRouterProvider
@@ -70,21 +58,19 @@ export function DeskToolPane(props: DeskToolPaneProps) {
       index={index}
       params={params}
       payload={payload}
-      router={router}
-      routerState={routerState}
       siblingIndex={siblingIndex}
     >
       <PaneComponent
-        key={paneKey} // Use key to force rerendering pane on ID change
-        paneKey={paneKey}
+        childItemId={childItemId}
         index={i}
         itemId={itemId}
-        urlParams={params}
-        childItemId={childItemId}
+        isActive={isActive}
         isSelected={isSelected}
         isClosable={isClosable}
-        isActive={isActive}
-        {...restPane}
+        key={paneKey} // Use key to force rerendering pane on ID change
+        paneKey={paneKey}
+        pane={pane}
+        urlParams={params}
       />
     </PaneRouterProvider>
   )
