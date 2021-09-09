@@ -60,6 +60,7 @@ function DocumentStatusBarActionsInner(props: DocumentStatusBarActionsProps) {
               <Button
                 disabled={disabled || Boolean(firstActionState.disabled)}
                 icon={firstActionState.icon}
+                // eslint-disable-next-line react/jsx-handler-names
                 onClick={firstActionState.onHandle}
                 ref={setButtonElement}
                 text={firstActionState.label}

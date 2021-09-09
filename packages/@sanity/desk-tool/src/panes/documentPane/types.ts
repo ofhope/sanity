@@ -13,6 +13,7 @@ export interface DocumentView {
   type: string
   id: string
   title: string
+  // eslint-disable-next-line @typescript-eslint/ban-types
   options: {}
   component: React.ComponentType<any>
   icon?: React.ComponentType<any>
@@ -22,6 +23,7 @@ export interface DocumentViewType {
   type: string
   id: string
   title: string
+  // eslint-disable-next-line @typescript-eslint/ban-types
   options: {}
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: React.ComponentType<any>
