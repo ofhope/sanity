@@ -9,9 +9,10 @@ import {of} from 'rxjs'
 import {map} from 'rxjs/operators'
 import {getPublishedId} from 'part:@sanity/base/util/draft-utils'
 import {useRouter} from 'part:@sanity/base/router'
+import {LOADING_PANE} from '../constants'
 import {versionedClient} from '../versionedClient'
 import {useStructure} from '../utils/resolvePanes'
-import {LOADING_PANE} from '../constants'
+import {Delay} from './Delay'
 import {StructureError} from './StructureError'
 
 export interface IntentResolverProps {
@@ -44,7 +45,6 @@ function removeDraftPrefix(documentId: string) {
  *   - Yes: Resolves to "<typeName>;<documentId>"
  *   - No : Resolves to fallback edit pane (context-less)
  */
-// eslint-disable-next-line complexity
 export const IntentResolver = React.memo(function IntentResolver({
   params,
   payload,
@@ -67,36 +67,32 @@ export const IntentResolver = React.memo(function IntentResolver({
     return isLoaded ? (
       <Redirect panes={[[{id: `__edit__${id || uuid()}`, params: otherParams}]]} />
     ) : (
-      <Flex
-        // @todo
-        // delay={600}
-        justify="center"
-      >
-        <Spinner muted />
-        <Box marginTop={3}>
-          <Text muted size={1}>
-            Resolving document type…
-          </Text>
-        </Box>
-      </Flex>
+      <Delay ms={600}>
+        <Flex justify="center">
+          <Spinner muted />
+          <Box marginTop={3}>
+            <Text muted size={1}>
+              Resolving document type…
+            </Text>
+          </Box>
+        </Flex>
+      </Delay>
     )
   }
 
   const isLoading = !structure || structure.some((item) => item === LOADING_PANE)
   if (isLoading) {
     return (
-      <Flex
-        // @todo
-        // delay={600}
-        justify="center"
-      >
-        <Spinner muted />
-        <Box marginTop={3}>
-          <Text muted size={1}>
-            Resolving structure…
-          </Text>
-        </Box>
-      </Flex>
+      <Delay ms={600}>
+        <Flex justify="center">
+          <Spinner muted />
+          <Box marginTop={3}>
+            <Text muted size={1}>
+              Resolving structure…
+            </Text>
+          </Box>
+        </Flex>
+      </Delay>
     )
   }
 
@@ -140,18 +136,16 @@ function Redirect({panes}) {
   })
 
   return (
-    <Flex
-      // @todo
-      // delay={600}
-      justify="center"
-    >
-      <Spinner muted />
-      <Box marginTop={3}>
-        <Text muted size={1}>
-          Redirecting…
-        </Text>
-      </Box>
-    </Flex>
+    <Delay ms={600}>
+      <Flex justify="center">
+        <Spinner muted />
+        <Box marginTop={3}>
+          <Text muted size={1}>
+            Redirecting…
+          </Text>
+        </Box>
+      </Flex>
+    </Delay>
   )
 }
 
