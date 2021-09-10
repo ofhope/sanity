@@ -1,18 +1,17 @@
 // @todo: remove the following line when part imports has been removed from this file
 ///<reference types="@sanity/types/parts" />
 
-import {Box, Card, Inline, Text} from '@sanity/ui'
+import {Box, Card, Dialog, Inline, Text, ThemeColorProvider} from '@sanity/ui'
 import React from 'react'
 import {streamingComponent} from 'react-props-stream'
 import {merge, from, of, Observable} from 'rxjs'
 import {map, switchMap, scan, filter, mergeMap} from 'rxjs/operators'
 import {uniq, uniqBy} from 'lodash'
-import DefaultPane from 'part:@sanity/components/panes/default'
 import {observePaths} from 'part:@sanity/base/preview'
 import {getDraftId, getPublishedId} from 'part:@sanity/base/util/draft-utils'
 import FormBuilder from 'part:@sanity/form-builder'
-import PanePopover from 'part:@sanity/components/dialogs/pane-popover'
 import {ReferringDocumentsList} from './ReferringDocumentsList'
+import {Pane, PaneContent, PaneHeader} from './pane'
 
 interface DocRef {
   id: string
@@ -43,54 +42,53 @@ function BrokenRefs(props: BrokenRefsProps) {
   const renderUnpublished = !renderNonExisting
 
   return (
-    <DefaultPane title={`New ${type}`} isScrollable={false}>
-      <Box>
-        {renderNonExisting && (
-          <PanePopover
-            icon
-            kind="error"
-            id="missing-references"
-            title="Missing references"
-            subtitle={`The new document can only reference existing documents. ${
-              nonExistent.length === 1 ? 'A document' : 'Documents'
-            } with the following ID${nonExistent.length === 1 ? ' was' : 's were'} not found:`}
-          >
-            <Inline space={1}>
-              {nonExistent.map((doc) => (
-                <Card key={doc.id} padding={2} radius={2} tone="critical">
-                  <Text>{doc.id}</Text>
-                </Card>
-              ))}
-            </Inline>
-          </PanePopover>
-        )}
+    <Pane>
+      <PaneHeader title={`New ${type}`} />
+      <PaneContent>
+        <Box>
+          {renderNonExisting && (
+            <ThemeColorProvider tone="critical">
+              <Dialog id="missing-references" header="Missing references">
+                <p>{`The new document can only reference existing documents. ${
+                  nonExistent.length === 1 ? 'A document' : 'Documents'
+                } with the following ID${
+                  nonExistent.length === 1 ? ' was' : 's were'
+                } not found:`}</p>
+                <Inline space={1}>
+                  {nonExistent.map((doc) => (
+                    <Card key={doc.id} padding={2} radius={2} tone="critical">
+                      <Text>{doc.id}</Text>
+                    </Card>
+                  ))}
+                </Inline>
+              </Dialog>
+            </ThemeColorProvider>
+          )}
 
-        {renderUnpublished && (
-          <PanePopover
-            icon
-            kind="warning"
-            id="unpublished-documents"
-            title="Unpublished references"
-            subtitle={`A document can only refer to published documents. Publish the following ${
-              unpublished.length === 1 ? 'draft' : 'drafts'
-            } before creating
-            a new document.`}
-          >
-            <ReferringDocumentsList
-              documents={unpublished.map(({id, type: _type, hasDraft}) => ({
-                _id: `drafts.${id}`,
-                _type: _type,
-                _hasDraft: hasDraft,
-              }))}
-            />
-          </PanePopover>
-        )}
-      </Box>
+          {renderUnpublished && (
+            <ThemeColorProvider tone="caution">
+              <Dialog id="unpublished-documents" header="Unpublished references">
+                <p>{`A document can only refer to published documents. Publish the following ${
+                  unpublished.length === 1 ? 'draft' : 'drafts'
+                } before creating
+            a new document.`}</p>
+                <ReferringDocumentsList
+                  documents={unpublished.map(({id, type: _type, hasDraft}) => ({
+                    _id: `drafts.${id}`,
+                    _type: _type,
+                    _hasDraft: hasDraft,
+                  }))}
+                />
+              </Dialog>
+            </ThemeColorProvider>
+          )}
+        </Box>
 
-      <Box as="form" paddingX={4}>
-        <FormBuilder readOnly type={schemaType} schema={schema} />
-      </Box>
-    </DefaultPane>
+        <Box as="form" paddingX={4}>
+          <FormBuilder readOnly type={schemaType} schema={schema} />
+        </Box>
+      </PaneContent>
+    </Pane>
   )
 }
 
