@@ -1,26 +1,29 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
-export default class Delay extends React.Component<{ms: number}> {
-  state = {done: false}
-  timer: NodeJS.Timeout | null = null
+export function Delay({
+  children,
+  ms = 0,
+}: {
+  children?: React.ReactElement | (() => React.ReactElement)
+  ms?: number
+}): React.ReactElement {
+  const [ready, setReady] = useState(ms <= 0)
 
-  componentDidMount() {
-    this.timer = setTimeout(() => {
-      this.setState({done: true})
-    }, this.props.ms)
-  }
-
-  componentWillUnmount() {
-    if (this.timer) clearTimeout(this.timer)
-  }
-
-  render() {
-    const {children} = this.props
-
-    if (!this.state.done) {
-      return null
+  useEffect(() => {
+    if (ms <= 0) {
+      return undefined
     }
 
-    return typeof children === 'function' ? children() : children
+    const timeoutId = setTimeout(() => setReady(true), ms)
+
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [ms])
+
+  if (!ready || !children) {
+    return <></>
   }
+
+  return typeof children === 'function' ? children() : children
 }
