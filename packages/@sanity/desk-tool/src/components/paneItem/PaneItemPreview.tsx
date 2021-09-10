@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
 // @todo: remove the following line when part imports has been removed from this file
 ///<reference types="@sanity/types/parts" />
 
@@ -11,17 +9,18 @@ import {map} from 'rxjs/operators'
 import {getDraftId, getPublishedId} from 'part:@sanity/base/util/draft-utils'
 import {SanityDefaultPreview, observeForPreview} from 'part:@sanity/base/preview'
 import {WarningOutlineIcon} from '@sanity/icons'
-import {NotPublishedStatus} from './NotPublishedStatus'
-import {DraftStatus} from './DraftStatus'
+import {PreviewValue} from '../../types'
+import {NotPublishedStatus} from '../NotPublishedStatus'
+import {DraftStatus} from '../DraftStatus'
 
-export interface DocumentPaneItemPreviewProps {
+export interface PaneItemPreviewProps {
   icon: React.FunctionComponent | boolean
-  layout: 'inline' | 'block' | 'default' | 'card' | 'media'
+  layout: 'inline' | 'block' | 'default' | 'card' | 'media' | 'detail'
   schemaType: any
   value: SanityDocument
 }
 
-export interface DocumentPaneItemPreviewState {
+export interface PaneItemPreviewState {
   isLoading?: boolean
   draft?: SanityDocument | null
   published?: SanityDocument | null
@@ -36,7 +35,7 @@ const getStatusIndicator = (draft?: SanityDocument | null, published?: SanityDoc
   return published ? null : NotPublishedStatus
 }
 
-const getMissingDocumentFallback = (item: SanityDocument) => ({
+const getMissingDocumentFallback = (item: SanityDocument): PreviewValue => ({
   title: (
     <span style={{fontStyle: 'italic'}}>
       {item.title ? String(item.title) : 'Missing document'}
@@ -58,7 +57,7 @@ const getValueWithFallback = ({
   value: SanityDocument
   draft?: SanityDocument | null
   published?: SanityDocument | null
-}): Record<string, unknown> => {
+}): PreviewValue | SanityDocument => {
   const snapshot = draft || published
 
   if (!snapshot) {
@@ -70,15 +69,12 @@ const getValueWithFallback = ({
   })
 }
 
-export class DocumentPaneItemPreview extends React.Component<
-  DocumentPaneItemPreviewProps,
-  DocumentPaneItemPreviewState
-> {
-  state: DocumentPaneItemPreviewState = {}
+export class PaneItemPreview extends React.Component<PaneItemPreviewProps, PaneItemPreviewState> {
+  state: PaneItemPreviewState = {}
 
   subscription: Subscription
 
-  constructor(props: DocumentPaneItemPreviewProps) {
+  constructor(props: PaneItemPreviewProps) {
     super(props)
     const {value, schemaType} = props
     const {title} = value

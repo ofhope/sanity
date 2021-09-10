@@ -17,3 +17,14 @@ export interface StructureErrorType {
 export interface DeskToolContextValue {
   narrow: boolean
 }
+
+export interface PreviewValue {
+  id?: string
+  subtitle?: React.ReactNode
+  title?: React.ReactNode
+  media?: React.ReactNode | React.ComponentType
+  icon?: boolean
+  type?: string
+  displayOptions?: {showIcon?: boolean}
+  schemaType?: {name?: string}
+}

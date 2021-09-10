@@ -1,21 +1,22 @@
 import React, {useMemo} from 'react'
 import {FolderIcon, ChevronRightIcon, DocumentIcon} from '@sanity/icons'
-import {SanityDocument} from '@sanity/types'
 import {Card, Text} from '@sanity/ui'
 import schema from 'part:@sanity/base/schema'
 import {SanityDefaultPreview} from 'part:@sanity/base/preview'
-import {DocumentPaneItemPreview} from '../DocumentPaneItemPreview'
+import {isSanityDocument, SanityDocument} from '@sanity/types'
 import getIconWithFallback from '../../utils/getIconWithFallback'
 import {MissingSchemaType} from '../MissingSchemaType'
 import {usePaneRouter} from '../../contexts/paneRouter'
+import {PreviewValue} from '../../types'
+import {PaneItemPreview} from './PaneItemPreview'
 
 interface PaneItemProps {
   id: string
-  layout?: 'inline' | 'block' | 'default' | 'card' | 'media'
+  layout?: 'inline' | 'block' | 'default' | 'card' | 'media' | 'detail'
   isSelected?: boolean
   isActive?: boolean
   icon?: boolean | React.FunctionComponent
-  value: SanityDocument
+  value?: PreviewValue | SanityDocument
   schemaType?: {
     name?: string
     icon?: React.FunctionComponent
@@ -28,13 +29,13 @@ export function PaneItem(props: PaneItemProps) {
   const hasSchemaType = Boolean(schemaType && schemaType.name && schema.get(schemaType.name))
 
   const preview = useMemo(() => {
-    if (value && value._id) {
+    if (value && isSanityDocument(value)) {
       if (!hasSchemaType) {
         return <MissingSchemaType value={value} />
       }
 
       return (
-        <DocumentPaneItemPreview
+        <PaneItemPreview
           icon={getIconWithFallback(icon, schemaType, DocumentIcon)}
           layout={layout}
           schemaType={schemaType}
@@ -60,7 +61,7 @@ export function PaneItem(props: PaneItemProps) {
   const LinkComponent = useMemo(
     () =>
       // eslint-disable-next-line no-shadow
-      function LinkComponent(linkProps) {
+      function LinkComponent(linkProps: any) {
         return <ChildLink {...linkProps} childId={id} />
       },
     [ChildLink, id]

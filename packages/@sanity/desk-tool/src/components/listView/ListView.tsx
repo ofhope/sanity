@@ -7,10 +7,10 @@ import styles from './ListView.module.css'
 
 interface ListViewProps {
   children?: React.ReactNode
-  layout?: 'inline' | 'block' | 'default' | 'card' | 'media'
+  layout?: 'inline' | 'block' | 'default' | 'card' | 'media' | 'detail'
 }
 
-export function ListView(props: ListViewProps) {
+export function ListView(props: ListViewProps): React.ReactElement {
   const {children, layout = 'defaullt'} = props
 
   if (layout === 'card') {
@@ -21,5 +21,5 @@ export function ListView(props: ListViewProps) {
     return <GridList className={styles.mediaList}>{children}</GridList>
   }
 
-  return children
+  return <>{children}</>
 }

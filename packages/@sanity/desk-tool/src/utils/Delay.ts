@@ -1,12 +1,6 @@
-import * as React from 'react'
-import * as PropTypes from 'prop-types'
+import React from 'react'
 
 export default class Delay extends React.Component<{ms: number}> {
-  static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    ms: PropTypes.number.isRequired,
-  }
-
   state = {done: false}
   timer: NodeJS.Timeout | null = null
 

@@ -16,10 +16,14 @@ const PREVIEW_FIELDS = ['title']
 
 export function DocTitle(props: DocTitleProps) {
   const {document} = props
-  const type = schema.get(document._type!)
+  const schemaType = document._type && schema.get(document._type)
+
+  if (!schemaType) {
+    return <>&lt;Missing type&gt;</>
+  }
 
   return (
-    <PreviewFields document={document} fields={PREVIEW_FIELDS} layout="inline" type={type}>
+    <PreviewFields document={document} fields={PREVIEW_FIELDS} layout="inline" type={schemaType}>
       {renderTitle}
     </PreviewFields>
   )
