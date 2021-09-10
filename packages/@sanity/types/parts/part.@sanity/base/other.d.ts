@@ -139,16 +139,27 @@ declare module 'part:@sanity/base/preview' {
   export const SanityDefaultPreview: React.ComponentType<{
     icon?: any
     isPlaceholder?: boolean
-    layout?: 'inline' | 'block' | 'default' | 'card' | 'media'
+    layout?: 'inline' | 'block' | 'default' | 'card' | 'media' | 'detail'
     status?: React.ReactNode
     type?: any
-    value: Record<string, any>
+    value:
+      | SanityDocument
+      | {
+          id?: string
+          subtitle?: React.ReactNode
+          title?: React.ReactNode
+          media?: React.ReactNode | React.ComponentType
+          icon?: boolean
+          type?: string
+          displayOptions?: {showIcon?: boolean}
+          schemaType?: {name?: string}
+        }
   }>
 
   export const PreviewFields: React.ComponentType<{
     document: SanityDocument
     fields: string | string[]
-    layout?: 'inline' | 'block' | 'default' | 'card' | 'media'
+    layout?: 'inline' | 'block' | 'default' | 'card' | 'media' | 'detail'
     type: Type
     children: (snapshot: SanityDocument) => React.ReactElement
   }>
