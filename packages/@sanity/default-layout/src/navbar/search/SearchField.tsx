@@ -44,10 +44,12 @@ export function SearchField({
   portalElement,
   fullScreen,
   inputElement,
+  onSearchItemClick,
 }: {
   portalElement: HTMLDivElement | null
   fullScreen: boolean
   inputElement: (el: HTMLInputElement | null) => void
+  onSearchItemClick: () => void
 }) {
   const {handleSearch, handleClearSearch, searchState} = useSearch()
   const {hits, loading, searchString, error} = searchState
@@ -58,14 +60,20 @@ export function SearchField({
     }
   })
 
+  const handleClickItem = useCallback(() => {
+    if (fullScreen && onSearchItemClick) {
+      onSearchItemClick()
+    }
+  }, [fullScreen, onSearchItemClick])
+
   const filterOption = useCallback(() => true, [])
 
   const renderOption = useCallback(
     (option) => {
       const {data} = option.payload
-      return <SearchItem data={data} key={data.hit._id} onClick={handleClearSearch} padding={2} />
+      return <SearchItem data={data} key={data.hit._id} onClick={handleClickItem} padding={2} />
     },
-    [handleClearSearch]
+    [handleClickItem]
   )
 
   const FullscreenContent = useMemo(
