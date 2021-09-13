@@ -30,11 +30,14 @@ const ResultsPopover = styled(Popover)`
 
 const FullscreenContentCard = styled(Card)`
   position: absolute;
-  inset: 0 0 0 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 `
 
-const PopoverContentFlex = styled(Flex)`
-  min-height: 200;
+const StyledText = styled(Text)`
+  word-break: break-word;
 `
 
 export function SearchField({
@@ -86,10 +89,10 @@ export function SearchField({
       if (!props.hidden && error) {
         return (
           <FullscreenContent tone="critical">
-            <Flex align="center" height="fill" justify="center">
-              <Text align="center" muted>
+            <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
+              <StyledText align="center" muted>
                 {error.message}
-              </Text>
+              </StyledText>
             </Flex>
           </FullscreenContent>
         )
@@ -98,17 +101,17 @@ export function SearchField({
       if (!props.hidden && searchString && !loading && hits.length === 0) {
         return (
           <FullscreenContent>
-            <Flex align="center" height="fill" justify="center">
-              <Text align="center" muted>
+            <Flex align="center" height="fill" justify="center" padding={4} sizing="border">
+              <StyledText align="center" muted>
                 No results for <strong>‘{searchString}’</strong>
-              </Text>
+              </StyledText>
             </Flex>
           </FullscreenContent>
         )
       }
 
       return (
-        <FullscreenContent hidden={props.hidden} ref={ref}>
+        <FullscreenContent hidden={props.hidden} ref={ref} overflow="auto">
           {props.content}
         </FullscreenContent>
       )
@@ -150,11 +153,11 @@ export function SearchField({
             ref={ref}
             content={
               <Box padding={4}>
-                <PopoverContentFlex align="center" height="fill" justify="center">
-                  <Text align="center" muted>
-                    Something went wrong while searching
-                  </Text>
-                </PopoverContentFlex>
+                <Flex align="center" height="fill" justify="center">
+                  <StyledText align="center" muted>
+                    {error?.message || 'Something went wrong while searching'}
+                  </StyledText>
+                </Flex>
               </Box>
             }
           />
@@ -169,11 +172,11 @@ export function SearchField({
             ref={ref}
             content={
               <Box padding={4}>
-                <PopoverContentFlex align="center" height="fill" justify="center">
-                  <Text align="center" muted>
+                <Flex align="center" height="fill" justify="center">
+                  <StyledText align="center" muted>
                     No results for <strong>‘{searchString}’</strong>
-                  </Text>
-                </PopoverContentFlex>
+                  </StyledText>
+                </Flex>
               </Box>
             }
           />
