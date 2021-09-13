@@ -55,9 +55,12 @@ const BrandingCenterBox = styled(Box)`
 const SearchCard = styled(Card)<{$fullScreen: boolean}>`
   min-width: 253px;
   max-width: ${({$fullScreen}) => ($fullScreen ? undefined : '350px')};
-  inset: 0;
   z-index: 1;
   position: ${({$fullScreen}) => ($fullScreen ? 'absolute' : undefined)};
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 `
 
 export function Navbar(props: Props) {
@@ -199,6 +202,7 @@ export function Navbar(props: Props) {
                 paddingY={shouldRender.searchFullscreen ? 2 : undefined}
                 scheme="dark"
                 $fullScreen={shouldRender.searchFullscreen}
+                overflow="auto"
               >
                 <Flex flex={1}>
                   <Box flex={1} marginRight={shouldRender.searchFullscreen ? 2 : undefined}>
