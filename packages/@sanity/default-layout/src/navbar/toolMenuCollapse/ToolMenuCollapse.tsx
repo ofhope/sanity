@@ -1,8 +1,8 @@
 import {PlugIcon} from '@sanity/icons'
 import {StateLink} from '@sanity/state-router/components'
 import React, {forwardRef, useMemo} from 'react'
+import {CollapseMenu, CollapseMenuButton} from '@sanity/base/components'
 import {Tool, Router} from '../../types'
-import {CollapseMenu, CollapseMenuButton} from '../components'
 
 export function ToolMenuCollapse({tools, router}: {tools: Tool[]; router: Router}) {
   const tool = router.state?.tool || ''
@@ -43,7 +43,7 @@ export function ToolMenuCollapse({tools, router}: {tools: Tool[]; router: Router
   )
 
   return (
-    <CollapseMenu menuScheme="light">
+    <CollapseMenu menuPopoverProps={{scheme: 'light'}}>
       {toolsOptions.map((t) => (
         <CollapseMenuButton
           key={t?.name}
