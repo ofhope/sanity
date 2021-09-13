@@ -24,3 +24,5 @@ export interface PreviewValue {
   displayOptions?: {showIcon?: boolean}
   schemaType?: {name?: string}
 }
+
+export type DeskToolPaneActionHandler = (params: any, scope?: unknown) => void

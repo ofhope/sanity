@@ -47,7 +47,7 @@ export function PaneItem(props: PaneItemProps) {
     return (
       <SanityDefaultPreview
         status={
-          <Text muted size={1}>
+          <Text muted>
             <ChevronRightIcon />
           </Text>
         }

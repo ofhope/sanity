@@ -104,7 +104,7 @@ export const Pane = forwardRef(function Pane(
               ? PANE_COLLAPSED_WIDTH
               : // eslint-disable-next-line no-nested-ternary
               maxWidth
-              ? Math.min(currentMaxWidth || maxWidth, maxWidth || currentMaxWidth || 0)
+              ? Math.min(currentMaxWidth || maxWidth, maxWidth || currentMaxWidth!)
               : isLast
               ? undefined
               : currentMaxWidth,

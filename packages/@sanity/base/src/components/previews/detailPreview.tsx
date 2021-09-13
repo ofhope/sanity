@@ -48,9 +48,14 @@ export const DetailPreview: React.FunctionComponent<PreviewProps<'detail'>> = (p
   }
 
   return (
-    <Root align="center">
+    <Root align="center" className="studio-preview studio-preview--detail">
       {media !== false && (
-        <MediaWrapper align="center" justify="center" marginRight={2}>
+        <MediaWrapper
+          align="center"
+          className="studio-preview__media"
+          justify="center"
+          marginRight={2}
+        >
           {typeof media === 'function' &&
             media({
               dimensions: mediaDimensions,
@@ -58,30 +63,49 @@ export const DetailPreview: React.FunctionComponent<PreviewProps<'detail'>> = (p
             })}
           {typeof media === 'string' && <MediaString>{media}</MediaString>}
           {React.isValidElement(media) && media}
+          <span />
         </MediaWrapper>
       )}
-      <Content justify="center" direction="column">
+
+      <Content
+        className="studio-preview__content"
+        flex={1}
+        justify="center"
+        direction="column"
+        paddingLeft={media === false ? 1 : 0}
+      >
         <Top align="center" justify="space-between">
           <Header space={2} flex={1}>
-            <Text textOverflow="ellipsis" style={{color: 'inherit'}}>
+            <Text
+              className="studio-preview__title"
+              textOverflow="ellipsis"
+              style={{color: 'inherit'}}
+            >
               {title && typeof title === 'function' ? title({layout: 'detail'}) : title}
               {!title && <>Untitled</>}
             </Text>
 
             {subtitle && (
-              <Text muted size={1} textOverflow="ellipsis">
+              <Text className="studio-preview__subtitle" muted size={1} textOverflow="ellipsis">
                 {typeof subtitle === 'function' ? subtitle({layout: 'detail'}) : subtitle}
               </Text>
             )}
           </Header>
+
           {status && (
-            <StatusWrapper paddingLeft={1}>
+            <StatusWrapper className="studio-preview__status" paddingLeft={3} paddingRight={1}>
               {typeof status === 'function' ? status({layout: 'detail'}) : status}
             </StatusWrapper>
           )}
         </Top>
+
         {description && (
-          <Box marginTop={3} overflow="hidden" style={{maxHeight}}>
+          <Box
+            className="studio-preview__description"
+            marginTop={3}
+            overflow="hidden"
+            style={{maxHeight}}
+          >
             <Text muted size={1}>
               {typeof description === 'function' ? description({layout: 'detail'}) : description}
             </Text>

@@ -111,6 +111,7 @@ export function DocumentsListPane(props: DocumentsListPaneProps) {
         currentMaxWidth={350}
         data-index={index}
         data-pane-key={paneKey}
+        maxWidth={640}
         minWidth={320}
         selected={isSelected}
       >

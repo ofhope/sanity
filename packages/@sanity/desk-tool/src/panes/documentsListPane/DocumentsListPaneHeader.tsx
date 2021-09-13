@@ -8,6 +8,7 @@ import {IntentActionButton} from '../../components/IntentActionButton'
 import {usePane} from '../../components/pane/usePane'
 import {useDeskTool} from '../../contexts/deskTool'
 import {usePaneRouter} from '../../contexts/paneRouter'
+import {DeskToolPaneActionHandler} from '../../types'
 import {Layout, SortOrder} from './types'
 import {CreateMenuButton} from './CreateMenuButton'
 
@@ -33,7 +34,7 @@ export function DocumentsListPaneHeader(props: {
   const {collapsed, rootElement} = usePane()
   const {BackLink} = usePaneRouter()
 
-  const actionHandlers = useMemo(
+  const actionHandlers: Record<string, DeskToolPaneActionHandler> = useMemo(
     () => ({
       setLayout: ({layout: value}: {layout: Layout}) => {
         setLayout(value)
@@ -46,15 +47,21 @@ export function DocumentsListPaneHeader(props: {
   )
 
   const handleAction = useCallback(
-    (item) => {
-      const handler = typeof item.action === 'function' ? item.action : actionHandlers[item.action]
+    (item: MenuItemType) => {
+      const handler =
+        // eslint-disable-next-line no-nested-ternary
+        typeof item.action === 'function'
+          ? item.action
+          : typeof item.action === 'string'
+          ? actionHandlers[item.action]
+          : null
 
-      if (!handler) {
-        return false
+      if (handler) {
+        handler(item.params)
+        return true
       }
 
-      handler(item.params)
-      return true
+      return false
     },
     [actionHandlers]
   )

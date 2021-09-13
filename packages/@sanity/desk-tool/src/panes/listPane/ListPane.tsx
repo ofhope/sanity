@@ -167,6 +167,7 @@ export function ListPane(props: ListPaneProps) {
         data-index={index}
         data-pane-key={paneKey}
         data-testid="desk-tool-list-pane"
+        maxWidth={640}
         minWidth={320}
         selected={isSelected}
         ref={setRootElement}

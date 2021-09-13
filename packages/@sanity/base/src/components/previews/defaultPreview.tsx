@@ -10,34 +10,36 @@ const Root = styled(Flex)`
 
 const MediaWrapper = styled(Flex)`
   position: relative;
-  align-items: center;
-  justify-content: center;
   width: 35px;
   height: 35px;
   min-width: 35px;
   border-radius: ${({theme}) => rem(theme.sanity.radius[2])};
 
   & img {
+    display: block;
     position: absolute;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: inherit;
+    width: 100%;
+    height: 100%;
   }
 
   & svg {
     display: block;
     font-size: calc(21 / 16 * 1em);
-
-    &[data-sanity-icon] {
-      font-size: calc(33 / 16 * 1em);
-      margin: calc(6 / 36 * -1em);
-    }
   }
 
-  & img + span {
+  & [data-sanity-icon] {
+    display: block;
+    font-size: calc(33 / 16 * 1em);
+    margin: calc(6 / 36 * -1em);
+  }
+
+  & *:not(svg) + span {
     display: block;
     position: absolute;
     left: 0;
@@ -56,13 +58,38 @@ export const DefaultPreview = (props: PreviewProps<'default'>) => {
   const {title, subtitle, media, status, isPlaceholder, children} = props
 
   return (
-    <Root align="center">
+    <Root align="center" className="studio-preview studio-preview--default">
       {isPlaceholder && (
         <>
-          <Skeleton style={{width: 35, height: 35}} radius={2} marginRight={2} animated />
-          <Stack space={2} flex={1}>
-            <TextSkeleton style={{maxWidth: 320}} radius={1} animated />
-            <TextSkeleton style={{maxWidth: 200}} radius={1} size={1} animated />
+          {media !== false && (
+            <Skeleton
+              className="studio-preview__media"
+              style={{width: 35, height: 35}}
+              radius={2}
+              marginRight={2}
+              animated
+            />
+          )}
+
+          <Stack
+            className="studio-preview__content"
+            flex={1}
+            paddingLeft={media === false ? 1 : 0}
+            space={2}
+          >
+            <TextSkeleton
+              className="studio-preview__title"
+              style={{maxWidth: 320}}
+              radius={1}
+              animated
+            />
+            <TextSkeleton
+              className="studio-preview__subtitle"
+              style={{maxWidth: 200}}
+              radius={1}
+              size={1}
+              animated
+            />
           </Stack>
         </>
       )}
@@ -70,7 +97,13 @@ export const DefaultPreview = (props: PreviewProps<'default'>) => {
       {!isPlaceholder && (
         <>
           {media !== false && media !== undefined && (
-            <MediaWrapper align="center" justify="center" marginRight={2} overflow="hidden">
+            <MediaWrapper
+              align="center"
+              className="studio-preview__media"
+              justify="center"
+              marginRight={2}
+              overflow="hidden"
+            >
               {typeof media === 'function' &&
                 media({
                   dimensions: {
@@ -91,14 +124,23 @@ export const DefaultPreview = (props: PreviewProps<'default'>) => {
             </MediaWrapper>
           )}
 
-          <Stack flex={1} space={2} paddingLeft={media ? 0 : 1}>
-            <Text textOverflow="ellipsis" style={{color: 'inherit'}}>
+          <Stack
+            className="studio-preview__content"
+            flex={1}
+            paddingLeft={media === false ? 1 : 0}
+            space={2}
+          >
+            <Text
+              className="studio-preview__title"
+              textOverflow="ellipsis"
+              style={{color: 'inherit'}}
+            >
               {title && typeof title === 'function' ? title({layout: 'default'}) : title}
               {!title && <>Untitled</>}
             </Text>
 
             {subtitle && (
-              <Text muted size={1} textOverflow="ellipsis">
+              <Text className="studio-preview__subtitle" muted size={1} textOverflow="ellipsis">
                 {typeof subtitle === 'function' ? subtitle({layout: 'default'}) : subtitle}
               </Text>
             )}
@@ -107,7 +149,7 @@ export const DefaultPreview = (props: PreviewProps<'default'>) => {
           </Stack>
 
           {status && (
-            <Box padding={3}>
+            <Box className="studio-preview__status" paddingLeft={3} paddingRight={1}>
               {typeof status === 'function' ? status({layout: 'default'}) : status}
             </Box>
           )}

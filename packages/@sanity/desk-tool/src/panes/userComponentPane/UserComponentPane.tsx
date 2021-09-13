@@ -3,6 +3,7 @@ import {MenuItem, MenuItemGroup} from '@sanity/base/__legacy/@sanity/components'
 import {isValidElementType} from 'react-is'
 import {DocumentPanelContextMenu, Pane, PaneHeader} from '../../components/pane'
 import {BaseDeskToolPaneProps} from '../types'
+import {DeskToolPaneActionHandler} from '../../types'
 
 type UserComponentPaneProps = BaseDeskToolPaneProps<{
   type: 'component'
@@ -16,25 +17,27 @@ export function UserComponentPane(props: UserComponentPaneProps) {
   const {index, isSelected, pane, ...restProps} = props
   const {component, menuItems = [], menuItemGroups = [], title = ''} = pane
   const [rootElement, setRootElement] = useState<HTMLDivElement | null>(null)
-  const userComponent = useRef<any>()
+  const userComponent = useRef<{
+    actionHandlers?: Record<string, DeskToolPaneActionHandler>
+  } | null>(null)
 
   const handleAction = useCallback((item: MenuItem) => {
     let handler: MenuItem['action'] | null = null
 
     if (typeof item.action === 'function') {
       handler = item.action
-    } else {
+    } else if (typeof item.action === 'string') {
       handler =
         userComponent.current &&
         userComponent.current.actionHandlers &&
-        userComponent.current.actionHandlers[item.action as any]
+        userComponent.current.actionHandlers[item.action]
     }
 
     if (typeof handler === 'function') {
       handler(item.params)
     } else {
       // eslint-disable-next-line no-console
-      console.warn('No handler defined for action')
+      console.warn('No handler defined for action:', item.action)
     }
   }, [])
 
@@ -48,13 +51,7 @@ export function UserComponentPane(props: UserComponentPaneProps) {
   )
 
   return (
-    <Pane
-      data-index={index}
-      minWidth={320}
-      title={title}
-      selected={isSelected}
-      ref={setRootElement}
-    >
+    <Pane data-index={index} minWidth={320} selected={isSelected} ref={setRootElement}>
       <PaneHeader actions={actions} title={title} />
 
       {isValidElementType(component) &&
