@@ -207,6 +207,7 @@ export function Navbar(props: Props) {
                 <Flex flex={1}>
                   <Box flex={1} marginRight={shouldRender.searchFullscreen ? 2 : undefined}>
                     <SearchField
+                      onSearchItemClick={handleToggleSearchOpen}
                       portalElement={searchPortalElement}
                       inputElement={setInputElement}
                       fullScreen={shouldRender.searchFullscreen}
