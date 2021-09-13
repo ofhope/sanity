@@ -129,6 +129,7 @@ export function SearchField({
             placement="bottom"
             arrow={false}
             constrainSize
+            radius={2}
             ref={ref}
             scheme="light"
             matchReferenceWidth
@@ -201,7 +202,7 @@ export function SearchField({
         icon={SearchIcon}
         key="studio-search"
         id="studio-search"
-        listBox={{padding: 2}}
+        listBox={fullScreen ? {padding: 2} : undefined}
         loading={loading}
         onQueryChange={handleSearch}
         options={hits.map((hit) => {
