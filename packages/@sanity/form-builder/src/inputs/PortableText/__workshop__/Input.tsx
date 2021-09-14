@@ -4,7 +4,7 @@ import FormBuilderContext from '../../../FormBuilderContext'
 import PortableTextInput from '../PortableTextInput'
 
 const noop = () => undefined
-const subscribe = () => noop
+const subscribe = () => () => noop
 
 function inputResolver() {
   return PortableTextInput

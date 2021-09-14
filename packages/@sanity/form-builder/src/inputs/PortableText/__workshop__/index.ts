@@ -5,11 +5,11 @@ export default defineScope('form-builder/inputs/pte', 'Portable Text Editor', [
   {
     name: 'default',
     title: 'Default Schema',
-    component: lazy(() => import('./DefaultSchemaStory')),
+    component: lazy(() => import('./default/Story')),
   },
   {
     name: 'custom',
     title: 'Custom Schema',
-    component: lazy(() => import('./CustomSchemaStory')),
+    component: lazy(() => import('./custom/Story')),
   },
 ])

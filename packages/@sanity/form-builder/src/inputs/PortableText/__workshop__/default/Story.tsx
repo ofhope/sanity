@@ -1,10 +1,11 @@
 import {Card, Container, Flex, LayerProvider} from '@sanity/ui'
 import React from 'react'
 import {useSelect} from '@sanity/ui-workshop'
-import {schema, portableTextType, values, valueOptions} from './schemas/custom'
-import Input from './Input'
+import Input from '../Input'
+import {schema, portableTextType} from './schema'
+import {values, valueOptions} from './values'
 
-export default function CustomSchemaStory() {
+export default function Story() {
   const selectedValue = useSelect('Values', valueOptions) || 'empty'
   const value = values[selectedValue]
   return (
