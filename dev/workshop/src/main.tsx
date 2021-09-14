@@ -50,6 +50,10 @@ const WORKSHOP_COLLECTIONS = [
     name: 'field',
     title: '@sanity/field',
   },
+  {
+    name: 'form-builder',
+    title: '@sanity/form-builder',
+  },
 ]
 
 function Root() {
