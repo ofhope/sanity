@@ -3,8 +3,13 @@ import {lazy} from 'react'
 
 export default defineScope('form-builder/inputs/pte', 'Portable Text Editor', [
   {
-    name: 'example',
-    title: 'Example',
-    component: lazy(() => import('./ExampleStory')),
+    name: 'default',
+    title: 'Default Schema',
+    component: lazy(() => import('./DefaultSchemaStory')),
+  },
+  {
+    name: 'custom',
+    title: 'Custom Schema',
+    component: lazy(() => import('./CustomSchemaStory')),
   },
 ])
