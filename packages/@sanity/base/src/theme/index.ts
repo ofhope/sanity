@@ -13,19 +13,20 @@ declare global {
   }
 }
 
-window.__sanityLegacyTheme = legacyTheme
+const isLegacyDefaultTheme = legacyTheme['--sanity-color-black'] === '#121923'
 
 /**
  * The theme object used to configure theming of `@sanity/ui`.
+ * @internal
  */
 export const theme: RootTheme = {
   ...defaults,
-  color,
+  color: isLegacyDefaultTheme ? defaults.color : color,
   focusRing: {
     offset: -1,
     width: 2,
   },
-  fonts,
+  fonts: isLegacyDefaultTheme ? defaults.fonts : fonts,
   media: [
     parseInt(legacyTheme['--screen-medium-break'], 10) || 512,
     parseInt(legacyTheme['--screen-default-break'], 10) || 640,

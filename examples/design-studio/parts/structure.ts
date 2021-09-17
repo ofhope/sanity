@@ -1,12 +1,14 @@
 import S from '@sanity/desk-tool/structure-builder'
 import CogIcon from 'part:@sanity/base/cog-icon'
 import {CustomPane} from './components/CustomPane'
+import {IFrameView} from './components/IframeView'
 import {JSONPreviewDocumentView} from './components/jsonPreview'
+import {StyledTestView} from './schema/documentWithViews/view/styledTest'
 
 const STRUCTURE_CUSTOM_TYPES = ['settings']
 
 // Add `JSON` tab to the `author` document form
-export const getDefaultDocumentNode = ({schemaType}: {schemaType: any}) => {
+export const getDefaultDocumentNode = ({schemaType}: {schemaType: string}) => {
   // Conditionally return a different configuration based on the schema type
   if (schemaType === 'author') {
     return S.document().views([
@@ -19,6 +21,22 @@ export const getDefaultDocumentNode = ({schemaType}: {schemaType: any}) => {
     return S.document().views([
       S.view.form(),
       S.view.component(JSONPreviewDocumentView).title('JSON'),
+    ])
+  }
+
+  if (schemaType === 'documentWithViews') {
+    return S.document().views([
+      S.view.form(),
+      S.view.component(IFrameView).title('IFrame'),
+      S.view.component(StyledTestView).title('Styled Test 1'),
+      S.view.component(StyledTestView).title('Styled Test 2'),
+      S.view.component(StyledTestView).title('Styled Test 3'),
+      S.view.component(StyledTestView).title('Styled Test 4'),
+      S.view.component(StyledTestView).title('Styled Test 5'),
+      S.view.component(StyledTestView).title('Styled Test 6'),
+      S.view.component(StyledTestView).title('Styled Test 7'),
+      S.view.component(StyledTestView).title('Styled Test 8'),
+      S.view.component(StyledTestView).title('Styled Test 9'),
     ])
   }
 

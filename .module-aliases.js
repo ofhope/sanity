@@ -21,6 +21,9 @@ module.exports = {
   '@sanity/diff': './packages/@sanity/diff/src',
   '@sanity/field': './packages/@sanity/field/src',
   '@sanity/form-builder/PatchEvent': './packages/@sanity/form-builder/src/PatchEvent',
+  // Required by BarcodeInput in the Ecommerce template
+  '@sanity/form-builder/lib/FormBuilderInput':
+    './packages/@sanity/form-builder/src/FormBuilderInput',
   '@sanity/form-builder': './packages/@sanity/form-builder/src',
   '@sanity/imagetool': './packages/@sanity/imagetool/src',
   '@sanity/initial-value-templates': './packages/@sanity/initial-value-templates/src',
@@ -31,8 +34,7 @@ module.exports = {
 
   '@sanity/react-hooks': './packages/@sanity/react-hooks/src',
 
-  '@sanity/state-router/components': './packages/@sanity/state-router/src/components',
-  '@sanity/state-router': './packages/@sanity/state-router/src',
+  '@sanity/state-router': './packages/@sanity/state-router/src/_exports',
   '@sanity/structure': './packages/@sanity/structure/src',
   '@sanity/transaction-collator': './packages/@sanity/transaction-collator/src',
   '@sanity/util': './packages/@sanity/util/src/_exports',
